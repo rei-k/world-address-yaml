@@ -1,0 +1,68 @@
+name:
+  en: Kenya
+  local:
+    - lang: en
+      value: Kenya
+      script: Latin
+      direction: ltr
+    - lang: sw
+      value: Kenya
+      script: Latin
+      direction: ltr
+
+iso_codes:
+  alpha2: KE
+  alpha3: KEN
+  numeric: "404"
+
+continent: Africa
+subregion: Eastern Africa
+
+languages:
+  - name: English
+    script: Latin
+    direction: ltr
+    role: official
+    required_for_shipping: true
+    country_name: Kenya
+  - name: Swahili
+    script: Latin
+    direction: ltr
+    role: official
+    country_name: Kenya
+
+administrative_divisions:
+  level1:
+    type: County
+    label_local: County
+    label_en: County
+    count: 47
+
+address_format:
+  order_variants:
+    - context: domestic
+      order: [recipient, street_address, city, county, postal_code, country]
+    - context: international
+      order: [recipient, street_address, city, county, postal_code, country]
+
+  postal_code:
+    required: true
+    regex: "^[0-9]{5}$"
+    description: "5-digit postal code"
+    example: "00100"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "County name is required"
+    - "Postal code format: 5 digits"
+
+examples:
+  domestic_raw: "Kenyatta Avenue, Nairobi 00100"
+  domestic_normalized: "Kenyatta Avenue, Nairobi 00100"
+  international: "Kenyatta Avenue, Nairobi 00100, Kenya"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

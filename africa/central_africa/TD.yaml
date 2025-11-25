@@ -1,0 +1,70 @@
+name:
+  en: Chad
+  local:
+    - lang: fr
+      value: Tchad
+      script: Latin
+      direction: ltr
+    - lang: ar
+      value: تشاد
+      script: Arabic
+      direction: rtl
+
+iso_codes:
+  alpha2: TD
+  alpha3: TCD
+  numeric: "148"
+
+continent: Africa
+subregion: Central Africa
+
+languages:
+  - name: French
+    script: Latin
+    direction: ltr
+    role: official
+    country_name: Tchad
+  - name: Arabic
+    script: Arabic
+    direction: rtl
+    role: official
+    country_name: تشاد
+  - name: English
+    script: Latin
+    direction: ltr
+    role: auxiliary
+    required_for_shipping: true
+    country_name: Chad
+
+administrative_divisions:
+  level1:
+    type: Province
+    label_local: Région
+    label_en: Province
+    count: 23
+
+address_format:
+  order_variants:
+    - context: domestic
+      order: [recipient, street_address, city, province, country]
+    - context: international
+      order: [recipient, street_address, city, province, country]
+
+  postal_code:
+    required: false
+    description: "Postal codes not widely used"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "City name is required"
+
+examples:
+  domestic_raw: "Avenue Charles de Gaulle, N'Djamena"
+  domestic_normalized: "Avenue Charles de Gaulle, N'Djamena"
+  international: "Avenue Charles de Gaulle, N'Djamena, Chad"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

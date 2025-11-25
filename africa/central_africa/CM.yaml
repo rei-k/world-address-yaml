@@ -1,0 +1,65 @@
+name:
+  en: Cameroon
+  local:
+    - lang: fr
+      value: Cameroun
+      script: Latin
+      direction: ltr
+    - lang: en
+      value: Cameroon
+      script: Latin
+      direction: ltr
+
+iso_codes:
+  alpha2: CM
+  alpha3: CMR
+  numeric: "120"
+
+continent: Africa
+subregion: Central Africa
+
+languages:
+  - name: French
+    script: Latin
+    direction: ltr
+    role: official
+    country_name: Cameroun
+  - name: English
+    script: Latin
+    direction: ltr
+    role: official
+    required_for_shipping: true
+    country_name: Cameroon
+
+administrative_divisions:
+  level1:
+    type: Region
+    label_local: Région
+    label_en: Region
+    count: 10
+
+address_format:
+  order_variants:
+    - context: domestic
+      order: [recipient, street_address, city, region, country]
+    - context: international
+      order: [recipient, street_address, city, region, country]
+
+  postal_code:
+    required: false
+    description: "Postal codes not widely used"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "City name is required"
+
+examples:
+  domestic_raw: "Boulevard du 20 Mai, Yaoundé"
+  domestic_normalized: "Boulevard du 20 Mai, Yaoundé"
+  international: "Boulevard du 20 Mai, Yaoundé, Cameroon"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

@@ -1,0 +1,66 @@
+name:
+  en: South Sudan
+  local:
+    - lang: en
+      value: South Sudan
+      script: Latin
+      direction: ltr
+    - lang: ar
+      value: جنوب السودان
+      script: Arabic
+      direction: rtl
+
+iso_codes:
+  alpha2: SS
+  alpha3: SSD
+  numeric: "728"
+
+continent: Africa
+subregion: Northern Africa
+
+languages:
+  - name: English
+    script: Latin
+    direction: ltr
+    role: official
+    required_for_shipping: true
+    country_name: South Sudan
+  - name: Arabic
+    script: Arabic
+    direction: rtl
+    role: co-official
+    country_name: جنوب السودان
+
+administrative_divisions:
+  level1:
+    type: State
+    label_local: State
+    label_en: State
+    count: 10
+
+address_format:
+  order_variants:
+    - context: domestic
+      order: [recipient, street_address, city, state, country]
+    - context: international
+      order: [recipient, street_address, city, state, country]
+
+  postal_code:
+    required: false
+    description: "Postal code system not established"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "State name is required"
+    - "City name is required"
+
+examples:
+  domestic_raw: "Ministries Road, Juba, Central Equatoria"
+  domestic_normalized: "Ministries Road, Juba, Central Equatoria"
+  international: "Ministries Road, Juba, Central Equatoria, South Sudan"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

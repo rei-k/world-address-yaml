@@ -1,0 +1,70 @@
+name:
+  en: Zimbabwe
+  local:
+    - lang: en
+      value: Zimbabwe
+      script: Latin
+      direction: ltr
+    - lang: sn
+      value: Zimbabwe
+      script: Latin
+      direction: ltr
+
+iso_codes:
+  alpha2: ZW
+  alpha3: ZWE
+  numeric: "716"
+
+continent: Africa
+subregion: Eastern Africa
+
+languages:
+  - name: English
+    script: Latin
+    direction: ltr
+    role: official
+    required_for_shipping: true
+    country_name: Zimbabwe
+  - name: Shona
+    script: Latin
+    direction: ltr
+    role: official
+    country_name: Zimbabwe
+  - name: Ndebele
+    script: Latin
+    direction: ltr
+    role: official
+    country_name: Zimbabwe
+
+administrative_divisions:
+  level1:
+    type: Province
+    label_local: Province
+    label_en: Province
+    count: 10
+
+address_format:
+  order_variants:
+    - context: domestic
+      order: [recipient, street_address, city, province, country]
+    - context: international
+      order: [recipient, street_address, city, province, country]
+
+  postal_code:
+    required: false
+    description: "Postal codes not widely used"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "City name is required"
+
+examples:
+  domestic_raw: "Samora Machel Avenue, Harare"
+  domestic_normalized: "Samora Machel Avenue, Harare"
+  international: "Samora Machel Avenue, Harare, Zimbabwe"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

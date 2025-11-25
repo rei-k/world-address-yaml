@@ -1,0 +1,70 @@
+name:
+  en: Somalia
+  local:
+    - lang: so
+      value: Soomaaliya
+      script: Latin
+      direction: ltr
+    - lang: ar
+      value: الصومال
+      script: Arabic
+      direction: rtl
+
+iso_codes:
+  alpha2: SO
+  alpha3: SOM
+  numeric: "706"
+
+continent: Africa
+subregion: Eastern Africa
+
+languages:
+  - name: Somali
+    script: Latin
+    direction: ltr
+    role: official
+    country_name: Soomaaliya
+  - name: Arabic
+    script: Arabic
+    direction: rtl
+    role: official
+    country_name: الصومال
+  - name: English
+    script: Latin
+    direction: ltr
+    role: auxiliary
+    required_for_shipping: true
+    country_name: Somalia
+
+administrative_divisions:
+  level1:
+    type: Federal Member State
+    label_local: Dowlad Goboleed
+    label_en: Federal Member State
+    count: 6
+
+address_format:
+  order_variants:
+    - context: domestic
+      order: [recipient, street_address, city, state, country]
+    - context: international
+      order: [recipient, street_address, city, state, country]
+
+  postal_code:
+    required: false
+    description: "Postal codes not widely used"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "City name is required"
+
+examples:
+  domestic_raw: "Maka Al-Mukarama Road, Mogadishu"
+  domestic_normalized: "Maka Al-Mukarama Road, Mogadishu"
+  international: "Maka Al-Mukarama Road, Mogadishu, Somalia"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false
