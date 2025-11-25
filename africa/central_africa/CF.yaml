@@ -1,0 +1,92 @@
+name:
+  en: Central African Republic
+  local:
+    - lang: fr
+      value: République centrafricaine
+      script: Latin
+      direction: ltr
+    - lang: sg
+      value: Ködörösêse tî Bêafrîka
+      script: Latin
+      direction: ltr
+
+iso_codes:
+  alpha2: CF
+  alpha3: CAF
+  numeric: "140"
+
+continent: Africa
+subregion: Central Africa
+
+languages:
+  - name: French
+    script: Latin
+    direction: ltr
+    role: official_administrative
+    country_name: République centrafricaine
+  - name: Sango
+    script: Latin
+    direction: ltr
+    role: official_national
+    country_name: Ködörösêse tî Bêafrîka
+  - name: English
+    script: Latin
+    direction: ltr
+    role: auxiliary_international
+    required_for_shipping: true
+    country_name: Central African Republic
+
+administrative_divisions:
+  level1:
+    type: Prefecture
+    label_local: Préfecture
+    label_en: Prefecture
+    count: 20
+    source: ../../data/cf_prefectures.json
+  level2:
+    type: Sub-Prefecture
+    label_local: Sous-préfecture
+    label_en: Sub-Prefecture
+    count: null
+    source: ../../data/cf_subprefectures.json
+  level3:
+    type: Commune
+    label_local: Commune
+    label_en: Commune
+    count: null
+    source: ../../data/cf_communes.json
+
+address_format:
+  order_variants:
+    - context: domestic_fr
+      order: [recipient, building, floor, room, street_address, commune, sub_prefecture, prefecture, country]
+    - context: international_en
+      order: [recipient, room, floor, building, street_address, commune, prefecture, postal_code, country]
+
+  building: { required: false, example: "Immeuble Bangui" }
+  floor: { required: false, example: "2e étage" }
+  room: { required: false, example: "Appt 10" }
+
+  postal_code:
+    required: false
+    required_for_international: true
+    regex: "^[0-9]{5}$"
+    length: 5
+    description: "Exists but not consistently used domestically"
+    example: "00010"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "Prefecture must be identifiable"
+    - "Postal code recommended for export/import logistics"
+
+examples:
+  domestic_raw: "Immeuble Bangui, Avenue des Martyrs, Commune de Bangui, Préfecture de Bangui, République centrafricaine"
+  domestic_normalized: "Avenue des Martyrs Bangui"
+  international: "Avenue des Martyrs, Bangui 00010, Central African Republic"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

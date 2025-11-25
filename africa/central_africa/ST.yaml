@@ -1,0 +1,71 @@
+name:
+  en: São Tomé and Príncipe
+  local:
+    - lang: pt
+      value: São Tomé e Príncipe
+      script: Latin
+      direction: ltr
+    - lang: fof
+      value: Sãotomé
+      script: Latin
+      direction: ltr
+
+iso_codes:
+  alpha2: ST
+  alpha3: STP
+  numeric: "678"
+
+continent: Africa
+subregion: Central Africa
+
+languages:
+  - name: Portuguese
+    script: Latin
+    direction: ltr
+    role: official
+  - name: Forro
+    script: Latin
+    direction: ltr
+    role: indigenous_cultural
+  - name: English
+    script: Latin
+    direction: ltr
+    role: auxiliary_international
+    required_for_shipping: true
+
+administrative_divisions:
+  level1:
+    type: District
+    label_local: Distrito
+    count: 7
+    source: ../../data/st_districts.json
+
+address_format:
+  order_variants:
+    - context: domestic
+      order: [recipient, building, floor, room, street_address, district, country]
+    - context: international
+      order: [recipient, room, floor, building, street_address, district, postal_code, country]
+
+  building: { required: false, example: "Edifício São Tomé" }
+  floor: { required: false, example: "1º andar" }
+  room: { required: false, example: "Apto 3" }
+
+  postal_code:
+    required: false
+    required_for_international: true
+    regex: "^[0-9]{4}$"
+    example: "1000"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "District must be identifiable"
+
+examples:
+  international: "Rua da Independência, São Tomé 1000, São Tomé and Príncipe"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

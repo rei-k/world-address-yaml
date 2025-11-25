@@ -1,0 +1,75 @@
+name:
+  en: Zimbabwe
+  local:
+    - lang: en
+      value: Zimbabwe
+      script: Latin
+      direction: ltr
+    - lang: sn
+      value: Zimbabwe
+      script: Latin
+      direction: ltr
+    - lang: nd
+      value: Zimbabwe
+      script: Latin
+      direction: ltr
+
+iso_codes:
+  alpha2: ZW
+  alpha3: ZWE
+  numeric: "716"
+
+continent: Africa
+subregion: East Africa
+
+languages:
+  - name: English
+    role: official
+    required_for_shipping: true
+  - name: Shona
+    role: regional_primary
+  - name: Ndebele
+    role: regional_primary
+
+administrative_divisions:
+  level1:
+    type: Province
+    count: 10
+    source: ../../data/zw_provinces.json
+
+  level2:
+    type: District
+    count: null
+    source: ../../data/zw_districts.json
+
+  level3:
+    type: Ward / Township / Growth Point
+    count: null
+    source: ../../data/zw_localities.json
+
+address_format:
+  order_variants:
+    - context: domestic
+      order: [recipient, building, floor, room, street_address, locality, district, province, country]
+    - context: international
+      order: [recipient, room, floor, building, street_address, district, province, postal_code, country]
+
+  postal_code:
+    required: false
+    required_for_international: true
+    stability: medium
+    regex: "^[0-9]{4}$"
+    example: "0020"
+
+validation:
+  rules:
+    - "Province must be present"
+    - "District recommended"
+
+examples:
+  international: "Samora Machel Ave, Harare 0020, Zimbabwe"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

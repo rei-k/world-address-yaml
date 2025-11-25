@@ -1,0 +1,73 @@
+# EH.yaml — 西サハラ
+name:
+  en: Western Sahara
+  local:
+    - lang: ar
+      value: الصحراء الغربية
+      script: Arabic
+      direction: rtl
+    - lang: es
+      value: Sahara Occidental
+      script: Latin
+      direction: ltr
+
+iso_codes:
+  alpha2: EH
+  alpha3: ESH
+  numeric: "732"
+
+continent: Africa
+subregion: Northern Africa
+
+languages:
+  - name: Arabic
+    script: Arabic
+    direction: rtl
+    role: official
+    country_name: الصحراء الغربية
+  - name: Spanish
+    script: Latin
+    direction: ltr
+    role: auxiliary
+    required_for_shipping: false
+    country_name: Sahara Occidental
+
+administrative_divisions:
+  level1:
+    type: Province (de facto / claimed)
+    label_local: محافظة
+    label_en: Province
+    count: null
+    source: ../../data/eh_divisions_notes.md
+
+address_format:
+  order_variants:
+    - context: domestic_ar
+      order: [recipient, building, floor, room, street_address, city, province, postal_code, country]
+    - context: international_en
+      order: [recipient, room, floor, building, street_address, city, province, postal_code, country]
+  building: { required: false, example: "عمارة الكويرة" }
+  floor: { required: false, example: "الطابق 1" }
+  room: { required: false, example: "شقة 3" }
+  postal_code:
+    required: false
+    regex: "^[0-9]{5}$"
+    length: 5
+    description: "Uses Moroccan 5-digit format where applicable"
+    example: "70000"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "Province/Region naming follows de facto postal usage (Morocco-controlled areas)"
+    - "Postal code optional; use 5-digit if provided"
+
+examples:
+  domestic_raw: "عمارة الكويرة، شارع السمارة، العيون 70000، الصحراء الغربية"
+  domestic_normalized: "شارع السمارة العيون 70000"
+  international: "Av. Es-Semara, Laayoune 70000, Western Sahara"
+
+status:
+  un_member: false
+  recognized: true
+  disputed: true

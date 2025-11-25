@@ -1,0 +1,76 @@
+name:
+  en: Gabon
+  local:
+    - lang: fr
+      value: Gabon
+      script: Latin
+      direction: ltr
+    - lang: fan
+      value: Ngabu
+      script: Latin
+      direction: ltr
+
+iso_codes:
+  alpha2: GA
+  alpha3: GAB
+  numeric: "266"
+
+continent: Africa
+subregion: Central Africa
+
+languages:
+  - name: French
+    script: Latin
+    direction: ltr
+    role: official
+  - name: Fang
+    script: Latin
+    direction: ltr
+    role: widely_used_indigenous
+  - name: English
+    script: Latin
+    direction: ltr
+    role: auxiliary_international
+    required_for_shipping: true
+
+administrative_divisions:
+  level1:
+    type: Province
+    label_local: Province
+    count: 9
+    source: ../../data/ga_provinces.json
+  level2:
+    type: Department
+    label_local: Département
+    count: null
+    source: ../../data/ga_departments.json
+
+address_format:
+  order_variants:
+    - context: domestic
+      order: [recipient, building, floor, room, street_address, department, province, country]
+    - context: international
+      order: [recipient, room, floor, building, street_address, province, postal_code, country]
+
+  building: { required: false, example: "Résidence Libreville" }
+  floor: { required: false, example: "2e étage" }
+  room: { required: false, example: "Appt 4" }
+
+  postal_code:
+    required: false
+    required_for_international: true
+    regex: "^[0-9]{5}$"
+    example: "10000"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "Province must be recorded"
+
+examples:
+  international: "Boulevard Triomphal, Libreville 10000, Gabon"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

@@ -1,0 +1,74 @@
+# LY.yaml — リビア
+name:
+  en: Libya
+  local:
+    - lang: ar
+      value: ليبيا
+      script: Arabic
+      direction: rtl
+
+iso_codes:
+  alpha2: LY
+  alpha3: LBY
+  numeric: "434"
+
+continent: Africa
+subregion: Northern Africa
+
+languages:
+  - name: Arabic
+    script: Arabic
+    direction: rtl
+    role: official
+    country_name: ليبيا
+  - name: Tamazight (Berber)
+    script: Tifinagh
+    direction: ltr
+    role: recognized
+    country_name: ⵍⵉⴱⵢⴰ
+  - name: English
+    script: Latin
+    direction: ltr
+    role: auxiliary
+    required_for_shipping: true
+    country_name: Libya
+
+administrative_divisions:
+  level1:
+    type: District
+    label_local: منطقة
+    label_en: District (Sha'biyah/Mantika)
+    count: 22
+    source: ../../data/ly_districts.json
+
+address_format:
+  order_variants:
+    - context: domestic_ar
+      order: [recipient, building, floor, room, street_address, city, district, postal_code, country]
+    - context: international_en
+      order: [recipient, room, floor, building, street_address, city, district, postal_code, country]
+  building: { required: false, example: "مبنى السرايا" }
+  floor: { required: false, example: "الطابق 2" }
+  room: { required: false, example: "شقة 6" }
+  postal_code:
+    required: false
+    regex: "^[0-9]{5}$"
+    length: 5
+    description: "5-digit code (not always used domestically)"
+    example: "21810"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "District should be specified where applicable"
+    - "Postal code may be omitted domestically"
+
+examples:
+  domestic_raw: "مبنى السرايا، شارع أول سبتمبر، طرابلس، ليبيا"
+  domestic_normalized: "شارع أول سبتمبر طرابلس"
+  international: "1st September St., Tripoli 21810, Libya"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

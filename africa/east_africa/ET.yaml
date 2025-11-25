@@ -1,0 +1,122 @@
+name:
+  en: Ethiopia
+  local:
+    - lang: am
+      value: ኢትዮጵያ
+      script: Ge'ez
+      direction: ltr
+    - lang: om
+      value: Itoophiyaa
+      script: Latin
+      direction: ltr
+    - lang: ti
+      value: ኢትዮጵያ
+      script: Ge'ez
+      direction: ltr
+    - lang: so
+      value: Itoobiya
+      script: Latin
+      direction: ltr
+    - lang: aa
+      value: Itiyoophiyaa
+      script: Latin
+      direction: ltr
+
+iso_codes:
+  alpha2: ET
+  alpha3: ETH
+  numeric: "231"
+
+continent: Africa
+subregion: East Africa
+
+languages:
+  - name: Amharic
+    script: Ge'ez
+    direction: ltr
+    role: official_federal
+  - name: Oromo
+    script: Latin
+    direction: ltr
+    role: major_regional
+  - name: Tigrinya
+    script: Ge'ez
+    direction: ltr
+    role: regional_highland
+  - name: Somali
+    script: Latin
+    direction: ltr
+    role: regional_eastern
+  - name: Afar
+    script: Latin
+    direction: ltr
+    role: regional_northeast
+  - name: English
+    script: Latin
+    direction: ltr
+    role: auxiliary_international
+    required_for_shipping: true
+
+administrative_divisions:
+  level1:
+    type: Region
+    label_local_am: ክልል (Kilil)
+    label_en: Region
+    count: 11
+    source: ../../data/et_regions.json
+  level2:
+    type: Zone
+    label_local_am: ዞን
+    label_en: Zone
+    count: null
+    source: ../../data/et_zones.json
+  level3:
+    type: Woreda
+    label_local_am: ወረዳ
+    label_en: Woreda (District)
+    count: null
+    source: ../../data/et_woredas.json
+  level4:
+    type: Kebele
+    label_local_am: ቀበሌ
+    label_en: Kebele (Neighbourhood / Locality)
+    count: null
+    source: ../../data/et_kebeles.json
+
+address_format:
+  order_variants:
+    - context: domestic_am
+      order: [recipient, building, floor, room, street_address, kebele, woreda, zone, region, country]
+    - context: international_en
+      order: [recipient, room, floor, building, street_address, woreda, region, postal_code, country]
+
+  building: { required: false, example_am: "የቦሌ መስሪያ ቤት", example_en: "Bole Commercial Center" }
+  floor: { required: false, example_am: "3ኛ ፎቅ", example_en: "3rd Floor" }
+  room: { required: false, example_am: "ቢሮ 12", example_en: "Office 12" }
+
+  postal_code:
+    required: false
+    required_for_international: true
+    stability: "low"
+    regex: "^[0-9]{4}$"
+    example: "1000"
+    operational_guidance:
+      - "If postal code unknown: ensure Woreda + Region are clear."
+      - "DHL/FedEx may override postal zone routing."
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "Region is mandatory"
+    - "If Zone omitted: Woreda must uniquely identify area"
+    - "If Kebele missing: street or locality reference must be present"
+
+examples:
+  domestic_raw: "Bole Commercial Center, Africa Avenue, Kebele 03, Woreda 02, Addis Ababa, Ethiopia"
+  domestic_normalized: "Africa Avenue Kebele 03 Woreda 02 Addis Ababa"
+  international: "Africa Avenue, Woreda 02, Addis Ababa 1000, Ethiopia"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

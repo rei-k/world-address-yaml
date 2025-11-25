@@ -1,0 +1,57 @@
+name:
+  en: Mozambique
+  local:
+    - lang: pt
+      value: Moçambique
+      script: Latin
+      direction: ltr
+
+iso_codes:
+  alpha2: MZ
+  alpha3: MOZ
+  numeric: "508"
+
+continent: Africa
+subregion: East Africa
+
+languages:
+  - name: Portuguese
+    script: Latin
+    direction: ltr
+    role: official
+  - name: English
+    script: Latin
+    direction: ltr
+    role: international
+    required_for_shipping: true
+
+administrative_divisions:
+  level1:
+    type: Province
+    label_en: Province
+    count: 11
+    source: ../../data/mz_provinces.json
+  level2:
+    type: District
+    label_en: District
+    count: null
+    source: ../../data/mz_districts.json
+  level3:
+    type: Administrative Post
+    label_en: Administrative Post
+    count: null
+    source: ../../data/mz_posts.json
+
+address_format:
+  order_variants:
+    - context: domestic
+      order: [recipient, building, floor, room, street_address, district, province, country]
+    - context: international
+      order: [recipient, room, floor, building, street_address, province, postal_code, country]
+
+  postal_code:
+    required: false
+    required_for_international: true
+    stability: "medium"
+    regex: "^[0-9]{4}$"
+    example: "1100"

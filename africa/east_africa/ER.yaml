@@ -1,0 +1,106 @@
+name:
+  en: Eritrea
+  local:
+    - lang: ti
+      value: ኤርትራ
+      script: Ge'ez
+      direction: ltr
+    - lang: ti-Latn
+      value: Ertra
+      script: Latin
+      direction: ltr
+    - lang: ar
+      value: إريتريا
+      script: Arabic
+      direction: rtl
+
+iso_codes:
+  alpha2: ER
+  alpha3: ERI
+  numeric: "232"
+
+continent: Africa
+subregion: East Africa
+
+languages:
+  - name: Tigrinya
+    script: Ge'ez
+    direction: ltr
+    role: official_national
+    country_name: ኤርትራ
+  - name: Tigrinya (Latin transliteration)
+    script: Latin
+    direction: ltr
+    role: transliteration_standard
+    usage_notes: used in passports, shipping labels when Latin required
+    country_name: Ertra
+  - name: Arabic
+    script: Arabic
+    direction: rtl
+    role: official_administrative
+    country_name: إريتريا
+  - name: English
+    script: Latin
+    direction: ltr
+    role: auxiliary_international
+    required_for_shipping: true
+    country_name: Eritrea
+
+administrative_divisions:
+  level1:
+    type: Region
+    label_local_ti: ዞባ (Zoba)
+    label_en: Region
+    count: 6
+    source: ../../data/er_regions.json
+  level2:
+    type: Subregion / District
+    label_local_ti: ክልል
+    label_en: District
+    count: null
+    source: ../../data/er_districts.json
+  level3:
+    type: Locality / Village / Quarter
+    label_local_ti: ቀበሌ
+    label_en: Locality
+    count: null
+    source: ../../data/er_localities.json
+
+address_format:
+  order_variants:
+    - context: domestic_ti
+      order: [recipient, building, floor, room, street_address, locality, district, region, country]
+    - context: domestic_en
+      order: [recipient, building, floor, room, street_address, locality, district, region, country]
+    - context: international_en
+      order: [recipient, room, floor, building, street_address, locality, region, postal_code, country]
+
+  building: { required: false, example_ti: "ዓምዲ ቤት", example_en: "Asmara Block" }
+  floor: { required: false, example_ti: "ደረጃ 2", example_en: "2nd Floor" }
+  room: { required: false, example_ti: "ክፍል 5", example_en: "Room 5" }
+
+  postal_code:
+    required: false
+    required_for_international: true
+    stability: "low"
+    regex: "^[0-9]{4}$"
+    example: "1100"
+    operational_guidance:
+      - "If postal code is unavailable: locality + region must be unambiguous."
+      - "Never replace missing postal code with zeros in DDU -> use omission."
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "Locality and Region must be clear"
+    - "Include transliteration when exporting via courier"
+
+examples:
+  domestic_raw_ti: "ዓምዲ ቤት, መንገዲ ሃገር, ቀበሌ 12, ክልል ማከላ, ዞባ ቀይሕ ባሕሪ, ኤርትራ"
+  domestic_normalized: "Street Hager, Locality 12, Maekel District, Zoba Maekel"
+  international: "Hager Street, Locality 12, Zoba Maekel 1100, Eritrea"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

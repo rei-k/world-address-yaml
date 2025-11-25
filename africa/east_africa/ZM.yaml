@@ -1,0 +1,85 @@
+name:
+  en: Zambia
+  local:
+    - lang: en
+      value: Zambia
+      script: Latin
+      direction: ltr
+
+iso_codes:
+  alpha2: ZM
+  alpha3: ZMB
+  numeric: "894"
+
+continent: Africa
+subregion: East Africa
+
+languages:
+  - name: English
+    script: Latin
+    direction: ltr
+    role: official_administrative
+    required_for_shipping: true
+  - name: Bemba
+    role: major_regional
+  - name: Nyanja
+    role: major_regional
+  - name: Tonga
+    role: major_regional
+
+administrative_divisions:
+  level1:
+    type: Province
+    label_en: Province
+    count: 10
+    source: ../../data/zm_provinces.json
+
+  level2:
+    type: District
+    label_en: District
+    count: null
+    source: ../../data/zm_districts.json
+
+  level3:
+    type: Constituency
+    label_en: Constituency
+    count: null
+    source: ../../data/zm_constituencies.json
+
+  level4:
+    type: Ward / Locality
+    label_en: Ward / Locality
+    count: null
+    source: ../../data/zm_wards.json
+
+address_format:
+  order_variants:
+    - context: domestic
+      order: [recipient, building, floor, room, street_address, locality, district, province, country]
+
+    - context: international
+      order: [recipient, room, floor, building, street_address, district, province, postal_code, country]
+
+  building: { required: false, example: "Findeco House" }
+  floor: { required: false, example: "7th Floor" }
+  room: { required: false, example: "Unit 701" }
+
+  postal_code:
+    required: false
+    required_for_international: true
+    stability: medium
+    regex: "^[0-9]{5}$"
+    example: "10101"
+
+validation:
+  rules:
+    - "District and Province must be present"
+    - "Locality recommended"
+
+examples:
+  international: "Findeco House, Cairo Road, Lusaka 10101, Zambia"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

@@ -1,0 +1,149 @@
+🚚 配送実務（届くレベル）スキーマ
+
+👉 ゴール：最小限の入力でも確実に届く。フォーム設計や配送ラベル生成向け。
+
+name: 
+  en: Afghanistan
+
+iso_codes:
+  alpha2: AF
+
+languages:
+  - name: English
+    script: Latin
+    direction: ltr
+    role: shipping_required
+  - name: Pashto
+    script: Arabic
+    direction: rtl
+    role: official
+  - name: Dari
+    script: Arabic
+    direction: rtl
+    role: official
+
+address_format:
+  order: [recipient, street_address, city, province, postal_code, country]
+
+  recipient:
+    required: true
+  street_address:
+    required: true
+  city:
+    required: true
+  province:
+    required: true
+    label_en: Province
+  postal_code:
+    required: true
+    regex: "^[0-9]{4}$"
+  country:
+    required: true
+
+examples:
+  international: "Mr. Ahmad Khan, Karte Parwan Street 15, Kabul, Afghanistan 1001"
+
+特徴
+
+必須フィールドだけ
+
+言語は英語＋現地語（英語必須フラグあり）
+
+郵便番号は正規表現のみ
+
+サンプル住所は国際配送向けに1つ
+
+📚 研究分析（フルレベル）スキーマ
+
+👉 ゴール：各国の住所制度を比較・分析・標準化する研究用途。階層・多言語・歴史も含む。
+
+name:
+  en: Afghanistan
+  fa: افغانستان
+  ps: افغانستان
+
+iso_codes:
+  alpha2: AF
+  alpha3: AFG
+  numeric: "004"
+
+continent: Asia
+subregion: South Asia
+
+languages:
+  - name: Pashto
+    script: Arabic
+    direction: rtl
+    role: official
+    country_name: افغانستان
+  - name: Dari
+    script: Arabic
+    direction: rtl
+    role: official
+    country_name: افغانستان
+  - name: English
+    script: Latin
+    direction: ltr
+    role: auxiliary
+    required_for_shipping: true
+    country_name: Afghanistan
+
+address_format:
+  order_variants:
+    - context: domestic
+      order: [recipient, street_address, district, city, province, postal_code, country]
+    - context: international
+      order: [recipient, building, floor, room, street_address, city, province, postal_code, country]
+
+  recipient:
+    required: true
+  building:
+    required: false
+  floor:
+    required: false
+  room:
+    required: false
+  street_address:
+    required: true
+  district:
+    required: false
+  city:
+    required: true
+  province:
+    required: true
+    type: Province
+    label_local: ولایت
+    label_en: Province
+    count: 34
+  postal_code:
+    required: true
+    regex: "^[0-9]{4}$"
+    description: "4-digit numeric code"
+    example: "1001"
+    since: 2011
+  country:
+    required: true
+    value: Afghanistan
+
+administrative_divisions:
+  level1:
+    type: Province
+    count: 34
+  level2:
+    type: District
+    required: false
+  level3:
+    type: Subdistrict
+    required: false
+
+validation:
+  allow_latin_transliteration: true
+  postal_code_rules:
+    general: required
+    exceptions: "Some rural areas may not have postal codes"
+  fallback: "city + province + country"
+
+examples:
+  domestic_raw: "ولایت کابل، شهر کابل، کارته پروان، سرک ۱۵"
+  domestic_normalized: "Kabul Province, Kabul City, Karte Parwan Street 15"
+  international: "Room 1205, Floor 12, Azadi Tower Complex, Karte Parwan Street 15, Kabul, Afghanistan 1001"

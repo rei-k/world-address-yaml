@@ -1,0 +1,93 @@
+name:
+  en: Equatorial Guinea
+  local:
+    - lang: es
+      value: Guinea Ecuatorial
+      script: Latin
+      direction: ltr
+    - lang: fr
+      value: Guinée équatoriale
+      script: Latin
+      direction: ltr
+    - lang: pt
+      value: Guiné Equatorial
+      script: Latin
+      direction: ltr
+
+iso_codes:
+  alpha2: GQ
+  alpha3: GNQ
+  numeric: "226"
+
+continent: Africa
+subregion: Central Africa
+
+languages:
+  - name: Spanish
+    script: Latin
+    direction: ltr
+    role: official_primary
+  - name: French
+    script: Latin
+    direction: ltr
+    role: official_secondary
+  - name: Portuguese
+    script: Latin
+    direction: ltr
+    role: treaty_official
+  - name: English
+    script: Latin
+    direction: ltr
+    role: auxiliary_international
+    required_for_shipping: true
+
+administrative_divisions:
+  level1:
+    type: Province
+    label_local_es: Provincia
+    label_en: Province
+    count: 8
+    source: ../../data/gq_provinces.json
+  level2:
+    type: District
+    label_local_es: Distrito
+    label_en: District
+    count: null
+    source: ../../data/gq_districts.json
+  level3:
+    type: Municipality
+    label_local_es: Municipio
+    label_en: Municipality
+    count: null
+    source: ../../data/gq_municipalities.json
+
+address_format:
+  order_variants:
+    - context: domestic_es
+      order: [recipient, building, floor, room, street_address, municipality, province, country]
+    - context: international_en
+      order: [recipient, room, floor, building, street_address, municipality, province, postal_code, country]
+
+  building: { required: false, example_es: "Edificio Malabo" }
+  floor: { required: false, example: "3º piso" }
+  room: { required: false, example: "Apto 9" }
+
+  postal_code:
+    required: false
+    required_for_international: true
+    regex: "^[0-9]{5}$"
+    example: "99900"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "Municipality and Province must be recognizable"
+
+examples:
+  domestic_raw: "Edificio Malabo, Calle Ela Nguema, Municipio de Malabo, Provincia de Bioko Norte, Guinea Ecuatorial"
+  international: "Calle Ela Nguema, Malabo 99900, Equatorial Guinea"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

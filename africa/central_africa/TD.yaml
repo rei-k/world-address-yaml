@@ -1,0 +1,96 @@
+name:
+  en: Chad
+  local:
+    - lang: fr
+      value: Tchad
+      script: Latin
+      direction: ltr
+    - lang: ar
+      value: تشاد
+      script: Arabic
+      direction: rtl
+
+iso_codes:
+  alpha2: TD
+  alpha3: TCD
+  numeric: "148"
+
+continent: Africa
+subregion: Central Africa
+
+languages:
+  - name: French
+    script: Latin
+    direction: ltr
+    role: official_administrative
+    country_name: Tchad
+  - name: Arabic (Chadian Standard)
+    script: Arabic
+    direction: rtl
+    role: official_administrative
+    country_name: تشاد
+  - name: English
+    script: Latin
+    direction: ltr
+    role: auxiliary_international
+    required_for_shipping: true
+    country_name: Chad
+
+administrative_divisions:
+  level1:
+    type: Region
+    label_local_fr: Région
+    label_local_ar: ولاية
+    label_en: Region
+    count: 23
+    source: ../../data/td_regions.json
+  level2:
+    type: Department
+    label_local_fr: Département
+    label_local_ar: دائرة
+    label_en: Department
+    count: null
+    source: ../../data/td_departments.json
+  level3:
+    type: Sub-Prefecture / Commune
+    label_local_fr: Sous-préfecture / Commune
+    label_local_ar: مقاطعة
+    label_en: Commune
+    count: null
+    source: ../../data/td_communes.json
+
+address_format:
+  order_variants:
+    - context: domestic_fr
+      order: [recipient, building, floor, room, street_address, commune, department, region, country]
+    - context: domestic_ar
+      order: [recipient, building, floor, room, street_address, commune, department, region, country]
+    - context: international_en
+      order: [recipient, room, floor, building, street_address, commune, region, postal_code, country]
+
+  building: { required: false, example_fr: "Immeuble N'Djamena", example_ar: "عمارة نجامينا" }
+  floor: { required: false, example_fr: "2e étage", example_ar: "الطابق 2" }
+  room: { required: false, example_fr: "Appt 6", example_ar: "شقة 6" }
+
+  postal_code:
+    required: false
+    required_for_international: true
+    regex: "^[0-9]{5}$"
+    description: "Used mainly for export / customs routing"
+    example: "01000"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "Region must be identifiable"
+    - "Postal code recommended for international shipments"
+
+examples:
+  domestic_raw: "Immeuble N'Djamena, Avenue Charles de Gaulle, Commune de N'Djamena, Région de N'Djamena, Tchad"
+  domestic_normalized: "Avenue Charles de Gaulle N'Djamena"
+  international: "Avenue Charles de Gaulle, N'Djamena 01000, Chad"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

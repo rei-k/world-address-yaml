@@ -1,0 +1,102 @@
+name:
+  en: Comoros
+  local:
+    - lang: swb
+      value: Komori / Ukomori
+      script: Latin
+      direction: ltr
+    - lang: ar
+      value: جزر القمر
+      script: Arabic
+      direction: rtl
+    - lang: fr
+      value: Comores
+      script: Latin
+      direction: ltr
+
+iso_codes:
+  alpha2: KM
+  alpha3: COM
+  numeric: "174"
+
+continent: Africa
+subregion: East Africa
+
+languages:
+  - name: Comorian (Shikomori)
+    script: Latin
+    direction: ltr
+    role: official_national
+    usage_notes: local place names and neighborhood identifiers
+  - name: Arabic
+    script: Arabic
+    direction: rtl
+    role: cultural_religious
+    usage_notes: sometimes in personal & street naming
+  - name: French
+    script: Latin
+    direction: ltr
+    role: official_administrative
+    usage_notes: government records and legal forms
+  - name: English
+    script: Latin
+    direction: ltr
+    role: auxiliary_international
+    required_for_shipping: true
+
+administrative_divisions:
+  level1:
+    type: Island
+    label_local: Ndzuwani / Ngazidja / Mwali (island names vary by Shikomori)
+    label_en: Island
+    count: 3
+    source: ../../data/km_islands.json
+  level2:
+    type: Region / Commune
+    label_local: Wilaya / Komine
+    label_en: Region / Commune
+    count: null
+    source: ../../data/km_communes.json
+  level3:
+    type: Locality / Village
+    label_local: Shungwi
+    label_en: Locality / Village
+    count: null
+    source: ../../data/km_localities.json
+
+address_format:
+  order_variants:
+    - context: domestic
+      order: [recipient, building, floor, room, street_address, village, commune, island, country]
+    - context: international
+      order: [recipient, room, floor, building, street_address, commune, island, postal_code, country]
+
+  building: { required: false, example: "Immeuble Moroni" }
+  floor: { required: false, example: "2e étage" }
+  room: { required: false, example: "Appt 4" }
+
+  postal_code:
+    required: false
+    required_for_international: true
+    stability: "low"
+    regex: "^[0-9]{4}$"
+    example: "0000"
+    operational_guidance:
+      - "If postal code is unavailable, always include island and commune."
+      - "For DHL/FedEx, routing is performed by island + commune + locality."
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "Commune and Island must be explicitly present"
+    - "If no postal code: do NOT substitute '00000'; simply omit"
+
+examples:
+  domestic_raw: "Immeuble Moroni, Rue de la Corniche, Village Tsidjé, Commune Moroni, Ngazidja, Comores"
+  domestic_normalized: "Rue de la Corniche Tsidjé Moroni Ngazidja"
+  international: "Rue de la Corniche, Moroni, Ngazidja 0000, Comoros"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false

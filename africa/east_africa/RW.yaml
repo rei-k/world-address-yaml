@@ -1,0 +1,52 @@
+name:
+  en: Rwanda
+  local:
+    - lang: rw
+      value: Rwanda
+      script: Latin
+      direction: ltr
+    - lang: fr
+      value: Rwanda
+      script: Latin
+      direction: ltr
+
+iso_codes:
+  alpha2: RW
+  alpha3: RWA
+  numeric: "646"
+
+languages:
+  - name: Kinyarwanda
+    script: Latin
+    direction: ltr
+    role: national_primary
+  - name: English
+    script: Latin
+    direction: ltr
+    role: official
+    required_for_shipping: true
+  - name: French
+    script: Latin
+    direction: ltr
+    role: administrative
+
+administrative_divisions:
+  level1:
+    type: Province
+    count: 5
+  level2:
+    type: District
+    count: 30
+  level3:
+    type: Sector
+  level4:
+    type: Cell
+  level5:
+    type: Village (Umudugudu)
+
+address_format:
+  postal_code:
+    required_for_international: true
+    stability: "medium"
+    regex: "^[0-9]{5}$"
+    example: "25000"
