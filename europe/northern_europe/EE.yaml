@@ -17,13 +17,23 @@ subregion: Northern Europe
 languages:
   - name: Estonian
     script: Latin
+    direction: ltr
     role: official
     country_name:
       et: Eesti
       en: Estonia
+  - name: Russian
+    script: Cyrillic
+    direction: ltr
+    role: minority
+    country_name:
+      ru: Эстония
+      en: Estonia
   - name: English
     script: Latin
+    direction: ltr
     role: auxiliary
+    required_for_shipping: true
     country_name:
       en: Estonia
 
@@ -58,6 +68,12 @@ address_format:
     regex: "^[0-9]{5}$"
     description: "5-digit numeric postal code"
     example: "10111"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "Postal code format: 5 digits"
+    - "City name required"
 
 examples:
   domestic_raw: "Pärnu mnt 10, 10111 Tallinn"

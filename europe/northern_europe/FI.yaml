@@ -21,19 +21,23 @@ subregion: Northern Europe
 languages:
   - name: Finnish
     script: Latin
+    direction: ltr
     role: official
     country_name:
       fi: Suomi
       en: Finland
   - name: Swedish
     script: Latin
+    direction: ltr
     role: co-official
     country_name:
       sv: Finland
       en: Finland
   - name: English
     script: Latin
+    direction: ltr
     role: auxiliary
+    required_for_shipping: true
     country_name:
       en: Finland
 
@@ -68,6 +72,12 @@ address_format:
     regex: "^[0-9]{5}$"
     description: "5-digit numeric postal code"
     example: "00100"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "Postal code format: 5 digits"
+    - "City name required"
 
 examples:
   domestic_raw: "Mannerheimintie 10, 00100 Helsinki"

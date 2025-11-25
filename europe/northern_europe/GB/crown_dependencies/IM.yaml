@@ -21,11 +21,14 @@ subregion: Northern Europe
 languages:
   - name: English
     script: Latin
+    direction: ltr
     role: official
+    required_for_shipping: true
     country_name:
       en: Isle of Man
   - name: Manx
     script: Latin
+    direction: ltr
     role: co-official
     country_name:
       gv: Ellan Vannin
@@ -67,6 +70,12 @@ address_format:
     regex: "^IM[0-9]{1,2} ?[0-9][A-Z]{2}$"
     description: "Isle of Man postcode format"
     example: "IM1 1AA"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "Postal code format: IM followed by digits and letters"
+    - "City name required"
 
 examples:
   domestic_raw: "Circular Road, Douglas, IM1 1AA"

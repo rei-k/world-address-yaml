@@ -17,13 +17,16 @@ subregion: North America
 languages:
   - name: French
     script: Latin
+    direction: ltr
     role: official
     country_name:
       fr: Saint-Pierre-et-Miquelon
       en: Saint Pierre and Miquelon
   - name: English
     script: Latin
+    direction: ltr
     role: auxiliary
+    required_for_shipping: true
     country_name:
       en: Saint Pierre and Miquelon
 
@@ -61,6 +64,12 @@ address_format:
     regex: "^975[0-9]{2}$"
     description: "Postal codes start with 975"
     example: "97500"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "Postal code format: starts with 975"
+    - "City name required"
 
 examples:
   domestic_raw: "Rue Abbé Pierre Gervain, 97500 Saint-Pierre"

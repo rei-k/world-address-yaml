@@ -9,8 +9,19 @@ continent: North America
 subregion: Caribbean
 
 languages:
-  - { name: English, role: official }
-  - { name: French Patois, role: regional }
+  - name: English
+    script: Latin
+    direction: ltr
+    role: official
+    required_for_shipping: true
+    country_name:
+      en: Grenada
+  - name: French Patois
+    script: Latin
+    direction: ltr
+    role: regional
+    country_name:
+      en: Grenada
 
 administrative_divisions:
   level1: { type: Parish, label_en: Parish, count: 6, source: ../../data/gd_parishes.json }

@@ -17,11 +17,14 @@ subregion: West Asia
 languages:
   - name: Arabic
     script: Arabic
+    direction: rtl
     role: official
     country_name: الأردن
   - name: English
     script: Latin
+    direction: ltr
     role: auxiliary
+    required_for_shipping: true
     country_name: Jordan
 
 administrative_divisions:
@@ -64,6 +67,12 @@ address_format:
     regex: "^[0-9]{5}$"
     description: "5-digit numeric postal code"
     example: "11118"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "Governorate name is required"
+    - "Postal code format: 5 digits"
 
 examples:
   domestic_raw: "شارع الملك عبدالله الثاني، عمّان 11118"
