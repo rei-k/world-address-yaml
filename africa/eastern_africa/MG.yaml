@@ -42,17 +42,34 @@ administrative_divisions:
     label_local: Faritany
     label_en: Province
     count: 6
+    source: ../../data/mg_provinces.json
+  level2:
+    type: Region
+    label_local: Faritra
+    label_en: Region
+    count: 22
+  level3:
+    type: District
+    label_local: Fivondronana
+    label_en: District
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, postal_code, city, country]
+      order: [recipient, building, floor, room, street_address, district, region, province, postal_code, country]
     - context: international
-      order: [recipient, street_address, postal_code, city, country]
+      order: [recipient, room, floor, building, street_address, city, postal_code, country]
+
+  building: { required: false, example: "Immeuble ARO" }
+  floor: { required: false, example: "5ème étage" }
+  room: { required: false, example: "Bureau 503" }
 
   postal_code:
     required: true
+    required_for_international: true
     regex: "^[0-9]{3}$"
+    length: 3
     description: "3-digit postal code"
     example: "101"
 

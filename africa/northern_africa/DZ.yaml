@@ -47,17 +47,34 @@ administrative_divisions:
     label_local: ولاية
     label_en: Province
     count: 58
+    source: ../../data/dz_wilayas.json
+  level2:
+    type: Daira
+    label_local: دائرة
+    label_en: District
+    count: null
+  level3:
+    type: Commune
+    label_local: بلدية
+    label_en: Municipality
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, postal_code, city, wilaya, country]
+      order: [recipient, building, floor, room, street_address, commune, daira, wilaya, postal_code, country]
     - context: international
-      order: [recipient, street_address, postal_code, city, wilaya, country]
+      order: [recipient, room, floor, building, street_address, city, wilaya, postal_code, country]
+
+  building: { required: false, example: "Immeuble El-Djazair" }
+  floor: { required: false, example: "4ème étage" }
+  room: { required: false, example: "Bureau 402" }
 
   postal_code:
     required: true
+    required_for_international: true
     regex: "^[0-9]{5}$"
+    length: 5
     description: "5-digit postal code"
     example: "16000"
 

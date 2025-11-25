@@ -33,16 +33,29 @@ administrative_divisions:
     label_local: Distrito
     label_en: District
     count: 7
+    names:
+      - Água Grande
+      - Cantagalo
+      - Caué
+      - Lembá
+      - Lobata
+      - Mé-Zóchi
+      - Pagué (Príncipe)
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, district, country]
+      order: [recipient, building, floor, room, street_address, locality, city, district, country]
     - context: international
-      order: [recipient, street_address, city, district, country]
+      order: [recipient, room, floor, building, street_address, city, district, country]
+
+  building: { required: false, example: "Hotel Miramar" }
+  floor: { required: false, example: "3º Andar" }
+  room: { required: false, example: "Sala 305" }
 
   postal_code:
     required: false
+    required_for_international: false
     description: "Postal codes not widely used"
 
 validation:

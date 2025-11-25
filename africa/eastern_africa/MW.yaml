@@ -37,21 +37,32 @@ administrative_divisions:
     label_local: Region
     label_en: Region
     count: 3
+    source: ../../data/mw_regions.json
   level2:
     type: District
     label_local: District
     label_en: District
     count: 28
+  level3:
+    type: Traditional Authority
+    label_local: Traditional Authority
+    label_en: Traditional Authority
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, district, country]
+      order: [recipient, building, floor, room, street_address, area, district, region, country]
     - context: international
-      order: [recipient, street_address, city, district, country]
+      order: [recipient, room, floor, building, street_address, city, district, country]
+
+  building: { required: false, example: "Umoyo House" }
+  floor: { required: false, example: "4th Floor" }
+  room: { required: false, example: "Suite 402" }
 
   postal_code:
     required: false
+    required_for_international: false
     description: "Postal codes not widely used"
 
 validation:

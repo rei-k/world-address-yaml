@@ -37,16 +37,32 @@ administrative_divisions:
     label_local: State
     label_en: State
     count: 10
+    source: ../../data/ss_states.json
+  level2:
+    type: County
+    label_local: County
+    label_en: County
+    count: null
+  level3:
+    type: Payam
+    label_local: Payam
+    label_en: District
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, state, country]
+      order: [recipient, building, floor, room, street_address, payam, county, city, state, country]
     - context: international
-      order: [recipient, street_address, city, state, country]
+      order: [recipient, room, floor, building, street_address, city, state, country]
+
+  building: { required: false, example: "Crown Hotel Building" }
+  floor: { required: false, example: "2nd Floor" }
+  room: { required: false, example: "Suite 205" }
 
   postal_code:
     required: false
+    required_for_international: false
     description: "Postal code system not established"
 
 validation:

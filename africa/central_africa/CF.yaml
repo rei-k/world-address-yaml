@@ -42,16 +42,32 @@ administrative_divisions:
     label_local: Préfecture
     label_en: Prefecture
     count: 16
+    source: ../../data/cf_prefectures.json
+  level2:
+    type: Sub-Prefecture
+    label_local: Sous-Préfecture
+    label_en: Sub-Prefecture
+    count: null
+  level3:
+    type: Commune
+    label_local: Commune
+    label_en: Commune
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, prefecture, country]
+      order: [recipient, building, floor, room, street_address, commune, subprefecture, city, prefecture, country]
     - context: international
-      order: [recipient, street_address, city, prefecture, country]
+      order: [recipient, room, floor, building, street_address, city, prefecture, country]
+
+  building: { required: false, example: "Immeuble Centrafrican" }
+  floor: { required: false, example: "3ème étage" }
+  room: { required: false, example: "Bureau 301" }
 
   postal_code:
     required: false
+    required_for_international: false
     description: "Postal codes not widely used"
 
 validation:

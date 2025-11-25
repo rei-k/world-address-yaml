@@ -33,16 +33,32 @@ administrative_divisions:
     label_local: Province
     label_en: Province
     count: 26
+    source: ../../data/cd_provinces.json
+  level2:
+    type: Territory
+    label_local: Territoire
+    label_en: Territory
+    count: null
+  level3:
+    type: Commune
+    label_local: Commune
+    label_en: Commune
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, commune, city, province, country]
+      order: [recipient, building, floor, room, street_address, commune, territory, province, country]
     - context: international
-      order: [recipient, street_address, commune, city, province, country]
+      order: [recipient, room, floor, building, street_address, commune, city, province, country]
+
+  building: { required: false, example: "Immeuble Trade Center" }
+  floor: { required: false, example: "6ème étage" }
+  room: { required: false, example: "Bureau 601" }
 
   postal_code:
     required: false
+    required_for_international: false
     description: "Postal codes not widely used"
 
 validation:

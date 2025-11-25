@@ -51,16 +51,35 @@ administrative_divisions:
     label_local: Provincia
     label_en: Province
     count: 8
+    names:
+      - Annobón
+      - Bioko Norte
+      - Bioko Sur
+      - Centro Sur
+      - Djibloho
+      - Kié-Ntem
+      - Litoral
+      - Wele-Nzas
+  level2:
+    type: District
+    label_local: Distrito
+    label_en: District
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, province, country]
+      order: [recipient, building, floor, room, street_address, district, city, province, country]
     - context: international
-      order: [recipient, street_address, city, province, country]
+      order: [recipient, room, floor, building, street_address, city, province, country]
+
+  building: { required: false, example: "Edificio Sofitel" }
+  floor: { required: false, example: "5º Piso" }
+  room: { required: false, example: "Oficina 501" }
 
   postal_code:
     required: false
+    required_for_international: false
     description: "Postal codes not widely used"
 
 validation:

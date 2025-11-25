@@ -33,17 +33,34 @@ administrative_divisions:
     label_local: Província
     label_en: Province
     count: 11
+    source: ../../data/mz_provinces.json
+  level2:
+    type: District
+    label_local: Distrito
+    label_en: District
+    count: null
+  level3:
+    type: Administrative Post
+    label_local: Posto Administrativo
+    label_en: Administrative Post
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, province, postal_code, country]
+      order: [recipient, building, floor, room, street_address, district, city, province, postal_code, country]
     - context: international
-      order: [recipient, street_address, city, province, postal_code, country]
+      order: [recipient, room, floor, building, street_address, city, province, postal_code, country]
+
+  building: { required: false, example: "Edifício 33 Andares" }
+  floor: { required: false, example: "10º Andar" }
+  room: { required: false, example: "Sala 1001" }
 
   postal_code:
     required: true
+    required_for_international: true
     regex: "^[0-9]{4}$"
+    length: 4
     description: "4-digit postal code"
     example: "1100"
 

@@ -42,17 +42,34 @@ administrative_divisions:
     label_local: ولاية
     label_en: Governorate
     count: 24
+    source: ../../data/tn_governorates.json
+  level2:
+    type: Delegation
+    label_local: معتمدية
+    label_en: Delegation
+    count: null
+  level3:
+    type: Sector
+    label_local: قطاع
+    label_en: Sector
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, postal_code, city, country]
+      order: [recipient, building, floor, room, street_address, sector, delegation, governorate, postal_code, country]
     - context: international
-      order: [recipient, street_address, postal_code, city, country]
+      order: [recipient, room, floor, building, street_address, city, postal_code, country]
+
+  building: { required: false, example: "Immeuble Lac Palace" }
+  floor: { required: false, example: "5ème étage" }
+  room: { required: false, example: "Bureau 502" }
 
   postal_code:
     required: true
+    required_for_international: true
     regex: "^[0-9]{4}$"
+    length: 4
     description: "4-digit postal code"
     example: "1000"
 

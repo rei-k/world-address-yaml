@@ -37,17 +37,34 @@ administrative_divisions:
     label_local: County
     label_en: County
     count: 47
+    source: ../../data/ke_counties.json
+  level2:
+    type: Sub-County
+    label_local: Sub-County
+    label_en: Sub-County
+    count: null
+  level3:
+    type: Ward
+    label_local: Ward
+    label_en: Ward
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, county, postal_code, country]
+      order: [recipient, building, floor, room, street_address, ward, subcounty, county, postal_code, country]
     - context: international
-      order: [recipient, street_address, city, county, postal_code, country]
+      order: [recipient, room, floor, building, street_address, subcounty, county, postal_code, country]
+
+  building: { required: false, example: "KICC Building" }
+  floor: { required: false, example: "3rd Floor" }
+  room: { required: false, example: "Suite 305" }
 
   postal_code:
     required: true
+    required_for_international: true
     regex: "^[0-9]{5}$"
+    length: 5
     description: "5-digit postal code"
     example: "00100"
 

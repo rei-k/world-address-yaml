@@ -42,16 +42,32 @@ administrative_divisions:
     label_local: Région
     label_en: Province
     count: 23
+    source: ../../data/td_provinces.json
+  level2:
+    type: Department
+    label_local: Département
+    label_en: Department
+    count: null
+  level3:
+    type: Sub-Prefecture
+    label_local: Sous-Préfecture
+    label_en: Sub-Prefecture
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, province, country]
+      order: [recipient, building, floor, room, street_address, subprefecture, department, city, province, country]
     - context: international
-      order: [recipient, street_address, city, province, country]
+      order: [recipient, room, floor, building, street_address, city, province, country]
+
+  building: { required: false, example: "Immeuble Hilton" }
+  floor: { required: false, example: "6ème étage" }
+  room: { required: false, example: "Bureau 605" }
 
   postal_code:
     required: false
+    required_for_international: false
     description: "Postal codes not widely used"
 
 validation:

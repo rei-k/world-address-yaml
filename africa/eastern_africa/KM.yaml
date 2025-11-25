@@ -47,16 +47,30 @@ administrative_divisions:
     label_local: Île
     label_en: Island
     count: 3
+    names:
+      - Grande Comore (Ngazidja)
+      - Anjouan (Ndzuani)
+      - Mohéli (Mwali)
+  level2:
+    type: Prefecture
+    label_local: Préfecture
+    label_en: Prefecture
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, island, country]
+      order: [recipient, building, floor, room, street_address, prefecture, city, island, country]
     - context: international
-      order: [recipient, street_address, city, island, country]
+      order: [recipient, room, floor, building, street_address, city, island, country]
+
+  building: { required: false, example: "Itsandra Beach Hotel" }
+  floor: { required: false, example: "2nd Floor" }
+  room: { required: false, example: "Room 205" }
 
   postal_code:
     required: false
+    required_for_international: false
     description: "Postal codes not widely used"
 
 validation:

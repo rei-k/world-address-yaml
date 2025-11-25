@@ -33,16 +33,27 @@ administrative_divisions:
     label_local: Département
     label_en: Department
     count: 12
+    source: ../../data/cg_departments.json
+  level2:
+    type: District
+    label_local: District
+    label_en: District
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, department, country]
+      order: [recipient, building, floor, room, street_address, district, city, department, country]
     - context: international
-      order: [recipient, street_address, city, department, country]
+      order: [recipient, room, floor, building, street_address, city, department, country]
+
+  building: { required: false, example: "Tour Nabemba" }
+  floor: { required: false, example: "12ème étage" }
+  room: { required: false, example: "Bureau 1205" }
 
   postal_code:
     required: false
+    required_for_international: false
     description: "Postal codes not widely used"
 
 validation:

@@ -37,16 +37,32 @@ administrative_divisions:
     label_local: Région
     label_en: Region
     count: 10
+    source: ../../data/cm_regions.json
+  level2:
+    type: Department
+    label_local: Département
+    label_en: Department
+    count: null
+  level3:
+    type: Subdivision
+    label_local: Arrondissement
+    label_en: Subdivision
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, region, country]
+      order: [recipient, building, floor, room, street_address, subdivision, department, region, country]
     - context: international
-      order: [recipient, street_address, city, region, country]
+      order: [recipient, room, floor, building, street_address, city, region, country]
+
+  building: { required: false, example: "Immeuble Star Building" }
+  floor: { required: false, example: "3ème étage" }
+  room: { required: false, example: "Bureau 305" }
 
   postal_code:
     required: false
+    required_for_international: false
     description: "Postal codes not widely used"
 
 validation:

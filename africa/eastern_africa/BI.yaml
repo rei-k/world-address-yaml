@@ -42,16 +42,32 @@ administrative_divisions:
     label_local: Province
     label_en: Province
     count: 18
+    source: ../../data/bi_provinces.json
+  level2:
+    type: Commune
+    label_local: Commune
+    label_en: Commune
+    count: null
+  level3:
+    type: Colline
+    label_local: Colline
+    label_en: Hill
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, province, country]
+      order: [recipient, building, floor, room, street_address, commune, city, province, country]
     - context: international
-      order: [recipient, street_address, city, province, country]
+      order: [recipient, room, floor, building, street_address, city, province, country]
+
+  building: { required: false, example: "Immeuble Trade Point" }
+  floor: { required: false, example: "4ème étage" }
+  room: { required: false, example: "Bureau 401" }
 
   postal_code:
     required: false
+    required_for_international: false
     description: "Postal codes not widely used"
 
 validation:

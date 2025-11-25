@@ -42,17 +42,29 @@ administrative_divisions:
     label_local: District
     label_en: District
     count: 9
+    source: ../../data/mu_districts.json
+  level2:
+    type: Village Council Area
+    label_local: Village Council Area
+    label_en: Village Council Area
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, district, postal_code, country]
+      order: [recipient, building, floor, room, street_address, village, city, district, postal_code, country]
     - context: international
-      order: [recipient, street_address, city, district, postal_code, country]
+      order: [recipient, room, floor, building, street_address, city, district, postal_code, country]
+
+  building: { required: false, example: "Newton Tower" }
+  floor: { required: false, example: "8th Floor" }
+  room: { required: false, example: "Suite 805" }
 
   postal_code:
     required: true
+    required_for_international: true
     regex: "^[0-9]{5}$"
+    length: 5
     description: "5-digit postal code"
     example: "11328"
 

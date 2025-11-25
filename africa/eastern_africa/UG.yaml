@@ -37,16 +37,32 @@ administrative_divisions:
     label_local: District
     label_en: District
     count: 146
+    source: ../../data/ug_districts.json
+  level2:
+    type: County
+    label_local: County
+    label_en: County
+    count: null
+  level3:
+    type: Sub-County
+    label_local: Sub-County
+    label_en: Sub-County
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, district, country]
+      order: [recipient, building, floor, room, street_address, subcounty, county, district, country]
     - context: international
-      order: [recipient, street_address, city, district, country]
+      order: [recipient, room, floor, building, street_address, county, district, country]
+
+  building: { required: false, example: "Workers House" }
+  floor: { required: false, example: "6th Floor" }
+  room: { required: false, example: "Suite 605" }
 
   postal_code:
     required: false
+    required_for_international: false
     description: "Postal codes not widely used"
 
 validation:

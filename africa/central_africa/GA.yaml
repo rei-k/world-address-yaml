@@ -33,16 +33,32 @@ administrative_divisions:
     label_local: Province
     label_en: Province
     count: 9
+    source: ../../data/ga_provinces.json
+  level2:
+    type: Department
+    label_local: Département
+    label_en: Department
+    count: null
+  level3:
+    type: Commune
+    label_local: Commune
+    label_en: Commune
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, province, postal_code, country]
+      order: [recipient, building, floor, room, street_address, commune, department, city, province, postal_code, country]
     - context: international
-      order: [recipient, street_address, city, province, postal_code, country]
+      order: [recipient, room, floor, building, street_address, city, province, postal_code, country]
+
+  building: { required: false, example: "Immeuble du Littoral" }
+  floor: { required: false, example: "7ème étage" }
+  room: { required: false, example: "Bureau 702" }
 
   postal_code:
     required: false
+    required_for_international: false
     description: "Postal codes exist but not widely used"
 
 validation:

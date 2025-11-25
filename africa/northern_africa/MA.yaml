@@ -47,17 +47,34 @@ administrative_divisions:
     label_local: جهة
     label_en: Region
     count: 12
+    source: ../../data/ma_regions.json
+  level2:
+    type: Province/Prefecture
+    label_local: إقليم/عمالة
+    label_en: Province/Prefecture
+    count: null
+  level3:
+    type: Commune
+    label_local: جماعة
+    label_en: Municipality
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, postal_code, city, country]
+      order: [recipient, building, floor, room, street_address, commune, province, region, postal_code, country]
     - context: international
-      order: [recipient, street_address, postal_code, city, country]
+      order: [recipient, room, floor, building, street_address, city, postal_code, country]
+
+  building: { required: false, example: "Tour Atlas" }
+  floor: { required: false, example: "5ème étage" }
+  room: { required: false, example: "Bureau 501" }
 
   postal_code:
     required: true
+    required_for_international: true
     regex: "^[0-9]{5}$"
+    length: 5
     description: "5-digit postal code"
     example: "20000"
 

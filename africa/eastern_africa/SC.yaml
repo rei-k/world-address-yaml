@@ -42,16 +42,48 @@ administrative_divisions:
     label_local: District
     label_en: District
     count: 26
+    names:
+      - Anse aux Pins
+      - Anse Boileau
+      - Anse Etoile
+      - Anse Louis
+      - Anse Royale
+      - Baie Lazare
+      - Baie Sainte Anne
+      - Beau Vallon
+      - Bel Air
+      - Bel Ombre
+      - Cascade
+      - Glacis
+      - Grand Anse Mahe
+      - Grand Anse Praslin
+      - La Digue and Inner Islands
+      - Les Mamelles
+      - Mont Buxton
+      - Mont Fleuri
+      - Plaisance
+      - Pointe La Rue
+      - Port Glaud
+      - Roche Caiman
+      - Saint Louis
+      - Takamaka
+      - English River
+      - Victoria
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, island, country]
+      order: [recipient, building, floor, room, street_address, district, island, country]
     - context: international
-      order: [recipient, street_address, city, island, country]
+      order: [recipient, room, floor, building, street_address, city, island, country]
+
+  building: { required: false, example: "Victoria House" }
+  floor: { required: false, example: "3rd Floor" }
+  room: { required: false, example: "Suite 302" }
 
   postal_code:
     required: false
+    required_for_international: false
     description: "Postal codes not used"
 
 validation:

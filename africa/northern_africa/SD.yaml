@@ -33,17 +33,29 @@ administrative_divisions:
     label_local: ولاية
     label_en: State
     count: 18
+    source: ../../data/sd_states.json
+  level2:
+    type: Locality
+    label_local: محلية
+    label_en: Locality
+    count: null
 
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, state, postal_code, country]
+      order: [recipient, building, floor, room, street_address, locality, city, state, postal_code, country]
     - context: international
-      order: [recipient, street_address, city, state, postal_code, country]
+      order: [recipient, room, floor, building, street_address, city, state, postal_code, country]
+
+  building: { required: false, example: "Corinthia Tower" }
+  floor: { required: false, example: "8th Floor" }
+  room: { required: false, example: "Suite 805" }
 
   postal_code:
     required: true
+    required_for_international: true
     regex: "^[0-9]{5}$"
+    length: 5
     description: "5-digit postal code"
     example: "11111"
 
