@@ -313,6 +313,97 @@ console.log(japanData.name.en);  // Japan
 - **特殊地域**: 海外領土、係争地域、研究基地なども収録
 - **データ形式**: YAML および JSON
 
+## 🌍 対応国・地域一覧
+
+### アフリカ / Africa
+
+#### 中央アフリカ / Central Africa
+Angola (AO), Cameroon (CM), Central African Republic (CF), Chad (TD), Democratic Republic of the Congo (CD), Equatorial Guinea (GQ), Gabon (GA), Republic of the Congo (CG), São Tomé and Príncipe (ST)
+
+#### 東アフリカ / Eastern Africa
+Burundi (BI), Comoros (KM), Djibouti (DJ), Eritrea (ER), Ethiopia (ET), Kenya (KE), Madagascar (MG), Malawi (MW), Mauritius (MU), Mozambique (MZ), Rwanda (RW), Seychelles (SC), Somalia (SO), Tanzania (TZ), Uganda (UG), Zambia (ZM), Zimbabwe (ZW)
+
+#### 北アフリカ / Northern Africa
+Algeria (DZ), Egypt (EG), Libya (LY), Morocco (MA), South Sudan (SS), Sudan (SD), Tunisia (TN)
+
+#### 南部アフリカ / Southern Africa
+Botswana (BW), Eswatini (SZ), Lesotho (LS), Namibia (NA), South Africa (ZA)
+
+#### 西アフリカ / West Africa
+Benin (BJ), Burkina Faso (BF), Cape Verde (CV), Côte d'Ivoire (CI), Ghana (GH), Guinea (GN), Guinea-Bissau (GW), Liberia (LR), Mali (ML), Mauritania (MR), Niger (NE), Nigeria (NG), Senegal (SN), Sierra Leone (SL), The Gambia (GM), Togo (TG)
+
+### アメリカ大陸 / Americas
+
+#### カリブ海 / Caribbean
+Antigua and Barbuda (AG), Barbados (BB), Cuba (CU), Dominica (DM), Dominican Republic (DO), Grenada (GD), Haiti (HT), Jamaica (JM), Saint Kitts and Nevis (KN), Saint Lucia (LC), Saint Vincent and the Grenadines (VC), The Bahamas (BS), Trinidad and Tobago (TT)
+
+#### 中央アメリカ / Central America
+Belize (BZ), Costa Rica (CR), El Salvador (SV), Guatemala (GT), Honduras (HN), Nicaragua (NI), Panama (PA)
+
+#### 北アメリカ / North America
+Canada (CA), Mexico (MX), United States (US)
+
+#### 南アメリカ / South America
+Argentina (AR), Bolivia (BO), Brazil (BR), Chile (CL), Colombia (CO), Ecuador (EC), Guyana (GY), Paraguay (PY), Peru (PE), Suriname (SR), Uruguay (UY), Venezuela (VE)
+
+### 南極 / Antarctica
+Antarctica (AQ)
+
+※ 南極の領有権主張地域や研究基地の詳細は `antarctica/` ディレクトリを参照してください。
+
+### アジア / Asia
+
+#### 中央アジア / Central Asia
+Kazakhstan (KZ), Kyrgyzstan (KG), Tajikistan (TJ), Turkmenistan (TM), Uzbekistan (UZ)
+
+#### 東アジア / East Asia
+China (CN), Hong Kong (HK), Japan (JP), Macao (MO), Mongolia (MN), North Korea (KP), South Korea (KR), Taiwan (TW)
+
+#### 南アジア / South Asia
+Afghanistan (AF), Bangladesh (BD), Bhutan (BT), India (IN), Maldives (MV), Nepal (NP), Pakistan (PK), Sri Lanka (LK)
+
+#### 東南アジア / Southeast Asia
+Brunei (BN), Cambodia (KH), Indonesia (ID), Laos (LA), Malaysia (MY), Myanmar (MM), Philippines (PH), Singapore (SG), Thailand (TH), Timor-Leste (TL), Vietnam (VN)
+
+#### 西アジア / West Asia
+Armenia (AM), Azerbaijan (AZ), Bahrain (BH), Georgia (GE), Iran (IR), Iraq (IQ), Israel (IL), Jordan (JO), Kuwait (KW), Lebanon (LB), Oman (OM), Palestine (PS), Qatar (QA), Saudi Arabia (SA), Syria (SY), Turkey (TR), United Arab Emirates (AE), Yemen (YE)
+
+### ヨーロッパ / Europe
+
+#### コーカサス / Caucasus
+Armenia (AM), Azerbaijan (AZ), Georgia (GE)
+
+#### 東ヨーロッパ / Eastern Europe
+Belarus (BY), Bulgaria (BG), Czech Republic (CZ), Hungary (HU), Moldova (MD), Poland (PL), Romania (RO), Russia (RU), Slovakia (SK), Ukraine (UA)
+
+#### 北ヨーロッパ / Northern Europe
+Denmark (DK), Estonia (EE), Finland (FI), Iceland (IS), Ireland (IE), Latvia (LV), Lithuania (LT), Norway (NO), Sweden (SE), United Kingdom (GB)
+
+#### 南東ヨーロッパ / Southeastern Europe
+Albania (AL), Bosnia and Herzegovina (BA), Croatia (HR), Montenegro (ME), North Macedonia (MK), Serbia (RS)
+
+#### 南ヨーロッパ / Southern Europe
+Andorra (AD), Cyprus (CY), Greece (GR), Italy (IT), Malta (MT), Portugal (PT), San Marino (SM), Spain (ES), Vatican City (VA)
+
+#### 西ヨーロッパ / Western Europe
+Austria (AT), Belgium (BE), France (FR), Germany (DE), Liechtenstein (LI), Luxembourg (LU), Monaco (MC), Netherlands (NL), Switzerland (CH)
+
+### オセアニア / Oceania
+
+#### オーストラリア・ニュージーランド / Australia & New Zealand
+Australia (AU), New Zealand (NZ)
+
+#### メラネシア / Melanesia
+Fiji (FJ), Papua New Guinea (PG), Solomon Islands (SB), Vanuatu (VU)
+
+#### ミクロネシア / Micronesia
+Federated States of Micronesia (FM), Kiribati (KI), Marshall Islands (MH), Nauru (NR), Palau (PW)
+
+#### ポリネシア / Polynesia
+Samoa (WS), Tonga (TO), Tuvalu (TV)
+
+※ 各国の海外領土や特別地域については、該当国のディレクトリ内の `overseas/` または `regions/` サブディレクトリを参照してください。
+
 ## 📜 ライセンス
 
 このプロジェクトのデータはオープンデータとして提供されています。
