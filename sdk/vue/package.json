@@ -1,0 +1,49 @@
+{
+  "name": "@vey/vue",
+  "version": "1.0.0",
+  "description": "Vue components for World Address SDK - Address forms and pickers",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --external vue",
+    "test": "vitest",
+    "lint": "eslint src --ext .ts,.vue"
+  },
+  "keywords": [
+    "address",
+    "vue",
+    "form",
+    "world-address",
+    "shipping",
+    "address-form"
+  ],
+  "author": "Vey Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rei-k/world-address-yaml"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "vue": ">=3.0.0"
+  },
+  "dependencies": {
+    "@vey/core": "^1.0.0"
+  },
+  "devDependencies": {
+    "vue": "^3.0.0",
+    "typescript": "^5.0.0",
+    "tsup": "^8.0.0",
+    "vitest": "^1.0.0"
+  }
+}

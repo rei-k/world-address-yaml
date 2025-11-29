@@ -166,6 +166,80 @@ status:
   disputed: false
 ```
 
+## 🛠️ SDK（開発者向けツール）
+
+本プロジェクトでは、様々なフレームワークやプラットフォームで利用可能なSDKを提供しています。
+
+### 📦 利用可能なパッケージ
+
+| パッケージ | 説明 | インストール |
+|-----------|------|-------------|
+| `@vey/core` | コアSDK（バリデーション・フォーマット） | `npm install @vey/core` |
+| `@vey/react` | React用フック・コンポーネント | `npm install @vey/react` |
+| `@vey/vue` | Vue用コンポーザブル | `npm install @vey/vue` |
+| `@vey/widget` | Universal Shadow Widget（フレームワーク非依存） | `npm install @vey/widget` |
+| `@vey/webhooks` | Webhookユーティリティ | `npm install @vey/webhooks` |
+| `@vey/qr-nfc` | QRコード・NFC統合 | `npm install @vey/qr-nfc` |
+| `@vey/graphql` | GraphQLスキーマ | `npm install @vey/graphql` |
+| `@vey/grpc` | gRPCプロトコル定義 | `npm install @vey/grpc` |
+| `veyform-sdk` | CLIツール | `npx veyform-sdk init` |
+
+### 🚀 クイックスタート
+
+```bash
+# プロジェクト初期化
+npx veyform-sdk init
+
+# 依存関係インストール（React）
+npm install @vey/core @vey/react
+```
+
+### React での使用例
+
+```tsx
+import { VeyProvider, AddressForm } from '@vey/react';
+
+function App() {
+  return (
+    <VeyProvider config={{ apiKey: 'your-api-key' }}>
+      <AddressForm
+        countryCode="JP"
+        onSubmit={(address, validation) => {
+          if (validation.valid) {
+            console.log('Valid address:', address);
+          }
+        }}
+      />
+    </VeyProvider>
+  );
+}
+```
+
+### Universal Widget の使用例
+
+```html
+<script src="https://unpkg.com/@vey/widget"></script>
+<vey-address-widget country-code="JP" theme="light"></vey-address-widget>
+```
+
+### CLI コマンド
+
+```bash
+# GraphQLスキーマ生成
+npx veyform-sdk graphql --output schema.graphql
+
+# gRPC protoファイル生成
+npx veyform-sdk proto --output vey.proto
+
+# 住所バリデーション
+npx veyform-sdk validate --country JP --postal-code 100-0001
+
+# 対応国一覧
+npx veyform-sdk countries --region asia
+```
+
+詳細は [SDK README](./sdk/README.md) をご覧ください。
+
 ## 🔧 使用方法
 
 ### データの読み込み
