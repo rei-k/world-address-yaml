@@ -225,16 +225,27 @@ export class VeyNFCHandler {
   }
 
   /**
+   * Get NDEFReader constructor if available
+   */
+  private getNDEFReader(): (new () => NDEFReaderLike) | null {
+    if (!this.isSupported) {
+      return null;
+    }
+    // Safe access with proper runtime check
+    const win = window as { NDEFReader?: new () => NDEFReaderLike };
+    return win.NDEFReader ?? null;
+  }
+
+  /**
    * Read NFC tag
    */
   async read(): Promise<NFCRecord | null> {
-    if (!this.isSupported) {
+    const NDEFReaderClass = this.getNDEFReader();
+    if (!NDEFReaderClass) {
       throw new Error('NFC is not supported on this device');
     }
 
-    // TypeScript doesn't have NDEFReader types by default
-    const NDEFReader = (window as unknown as { NDEFReader: new () => NDEFReaderLike }).NDEFReader;
-    const reader = new NDEFReader();
+    const reader = new NDEFReaderClass();
 
     return new Promise((resolve, reject) => {
       reader.scan().then(() => {
@@ -270,12 +281,12 @@ export class VeyNFCHandler {
    * Write to NFC tag
    */
   async write(record: NFCRecord): Promise<void> {
-    if (!this.isSupported) {
+    const NDEFReaderClass = this.getNDEFReader();
+    if (!NDEFReaderClass) {
       throw new Error('NFC is not supported on this device');
     }
 
-    const NDEFReader = (window as unknown as { NDEFReader: new () => NDEFReaderLike }).NDEFReader;
-    const writer = new NDEFReader();
+    const writer = new NDEFReaderClass();
 
     const payload: QRPayload = {
       type: record.type,

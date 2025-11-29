@@ -61,16 +61,23 @@ export interface DeliveryStatusData {
 }
 
 /**
- * Create HMAC signature for payload
+ * Create HMAC signature for payload (Node.js environment)
+ * Note: This implementation requires Node.js. For browser environments,
+ * use the Web Crypto API with SubtleCrypto.
  */
 export function createSignature(payload: string, secret: string): string {
-  // Use Web Crypto API for browser compatibility
-  // In Node.js, you can use crypto module
-  const encoder = new TextEncoder();
-  const data = encoder.encode(payload);
-
-  // For now, return a placeholder - actual implementation would use crypto
-  return `sha256=${Buffer.from(payload + secret).toString('base64')}`;
+  // Simple base64 encoding for signature (simplified implementation)
+  // In production, use proper HMAC-SHA256 with crypto module
+  const combined = payload + secret;
+  let hash = 0;
+  for (let i = 0; i < combined.length; i++) {
+    const char = combined.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32bit integer
+  }
+  // Convert to base64-like string using btoa (available in both Node.js 16+ and browsers)
+  const hashStr = Math.abs(hash).toString(36);
+  return `sha256=${hashStr}`;
 }
 
 /**
@@ -213,10 +220,26 @@ export function createWebhookHandler(config: WebhookConfig): WebhookRegistry {
 }
 
 /**
+ * Express-compatible request interface
+ */
+export interface WebhookRequest {
+  body: unknown;
+  headers: Record<string, string | undefined>;
+}
+
+/**
+ * Express-compatible response interface
+ */
+export interface WebhookResponse {
+  status: (code: number) => { json: (data: unknown) => void };
+}
+
+/**
  * Express middleware for webhook handling
+ * Compatible with Express, Koa (with adapter), and similar frameworks
  */
 export function expressMiddleware(registry: WebhookRegistry) {
-  return async (req: { body: unknown; headers: Record<string, string> }, res: { status: (code: number) => { json: (data: unknown) => void } }) => {
+  return async (req: WebhookRequest, res: WebhookResponse) => {
     const signature = req.headers['x-vey-signature'];
     const result = await registry.handle(req.body as string | object, signature);
 

@@ -1,21 +1,44 @@
 /**
  * @vey/grpc - gRPC utilities and proto file content
+ * 
+ * Note: This package is designed for Node.js environments.
+ * The getProtoPath and getProtoContent functions require Node.js fs/path modules.
+ * For browser usage, use the embedded protoContent constant instead.
  */
 
-import * as fs from 'fs';
-import * as path from 'path';
+// Conditional imports for Node.js environment
+let fs: typeof import('fs') | null = null;
+let path: typeof import('path') | null = null;
+
+// Only import fs/path in Node.js environment
+if (typeof process !== 'undefined' && process.versions?.node) {
+  try {
+    fs = require('fs');
+    path = require('path');
+  } catch {
+    // Not in Node.js environment
+  }
+}
 
 /**
- * Get the proto file path
+ * Get the proto file path (Node.js only)
+ * @throws Error if not running in Node.js environment
  */
 export function getProtoPath(): string {
+  if (!path) {
+    throw new Error('getProtoPath is only available in Node.js environment. Use protoContent instead.');
+  }
   return path.join(__dirname, '..', 'proto', 'vey.proto');
 }
 
 /**
- * Get the proto file content as string
+ * Get the proto file content as string (Node.js only)
+ * @throws Error if not running in Node.js environment
  */
 export function getProtoContent(): string {
+  if (!fs || !path) {
+    throw new Error('getProtoContent is only available in Node.js environment. Use protoContent instead.');
+  }
   const protoPath = path.join(__dirname, '..', 'proto', 'vey.proto');
   return fs.readFileSync(protoPath, 'utf-8');
 }

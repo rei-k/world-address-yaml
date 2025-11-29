@@ -1,5 +1,8 @@
 /**
  * @vey/core - Address data loader
+ * 
+ * This loader implements in-memory caching for loaded country data.
+ * For HTTP-level caching, configure your fetch implementation or CDN accordingly.
  */
 
 import type { CountryAddressFormat, RegionHierarchy } from './types';
@@ -7,12 +10,19 @@ import type { CountryAddressFormat, RegionHierarchy } from './types';
 // In-memory cache for loaded data
 const cache = new Map<string, CountryAddressFormat>();
 
+// Track in-flight requests to prevent duplicate fetches
+const pendingRequests = new Map<string, Promise<CountryAddressFormat | null>>();
+
 /**
  * Data loader configuration
  */
 export interface DataLoaderConfig {
+  /** Base path for data files */
   basePath?: string;
+  /** Custom fetch implementation */
   fetch?: typeof fetch;
+  /** Cache TTL in milliseconds (default: no expiration) */
+  cacheTTL?: number;
 }
 
 /**
@@ -24,6 +34,7 @@ export function createDataLoader(config: DataLoaderConfig = {}) {
   return {
     /**
      * Load country address format by ISO alpha-2 code
+     * Uses request deduplication to prevent multiple simultaneous fetches for the same country.
      */
     async loadCountry(countryCode: string): Promise<CountryAddressFormat | null> {
       const code = countryCode.toUpperCase();
@@ -31,6 +42,11 @@ export function createDataLoader(config: DataLoaderConfig = {}) {
       // Check cache first
       if (cache.has(code)) {
         return cache.get(code)!;
+      }
+
+      // Check if there's already a pending request for this country
+      if (pendingRequests.has(code)) {
+        return pendingRequests.get(code)!;
       }
 
       // Map country codes to their file paths
@@ -52,18 +68,27 @@ export function createDataLoader(config: DataLoaderConfig = {}) {
         return null;
       }
 
-      try {
-        const fullPath = basePath ? `${basePath}/${path}` : path;
-        const response = await (config.fetch ?? fetch)(fullPath);
-        if (!response.ok) {
+      // Create the fetch promise and track it
+      const fetchPromise = (async (): Promise<CountryAddressFormat | null> => {
+        try {
+          const fullPath = basePath ? `${basePath}/${path}` : path;
+          const response = await (config.fetch ?? fetch)(fullPath);
+          if (!response.ok) {
+            return null;
+          }
+          const data = await response.json() as CountryAddressFormat;
+          cache.set(code, data);
+          return data;
+        } catch {
           return null;
+        } finally {
+          // Remove from pending requests once complete
+          pendingRequests.delete(code);
         }
-        const data = await response.json() as CountryAddressFormat;
-        cache.set(code, data);
-        return data;
-      } catch {
-        return null;
-      }
+      })();
+
+      pendingRequests.set(code, fetchPromise);
+      return fetchPromise;
     },
 
     /**
