@@ -68,3 +68,72 @@ status:
   un_member: true
   recognized: true
   disputed: false
+
+# POS（販売時点情報管理）関連情報
+pos:
+  currency:
+    code: JPY
+    symbol: "¥"
+    symbol_position: before
+    decimal_places: 0
+    decimal_separator: "."
+    thousands_separator: ","
+
+  tax:
+    type: Consumption Tax
+    rate:
+      standard: 0.10
+      reduced:
+        - rate: 0.08
+          category: food_beverages
+        - rate: 0.08
+          category: newspapers
+    included_in_price: true
+    invoice_requirement: required
+
+  receipt:
+    required_fields:
+      - business_name
+      - business_address
+      - registration_number
+      - date
+      - items
+      - tax_breakdown
+      - total
+    paper_width: "80mm"
+    electronic_allowed: true
+    retention_period: "7 years"
+
+  fiscal:
+    fiscal_device_required: false
+    registration_required: true
+    reporting_frequency: annually
+
+  payment_methods:
+    - type: cash
+      name: 現金
+      prevalence: high
+    - type: credit_card
+      name: クレジットカード
+      prevalence: high
+    - type: mobile
+      name: Suica/PASMO
+      prevalence: high
+    - type: qr_code
+      name: PayPay
+      prevalence: high
+    - type: qr_code
+      name: LINE Pay
+      prevalence: medium
+
+  locale:
+    date_format: "YYYY/MM/DD"
+    time_format: "24h"
+    timezone: "Asia/Tokyo"
+    week_start: sunday
+
+  business_hours:
+    typical_open: "10:00"
+    typical_close: "20:00"
+    sunday_trading: true
+    public_holidays_trading: true

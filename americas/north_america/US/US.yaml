@@ -98,3 +98,90 @@ status:
   un_member: true
   recognized: true
   disputed: false
+
+# POS（販売時点情報管理）関連情報
+pos:
+  currency:
+    code: USD
+    symbol: "$"
+    symbol_position: before
+    decimal_places: 2
+    decimal_separator: "."
+    thousands_separator: ","
+
+  tax:
+    type: Sales Tax
+    rate:
+      standard: null  # 州・地域により異なる（0% ～ 10%以上）
+      notes: "No federal sales tax. Rates vary by state, county, and city."
+      examples:
+        - state: CA
+          rate: 0.0725
+          notes: "Base state rate, local additions possible"
+        - state: TX
+          rate: 0.0625
+          notes: "Base state rate, local additions up to 2%"
+        - state: OR
+          rate: 0.00
+          notes: "No sales tax"
+        - state: DE
+          rate: 0.00
+          notes: "No sales tax"
+    included_in_price: false
+    invoice_requirement: optional
+
+  receipt:
+    required_fields:
+      - business_name
+      - date
+      - items
+      - subtotal
+      - tax_amount
+      - total
+    paper_width: "80mm"
+    electronic_allowed: true
+    retention_period: "3-7 years"
+
+  fiscal:
+    fiscal_device_required: false
+    registration_required: true
+    reporting_frequency: varies_by_state
+
+  payment_methods:
+    - type: credit_card
+      name: Credit Card
+      prevalence: high
+    - type: debit_card
+      name: Debit Card
+      prevalence: high
+    - type: cash
+      name: Cash
+      prevalence: medium
+    - type: mobile
+      name: Apple Pay
+      prevalence: high
+    - type: mobile
+      name: Google Pay
+      prevalence: medium
+    - type: qr_code
+      name: Venmo
+      prevalence: medium
+
+  locale:
+    date_format: "MM/DD/YYYY"
+    time_format: "12h"
+    timezone: "America/New_York"
+    timezones:
+      - "America/New_York"
+      - "America/Chicago"
+      - "America/Denver"
+      - "America/Los_Angeles"
+      - "America/Anchorage"
+      - "Pacific/Honolulu"
+    week_start: sunday
+
+  business_hours:
+    typical_open: "09:00"
+    typical_close: "21:00"
+    sunday_trading: true
+    public_holidays_trading: true

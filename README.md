@@ -67,7 +67,7 @@ world-address-yaml/
 
 ### スキーマレベル
 
-このプロジェクトでは2つのスキーマレベルを提供しています：
+このプロジェクトでは3つのスキーマレベルを提供しています：
 
 #### 🚚 配送実務レベル（届くレベル）
 
@@ -164,6 +164,71 @@ status:
   un_member: true
   recognized: true
   disputed: false
+```
+
+#### 🏪 POSレベル（販売時点情報管理用）
+
+POSシステムでの決済・レシート発行・税務処理に必要な情報を提供する、小売・飲食店向けのスキーマです。
+
+```yaml
+pos:
+  currency:
+    code: JPY                  # ISO 4217 通貨コード
+    symbol: "¥"                # 通貨記号
+    symbol_position: before    # 記号の位置（before / after）
+    decimal_places: 0          # 小数点以下桁数
+    decimal_separator: "."     # 小数点記号
+    thousands_separator: ","   # 千区切り記号
+
+  tax:
+    type: Consumption Tax      # 税の種類
+    rate:
+      standard: 0.10           # 標準税率
+      reduced:                 # 軽減税率
+        - rate: 0.08
+          category: food_beverages
+    included_in_price: true    # 内税（true）/ 外税（false）
+    invoice_requirement: required  # インボイス制度
+
+  receipt:
+    required_fields:           # 法的必須項目
+      - business_name
+      - registration_number
+      - date
+      - items
+      - tax_breakdown
+      - total
+    paper_width: "80mm"        # 標準レシート幅
+    electronic_allowed: true   # 電子レシート可否
+    retention_period: "7 years"  # 保存義務期間
+
+  fiscal:
+    fiscal_device_required: false  # 財務デバイス必須か
+    registration_required: true    # 事業者登録必須か
+    reporting_frequency: annually  # 申告頻度
+
+  payment_methods:             # 主要決済手段
+    - type: cash
+      name: 現金
+      prevalence: high
+    - type: mobile
+      name: Suica/PASMO
+      prevalence: high
+    - type: qr_code
+      name: PayPay
+      prevalence: high
+
+  locale:
+    date_format: "YYYY/MM/DD"  # 日付形式
+    time_format: "24h"         # 時刻形式
+    timezone: "Asia/Tokyo"     # タイムゾーン
+    week_start: sunday         # 週の開始曜日
+
+  business_hours:
+    typical_open: "10:00"      # 一般的な開店時間
+    typical_close: "20:00"     # 一般的な閉店時間
+    sunday_trading: true       # 日曜営業の一般性
+    public_holidays_trading: true  # 祝日営業の一般性
 ```
 
 ## 🛠️ SDK（開発者向けツール）
