@@ -1,0 +1,35 @@
+{
+  "name": "@vey/sdk",
+  "version": "1.0.0",
+  "description": "Vey World Address SDK - Monorepo for all SDK packages",
+  "private": true,
+  "workspaces": [
+    "core",
+    "react",
+    "vue",
+    "widget",
+    "webhooks",
+    "qr-nfc",
+    "graphql",
+    "grpc",
+    "cli"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces"
+  },
+  "keywords": [
+    "address",
+    "world-address",
+    "international",
+    "shipping",
+    "postal"
+  ],
+  "author": "Vey Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rei-k/world-address-yaml"
+  }
+}

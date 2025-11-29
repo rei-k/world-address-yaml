@@ -1,0 +1,40 @@
+{
+  "name": "veyform-sdk",
+  "version": "1.0.0",
+  "description": "CLI tool for Vey World Address SDK - Initialize, generate, and manage address configurations",
+  "bin": {
+    "veyform-sdk": "./dist/cli.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/cli.ts src/index.ts --format cjs --dts",
+    "test": "vitest",
+    "lint": "eslint src --ext .ts"
+  },
+  "keywords": [
+    "cli",
+    "address",
+    "world-address",
+    "vey",
+    "shipping"
+  ],
+  "author": "Vey Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rei-k/world-address-yaml"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@vey/core": "^1.0.0",
+    "commander": "^11.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "tsup": "^8.0.0",
+    "vitest": "^1.0.0"
+  }
+}
