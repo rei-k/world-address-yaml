@@ -1,63 +1,92 @@
+# 🌎 アメリカ大陸 / Americas
+
+アメリカ大陸の収録国一覧と分類ルールです。
+
+## 📁 ディレクトリ構造
+
+```
 americas/
-  README.md   # アメリカ大陸の収録国一覧と分類ルール
-americas/
-  README.md                         # アメリカ大陸の収録国一覧と分類ルール
+├── north_america/      # 北アメリカ
+├── central_america/    # 中央アメリカ
+├── caribbean/          # カリブ海
+└── south_america/      # 南アメリカ
+```
 
-  north_america/
-    US/                             # アメリカ合衆国
-      US.yaml
-      overseas/
-        PR.yaml                     # プエルトリコ（カリブ、独自ZIP体系）
-        VI.yaml                     # 米領バージン諸島（カリブ）
-        GU.yaml                     # グアム（オセアニア）
-        MP.yaml                     # 北マリアナ諸島（オセアニア）
-        AS.yaml                     # 米領サモア（オセアニア）
-        UM.yaml                     # 合衆国領有小離島（軍事基地など特殊）
-    CA.yaml                         # カナダ
-    MX.yaml                         # メキシコ
+## 🗺️ 収録国・地域一覧
 
-  central_america/
-    BZ.yaml                         # ベリーズ
-    CR.yaml                         # コスタリカ
-    SV.yaml                         # エルサルバドル
-    GT.yaml                         # グアテマラ
-    HN.yaml                         # ホンジュラス
-    NI.yaml                         # ニカラグア
-    PA.yaml                         # パナマ
+### 北アメリカ / North America
 
-  caribbean/
-    BS.yaml                         # バハマ
-    CU.yaml                         # キューバ
-    DM.yaml                         # ドミニカ国
-    DO.yaml                         # ドミニカ共和国
-    GD.yaml                         # グレナダ
-    HT.yaml                         # ハイチ
-    JM.yaml                         # ジャマイカ
-    KN.yaml                         # セントクリストファー・ネイビス
-    LC.yaml                         # セントルシア
-    VC.yaml                         # セントビンセント・グレナディーン
-    TT.yaml                         # トリニダード・トバゴ
-    BB.yaml                         # バルバドス
-    AG.yaml                         # アンティグア・バーブーダ
-    # 英・仏・蘭のカリブ海外領はヨーロッパ側に統合済みなのでここには置かない
+| コード | 国名（英語） | 国名（日本語） |
+|--------|--------------|----------------|
+| CA | Canada | カナダ |
+| MX | Mexico | メキシコ |
+| US | United States | アメリカ合衆国 |
 
-  south_america/
-    AR.yaml                         # アルゼンチン
-    BO.yaml                         # ボリビア
-    BR.yaml                         # ブラジル
-    CL/                             # チリ
-      CL.yaml                       # 本国
-      overseas/
-        CL_EI.yaml                  # イースター島 (Rapa Nui, Isla de Pascua) ― 特別自治州、独自郵便番号
-        CL_AA.yaml                  # フアン・フェルナンデス諸島などの外島（住所形式が異なる）
-    CO.yaml                         # コロンビア
-    EC.yaml                         # エクアドル
-    GY.yaml                         # ガイアナ
-    PY.yaml                         # パラグアイ
-    PE.yaml                         # ペルー
-    SR.yaml                         # スリナム
-    UY.yaml                         # ウルグアイ
-    VE.yaml                         # ベネズエラ
+#### 米国海外領土 / U.S. Overseas Territories
 
-  
-  
+| コード | 地域名（英語） | 地域名（日本語） |
+|--------|----------------|------------------|
+| AS | American Samoa | 米領サモア |
+| GU | Guam | グアム |
+| MP | Northern Mariana Islands | 北マリアナ諸島 |
+| PR | Puerto Rico | プエルトリコ |
+| VI | United States Virgin Islands | 米領バージン諸島 |
+
+> ※ グアム、北マリアナ諸島、米領サモアは地理的にはオセアニアですが、米国海外領土として本ディレクトリに配置しています。
+
+### 中央アメリカ / Central America
+
+| コード | 国名（英語） | 国名（日本語） |
+|--------|--------------|----------------|
+| BZ | Belize | ベリーズ |
+| CR | Costa Rica | コスタリカ |
+| GT | Guatemala | グアテマラ |
+| HN | Honduras | ホンジュラス |
+| NI | Nicaragua | ニカラグア |
+| PA | Panama | パナマ |
+| SV | El Salvador | エルサルバドル |
+
+### カリブ海 / Caribbean
+
+| コード | 国名（英語） | 国名（日本語） |
+|--------|--------------|----------------|
+| AG | Antigua and Barbuda | アンティグア・バーブーダ |
+| BB | Barbados | バルバドス |
+| BS | The Bahamas | バハマ |
+| CU | Cuba | キューバ |
+| DM | Dominica | ドミニカ国 |
+| DO | Dominican Republic | ドミニカ共和国 |
+| GD | Grenada | グレナダ |
+| HT | Haiti | ハイチ |
+| JM | Jamaica | ジャマイカ |
+| KN | Saint Kitts and Nevis | セントクリストファー・ネイビス |
+| LC | Saint Lucia | セントルシア |
+| TT | Trinidad and Tobago | トリニダード・トバゴ |
+| VC | Saint Vincent and the Grenadines | セントビンセント・グレナディーン |
+
+> ※ 英・仏・蘭のカリブ海外領はヨーロッパ側のディレクトリに配置されています。
+
+### 南アメリカ / South America
+
+| コード | 国名（英語） | 国名（日本語） |
+|--------|--------------|----------------|
+| AR | Argentina | アルゼンチン |
+| BO | Bolivia | ボリビア |
+| BR | Brazil | ブラジル |
+| CL | Chile | チリ |
+| CO | Colombia | コロンビア |
+| EC | Ecuador | エクアドル |
+| GY | Guyana | ガイアナ |
+| PE | Peru | ペルー |
+| PY | Paraguay | パラグアイ |
+| SR | Suriname | スリナム |
+| UY | Uruguay | ウルグアイ |
+| VE | Venezuela | ベネズエラ |
+
+#### チリ海外領土 / Chile Overseas Territories
+
+| ファイル名 | 地域名（英語） | 地域名（日本語） |
+|------------|----------------|------------------|
+| Desventuradas | Desventuradas Islands | デスベンチュラダス諸島 |
+| Easter_Island | Easter Island | イースター島 |
+| Juan_Fernandez | Juan Fernández Islands | フアン・フェルナンデス諸島 |
