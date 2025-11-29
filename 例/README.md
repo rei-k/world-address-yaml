@@ -147,3 +147,101 @@ examples:
   domestic_raw: "ولایت کابل، شهر کابل، کارته پروان، سرک ۱۵"
   domestic_normalized: "Kabul Province, Kabul City, Karte Parwan Street 15"
   international: "Room 1205, Floor 12, Azadi Tower Complex, Karte Parwan Street 15, Kabul, Afghanistan 1001"
+
+🏪 POS（販売時点情報管理）スキーマ
+
+👉 ゴール：POS システムでの決済・レシート発行・税務処理に必要な情報を提供。小売・飲食店向け。
+
+name:
+  en: Japan
+  local:
+    - lang: ja
+      value: 日本
+      script: Kanji
+      direction: ltr
+
+iso_codes:
+  alpha2: JP
+  alpha3: JPN
+  numeric: "392"
+
+currency:
+  code: JPY
+  symbol: "¥"
+  symbol_position: before
+  decimal_places: 0
+  decimal_separator: "."
+  thousands_separator: ","
+
+tax:
+  type: Consumption Tax
+  rate:
+    standard: 0.10
+    reduced:
+      - rate: 0.08
+        category: food_beverages
+      - rate: 0.08
+        category: newspapers
+  included_in_price: true
+  invoice_requirement: required
+
+receipt:
+  required_fields:
+    - business_name
+    - business_address
+    - registration_number
+    - date
+    - items
+    - tax_breakdown
+    - total
+  paper_width: "80mm"
+  electronic_allowed: true
+  retention_period: "7 years"
+
+fiscal:
+  fiscal_device_required: false
+  registration_required: true
+  reporting_frequency: annually
+
+payment_methods:
+  - type: cash
+    name: 現金
+    prevalence: high
+  - type: credit_card
+    name: クレジットカード
+    prevalence: high
+  - type: mobile
+    name: Suica/PASMO
+    prevalence: high
+  - type: qr_code
+    name: PayPay
+    prevalence: high
+  - type: qr_code
+    name: LINE Pay
+    prevalence: medium
+
+locale:
+  date_format: "YYYY/MM/DD"
+  time_format: "24h"
+  timezone: "Asia/Tokyo"
+  week_start: "sunday"
+
+business_hours:
+  typical_open: "10:00"
+  typical_close: "20:00"
+  sunday_trading: true
+  public_holidays_trading: true
+
+特徴
+
+通貨情報（ISO 4217 コード、記号、小数点桁数）
+
+税制（消費税率、軽減税率、内税/外税）
+
+レシート要件（必須項目、電子レシート可否、保存義務期間）
+
+決済手段（主要な決済方法と普及度）
+
+ロケール（日付・時刻形式、タイムゾーン）
+
+営業時間慣習（日曜・祝日営業の一般性）
