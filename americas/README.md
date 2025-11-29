@@ -32,6 +32,8 @@ americas/
 | PR | Puerto Rico | プエルトリコ |
 | VI | United States Virgin Islands | 米領バージン諸島 |
 
+> ※ グアム、北マリアナ諸島、米領サモアは地理的にはオセアニアですが、米国海外領土として本ディレクトリに配置しています。
+
 ### 中央アメリカ / Central America
 
 | コード | 国名（英語） | 国名（日本語） |

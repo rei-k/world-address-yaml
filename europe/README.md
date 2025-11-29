@@ -59,7 +59,7 @@ europe/
 | KY | Cayman Islands | ケイマン諸島 |
 | MS | Montserrat | モントセラト |
 | PN | Pitcairn Islands | ピトケアン諸島 |
-| SH | Saint Helena, Ascension and Tristan da Cunha | セントヘレナ・アセンション・トリスタンダクーニャ |
+| SH | Saint Helena, Ascension and Tristan da Cunha | セントヘレナ・アセンション・トリスタン＝ダクーニャ |
 | TC | Turks and Caicos Islands | タークス・カイコス諸島 |
 | VG | British Virgin Islands | 英領バージン諸島 |
 
