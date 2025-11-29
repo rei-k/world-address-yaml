@@ -458,11 +458,11 @@ console.log(japanData.name.en);  // Japan
 | VE | Venezuela |
 
 **チリ海外領土 / Chile Overseas Territories:**
-| 地域名 |
-|--------|
-| Desventuradas Islands |
-| Easter Island |
-| Juan Fernández Islands |
+| ファイル名 | 地域名 |
+|------------|--------|
+| Desventuradas | Desventuradas Islands |
+| Easter_Island | Easter Island |
+| Juan_Fernandez | Juan Fernández Islands |
 
 </details>
 
@@ -542,10 +542,10 @@ console.log(japanData.name.en);  // Japan
 | PK | Pakistan |
 
 **インド連邦直轄領 / Indian Union Territories:**
-| 地域名 |
-|--------|
-| Andaman and Nicobar Islands |
-| Lakshadweep |
+| ファイル名 | 地域名 |
+|------------|--------|
+| Andaman_Nicobar | Andaman and Nicobar Islands |
+| Lakshadweep | Lakshadweep |
 
 #### 東南アジア / Southeast Asia
 | コード | 国名 |
@@ -563,9 +563,9 @@ console.log(japanData.name.en);  // Japan
 | VN | Vietnam |
 
 **インドネシア特別地域 / Indonesia Special Regions:**
-| 地域名 |
-|--------|
-| Papua |
+| ファイル名 | 地域名 |
+|------------|--------|
+| Papua | Papua |
 
 #### 西アジア / West Asia
 | コード | 国名 |
@@ -593,6 +593,9 @@ console.log(japanData.name.en);  // Japan
 | AZ | Azerbaijan |
 | GE | Georgia |
 
+> ※ コーカサス諸国はアジアとヨーロッパの境界に位置するため、両方のセクションに記載されています。
+> *Note: Caucasus countries are listed in both Asia and Europe sections as they are geographically located at the boundary between the two continents.*
+
 </details>
 
 <details>
@@ -604,6 +607,8 @@ console.log(japanData.name.en);  // Japan
 | AM | Armenia |
 | AZ | Azerbaijan |
 | GE | Georgia |
+
+> ※ アジアセクションにも記載 / Also listed in Asia section
 
 **コーカサス係争地域 / Caucasus Disputed Territories:**
 | コード | 地域名 |
@@ -697,16 +702,16 @@ console.log(japanData.name.en);  // Japan
 | VA | Vatican City |
 
 **スペイン特別地域 / Spain Special Regions:**
-| 地域名 |
-|--------|
-| Canary Islands |
-| Ceuta and Melilla |
+| ファイル名 | 地域名 |
+|------------|--------|
+| Canary_Islands | Canary Islands |
+| Ceuta_Melilla | Ceuta and Melilla |
 
 **ポルトガル自治領 / Portuguese Autonomous Regions:**
-| 地域名 |
-|--------|
-| Azores |
-| Madeira |
+| ファイル名 | 地域名 |
+|------------|--------|
+| Azores | Azores |
+| Madeira | Madeira |
 
 #### 西ヨーロッパ / Western Europe
 | コード | 国名 |
