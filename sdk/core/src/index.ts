@@ -26,6 +26,14 @@ export type {
   WebhookEventType,
   WebhookPayload,
   RegionHierarchy,
+  // PID types
+  PIDComponents,
+  AddressPID,
+  PIDValidationResult,
+  PIDValidationError,
+  PIDEncodingOptions,
+  NormalizedAddress,
+  WaybillPayload,
 } from './types';
 
 // Client
@@ -50,3 +58,20 @@ export type { FormatOptions } from './formatter';
 // Loader
 export { createDataLoader, dataLoader } from './loader';
 export type { DataLoaderConfig } from './loader';
+
+// PID (Place ID) module
+export {
+  encodePID,
+  decodePID,
+  validatePID,
+  createPID,
+  parsePID,
+  generatePIDFromAddress,
+  addCollisionCounter,
+  removeCollisionCounter,
+  extractPIDPath,
+  comparePIDHierarchy,
+  isPIDParent,
+  getPIDDepth,
+  createWaybillPayload,
+} from './pid';
