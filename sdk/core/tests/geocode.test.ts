@@ -87,14 +87,14 @@ describe('isWithinBounds', () => {
   });
 
   it('should handle international date line crossing', () => {
-    const fijiiBounds: GeoBounds = {
+    const fijiBounds: GeoBounds = {
       northeast: { latitude: -16.0, longitude: -179.0 },
       southwest: { latitude: -18.0, longitude: 179.0 },
     };
     
     // Point at 180 longitude should be within bounds
     const point: GeoCoordinates = { latitude: -17.0, longitude: 180 };
-    expect(isWithinBounds(point, fijiiBounds)).toBe(true);
+    expect(isWithinBounds(point, fijiBounds)).toBe(true);
   });
 
   it('should return true for point on boundary', () => {
