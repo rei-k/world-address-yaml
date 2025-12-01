@@ -318,6 +318,59 @@ npx veyform-sdk countries --region asia
 
 詳細は [SDK README](./sdk/README.md) をご覧ください。
 
+## 🔑 住所PID (Place ID)
+
+住所PIDは階層的な住所識別子で、以下の用途に対応しています：
+
+- **一意識別** - 世界中の住所を1つのIDで区別
+- **ZK証明** - 住所を公開せずに正当性を検証
+- **配送ルーティング** - WMS/TMS/Carrierシステムと互換
+
+### PIDフォーマット
+
+```
+<Country>-<Admin1>-<Admin2>-<Locality>-<Sublocality>-<Block>-<Building>-<Unit>
+```
+
+例: `JP-13-113-01-T07-B12-BN02-R342`
+
+| フィールド | 内容 | コード例 |
+|-----------|------|---------|
+| Country | 国/地域 (ISO 3166-1 alpha-2) | `JP` |
+| Admin1 | 第1行政階層（都道府県） | `13` = 東京 |
+| Admin2 | 第2行政階層（市区町村） | `113` = 渋谷区 |
+| Locality | 市/区/郡 | `01` |
+| Sublocality | 町/丁目 | `T07` = 東7丁目 |
+| Block | 番地/ブロック | `B12` = 12番地 |
+| Building | 建物/ビル | `BN02` = build-02 |
+| Unit | 部屋/ユニット | `R342` = 342号室 |
+
+### 使用例
+
+```typescript
+import { encodePID, decodePID, validatePID } from '@vey/core';
+
+// PIDエンコード
+const pid = encodePID({
+  country: 'JP',
+  admin1: '13',
+  admin2: '113',
+  locality: '01'
+});
+// 結果: 'JP-13-113-01'
+
+// PIDデコード
+const components = decodePID('JP-13-113-01');
+
+// PIDバリデーション
+const result = validatePID('JP-13-113');
+if (result.valid) {
+  console.log('有効なPID:', result.components);
+}
+```
+
+詳細は [SDK README](./sdk/README.md#-address-pid-place-id) をご覧ください。
+
 ## 🔧 使用方法
 
 ### データの読み込み

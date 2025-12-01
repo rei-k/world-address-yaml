@@ -159,6 +159,7 @@ async function handleSubmit() {
 - **Validation Engine** - Country-specific validation rules
 - **Postal Code Validation** - Regex-based format checking
 - **Transliteration Support** - Latin character handling for international shipping
+- **Address PID (Place ID)** - Hierarchical address identifiers for ZK proofs and shipping routing
 
 ### Developer Experience
 
@@ -254,6 +255,123 @@ if (nfc.supported) {
   console.log('NFC address:', record.data);
 }
 ```
+
+## 🔑 Address PID (Place ID)
+
+Address PID is a hierarchical identifier for addresses that enables:
+- **Unique identification** of any address worldwide
+- **ZK proof verification** without exposing full address
+- **Shipping routing** compatible with WMS/TMS/Carrier systems
+- **Hierarchy embedding** for area-based operations
+
+### PID Format
+
+```
+<Country>-<Admin1>-<Admin2>-<Locality>-<Sublocality>-<Block>-<Building>-<Unit>
+```
+
+Example: `JP-13-113-01-T07-B12-BN02-R342`
+
+### Usage
+
+```typescript
+import {
+  encodePID,
+  decodePID,
+  validatePID,
+  generatePIDFromAddress,
+  createWaybillPayload
+} from '@vey/core';
+
+// Encode components to PID
+const pid = encodePID({
+  country: 'JP',
+  admin1: '13',
+  admin2: '113',
+  locality: '01',
+  sublocality: 'T07',
+  block: 'B12',
+  building: 'BN02',
+  unit: 'R342'
+});
+// Result: 'JP-13-113-01-T07-B12-BN02-R342'
+
+// Decode PID to components
+const components = decodePID('JP-13-113-01');
+// Result: { country: 'JP', admin1: '13', admin2: '113', locality: '01' }
+
+// Validate PID
+const validation = validatePID('JP-13-113');
+if (validation.valid) {
+  console.log('Valid PID:', validation.components);
+}
+
+// Generate PID from normalized address
+const pid = generatePIDFromAddress({
+  countryCode: 'JP',
+  admin1: '13',
+  admin2: '113'
+});
+
+// Create shipping waybill with PID
+const waybill = createWaybillPayload('WB890123456', 'JP-13-113-01-T07-B12-BN02-R342', {
+  parcel_weight: 2.4,
+  parcel_size: '60',
+  carrier_zone: 'ZONE_KANTO'
+});
+```
+
+### Collision Handling
+
+When duplicate PIDs are detected in your database:
+
+```typescript
+import { addCollisionCounter, removeCollisionCounter } from '@vey/core';
+
+// Add collision counter
+const pidWithCollision = addCollisionCounter('JP-13-113', 1);
+// Result: 'JP-13-113-C01'
+
+// Remove collision counter
+const basePid = removeCollisionCounter('JP-13-113-C01');
+// Result: 'JP-13-113'
+```
+
+### Hierarchy Operations
+
+```typescript
+import {
+  extractPIDPath,
+  comparePIDHierarchy,
+  isPIDParent,
+  getPIDDepth
+} from '@vey/core';
+
+// Extract path to specific depth (for routing)
+extractPIDPath('JP-13-113-01-T07-B12-BN02-R342', 3);
+// Result: 'JP-13-113'
+
+// Compare hierarchy match depth
+comparePIDHierarchy('JP-13-113-01', 'JP-13-114-02');
+// Result: 2 (country and admin1 match)
+
+// Check parent-child relationship
+isPIDParent('JP-13', 'JP-13-113-01');
+// Result: true
+
+// Get hierarchy depth
+getPIDDepth('JP-13-113');
+// Result: 3
+```
+
+### Country-Specific PID Formats
+
+| Region | Format | Example |
+|--------|--------|---------|
+| Japan | `JP-<pref>-<ward>-<town>-<block>-RNNN` | `JP-13-113-01-T07-B12-BN02-R342` |
+| US | `US-<state>-<zip>-<block>-<bldg>-Apt` | `US-CA-90210-MAIN-B001-APT5` |
+| EU | `<CC>-<postal>-<city>-<bldg>-Unit` | `DE-10115-MITTE-B42-U301` |
+| Middle East | `<CC>-<city>-<block>-<bldg>-<unit>` | `AE-DXB-BLK5-TWR2-1205` |
 
 ## 🌍 Supported Countries
 

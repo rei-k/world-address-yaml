@@ -209,3 +209,116 @@ export interface RegionHierarchy {
     }[];
   }[];
 }
+
+/**
+ * Address PID (Place ID) Components
+ * 
+ * Hierarchical ID structure: <Country>-<Admin1>-<Admin2>-<Locality>-<Sublocality>-<Block>-<Building>-<Unit>
+ * Example: JP-13-113-01-T07-B12-BN02-R342
+ */
+export interface PIDComponents {
+  /** ISO 3166-1 alpha-2 country code (e.g., 'JP') */
+  country: string;
+  /** First administrative level code (e.g., '13' for Tokyo) */
+  admin1?: string;
+  /** Second administrative level code (e.g., '113' for Shibuya) */
+  admin2?: string;
+  /** Locality code (e.g., '01') */
+  locality?: string;
+  /** Sublocality code (e.g., 'T07' for 7-chome) */
+  sublocality?: string;
+  /** Block code (e.g., 'B12' for block 12) */
+  block?: string;
+  /** Building code (e.g., 'BN02' for building 02) */
+  building?: string;
+  /** Unit/room code (e.g., 'R342' for room 342) */
+  unit?: string;
+  /** Collision counter suffix (e.g., 'C01' for first collision) */
+  collision?: string;
+}
+
+/**
+ * Address PID representation
+ * 
+ * PID serves as:
+ * 1. Unique identifier for world addresses
+ * 2. Lossless key to address hierarchy DAG
+ * 3. ZK proof input for address validity verification
+ * 4. Shipping routing code compatible with WMS/TMS/Carrier
+ */
+export interface AddressPID {
+  /** Full PID string (e.g., 'JP-13-113-01-T07-B12-BN02-R342') */
+  pid: string;
+  /** Parsed PID components */
+  components: PIDComponents;
+  /** Whether this PID has been validated */
+  validated?: boolean;
+}
+
+/** PID validation result */
+export interface PIDValidationResult {
+  /** Whether the PID is valid */
+  valid: boolean;
+  /** Validation errors */
+  errors: PIDValidationError[];
+  /** Parsed components if valid */
+  components?: PIDComponents;
+}
+
+/** PID validation error */
+export interface PIDValidationError {
+  /** Component that caused the error */
+  component: keyof PIDComponents | 'format';
+  /** Error code */
+  code: string;
+  /** Human-readable error message */
+  message: string;
+}
+
+/** PID encoding options */
+export interface PIDEncodingOptions {
+  /** Collision counter to append (1-99) */
+  collisionCounter?: number;
+}
+
+/** Normalized address input for PID generation */
+export interface NormalizedAddress {
+  /** ISO 3166-1 alpha-2 country code */
+  countryCode: string;
+  /** First administrative division (e.g., prefecture, state) */
+  admin1?: string;
+  /** Second administrative division (e.g., city, ward) */
+  admin2?: string;
+  /** Locality/neighborhood */
+  locality?: string;
+  /** Sublocality (e.g., town, chome) */
+  sublocality?: string;
+  /** Block/street number */
+  block?: string;
+  /** Building name/number */
+  building?: string;
+  /** Unit/room number */
+  unit?: string;
+}
+
+/**
+ * Waybill with PID (shipping label payload)
+ * 
+ * Example QR payload structure for shipping labels
+ */
+export interface WaybillPayload {
+  /** Waybill ID */
+  waybill_id: string;
+  /** Address PID */
+  addr_pid: string;
+  /** Parcel weight in kg */
+  parcel_weight?: number;
+  /** Parcel size code */
+  parcel_size?: string;
+  /** Carrier zone */
+  carrier_zone?: string;
+  /** ZK proof blob */
+  zkp?: string;
+  /** BLS signature */
+  sig?: string;
+}
