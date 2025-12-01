@@ -83,16 +83,13 @@ export function encodePID(
 
   parts.push(components.country.toUpperCase());
 
-  // Add optional components in order
+  // Add optional components in order, stopping at first empty component
   for (const key of COMPONENT_ORDER.slice(1)) {
     const value = components[key];
     if (value) {
       parts.push(value.toUpperCase());
-    } else if (options.includeEmpty) {
-      // Skip empty components unless explicitly requested
-      break;
     } else {
-      // Stop at first empty component
+      // Stop at first empty component since PID is positional
       break;
     }
   }

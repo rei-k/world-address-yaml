@@ -277,8 +277,6 @@ export interface PIDValidationError {
 
 /** PID encoding options */
 export interface PIDEncodingOptions {
-  /** Whether to include empty components with default values */
-  includeEmpty?: boolean;
   /** Collision counter to append (1-99) */
   collisionCounter?: number;
 }
