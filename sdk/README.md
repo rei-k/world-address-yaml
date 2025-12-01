@@ -209,7 +209,7 @@ if (nfc.supported) {
 
 ## 🌍 Supported Countries
 
-The SDK supports 200+ countries with detailed address format information. See the full list in the [data directory](/asia) or use:
+The SDK supports 200+ countries with detailed address format information. See the full list in the [data directory](/data) or use:
 
 ```bash
 npx veyform-sdk countries
