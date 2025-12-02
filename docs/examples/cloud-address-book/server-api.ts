@@ -773,6 +773,304 @@ export class CarrierAPI {
 }
 
 // ============================================================================
+// Section 6.7: Official Account API
+// ============================================================================
+
+/**
+ * Official Account Entry データ型
+ */
+interface OfficialAccountEntry {
+  id: string;
+  account_did: string;
+  pid: string;
+  official_name: string;
+  official_name_en?: string;
+  phone_number: string;
+  public_address_local: string;
+  public_address_en: string;
+  country_code: string;
+  admin1_code?: string;
+  admin2_code?: string;
+  postal_code?: string;
+  account_type: string;
+  business_hours?: string;
+  website_url?: string;
+  email?: string;
+  signature: string;
+  vc_id?: string;
+  geo_hash?: string;
+  latitude?: number;
+  longitude?: number;
+  qr_code_data: string;
+  qr_code_url?: string;
+  is_verified: boolean;
+  verified_by?: string;
+  verified_at?: string;
+  is_active: boolean;
+  is_public: boolean;
+  created_at: string;
+  updated_at: string;
+  usage_count?: number;
+  last_used_at?: string;
+  description?: string;
+  notes?: string;
+}
+
+/**
+ * Official Account (公式アカウント) API クラス
+ * 
+ * 公式アカウントは住所を公開し、QRコードや登録で配送先として利用可能
+ */
+export class OfficialAccountAPI {
+  private accounts: Map<string, OfficialAccountEntry> = new Map();
+  
+  /**
+   * POST /v1/official-accounts - 公式アカウント登録
+   * 
+   * @param request - 登録リクエスト
+   * @returns 登録結果
+   */
+  async registerOfficialAccount(request: {
+    official_name: string;
+    official_name_en?: string;
+    phone_number: string;
+    address: {
+      local: string;
+      en: string;
+      country_code: string;
+      admin1_code?: string;
+      admin2_code?: string;
+      postal_code?: string;
+    };
+    account_type: string;
+    business_hours?: string;
+    website_url?: string;
+    email?: string;
+    account_did: string;
+    signature: string;
+    description?: string;
+  }): Promise<OfficialAccountEntry> {
+    // PID 生成
+    const pid = encodePID({
+      country: request.address.country_code,
+      admin1: request.address.admin1_code || '',
+      admin2: request.address.admin2_code || '',
+    } as any);
+    
+    // QRコードデータ生成
+    const qrCodeData = JSON.stringify({
+      type: 'official_account',
+      account_did: request.account_did,
+      pid,
+      official_name: request.official_name,
+      phone_number: request.phone_number,
+      timestamp: new Date().toISOString(),
+    });
+    
+    const qrCodeHash = await hashData(qrCodeData);
+    
+    // 公式アカウントエントリ作成
+    const entry: OfficialAccountEntry = {
+      id: generateId(),
+      account_did: request.account_did,
+      pid,
+      official_name: request.official_name,
+      official_name_en: request.official_name_en,
+      phone_number: request.phone_number,
+      public_address_local: request.address.local,
+      public_address_en: request.address.en,
+      country_code: request.address.country_code,
+      admin1_code: request.address.admin1_code,
+      admin2_code: request.address.admin2_code,
+      postal_code: request.address.postal_code,
+      account_type: request.account_type,
+      business_hours: request.business_hours,
+      website_url: request.website_url,
+      email: request.email,
+      signature: request.signature,
+      qr_code_data: qrCodeData,
+      qr_code_url: `https://api.vey.example/qr/${qrCodeHash}`,
+      is_verified: false,
+      is_active: true,
+      is_public: true,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      usage_count: 0,
+      description: request.description,
+    };
+    
+    this.accounts.set(entry.id, entry);
+    
+    return entry;
+  }
+  
+  /**
+   * GET /v1/official-accounts - 公式アカウント一覧取得
+   * 
+   * @param filters - フィルター条件
+   * @returns 公式アカウント配列
+   */
+  async listOfficialAccounts(filters?: {
+    country_code?: string;
+    account_type?: string;
+    is_verified?: boolean;
+    search?: string;
+  }): Promise<OfficialAccountEntry[]> {
+    let accounts = Array.from(this.accounts.values()).filter(
+      account => account.is_active && account.is_public
+    );
+    
+    if (filters?.country_code) {
+      accounts = accounts.filter(a => a.country_code === filters.country_code);
+    }
+    
+    if (filters?.account_type) {
+      accounts = accounts.filter(a => a.account_type === filters.account_type);
+    }
+    
+    if (filters?.is_verified !== undefined) {
+      accounts = accounts.filter(a => a.is_verified === filters.is_verified);
+    }
+    
+    if (filters?.search) {
+      const searchLower = filters.search.toLowerCase();
+      accounts = accounts.filter(a =>
+        a.official_name.toLowerCase().includes(searchLower) ||
+        a.official_name_en?.toLowerCase().includes(searchLower) ||
+        a.description?.toLowerCase().includes(searchLower)
+      );
+    }
+    
+    return accounts;
+  }
+  
+  /**
+   * GET /v1/official-accounts/{id} - 特定の公式アカウント取得
+   * 
+   * @param id - アカウントID
+   * @returns 公式アカウント
+   */
+  async getOfficialAccount(id: string): Promise<OfficialAccountEntry | null> {
+    return this.accounts.get(id) || null;
+  }
+  
+  /**
+   * GET /v1/official-accounts/by-pid/{pid} - PIDで公式アカウント検索
+   * 
+   * @param pid - 住所PID
+   * @returns 公式アカウント
+   */
+  async getOfficialAccountByPID(pid: string): Promise<OfficialAccountEntry | null> {
+    const accounts = Array.from(this.accounts.values());
+    return accounts.find(a => a.pid === pid) || null;
+  }
+  
+  /**
+   * PUT /v1/official-accounts/{id} - 公式アカウント更新
+   * 
+   * @param id - アカウントID
+   * @param updates - 更新内容
+   * @returns 更新後の公式アカウント
+   */
+  async updateOfficialAccount(
+    id: string,
+    updates: Partial<OfficialAccountEntry>
+  ): Promise<OfficialAccountEntry | null> {
+    const account = this.accounts.get(id);
+    if (!account) {
+      return null;
+    }
+    
+    const updated = {
+      ...account,
+      ...updates,
+      updated_at: new Date().toISOString(),
+    };
+    
+    this.accounts.set(id, updated);
+    
+    return updated;
+  }
+  
+  /**
+   * POST /v1/official-accounts/{id}/verify - 公式アカウント検証
+   * 
+   * @param id - アカウントID
+   * @param verifier_did - 検証者DID
+   * @returns 検証結果
+   */
+  async verifyOfficialAccount(
+    id: string,
+    verifier_did: string
+  ): Promise<OfficialAccountEntry | null> {
+    const account = this.accounts.get(id);
+    if (!account) {
+      return null;
+    }
+    
+    const verified = {
+      ...account,
+      is_verified: true,
+      verified_by: verifier_did,
+      verified_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+    
+    this.accounts.set(id, verified);
+    
+    return verified;
+  }
+  
+  /**
+   * POST /v1/official-accounts/{id}/increment-usage - 使用回数インクリメント
+   * 
+   * @param id - アカウントID
+   * @returns 更新結果
+   */
+  async incrementUsage(id: string): Promise<boolean> {
+    const account = this.accounts.get(id);
+    if (!account) {
+      return false;
+    }
+    
+    const updated = {
+      ...account,
+      usage_count: (account.usage_count || 0) + 1,
+      last_used_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+    
+    this.accounts.set(id, updated);
+    
+    return true;
+  }
+  
+  /**
+   * DELETE /v1/official-accounts/{id} - 公式アカウント削除（非公開化）
+   * 
+   * @param id - アカウントID
+   * @returns 削除結果
+   */
+  async deactivateOfficialAccount(id: string): Promise<boolean> {
+    const account = this.accounts.get(id);
+    if (!account) {
+      return false;
+    }
+    
+    const deactivated = {
+      ...account,
+      is_active: false,
+      is_public: false,
+      updated_at: new Date().toISOString(),
+    };
+    
+    this.accounts.set(id, deactivated);
+    
+    return true;
+  }
+}
+
+// ============================================================================
 // 統合 API サーバー
 // ============================================================================
 
@@ -788,6 +1086,7 @@ export class CloudAddressBookAPIServer {
   public zkp: ZKPAPI;
   public shipping: ShippingAPI;
   public carrier: CarrierAPI;
+  public officialAccount: OfficialAccountAPI;
   
   constructor() {
     this.addressProvider = new AddressProviderAPI();
@@ -796,6 +1095,7 @@ export class CloudAddressBookAPIServer {
     this.zkp = new ZKPAPI();
     this.shipping = new ShippingAPI(this.zkp);
     this.carrier = new CarrierAPI(this.pidManagement);
+    this.officialAccount = new OfficialAccountAPI();
   }
   
   /**
@@ -810,6 +1110,7 @@ export class CloudAddressBookAPIServer {
     console.log('  - ZKP API (Section 6.4)');
     console.log('  - Shipping API (Section 6.5)');
     console.log('  - Carrier API (Section 6.6)');
+    console.log('  - Official Account API (Section 6.7)');
   }
 }
 

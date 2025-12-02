@@ -195,6 +195,72 @@ export interface PaymentEntry {
   notes?: string;                  // メモ
 }
 
+/**
+ * Official Account Entry - 公式アカウントエントリ
+ * 
+ * 公式アカウントは住所を公開し、QRコードや登録で配送先として利用可能
+ * 名前、住所、電話番号を公開する必要がある
+ */
+export interface OfficialAccountEntry {
+  // 識別子
+  id: string;                      // 内部ID
+  account_did: string;             // 公式アカウントDID
+  pid: string;                     // 住所PID
+  
+  // 公開情報（平文）
+  official_name: string;           // 公式名称（企業名、店舗名など）
+  official_name_en?: string;       // 公式名称（英語）
+  phone_number: string;            // 公開電話番号
+  
+  // 住所情報（公開・平文）
+  public_address_local: string;    // 公開住所（母国語）
+  public_address_en: string;       // 公開住所（英語）
+  country_code: string;            // 国コード
+  admin1_code?: string;            // 第1行政区コード
+  admin2_code?: string;            // 第2行政区コード
+  postal_code?: string;            // 郵便番号
+  
+  // メタデータ
+  account_type: string;            // アカウント種別（store, office, warehouse等）
+  business_hours?: string;         // 営業時間
+  website_url?: string;            // ウェブサイトURL
+  email?: string;                  // 問い合わせメール
+  
+  // セキュリティ
+  signature: string;               // アカウント署名
+  vc_id?: string;                  // Verifiable Credential ID
+  
+  // 地理情報
+  geo_hash?: string;               // Geohash
+  latitude?: number;               // 緯度
+  longitude?: number;              // 経度
+  
+  // QRコード情報
+  qr_code_data: string;            // QRコードデータ
+  qr_code_url?: string;            // QRコード画像URL
+  
+  // 検証
+  is_verified: boolean;            // 検証済みフラグ
+  verified_by?: string;            // 検証者DID
+  verified_at?: string;            // 検証日時
+  
+  // 状態管理
+  is_active: boolean;              // アクティブフラグ
+  is_public: boolean;              // 公開フラグ
+  
+  // タイムスタンプ
+  created_at: string;              // 作成日時
+  updated_at: string;              // 更新日時
+  
+  // 統計
+  usage_count?: number;            // 利用回数
+  last_used_at?: string;           // 最終使用日時
+  
+  // メモ
+  description?: string;            // 説明
+  notes?: string;                  // メモ
+}
+
 // ============================================================================
 // PostgreSQL DDL (Data Definition Language)
 // ============================================================================
@@ -388,6 +454,85 @@ CREATE UNIQUE INDEX idx_payment_entries_user_default
 
 -- ============================================================================
 
+-- Official Account Entry テーブル
+CREATE TABLE official_account_entries (
+  -- 識別子
+  id VARCHAR(255) PRIMARY KEY,
+  account_did VARCHAR(255) NOT NULL UNIQUE,
+  pid VARCHAR(255) NOT NULL UNIQUE,
+  
+  -- 公開情報（平文）
+  official_name VARCHAR(500) NOT NULL,
+  official_name_en VARCHAR(500),
+  phone_number VARCHAR(50) NOT NULL,
+  
+  -- 住所情報（公開・平文）
+  public_address_local TEXT NOT NULL,
+  public_address_en TEXT NOT NULL,
+  country_code VARCHAR(2) NOT NULL,
+  admin1_code VARCHAR(10),
+  admin2_code VARCHAR(10),
+  postal_code VARCHAR(20),
+  
+  -- メタデータ
+  account_type VARCHAR(50) NOT NULL,
+  business_hours TEXT,
+  website_url TEXT,
+  email VARCHAR(255),
+  
+  -- セキュリティ
+  signature TEXT NOT NULL,
+  vc_id VARCHAR(255),
+  
+  -- 地理情報
+  geo_hash VARCHAR(20),
+  latitude DECIMAL(10, 8),
+  longitude DECIMAL(11, 8),
+  
+  -- QRコード情報
+  qr_code_data TEXT NOT NULL,
+  qr_code_url TEXT,
+  
+  -- 検証
+  is_verified BOOLEAN NOT NULL DEFAULT FALSE,
+  verified_by VARCHAR(255),
+  verified_at TIMESTAMP WITH TIME ZONE,
+  
+  -- 状態管理
+  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  is_public BOOLEAN NOT NULL DEFAULT TRUE,
+  
+  -- タイムスタンプ
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  
+  -- 統計
+  usage_count INTEGER NOT NULL DEFAULT 0,
+  last_used_at TIMESTAMP WITH TIME ZONE,
+  
+  -- メモ
+  description TEXT,
+  notes TEXT,
+  
+  -- 制約
+  CONSTRAINT check_official_account_type CHECK (account_type IN ('store', 'office', 'warehouse', 'service_center', 'distribution_center', 'pickup_point', 'other')),
+  CONSTRAINT check_official_pid_format CHECK (pid ~ '^[A-Z]{2}(-[A-Z0-9]+)*$'),
+  CONSTRAINT check_latitude CHECK (latitude IS NULL OR (latitude >= -90 AND latitude <= 90)),
+  CONSTRAINT check_longitude CHECK (longitude IS NULL OR (longitude >= -180 AND longitude <= 180))
+);
+
+-- インデックス
+CREATE INDEX idx_official_account_entries_account_did ON official_account_entries(account_did);
+CREATE INDEX idx_official_account_entries_pid ON official_account_entries(pid);
+CREATE INDEX idx_official_account_entries_country_code ON official_account_entries(country_code);
+CREATE INDEX idx_official_account_entries_is_active ON official_account_entries(is_active);
+CREATE INDEX idx_official_account_entries_is_public ON official_account_entries(is_public);
+CREATE INDEX idx_official_account_entries_is_verified ON official_account_entries(is_verified);
+CREATE INDEX idx_official_account_entries_account_type ON official_account_entries(account_type);
+CREATE INDEX idx_official_account_entries_geo_hash ON official_account_entries(geo_hash);
+
+-- ============================================================================
+
 -- Access Log Entry テーブル
 CREATE TABLE access_log_entries (
   -- 識別子
@@ -443,6 +588,11 @@ CREATE TRIGGER update_payment_entries_updated_at
   FOR EACH ROW
   EXECUTE FUNCTION update_updated_at_column();
 
+CREATE TRIGGER update_official_account_entries_updated_at 
+  BEFORE UPDATE ON official_account_entries
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
+
 -- ============================================================================
 -- ビュー: アクティブな住所のみ
 -- ============================================================================
@@ -458,6 +608,10 @@ WHERE is_revoked = FALSE;
 CREATE VIEW active_payment_methods AS
 SELECT * FROM payment_entries
 WHERE is_revoked = FALSE AND (expires_at IS NULL OR expires_at > CURRENT_TIMESTAMP);
+
+CREATE VIEW active_official_accounts AS
+SELECT * FROM official_account_entries
+WHERE is_active = TRUE AND is_public = TRUE;
 
 -- ============================================================================
 -- 関数: PID検証
@@ -749,6 +903,82 @@ db.payment_entries.createIndex(
   }
 );
 
+// ============================================================================
+
+// Official Account Entry コレクション
+db.createCollection("official_account_entries", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: [
+        "id", "account_did", "pid",
+        "official_name", "phone_number",
+        "public_address_local", "public_address_en",
+        "country_code", "account_type",
+        "signature", "qr_code_data",
+        "is_verified", "is_active", "is_public",
+        "created_at", "updated_at", "usage_count"
+      ],
+      properties: {
+        id: { bsonType: "string" },
+        account_did: { bsonType: "string" },
+        pid: { 
+          bsonType: "string",
+          pattern: "^[A-Z]{2}(-[A-Z0-9]+)*$"
+        },
+        official_name: { bsonType: "string" },
+        official_name_en: { bsonType: ["string", "null"] },
+        phone_number: { bsonType: "string" },
+        public_address_local: { bsonType: "string" },
+        public_address_en: { bsonType: "string" },
+        country_code: { 
+          bsonType: "string",
+          minLength: 2,
+          maxLength: 2
+        },
+        admin1_code: { bsonType: ["string", "null"] },
+        admin2_code: { bsonType: ["string", "null"] },
+        postal_code: { bsonType: ["string", "null"] },
+        account_type: { 
+          bsonType: "string",
+          enum: ["store", "office", "warehouse", "service_center", "distribution_center", "pickup_point", "other"]
+        },
+        business_hours: { bsonType: ["string", "null"] },
+        website_url: { bsonType: ["string", "null"] },
+        email: { bsonType: ["string", "null"] },
+        signature: { bsonType: "string" },
+        vc_id: { bsonType: ["string", "null"] },
+        geo_hash: { bsonType: ["string", "null"] },
+        latitude: { bsonType: ["double", "null"] },
+        longitude: { bsonType: ["double", "null"] },
+        qr_code_data: { bsonType: "string" },
+        qr_code_url: { bsonType: ["string", "null"] },
+        is_verified: { bsonType: "bool" },
+        verified_by: { bsonType: ["string", "null"] },
+        verified_at: { bsonType: ["string", "null"] },
+        is_active: { bsonType: "bool" },
+        is_public: { bsonType: "bool" },
+        created_at: { bsonType: "string" },
+        updated_at: { bsonType: "string" },
+        usage_count: { bsonType: "int" },
+        last_used_at: { bsonType: ["string", "null"] },
+        description: { bsonType: ["string", "null"] },
+        notes: { bsonType: ["string", "null"] }
+      }
+    }
+  }
+});
+
+// インデックス
+db.official_account_entries.createIndex({ "account_did": 1 }, { unique: true });
+db.official_account_entries.createIndex({ "pid": 1 }, { unique: true });
+db.official_account_entries.createIndex({ "country_code": 1 });
+db.official_account_entries.createIndex({ "is_active": 1 });
+db.official_account_entries.createIndex({ "is_public": 1 });
+db.official_account_entries.createIndex({ "is_verified": 1 });
+db.official_account_entries.createIndex({ "account_type": 1 });
+db.official_account_entries.createIndex({ "geo_hash": 1 });
+
 `;
 
 // ============================================================================
@@ -953,6 +1183,76 @@ model PaymentEntry {
   @@index([isDefault])
   @@index([provider])
   @@map("payment_entries")
+}
+
+model OfficialAccountEntry {
+  // 識別子
+  id         String @id
+  accountDid String @unique @map("account_did")
+  pid        String @unique
+  
+  // 公開情報（平文）
+  officialName   String  @map("official_name")
+  officialNameEn String? @map("official_name_en")
+  phoneNumber    String  @map("phone_number")
+  
+  // 住所情報（公開・平文）
+  publicAddressLocal String  @map("public_address_local")
+  publicAddressEn    String  @map("public_address_en")
+  countryCode        String  @map("country_code")
+  admin1Code         String? @map("admin1_code")
+  admin2Code         String? @map("admin2_code")
+  postalCode         String? @map("postal_code")
+  
+  // メタデータ
+  accountType   String  @map("account_type")
+  businessHours String? @map("business_hours")
+  websiteUrl    String? @map("website_url")
+  email         String?
+  
+  // セキュリティ
+  signature String
+  vcId      String? @map("vc_id")
+  
+  // 地理情報
+  geoHash   String?  @map("geo_hash")
+  latitude  Decimal? @db.Decimal(10, 8)
+  longitude Decimal? @db.Decimal(11, 8)
+  
+  // QRコード情報
+  qrCodeData String  @map("qr_code_data")
+  qrCodeUrl  String? @map("qr_code_url")
+  
+  // 検証
+  isVerified Boolean   @default(false) @map("is_verified")
+  verifiedBy String?   @map("verified_by")
+  verifiedAt DateTime? @map("verified_at")
+  
+  // 状態管理
+  isActive Boolean @default(true) @map("is_active")
+  isPublic Boolean @default(true) @map("is_public")
+  
+  // タイムスタンプ
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  
+  // 統計
+  usageCount Int       @default(0) @map("usage_count")
+  lastUsedAt DateTime? @map("last_used_at")
+  
+  // メモ
+  description String?
+  notes       String?
+  
+  @@index([accountDid])
+  @@index([pid])
+  @@index([countryCode])
+  @@index([isActive])
+  @@index([isPublic])
+  @@index([isVerified])
+  @@index([accountType])
+  @@index([geoHash])
+  @@map("official_account_entries")
 }
 `;
 
