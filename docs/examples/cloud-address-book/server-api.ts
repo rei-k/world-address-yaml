@@ -9,6 +9,20 @@
  * This file provides server-side API implementation examples
  * defined in Section 6 (API Endpoint Design) of
  * cloud-address-book-architecture.md
+ * 
+ * 注意: これは実装例です。本番環境では以下が必要です:
+ * - 実際のデータベース接続
+ * - 適切な認証・認可
+ * - エラーハンドリング
+ * - レート制限
+ * - ロギング
+ * 
+ * Note: This is example code. Production use requires:
+ * - Actual database connections
+ * - Proper authentication/authorization
+ * - Error handling
+ * - Rate limiting
+ * - Logging
  */
 
 import {

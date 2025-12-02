@@ -7,6 +7,18 @@
  * 
  * This file demonstrates how to integrate the Cloud Address Book System
  * into client applications (Web/Mobile).
+ * 
+ * 注意: これは実装例です。本番環境では以下が必要です:
+ * - 適切な状態管理 (Redux, Zustand等)
+ * - エラーハンドリング
+ * - オフライン対応
+ * - セキュリティ対策
+ * 
+ * Note: This is example code. Production use requires:
+ * - Proper state management (Redux, Zustand, etc.)
+ * - Error handling
+ * - Offline support
+ * - Security measures
  */
 
 import React from 'react';

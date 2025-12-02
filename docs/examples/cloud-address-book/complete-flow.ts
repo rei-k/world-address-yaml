@@ -7,6 +7,12 @@
  * 
  * This file provides a complete implementation of all data flows
  * defined in cloud-address-book-architecture.md
+ * 
+ * 注意: これは実装例です。本番環境では適切なエラーハンドリング、
+ * データベース接続、セキュリティ対策が必要です。
+ * 
+ * Note: This is example code. Production use requires proper error handling,
+ * database connections, and security measures.
  */
 
 import {
