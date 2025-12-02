@@ -1,0 +1,32 @@
+{
+  "name": "@vey/nuxt",
+  "version": "1.0.0",
+  "description": "Nuxt.js SDK for World Address YAML - Address validation and formatting",
+  "main": "dist/module.mjs",
+  "types": "dist/types.d.ts",
+  "scripts": {
+    "build": "nuxt-module-build",
+    "dev": "nuxi dev playground"
+  },
+  "keywords": [
+    "address",
+    "validation",
+    "nuxt",
+    "world-address",
+    "international"
+  ],
+  "author": "VEY Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "nuxt": "^3.0.0"
+  },
+  "dependencies": {
+    "@vey/core": "^1.0.0",
+    "@vey/vue": "^1.0.0"
+  },
+  "devDependencies": {
+    "@nuxt/module-builder": "^0.5.0",
+    "nuxt": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}

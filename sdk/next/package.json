@@ -1,0 +1,33 @@
+{
+  "name": "@vey/next",
+  "version": "1.0.0",
+  "description": "Next.js SDK for World Address YAML - Address validation and formatting",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "address",
+    "validation",
+    "nextjs",
+    "world-address",
+    "international"
+  ],
+  "author": "VEY Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "next": "^13.0.0 || ^14.0.0",
+    "react": "^18.0.0"
+  },
+  "dependencies": {
+    "@vey/core": "^1.0.0",
+    "@vey/react": "^1.0.0"
+  },
+  "devDependencies": {
+    "next": "^14.0.0",
+    "react": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "@vey/svelte",
+  "version": "1.0.0",
+  "description": "Svelte SDK for World Address YAML - Address validation and formatting",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "svelte": "src/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "svelte-package",
+    "check": "svelte-check"
+  },
+  "keywords": [
+    "address",
+    "validation",
+    "svelte",
+    "world-address",
+    "international"
+  ],
+  "author": "VEY Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "svelte": "^4.0.0"
+  },
+  "dependencies": {
+    "@vey/core": "^1.0.0"
+  },
+  "devDependencies": {
+    "svelte": "^4.0.0",
+    "@sveltejs/package": "^2.0.0",
+    "svelte-check": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}

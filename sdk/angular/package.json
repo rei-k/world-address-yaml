@@ -1,0 +1,32 @@
+{
+  "name": "@vey/angular",
+  "version": "1.0.0",
+  "description": "Angular SDK for World Address YAML - Address validation and formatting",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "ng test"
+  },
+  "keywords": [
+    "address",
+    "validation",
+    "angular",
+    "world-address",
+    "international"
+  ],
+  "author": "VEY Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/core": "^16.0.0 || ^17.0.0",
+    "@angular/common": "^16.0.0 || ^17.0.0"
+  },
+  "dependencies": {
+    "@vey/core": "^1.0.0"
+  },
+  "devDependencies": {
+    "@angular/core": "^17.0.0",
+    "@angular/common": "^17.0.0",
+    "typescript": "^5.0.0"
+  }
+}
