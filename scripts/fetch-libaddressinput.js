@@ -118,7 +118,9 @@ function jsonToYaml(obj, indent = 0) {
                           /^[-?]/.test(value);
       
       if (needsQuoting) {
-        yaml += `${indentStr}${key}: "${value.replace(/"/g, '\\"').replace(/\\/g, '\\\\')}"\n`;
+        // Escape backslashes first, then quotes to avoid double-escaping
+        const escaped = value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+        yaml += `${indentStr}${key}: "${escaped}"\n`;
       } else {
         yaml += `${indentStr}${key}: ${value}\n`;
       }
