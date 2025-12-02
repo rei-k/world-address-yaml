@@ -180,6 +180,49 @@ interface AccessLogEntry {
   accessed_at: string;
 }
 
+/**
+ * Official Account Entry - 公式アカウントエントリ
+ * 
+ * 公式アカウントは住所を公開し、QRコードや登録で配送先として利用可能
+ * 名前、住所、電話番号を公開する必要がある
+ */
+interface OfficialAccountEntry {
+  id: string;
+  account_did: string;
+  pid: string;
+  official_name: string;
+  official_name_en?: string;
+  phone_number: string;
+  public_address_local: string;
+  public_address_en: string;
+  country_code: string;
+  admin1_code?: string;
+  admin2_code?: string;
+  postal_code?: string;
+  account_type: string;
+  business_hours?: string;
+  website_url?: string;
+  email?: string;
+  signature: string;
+  vc_id?: string;
+  geo_hash?: string;
+  latitude?: number;
+  longitude?: number;
+  qr_code_data: string;
+  qr_code_url?: string;
+  is_verified: boolean;
+  verified_by?: string;
+  verified_at?: string;
+  is_active: boolean;
+  is_public: boolean;
+  created_at: string;
+  updated_at: string;
+  usage_count?: number;
+  last_used_at?: string;
+  description?: string;
+  notes?: string;
+}
+
 // ============================================================================
 // Flow 1: 住所登録フロー (2.1 住所登録フロー from architecture document)
 // ============================================================================
@@ -686,6 +729,211 @@ async function addressUpdateFlow(oldPid: string, userDid: string, userPrivateKey
 }
 
 // ============================================================================
+// Flow 5: 公式アカウント登録フロー
+// ============================================================================
+
+/**
+ * 公式アカウントを登録するフロー
+ * 
+ * 公式アカウントは住所を公開し、QRコードや登録で配送先として利用可能
+ * 名前、住所、電話番号を公開する必要がある
+ * 
+ * Steps:
+ * 1. 公式アカウント情報を入力
+ * 2. Address Provider が住所を正規化
+ * 3. PID 生成
+ * 4. 公式アカウントが署名
+ * 5. VC 発行（オプション）
+ * 6. 公開情報として保存（暗号化なし）
+ * 7. QR コード生成
+ */
+async function registerOfficialAccountFlow() {
+  console.log('=== Flow 5: 公式アカウント登録フロー ===\n');
+  
+  // Step 1: 公式アカウント情報を入力
+  console.log('Step 1: 公式アカウント情報を入力');
+  const officialAccountInfo = {
+    officialName: '渋谷ストア',
+    officialNameEn: 'Shibuya Store',
+    phoneNumber: '+81-3-1234-5678',
+    rawAddress: {
+      country: 'JP',
+      postalCode: '150-0043',
+      province: '東京都',
+      city: '渋谷区',
+      streetAddress: '道玄坂1-2-3 渋谷ビル1F',
+    },
+    accountType: 'store',
+    businessHours: '10:00-20:00',
+    websiteUrl: 'https://shibuya-store.example.com',
+    email: 'info@shibuya-store.example.com',
+    description: '渋谷駅徒歩5分の便利な店舗です',
+  };
+  console.log('  Official Name:', officialAccountInfo.officialName);
+  console.log('  Phone:', officialAccountInfo.phoneNumber);
+  console.log('  Account Type:', officialAccountInfo.accountType);
+  
+  // Step 2: Address Provider が AMF で正規化
+  console.log('\nStep 2: Address Provider が AMF で正規化');
+  const normalizedAddress = await normalizeAddress(
+    officialAccountInfo.rawAddress.streetAddress,
+    officialAccountInfo.rawAddress.country
+  );
+  console.log('  Normalized Address (local):', normalizedAddress.formatted.local);
+  console.log('  Normalized Address (en):', normalizedAddress.formatted.international);
+  
+  // Step 3: PID 生成
+  console.log('\nStep 3: PID 生成');
+  const pid = encodePID(normalizedAddress);
+  console.log('  PID:', pid);
+  
+  // 公式アカウントのDIDと鍵生成
+  const accountDid = `did:web:shibuya-store.example.com`;
+  const accountPrivateKey = 'official-account-private-key-' + Date.now();
+  console.log('  Account DID:', accountDid);
+  
+  // Step 4: 公式アカウントが署名
+  console.log('\nStep 4: 公式アカウントが署名');
+  const dataToSign = JSON.stringify({
+    pid,
+    officialName: officialAccountInfo.officialName,
+    phoneNumber: officialAccountInfo.phoneNumber,
+    address: normalizedAddress.formatted.local,
+  });
+  const signature = await signData(dataToSign, accountPrivateKey);
+  console.log('  Signature:', signature.substring(0, 30) + '...');
+  
+  // Step 5: VC 発行（オプション）
+  console.log('\nStep 5: VC 発行（オプション）');
+  const vc = await createAddressPIDCredential(
+    accountDid,
+    'did:web:vey.example',
+    pid,
+    normalizedAddress.components.country,
+    normalizedAddress.components.admin1
+  );
+  console.log('  VC ID:', vc.id);
+  console.log('  VC Type:', vc.type);
+  
+  // Step 6: QRコード生成
+  console.log('\nStep 6: QRコード生成');
+  const qrCodeData = JSON.stringify({
+    type: 'official_account',
+    account_did: accountDid,
+    pid,
+    official_name: officialAccountInfo.officialName,
+    phone_number: officialAccountInfo.phoneNumber,
+    timestamp: new Date().toISOString(),
+  });
+  const qrCodeHash = await hashData(qrCodeData);
+  console.log('  QR Code Generated');
+  console.log('  QR Hash:', qrCodeHash.substring(0, 30) + '...');
+  
+  // Step 7: 公開情報として保存（暗号化なし）
+  console.log('\nStep 7: 公開情報として保存（暗号化なし）');
+  const officialAccountEntry: OfficialAccountEntry = {
+    id: generateId(),
+    account_did: accountDid,
+    pid,
+    official_name: officialAccountInfo.officialName,
+    official_name_en: officialAccountInfo.officialNameEn,
+    phone_number: officialAccountInfo.phoneNumber,
+    public_address_local: normalizedAddress.formatted.local,
+    public_address_en: normalizedAddress.formatted.international,
+    country_code: normalizedAddress.components.country,
+    admin1_code: normalizedAddress.components.admin1,
+    admin2_code: normalizedAddress.components.admin2,
+    postal_code: officialAccountInfo.rawAddress.postalCode,
+    account_type: officialAccountInfo.accountType,
+    business_hours: officialAccountInfo.businessHours,
+    website_url: officialAccountInfo.websiteUrl,
+    email: officialAccountInfo.email,
+    signature,
+    vc_id: vc.id,
+    geo_hash: normalizedAddress.geoHash,
+    latitude: normalizedAddress.geo?.center?.latitude,
+    longitude: normalizedAddress.geo?.center?.longitude,
+    qr_code_data: qrCodeData,
+    qr_code_url: `https://api.vey.example/qr/${qrCodeHash}`,
+    is_verified: false,
+    is_active: true,
+    is_public: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    usage_count: 0,
+    description: officialAccountInfo.description,
+  };
+  
+  console.log('  Official Account Entry created');
+  console.log('  Entry ID:', officialAccountEntry.id);
+  console.log('  Is Public:', officialAccountEntry.is_public);
+  console.log('  Is Active:', officialAccountEntry.is_active);
+  
+  // ここで実際にはデータベースに保存
+  // await db.officialAccountEntries.insert(officialAccountEntry);
+  
+  console.log('\n✅ 公式アカウント登録フロー完了');
+  console.log('  公式アカウントは公開され、QRコードでアクセス可能です\n');
+  
+  return {
+    accountDid,
+    pid,
+    officialAccountEntry,
+    qrCodeData,
+  };
+}
+
+/**
+ * ユーザーが公式アカウントを友達として追加するフロー
+ * 
+ * Steps:
+ * 1. QRコードをスキャンまたは公式アカウント検索
+ * 2. 公式アカウント情報を取得
+ * 3. 友達として登録
+ */
+async function addOfficialAccountAsFriendFlow(
+  userDid: string,
+  officialAccountEntry: OfficialAccountEntry
+) {
+  console.log('=== 公式アカウントを友達として追加 ===\n');
+  
+  console.log('Step 1: 公式アカウント情報を確認');
+  console.log('  Official Name:', officialAccountEntry.official_name);
+  console.log('  Address:', officialAccountEntry.public_address_local);
+  console.log('  Phone:', officialAccountEntry.phone_number);
+  console.log('  Business Hours:', officialAccountEntry.business_hours);
+  
+  console.log('\nStep 2: 友達として登録');
+  const friendEntry: FriendEntry = {
+    id: generateId(),
+    owner_did: userDid,
+    friend_did: officialAccountEntry.account_did,
+    friend_pid: officialAccountEntry.pid,
+    friend_label_qr_hash: await hashData(officialAccountEntry.qr_code_data),
+    verified: officialAccountEntry.is_verified,
+    label: officialAccountEntry.official_name,
+    avatar_url: `${officialAccountEntry.website_url}/logo.png`,
+    is_revoked: false,
+    can_use_for_shipping: true,
+    added_at: new Date().toISOString(),
+    notes: `公式アカウント: ${officialAccountEntry.account_type}`,
+  };
+  
+  console.log('  Friend Entry created');
+  console.log('  Friend DID:', friendEntry.friend_did);
+  console.log('  Friend PID:', friendEntry.friend_pid);
+  console.log('  Can use for shipping:', friendEntry.can_use_for_shipping);
+  
+  // ここで実際にはデータベースに保存
+  // await db.friendEntries.insert(friendEntry);
+  
+  console.log('\n✅ 公式アカウントを友達として追加完了');
+  console.log('  この公式アカウントを配送先として選択できます\n');
+  
+  return friendEntry;
+}
+
+// ============================================================================
 // 完全なシナリオ実行
 // ============================================================================
 
@@ -697,6 +945,7 @@ async function addressUpdateFlow(oldPid: string, userDid: string, userPrivateKey
  * 2. 送り状発行フロー
  * 3. 友達登録フロー
  * 4. 住所更新・失効フロー
+ * 5. 公式アカウント登録フロー
  */
 async function completeScenario() {
   console.log('╔═══════════════════════════════════════════════════════════╗');
@@ -732,6 +981,15 @@ async function completeScenario() {
       registrationResult.userPrivateKey
     );
     
+    // Flow 5: 公式アカウント登録
+    const officialAccountResult = await registerOfficialAccountFlow();
+    
+    // ユーザーが公式アカウントを友達として追加
+    await addOfficialAccountAsFriendFlow(
+      registrationResult.userDid,
+      officialAccountResult.officialAccountEntry
+    );
+    
     console.log('╔═══════════════════════════════════════════════════════════╗');
     console.log('║   ✅ すべてのフローが正常に完了しました                     ║');
     console.log('║   All flows completed successfully                        ║');
@@ -742,12 +1000,14 @@ async function completeScenario() {
     console.log('  ✓ Flow 2: 送り状発行フロー (Section 2.2)');
     console.log('  ✓ Flow 3: 友達登録フロー (Section 2.3)');
     console.log('  ✓ Flow 4: 住所更新・失効フロー');
+    console.log('  ✓ Flow 5: 公式アカウント登録フロー');
     console.log();
     console.log('データモデル:');
     console.log('  ✓ AddressEntry (Section 5.1)');
     console.log('  ✓ FriendEntry (Section 5.2)');
     console.log('  ✓ RevocationEntry (Section 5.3)');
     console.log('  ✓ AccessLogEntry (Section 5.4)');
+    console.log('  ✓ OfficialAccountEntry (新規)');
     console.log();
     console.log('セキュリティ機能:');
     console.log('  ✓ エンドツーエンド暗号化 (AES-256-GCM)');

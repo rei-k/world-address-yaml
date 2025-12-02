@@ -380,6 +380,147 @@ export class CloudAddressBookClient {
     
     return friend.friend_pid;
   }
+  
+  // ==========================================================================
+  // 公式アカウント関連
+  // ==========================================================================
+  
+  /**
+   * 公式アカウント検索
+   * 
+   * @param filters - 検索フィルター
+   * @returns 公式アカウント配列
+   */
+  async searchOfficialAccounts(filters?: {
+    country_code?: string;
+    account_type?: string;
+    is_verified?: boolean;
+    search?: string;
+  }): Promise<any[]> {
+    console.log('🔍 Searching official accounts...');
+    
+    const response = await fetch(
+      `${this.apiEndpoint}/v1/official-accounts?` + new URLSearchParams({
+        ...(filters?.country_code && { country_code: filters.country_code }),
+        ...(filters?.account_type && { account_type: filters.account_type }),
+        ...(filters?.is_verified !== undefined && { is_verified: String(filters.is_verified) }),
+        ...(filters?.search && { search: filters.search }),
+      }),
+      {
+        headers: {
+          'Authorization': `Bearer ${this.apiKey}`,
+        },
+      }
+    );
+    
+    const accounts = await response.json();
+    
+    console.log(`✅ Found ${accounts.length} official account(s)`);
+    
+    return accounts;
+  }
+  
+  /**
+   * 公式アカウント取得（IDで）
+   * 
+   * @param accountId - 公式アカウントID
+   * @returns 公式アカウント
+   */
+  async getOfficialAccount(accountId: string): Promise<any> {
+    console.log('📖 Getting official account...');
+    
+    const response = await fetch(
+      `${this.apiEndpoint}/v1/official-accounts/${accountId}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${this.apiKey}`,
+        },
+      }
+    );
+    
+    const account = await response.json();
+    
+    console.log('✅ Official account retrieved:', account.official_name);
+    
+    return account;
+  }
+  
+  /**
+   * 公式アカウントをQRコードからスキャンして友達として追加
+   * 
+   * @param qrData - QRコードデータ
+   * @returns 友達エントリ
+   */
+  async addOfficialAccountFromQR(qrData: string): Promise<FriendEntry> {
+    this.ensureAuthenticated();
+    
+    console.log('📷 Scanning official account QR code...');
+    
+    // QRコードデータをパース
+    const qrInfo = JSON.parse(qrData);
+    
+    if (qrInfo.type !== 'official_account') {
+      throw new Error('Invalid QR code: not an official account');
+    }
+    
+    // 公式アカウント情報を取得（PIDで検索）
+    const response = await fetch(
+      `${this.apiEndpoint}/v1/official-accounts/by-pid/${qrInfo.pid}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${this.apiKey}`,
+        },
+      }
+    );
+    
+    const officialAccount = await response.json();
+    
+    if (!officialAccount) {
+      throw new Error('Official account not found');
+    }
+    
+    console.log('✅ Official account found:', officialAccount.official_name);
+    
+    // 友達として追加
+    const friendEntry = await this.addFriend(qrData, officialAccount.official_name);
+    
+    console.log('✅ Official account added as friend');
+    
+    return friendEntry;
+  }
+  
+  /**
+   * 公式アカウントを配送先として選択
+   * 
+   * @param accountId - 公式アカウントID
+   * @returns 公式アカウントのPID
+   */
+  async selectOfficialAccountForShipping(accountId: string): Promise<string> {
+    console.log('📦 Selecting official account for shipping...');
+    
+    const account = await this.getOfficialAccount(accountId);
+    
+    if (!account.is_active || !account.is_public) {
+      throw new Error('Official account is not available');
+    }
+    
+    // 使用回数をインクリメント
+    await fetch(
+      `${this.apiEndpoint}/v1/official-accounts/${accountId}/increment-usage`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${this.apiKey}`,
+        },
+      }
+    );
+    
+    console.log('✅ Official account selected:', account.official_name);
+    console.log('   Address:', account.public_address_local);
+    console.log('   Phone:', account.phone_number);
+    
+    return account.pid;
+  }
 }
 
 // ============================================================================

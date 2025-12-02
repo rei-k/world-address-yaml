@@ -15,12 +15,14 @@ cloud-address-book-architecture.md で定義された**すべてのデータフ�
 - ✅ Flow 2: 送り状発行フロー (Section 2.2)
 - ✅ Flow 3: 友達登録フロー (Section 2.3)
 - ✅ Flow 4: 住所更新・失効フロー
+- ✅ Flow 5: 公式アカウント登録フロー（新規）
 
 **実装されたデータモデル:**
 - ✅ AddressEntry (Section 5.1)
 - ✅ FriendEntry (Section 5.2)
 - ✅ RevocationEntry (Section 5.3)
 - ✅ AccessLogEntry (Section 5.4)
+- ✅ OfficialAccountEntry（新規）
 
 ```bash
 # 実行方法
@@ -68,6 +70,16 @@ cloud-address-book-architecture.md の Section 6 (APIエンドポイント設計
   - POST /v1/carrier/resolve - PID解決（配送業者用）
   - POST /v1/carrier/track - 配送追跡更新
   - GET /v1/carrier/access-logs - アクセスログ取得
+
+- ✅ Official Account API (Section 6.7)（新規）
+  - POST /v1/official-accounts - 公式アカウント登録
+  - GET /v1/official-accounts - 公式アカウント一覧取得
+  - GET /v1/official-accounts/{id} - 特定公式アカウント取得
+  - GET /v1/official-accounts/by-pid/{pid} - PIDで公式アカウント検索
+  - PUT /v1/official-accounts/{id} - 公式アカウント更新
+  - POST /v1/official-accounts/{id}/verify - 公式アカウント検証
+  - POST /v1/official-accounts/{id}/increment-usage - 使用回数インクリメント
+  - DELETE /v1/official-accounts/{id} - 公式アカウント削除（非公開化）
 
 ### 3. `database-schema.ts` - データベーススキーマ
 
