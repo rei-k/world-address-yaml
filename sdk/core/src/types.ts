@@ -5,11 +5,13 @@
 /** Language information for address representation */
 export interface Language {
   name: string;
+  code?: string; // ISO 639-1/639-2 language code (e.g., 'en', 'ja', 'de')
   script: string;
   direction: 'ltr' | 'rtl';
-  role: 'official' | 'auxiliary' | 'shipping_required';
+  role: 'official' | 'auxiliary' | 'shipping_required' | 'co-official' | 'working_language';
   required_for_shipping?: boolean;
   country_name?: string;
+  field_labels?: Record<string, string>; // Localized field labels for this language
 }
 
 /** Local name variant */
@@ -931,4 +933,64 @@ export interface ZKPWaybill extends WaybillPayload {
     id: string;
     name: string;
   };
+}
+
+// ============================================================================
+// Translation Service Types
+// ============================================================================
+
+/**
+ * Translation service provider
+ */
+export type TranslationService = 
+  | 'libretranslate'
+  | 'apertium'
+  | 'argostranslate';
+
+/**
+ * Translation service configuration
+ */
+export interface TranslationServiceConfig {
+  /** Service provider */
+  service: TranslationService;
+  /** API endpoint (for LibreTranslate) */
+  endpoint?: string;
+  /** API key (if required) */
+  apiKey?: string;
+  /** Timeout in milliseconds */
+  timeout?: number;
+}
+
+/**
+ * Translation request
+ */
+export interface TranslationRequest {
+  /** Text to translate */
+  text: string;
+  /** Source language code (ISO 639-1) */
+  sourceLang: string;
+  /** Target language code (ISO 639-1) */
+  targetLang: string;
+  /** Field name being translated (for context) */
+  field?: string;
+  /** Country code (for context) */
+  countryCode?: string;
+}
+
+/**
+ * Translation result
+ */
+export interface TranslationResult {
+  /** Translated text */
+  translatedText: string;
+  /** Source language */
+  sourceLang: string;
+  /** Target language */
+  targetLang: string;
+  /** Confidence score (0-1) */
+  confidence?: number;
+  /** Service used */
+  service: TranslationService;
+  /** Whether translation was cached */
+  cached?: boolean;
 }

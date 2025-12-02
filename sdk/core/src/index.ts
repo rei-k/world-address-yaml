@@ -69,6 +69,11 @@ export type {
   AuditLogEntry,
   TrackingEvent,
   ZKPWaybill,
+  // Translation types
+  TranslationService,
+  TranslationServiceConfig,
+  TranslationRequest,
+  TranslationResult,
 } from './types';
 
 // Client
@@ -188,4 +193,13 @@ export type {
   AddressQRPayload,
   FriendEntry,
 } from './friends';
+
+// Translation
+export {
+  translate,
+  batchTranslate,
+  clearTranslationCache,
+  getTranslationCacheStats,
+} from './translation';
+
 

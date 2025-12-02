@@ -20,14 +20,42 @@ subregion: South Asia
 
 languages:
   - name: Hindi
+    code: hi
     script: Devanagari
+    direction: ltr
     role: official
     country_name: भारत
+    field_labels:
+      recipient: प्राप्तकर्ता
+      building: भवन
+      floor: मंजिल
+      room: कमरा
+      street_address: पता
+      district: जिला
+      ward: वार्ड
+      city: शहर
+      province: राज्य
+      postal_code: पिन कोड
+      country: देश
   - name: English
+    code: en
     script: Latin
+    direction: ltr
     role: official
     required_for_shipping: true
     country_name: India
+    field_labels:
+      recipient: Recipient
+      building: Building
+      floor: Floor
+      room: Room
+      street_address: Street Address
+      district: District
+      ward: Ward
+      city: City
+      province: State
+      postal_code: PIN Code
+      country: Country
 
 administrative_divisions:
   level1:

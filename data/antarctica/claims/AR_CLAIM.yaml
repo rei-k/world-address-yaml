@@ -6,6 +6,29 @@ claimant_country:
   name: Argentina
   alpha2: AR
 
+languages:
+  - name: Spanish
+    code: es
+    script: Latin
+    direction: ltr
+    role: official
+    country_name: Antártida Argentina
+    field_labels:
+      recipient: Destinatario
+      station_name: Estación de Investigación
+      operating_country: País Operador
+  - name: English
+    code: en
+    script: Latin
+    direction: ltr
+    role: auxiliary
+    required_for_shipping: true
+    country_name: Argentine Antarctica
+    field_labels:
+      recipient: Recipient
+      station_name: Research Station
+      operating_country: Operating Country
+
 claim_details:
   sector: "25°W to 74°W, south of 60°S"
   area_km2: 965597
