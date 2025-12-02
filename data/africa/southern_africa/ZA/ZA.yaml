@@ -18,16 +18,96 @@ iso_codes:
 
 languages:
   - name: English
+    code: en
+    script: Latin
+    direction: ltr
+    role: official
     required_for_shipping: true
+    country_name: South Africa
+    field_labels:
+      recipient: Recipient
+      building: Building
+      floor: Floor
+      room: Room
+      street_address: Street Address
+      district: District
+      ward: Ward
+      city: City
+      province: Province
+      postal_code: Postal Code
+      country: Country
   - name: Afrikaans
+    code: af
+    script: Latin
+    direction: ltr
+    role: official
+    country_name: Suid-Afrika
+    field_labels:
+      recipient: Ontvanger
+      building: Gebou
+      floor: Verdieping
+      room: Kamer
+      street_address: Straatadres
+      district: Distrik
+      ward: Wyk
+      city: Stad
+      province: Provinsie
+      postal_code: Poskode
+      country: Land
   - name: Zulu
+    code: zu
+    script: Latin
+    direction: ltr
+    role: official
+    country_name: iNingizimu Afrika
+    field_labels:
+      recipient: Umamukeli
+      building: Isakhiwo
+      floor: Ipulangwe
+      room: Igumbi
+      street_address: Ikheli Lomgwaqo
+      district: Isifunda
+      ward: Iwodi
+      city: Idolobha
+      province: Isifundazwe
+      postal_code: Ikhodi Yeposi
+      country: Izwe
   - name: Xhosa
+    code: xh
+    script: Latin
+    direction: ltr
+    role: official
+    country_name: uMzantsi Afrika
   - name: Sotho
+    code: st
+    script: Latin
+    direction: ltr
+    role: official
   - name: Tswana
+    code: tn
+    script: Latin
+    direction: ltr
+    role: official
   - name: Tsonga
+    code: ts
+    script: Latin
+    direction: ltr
+    role: official
   - name: Venda
+    code: ve
+    script: Latin
+    direction: ltr
+    role: official
   - name: Swati
+    code: ss
+    script: Latin
+    direction: ltr
+    role: official
   - name: Ndebele
+    code: nr
+    script: Latin
+    direction: ltr
+    role: official
 
 administrative_divisions:
   level1:

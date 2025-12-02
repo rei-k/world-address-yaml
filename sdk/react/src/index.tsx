@@ -36,3 +36,12 @@ export type {
   AddressFieldProps,
   CountrySelectProps,
 } from './components';
+
+// Multilingual Components
+export {
+  MultilingualAddressForm,
+} from './multilingual-components';
+export type {
+  MultilingualAddressFormProps,
+} from './multilingual-components';
+

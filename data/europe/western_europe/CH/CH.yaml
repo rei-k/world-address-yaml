@@ -28,21 +28,96 @@ subregion: Western Europe
 
 languages:
   - name: German
+    code: de
     script: Latin
+    direction: ltr
     role: official
     country_name: Schweiz
+    field_labels:
+      recipient: Empfänger
+      building: Gebäude
+      floor: Stockwerk
+      room: Zimmer
+      street_address: Straße
+      district: Bezirk
+      ward: Stadtteil
+      city: Stadt
+      province: Kanton
+      postal_code: Postleitzahl
+      country: Land
   - name: French
+    code: fr
     script: Latin
+    direction: ltr
     role: official
     country_name: Suisse
+    field_labels:
+      recipient: Destinataire
+      building: Bâtiment
+      floor: Étage
+      room: Chambre
+      street_address: Adresse
+      district: District
+      ward: Quartier
+      city: Ville
+      province: Canton
+      postal_code: Code postal
+      country: Pays
   - name: Italian
+    code: it
     script: Latin
+    direction: ltr
     role: official
     country_name: Svizzera
+    field_labels:
+      recipient: Destinatario
+      building: Edificio
+      floor: Piano
+      room: Camera
+      street_address: Indirizzo
+      district: Distretto
+      ward: Quartiere
+      city: Città
+      province: Cantone
+      postal_code: Codice postale
+      country: Paese
   - name: Romansh
+    code: rm
     script: Latin
+    direction: ltr
     role: co-official
     country_name: Svizra
+    field_labels:
+      recipient: Destinatur
+      building: Edifizi
+      floor: Plaun
+      room: Chombra
+      street_address: Adressa
+      district: District
+      ward: Quartier
+      city: Citad
+      province: Chantun
+      postal_code: Numer postal
+      country: Pajais
+  - name: English
+    code: en
+    script: Latin
+    direction: ltr
+    role: auxiliary
+    required_for_shipping: true
+    country_name: Switzerland
+    field_labels:
+      recipient: Recipient
+      building: Building
+      floor: Floor
+      room: Room
+      street_address: Street Address
+      district: District
+      ward: Ward
+      city: City
+      province: Canton
+      postal_code: Postal Code
+      country: Country
 
 administrative_divisions:
   level1:

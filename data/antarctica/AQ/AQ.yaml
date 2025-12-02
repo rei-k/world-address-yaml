@@ -16,11 +16,17 @@ subregion: Antarctic
 
 languages:
   - name: English
+    code: en
     script: Latin
     direction: ltr
     role: working_language
     note: "No official language; English commonly used for international coordination"
     required_for_shipping: true
+    country_name: Antarctica
+    field_labels:
+      recipient: Recipient
+      station_name: Research Station
+      operating_country: Operating Country
 
 administrative_divisions:
   note: "No permanent population or government; governed by Antarctic Treaty System"

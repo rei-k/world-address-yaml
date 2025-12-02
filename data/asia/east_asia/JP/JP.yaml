@@ -16,16 +16,42 @@ subregion: East Asia
 
 languages:
   - name: Japanese
+    code: ja
     script: Kanji
     direction: ltr
     role: official
     country_name: 日本
+    field_labels:
+      recipient: 宛名
+      building: 建物名
+      floor: 階
+      room: 号室
+      street_address: 住所
+      district: 地区
+      ward: 区
+      city: 市町村
+      province: 都道府県
+      postal_code: 郵便番号
+      country: 国
   - name: English
+    code: en
     script: Latin
     direction: ltr
     role: auxiliary
     required_for_shipping: true
     country_name: Japan
+    field_labels:
+      recipient: Recipient
+      building: Building
+      floor: Floor
+      room: Room
+      street_address: Street Address
+      district: District
+      ward: Ward
+      city: City
+      province: Prefecture
+      postal_code: Postal Code
+      country: Country
 
 administrative_divisions:
   level1:
