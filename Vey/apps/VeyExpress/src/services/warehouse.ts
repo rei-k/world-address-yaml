@@ -123,7 +123,11 @@ export class WarehouseService {
     quantity: number;
     location?: string;
   }>> {
-    const results: Array<any> = [];
+    const results: Array<{
+      warehouse: Warehouse;
+      quantity: number;
+      location?: string;
+    }> = [];
 
     for (const warehouse of this.warehouses.values()) {
       const inventory = await this.getInventory(warehouse.id);

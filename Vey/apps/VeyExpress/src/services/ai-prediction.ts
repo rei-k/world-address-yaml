@@ -166,7 +166,12 @@ export class AIPredictionService {
     }>;
     insights: string[];
   }> {
-    const anomalies: any[] = [];
+    const anomalies: Array<{
+      orderId: string;
+      type: 'route' | 'timing' | 'cost' | 'status';
+      severity: 'low' | 'medium' | 'high';
+      description: string;
+    }> = [];
     
     // Check for unusual patterns
     for (const order of orders) {
@@ -297,7 +302,7 @@ export class AIPredictionService {
     return recommendations;
   }
 
-  private reorderStops(stops: any[]): any[] {
+  private reorderStops(stops: Route['stops']): Route['stops'] {
     // Simplified stop optimization
     // In production, would use TSP algorithms
     return [...stops].sort((a, b) => a.sequence - b.sequence);

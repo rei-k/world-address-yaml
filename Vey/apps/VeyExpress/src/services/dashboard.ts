@@ -142,7 +142,13 @@ export class DashboardService {
     delayed: number;
     returned: number;
   }>> {
-    const data: Array<any> = [];
+    const data: Array<{
+      date: Date;
+      created: number;
+      delivered: number;
+      delayed: number;
+      returned: number;
+    }> = [];
     const now = Date.now();
     
     for (let i = days - 1; i >= 0; i--) {
