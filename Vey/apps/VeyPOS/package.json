@@ -1,0 +1,30 @@
+{
+  "name": "@vey/veypos",
+  "version": "1.0.0",
+  "description": "VeyPOS - Point of Sale System",
+  "private": true,
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "lint": "eslint src --ext .ts,.tsx",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "@vey/core": "workspace:*",
+    "electron": "^28.0.0",
+    "electron-updater": "^6.1.0",
+    "zustand": "^4.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0",
+    "electron-vite": "^2.0.0",
+    "eslint": "^8.0.0",
+    "vite": "^5.0.0"
+  }
+}
