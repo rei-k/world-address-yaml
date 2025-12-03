@@ -1052,10 +1052,10 @@ interface WaybillRestoration {
 ## 関連ドキュメント / Related Documentation
 
 - [AI Capabilities](./ai-capabilities.md) - システム全体のAI機能
-- [Cloud Address Book](./cloud-address-book.md) - クラウド住所帳システム
-- [ZKP Protocol](./zkp-protocol.md) - ゼロ知識証明プロトコル
-- [Address Search Engine](./address-search-engine.md) - 住所検索エンジン
-- [EC Integration Flow](./ec-integration-flow.md) - ECサイト統合フロー
+- [Cloud Address Book](../cloud-address-book.md) - クラウド住所帳システム
+- [ZKP Protocol](../zkp-protocol.md) - ゼロ知識証明プロトコル
+- [Address Search Engine](../address-search-engine.md) - 住所検索エンジン
+- [EC Integration Flow](../ec-integration-flow.md) - ECサイト統合フロー
 
 ---
 
