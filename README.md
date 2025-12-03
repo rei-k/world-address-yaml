@@ -35,7 +35,7 @@
 - QR/NFCでの決済と配送先登録を同時に実現
 - グローバル展開する小売・飲食店に最適
 
-### ソーシャログイン統合 / Social Login Integration
+### ソーシャルログイン統合 / Social Login Integration
 
 Veybookにアカウントを持ち、住所を登録している場合：
 
