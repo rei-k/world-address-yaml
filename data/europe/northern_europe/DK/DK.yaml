@@ -1,19 +1,16 @@
-name: 
+name:
   en: Denmark
   local:
     - lang: da
       value: Danmark
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: DK
   alpha3: DNK
   numeric: "208"
-
 continent: Europe
 subregion: Northern Europe
-
 languages:
   - name: Danish
     script: Latin
@@ -26,7 +23,6 @@ languages:
     role: auxiliary
     country_name:
       en: Denmark
-
 administrative_divisions:
   level1:
     type: Region
@@ -39,7 +35,6 @@ administrative_divisions:
       - Nordjylland
       - Sjælland
       - Syddanmark
-
 address_format:
   order_variants:
     - context: domestic
@@ -60,19 +55,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{4}$"
-    description: "4-digit numeric postal code"
+    regex: ^[0-9]{4}$
+    description: 4-digit numeric postal code
     example: "2100"
-
 examples:
-  domestic_raw: "Nørregade 12, 1165 København K"
-  domestic_normalized: "Nørregade 12 1165 København K"
-  international: "Nørregade 12, 1165 København K, Denmark"
-
+  domestic_raw: Nørregade 12, 1165 København K
+  domestic_normalized: Nørregade 12 1165 København K
+  international: Nørregade 12, 1165 København K, Denmark
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 56.2639
+    longitude: 9.5018
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.636Z"

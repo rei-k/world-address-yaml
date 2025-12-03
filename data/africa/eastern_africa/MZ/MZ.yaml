@@ -5,15 +5,12 @@ name:
       value: Moçambique
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: MZ
   alpha3: MOZ
   numeric: "508"
-
 continent: Africa
 subregion: Eastern Africa
-
 languages:
   - name: Portuguese
     script: Latin
@@ -26,7 +23,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Mozambique
-
 administrative_divisions:
   level1:
     type: Province
@@ -44,38 +40,64 @@ administrative_divisions:
     label_local: Posto Administrativo
     label_en: Administrative Post
     count: null
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, district, city, province, postal_code, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - district
+        - city
+        - province
+        - postal_code
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, city, province, postal_code, country]
-
-  building: { required: false, example: "Edifício 33 Andares" }
-  floor: { required: false, example: "10º Andar" }
-  room: { required: false, example: "Sala 1001" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - city
+        - province
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Edifício 33 Andares
+  floor:
+    required: false
+    example: 10º Andar
+  room:
+    required: false
+    example: Sala 1001
   postal_code:
     required: true
     required_for_international: true
-    regex: "^[0-9]{4}$"
+    regex: ^[0-9]{4}$
     length: 4
-    description: "4-digit postal code"
+    description: 4-digit postal code
     example: "1100"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Province name is required"
+    - Province name is required
     - "Postal code format: 4 digits"
-
 examples:
-  domestic_raw: "Avenida Julius Nyerere, Maputo 1100"
-  domestic_normalized: "Avenida Julius Nyerere, Maputo 1100"
-  international: "Avenida Julius Nyerere, Maputo 1100, Mozambique"
-
+  domestic_raw: Avenida Julius Nyerere, Maputo 1100
+  domestic_normalized: Avenida Julius Nyerere, Maputo 1100
+  international: Avenida Julius Nyerere, Maputo 1100, Mozambique
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -18.6657
+    longitude: 35.5296
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.531Z"

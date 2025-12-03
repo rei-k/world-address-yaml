@@ -9,15 +9,12 @@ name:
       value: Узбекистан
       script: Cyrillic
       direction: ltr
-
 iso_codes:
   alpha2: UZ
   alpha3: UZB
   numeric: "860"
-
 continent: Asia
 subregion: Central Asia
-
 languages:
   - name: Uzbek
     script: Latin
@@ -32,7 +29,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Uzbekistan
-
 administrative_divisions:
   level1:
     type: Region/City
@@ -40,30 +36,58 @@ administrative_divisions:
     label_en: Region / City
     count: 14
     source: ../../data/uz_regions.json
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, region, city, district, street_address, building, floor, room, postal_code, country]
+      order:
+        - recipient
+        - region
+        - city
+        - district
+        - street_address
+        - building
+        - floor
+        - room
+        - postal_code
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, district, city, region, postal_code, country]
-
-  building: { required: false, example: "Tashkent City Mall" }
-  floor: { required: false, example: "10F" }
-  room: { required: false, example: "1002" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - district
+        - city
+        - region
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Tashkent City Mall
+  floor:
+    required: false
+    example: 10F
+  room:
+    required: false
+    example: "1002"
   postal_code:
     required: true
-    regex: "^[0-9]{6}$"
-    description: "6-digit numeric"
+    regex: ^[0-9]{6}$
+    description: 6-digit numeric
     example: "100000"
-
 examples:
-  domestic_raw: "Tashkent City Mall, Tashkent 100000"
-  domestic_normalized: "Tashkent City Mall Tashkent 100000"
-  international: "Room 1002, Tashkent City Mall, Tashkent 100000, Uzbekistan"
-
+  domestic_raw: Tashkent City Mall, Tashkent 100000
+  domestic_normalized: Tashkent City Mall Tashkent 100000
+  international: Room 1002, Tashkent City Mall, Tashkent 100000, Uzbekistan
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 41.3775
+    longitude: 64.5853
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.606Z"

@@ -1,19 +1,16 @@
-name: 
+name:
   en: France
   local:
     - lang: fr
       value: France
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: FR
   alpha3: FRA
   numeric: "250"
-
 continent: Europe
 subregion: Western Europe
-
 languages:
   - name: French
     script: Latin
@@ -26,14 +23,13 @@ languages:
     role: auxiliary
     country_name:
       en: France
-
 administrative_divisions:
   level1:
     type: Region
     label_local: Région
     label_en: Region
     count: 13
-    note: "Metropolitan France (13 regions since 2016)"
+    note: Metropolitan France (13 regions since 2016)
     names:
       - Auvergne-Rhône-Alpes
       - Bourgogne-Franche-Comté
@@ -48,7 +44,6 @@ administrative_divisions:
       - Occitanie
       - Pays de la Loire
       - Provence-Alpes-Côte d’Azur
-
 address_format:
   order_variants:
     - context: domestic
@@ -67,19 +62,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric postal code (01xxx–95xxx for metropolitan)"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric postal code (01xxx–95xxx for metropolitan)
     example: "75001"
-
 examples:
-  domestic_raw: "10 Rue de Rivoli, 75001 Paris"
-  domestic_normalized: "10 Rue de Rivoli 75001 Paris"
-  international: "10 Rue de Rivoli, 75001 Paris, France"
-
+  domestic_raw: 10 Rue de Rivoli, 75001 Paris
+  domestic_normalized: 10 Rue de Rivoli 75001 Paris
+  international: 10 Rue de Rivoli, 75001 Paris, France
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 46.2276
+    longitude: 2.2137
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.658Z"

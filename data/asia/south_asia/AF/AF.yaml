@@ -9,15 +9,12 @@ name:
       value: افغانستان
       script: Arabic
       direction: rtl
-
 iso_codes:
   alpha2: AF
   alpha3: AFG
   numeric: "004"
-
 continent: Asia
 subregion: South Asia
-
 languages:
   - name: Pashto
     script: Arabic
@@ -31,7 +28,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Afghanistan
-
 administrative_divisions:
   level1:
     type: Province
@@ -39,29 +35,51 @@ administrative_divisions:
     label_en: Province
     count: 34
     source: ../../data/af_provinces.json
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, province, district, street_address, building, room, postal_code, country]
+      order:
+        - recipient
+        - province
+        - district
+        - street_address
+        - building
+        - room
+        - postal_code
+        - country
     - context: international
-      order: [recipient, building, room, street_address, district, province, postal_code, country]
-
-  building: { required: false, example: "Serena Hotel" }
-  room: { required: false, example: "203" }
-
+      order:
+        - recipient
+        - building
+        - room
+        - street_address
+        - district
+        - province
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Serena Hotel
+  room:
+    required: false
+    example: "203"
   postal_code:
     required: false
-    description: "Postal codes exist (4-digit) but are not consistently used"
+    description: Postal codes exist (4-digit) but are not consistently used
     coverage: partial
     example: "1001"
-
 examples:
-  domestic_raw: "Serena Hotel, Kabul 1001"
-  domestic_normalized: "Serena Hotel Kabul 1001"
-  international: "Room 203, Serena Hotel, Kabul 1001, Afghanistan"
-
+  domestic_raw: Serena Hotel, Kabul 1001
+  domestic_normalized: Serena Hotel Kabul 1001
+  international: Room 203, Serena Hotel, Kabul 1001, Afghanistan
 status:
   un_member: true
   recognized: true
   disputed: true
+geo:
+  center:
+    latitude: 33.9391
+    longitude: 67.71
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.612Z"

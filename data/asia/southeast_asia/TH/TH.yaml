@@ -5,15 +5,12 @@ name:
       value: ประเทศไทย
       script: Thai
       direction: ltr
-
 iso_codes:
   alpha2: TH
   alpha3: THA
   numeric: "764"
-
 continent: Asia
 subregion: Southeast Asia
-
 languages:
   - name: Thai
     script: Thai
@@ -24,7 +21,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Thailand
-
 administrative_divisions:
   level1:
     type: Province
@@ -32,29 +28,53 @@ administrative_divisions:
     label_en: Province
     count: 77
     source: ../../data/th_provinces.json
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, province, district, subdistrict, street_address, building, room, postal_code, country]
+      order:
+        - recipient
+        - province
+        - district
+        - subdistrict
+        - street_address
+        - building
+        - room
+        - postal_code
+        - country
     - context: international
-      order: [recipient, building, room, street_address, subdistrict, district, province, postal_code, country]
-
-  building: { required: false, example: "เซ็นทรัลเวิลด์" }
-  room: { required: false, example: "1205" }
-
+      order:
+        - recipient
+        - building
+        - room
+        - street_address
+        - subdistrict
+        - district
+        - province
+        - postal_code
+        - country
+  building:
+    required: false
+    example: เซ็นทรัลเวิลด์
+  room:
+    required: false
+    example: "1205"
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric
     example: "10330"
-
 examples:
-  domestic_raw: "เซ็นทรัลเวิลด์, ปทุมวัน, กรุงเทพฯ 10330"
-  domestic_normalized: "เซ็นทรัลเวิลด์ ปทุมวัน กรุงเทพฯ 10330"
-  international: "Room 1205, CentralWorld, Pathumwan, Bangkok 10330, Thailand"
-
+  domestic_raw: เซ็นทรัลเวิลด์, ปทุมวัน, กรุงเทพฯ 10330
+  domestic_normalized: เซ็นทรัลเวิลด์ ปทุมวัน กรุงเทพฯ 10330
+  international: Room 1205, CentralWorld, Pathumwan, Bangkok 10330, Thailand
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 15.87
+    longitude: 100.9925
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.622Z"

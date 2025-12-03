@@ -9,15 +9,12 @@ name:
       value: Seychelles
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: SC
   alpha3: SYC
   numeric: "690"
-
 continent: Africa
 subregion: Eastern Africa
-
 languages:
   - name: English
     script: Latin
@@ -35,7 +32,6 @@ languages:
     direction: ltr
     role: official
     country_name: Sesel
-
 administrative_divisions:
   level1:
     type: District
@@ -69,35 +65,58 @@ administrative_divisions:
       - Takamaka
       - English River
       - Victoria
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, district, island, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - district
+        - island
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, city, island, country]
-
-  building: { required: false, example: "Victoria House" }
-  floor: { required: false, example: "3rd Floor" }
-  room: { required: false, example: "Suite 302" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - city
+        - island
+        - country
+  building:
+    required: false
+    example: Victoria House
+  floor:
+    required: false
+    example: 3rd Floor
+  room:
+    required: false
+    example: Suite 302
   postal_code:
     required: false
     required_for_international: false
-    description: "Postal codes not used"
-
+    description: Postal codes not used
 validation:
   allow_latin_transliteration: true
   rules:
-    - "City name is required"
-    - "Island name recommended"
-
+    - City name is required
+    - Island name recommended
 examples:
-  domestic_raw: "Independence Avenue, Victoria, Mahé"
-  domestic_normalized: "Independence Avenue, Victoria"
-  international: "Independence Avenue, Victoria, Seychelles"
-
+  domestic_raw: Independence Avenue, Victoria, Mahé
+  domestic_normalized: Independence Avenue, Victoria
+  international: Independence Avenue, Victoria, Seychelles
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -4.6796
+    longitude: 55.492
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.534Z"

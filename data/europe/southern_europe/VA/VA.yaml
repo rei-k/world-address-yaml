@@ -1,4 +1,4 @@
-name: 
+name:
   en: Vatican City
   local:
     - lang: it
@@ -9,15 +9,12 @@ name:
       value: Civitas Vaticana
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: VA
   alpha3: VAT
   numeric: "336"
-
 continent: Europe
 subregion: Southern Europe
-
 languages:
   - name: Italian
     script: Latin
@@ -36,27 +33,30 @@ languages:
     role: auxiliary
     country_name:
       en: Vatican City
-
 administrative_divisions:
   level1:
     type: None
     label_local: State
     label_en: State
     count: 1
-
 address_format:
   postal_code:
     required: true
-    regex: "^00120$"
-    description: "Single postal code 00120"
+    regex: ^00120$
+    description: Single postal code 00120
     example: "00120"
-
 examples:
-  domestic_raw: "00120 Città del Vaticano"
-  domestic_normalized: "00120 Città del Vaticano"
-  international: "00120 Vatican City"
-
+  domestic_raw: 00120 Città del Vaticano
+  domestic_normalized: 00120 Città del Vaticano
+  international: 00120 Vatican City
 status:
   un_member: observer
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 41.9029
+    longitude: 12.4534
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.655Z"

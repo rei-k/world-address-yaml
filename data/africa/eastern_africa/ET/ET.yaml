@@ -5,15 +5,12 @@ name:
       value: ኢትዮጵያ
       script: Ethiopic
       direction: ltr
-
 iso_codes:
   alpha2: ET
   alpha3: ETH
   numeric: "231"
-
 continent: Africa
 subregion: Eastern Africa
-
 languages:
   - name: Amharic
     script: Ethiopic
@@ -26,7 +23,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Ethiopia
-
 administrative_divisions:
   level1:
     type: Region
@@ -44,38 +40,64 @@ administrative_divisions:
     label_local: ወረዳ
     label_en: District
     count: null
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, woreda, zone, region, postal_code, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - woreda
+        - zone
+        - region
+        - postal_code
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, zone, region, postal_code, country]
-
-  building: { required: false, example: "Zemen Bank Building" }
-  floor: { required: false, example: "5th Floor" }
-  room: { required: false, example: "Office 501" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - zone
+        - region
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Zemen Bank Building
+  floor:
+    required: false
+    example: 5th Floor
+  room:
+    required: false
+    example: Office 501
   postal_code:
     required: true
     required_for_international: true
-    regex: "^[0-9]{4}$"
+    regex: ^[0-9]{4}$
     length: 4
-    description: "4-digit postal code"
+    description: 4-digit postal code
     example: "1000"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "City name is required"
+    - City name is required
     - "Postal code format: 4 digits"
-
 examples:
-  domestic_raw: "ቦሌ መንገድ፣ አዲስ አበባ 1000"
-  domestic_normalized: "Bole Road, Addis Ababa 1000"
-  international: "Bole Road, Addis Ababa 1000, Ethiopia"
-
+  domestic_raw: ቦሌ መንገድ፣ አዲስ አበባ 1000
+  domestic_normalized: Bole Road, Addis Ababa 1000
+  international: Bole Road, Addis Ababa 1000, Ethiopia
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 9.145
+    longitude: 40.4897
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.525Z"

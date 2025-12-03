@@ -1,19 +1,16 @@
-name: 
+name:
   en: Martinique
   local:
     - lang: fr
       value: Martinique
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: MQ
   alpha3: MTQ
   numeric: "474"
-
 continent: North America
 subregion: Caribbean
-
 languages:
   - name: French
     script: Latin
@@ -26,14 +23,12 @@ languages:
     role: auxiliary
     country_name:
       en: Martinique
-
 administrative_divisions:
   level1:
     type: Arrondissement
     label_local: Arrondissement
     label_en: District
     count: 4
-
 address_format:
   order_variants:
     - context: domestic
@@ -52,19 +47,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^972[0-9]{2}$"
-    description: "Postal codes start with 972"
+    regex: ^972[0-9]{2}$
+    description: Postal codes start with 972
     example: "97200"
-
 examples:
-  domestic_raw: "Rue Victor Hugo, 97200 Fort-de-France"
-  domestic_normalized: "Rue Victor Hugo 97200 Fort-de-France"
-  international: "Rue Victor Hugo, 97200 Fort-de-France, Martinique"
-
+  domestic_raw: Rue Victor Hugo, 97200 Fort-de-France
+  domestic_normalized: Rue Victor Hugo 97200 Fort-de-France
+  international: Rue Victor Hugo, 97200 Fort-de-France, Martinique
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 14.6415
+    longitude: -61.0242
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.660Z"

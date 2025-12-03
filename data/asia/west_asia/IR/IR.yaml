@@ -5,15 +5,12 @@ name:
       value: ایران
       script: Arabic
       direction: rtl
-
 iso_codes:
   alpha2: IR
   alpha3: IRN
   numeric: "364"
-
 continent: Asia
 subregion: West Asia
-
 languages:
   - name: Persian (Farsi)
     script: Arabic
@@ -23,7 +20,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Iran
-
 administrative_divisions:
   level1:
     type: Province
@@ -31,7 +27,6 @@ administrative_divisions:
     label_en: Province
     count: 31
     source: ../../data/ir_provinces.json
-
 address_format:
   order_variants:
     - context: domestic
@@ -58,19 +53,23 @@ address_format:
         - province
         - postal_code
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{10}$"
-    description: "10-digit numeric"
+    regex: ^[0-9]{10}$
+    description: 10-digit numeric
     example: "1435673954"
-
 examples:
-  domestic_raw: "Milad Tower, Tehran 1435673954"
-  domestic_normalized: "Milad Tower Tehran 1435673954"
-  international: "Room 1204, Milad Tower, Tehran 1435673954, Iran"
-
+  domestic_raw: Milad Tower, Tehran 1435673954
+  domestic_normalized: Milad Tower Tehran 1435673954
+  international: Room 1204, Milad Tower, Tehran 1435673954, Iran
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 32.4279
+    longitude: 53.688
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.625Z"

@@ -9,15 +9,12 @@ name:
       value: இலங்கை
       script: Tamil
       direction: ltr
-
 iso_codes:
   alpha2: LK
   alpha3: LKA
   numeric: "144"
-
 continent: Asia
 subregion: South Asia
-
 languages:
   - name: Sinhala
     script: Sinhala
@@ -35,7 +32,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Sri Lanka
-
 administrative_divisions:
   level1:
     type: Province
@@ -50,32 +46,48 @@ administrative_divisions:
   level3:
     type: Divisional Secretariat
     label_en: Divisional Secretariat
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, number, city, district, postal_code, country]
+      order:
+        - recipient
+        - street_address
+        - number
+        - city
+        - district
+        - postal_code
+        - country
     - context: international
-      order: [recipient, street_address, number, city, district, postal_code, country]
-
+      order:
+        - recipient
+        - street_address
+        - number
+        - city
+        - district
+        - postal_code
+        - country
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric postal code"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric postal code
     example: "00100"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Postal code is 5 digits"
-    - "District name is recommended"
-
+    - Postal code is 5 digits
+    - District name is recommended
 examples:
-  domestic_raw: "123 Galle Road, Colombo 03, Colombo District, 00300"
-  domestic_normalized: "123 Galle Road Colombo 03 Colombo 00300"
-  international: "123 Galle Road, Colombo 03, 00300, Sri Lanka"
-
+  domestic_raw: 123 Galle Road, Colombo 03, Colombo District, 00300
+  domestic_normalized: 123 Galle Road Colombo 03 Colombo 00300
+  international: 123 Galle Road, Colombo 03, 00300, Sri Lanka
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 7.8731
+    longitude: 80.7718
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.616Z"

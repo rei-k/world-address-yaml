@@ -1,4 +1,4 @@
-name: 
+name:
   en: Cyprus
   local:
     - lang: el
@@ -9,15 +9,12 @@ name:
       value: Kıbrıs
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: CY
   alpha3: CYP
   numeric: "196"
-
 continent: Europe
 subregion: Southern Europe
-
 languages:
   - name: Greek
     script: Greek
@@ -36,27 +33,30 @@ languages:
     role: auxiliary
     country_name:
       en: Cyprus
-
 administrative_divisions:
   level1:
     type: District
     label_local: Επαρχία / İlçe
     label_en: District
     count: 6
-
 address_format:
   postal_code:
     required: true
-    regex: "^[0-9]{4}$"
-    description: "4-digit numeric postal code"
+    regex: ^[0-9]{4}$
+    description: 4-digit numeric postal code
     example: "1010"
-
 examples:
-  domestic_raw: "Archbishop Makarios Ave 10, 1010 Nicosia"
-  domestic_normalized: "Archbishop Makarios Ave 10 1010 Nicosia"
-  international: "Archbishop Makarios Ave 10, 1010 Nicosia, Cyprus"
-
+  domestic_raw: Archbishop Makarios Ave 10, 1010 Nicosia
+  domestic_normalized: Archbishop Makarios Ave 10 1010 Nicosia
+  international: Archbishop Makarios Ave 10, 1010 Nicosia, Cyprus
 status:
   un_member: true
   recognized: true
   disputed: true
+geo:
+  center:
+    latitude: 35.1264
+    longitude: 33.4299
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.651Z"

@@ -5,15 +5,12 @@ name:
       value: Bolivia
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: BO
   alpha3: BOL
   numeric: "068"
-
 continent: South America
 subregion: Western South America
-
 languages:
   - name: Spanish
     script: Latin
@@ -34,7 +31,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Bolivia
-
 administrative_divisions:
   level1:
     type: Department
@@ -49,33 +45,50 @@ administrative_divisions:
     type: Municipality
     label_local: Municipio
     label_en: Municipality
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, number, zone, city, department, country]
+      order:
+        - recipient
+        - street_address
+        - number
+        - zone
+        - city
+        - department
+        - country
     - context: international
-      order: [recipient, street_address, number, zone, city, department, country]
-
-  zone: { required: false, example: "Zona Sur" }
-
+      order:
+        - recipient
+        - street_address
+        - number
+        - zone
+        - city
+        - department
+        - country
+  zone:
+    required: false
+    example: Zona Sur
   postal_code:
     required: false
-    description: "Postal codes are not commonly used in Bolivia"
+    description: Postal codes are not commonly used in Bolivia
     coverage: limited
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Postal codes are rarely used"
-    - "Zone names are important for urban areas"
-
+    - Postal codes are rarely used
+    - Zone names are important for urban areas
 examples:
-  domestic_raw: "Calle Comercio 123, Zona Central, La Paz"
-  domestic_normalized: "Calle Comercio 123 Zona Central La Paz"
-  international: "Calle Comercio 123, Zona Central, La Paz, Bolivia"
-
+  domestic_raw: Calle Comercio 123, Zona Central, La Paz
+  domestic_normalized: Calle Comercio 123 Zona Central La Paz
+  international: Calle Comercio 123, Zona Central, La Paz, Bolivia
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -16.2902
+    longitude: -63.5887
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.590Z"

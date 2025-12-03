@@ -1,4 +1,4 @@
-name: 
+name:
   en: Greenland
   local:
     - lang: kl
@@ -9,15 +9,12 @@ name:
       value: Grønland
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: GL
   alpha3: GRL
   numeric: "304"
-
 continent: North America
 subregion: Arctic
-
 languages:
   - name: Greenlandic
     script: Latin
@@ -36,7 +33,6 @@ languages:
     role: auxiliary
     country_name:
       en: Greenland
-
 administrative_divisions:
   level1:
     type: Municipality
@@ -49,7 +45,6 @@ administrative_divisions:
       - Qeqertalik
       - Qeqqata
       - Sermersooq
-
 address_format:
   order_variants:
     - context: domestic
@@ -68,19 +63,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{4}$"
-    description: "4-digit postal code, mostly in 39xx range"
+    regex: ^[0-9]{4}$
+    description: 4-digit postal code, mostly in 39xx range
     example: "3900"
-
 examples:
-  domestic_raw: "Imaneq 45, 3900 Nuuk"
-  domestic_normalized: "Imaneq 45 3900 Nuuk"
-  international: "Imaneq 45, 3900 Nuuk, Greenland"
-
+  domestic_raw: Imaneq 45, 3900 Nuuk
+  domestic_normalized: Imaneq 45 3900 Nuuk
+  international: Imaneq 45, 3900 Nuuk, Greenland
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 71.7069
+    longitude: -42.6043
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.637Z"

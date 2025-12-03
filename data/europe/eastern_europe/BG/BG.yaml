@@ -5,15 +5,12 @@ name:
       value: България
       script: Cyrillic
       direction: ltr
-
 iso_codes:
   alpha2: BG
   alpha3: BGR
   numeric: "100"
-
 continent: Europe
 subregion: Eastern Europe
-
 languages:
   - name: Bulgarian
     script: Cyrillic
@@ -26,7 +23,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Bulgaria
-
 administrative_divisions:
   level1:
     type: Province
@@ -37,36 +33,61 @@ administrative_divisions:
     type: Municipality
     label_local: Община
     label_en: Municipality
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, number, entrance, floor, apartment, postal_code, city, country]
+      order:
+        - recipient
+        - street_address
+        - number
+        - entrance
+        - floor
+        - apartment
+        - postal_code
+        - city
+        - country
     - context: international
-      order: [recipient, apartment, floor, entrance, street_address, number, postal_code, city, country]
-
-  entrance: { required: false, example: "вх. А" }
-  floor: { required: false, example: "ет. 3" }
-  apartment: { required: false, example: "ап. 12" }
-
+      order:
+        - recipient
+        - apartment
+        - floor
+        - entrance
+        - street_address
+        - number
+        - postal_code
+        - city
+        - country
+  entrance:
+    required: false
+    example: вх. А
+  floor:
+    required: false
+    example: ет. 3
+  apartment:
+    required: false
+    example: ап. 12
   postal_code:
     required: true
-    regex: "^[0-9]{4}$"
-    description: "4-digit numeric postal code"
+    regex: ^[0-9]{4}$
+    description: 4-digit numeric postal code
     example: "1000"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Postal code is 4 digits"
-    - "Cyrillic script is official but Latin transliteration accepted for international shipping"
-
+    - Postal code is 4 digits
+    - Cyrillic script is official but Latin transliteration accepted for international shipping
 examples:
-  domestic_raw: "ул. Витоша 10, вх. А, ет. 3, ап. 12, 1000 София"
-  domestic_normalized: "ул. Витоша 10 вх. А ет. 3 ап. 12 1000 София"
-  international: "Ap. 12, Fl. 3, Ent. A, ul. Vitosha 10, 1000 Sofia, Bulgaria"
-
+  domestic_raw: ул. Витоша 10, вх. А, ет. 3, ап. 12, 1000 София
+  domestic_normalized: ул. Витоша 10 вх. А ет. 3 ап. 12 1000 София
+  international: Ap. 12, Fl. 3, Ent. A, ul. Vitosha 10, 1000 Sofia, Bulgaria
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 42.7339
+    longitude: 25.4858
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.632Z"

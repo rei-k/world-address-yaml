@@ -1,13 +1,14 @@
 name:
   en: Grenada
   local:
-    - { lang: en, value: Grenada }
-
-iso_codes: { alpha2: GD, alpha3: GRD, numeric: "308" }
-
+    - lang: en
+      value: Grenada
+iso_codes:
+  alpha2: GD
+  alpha3: GRD
+  numeric: "308"
 continent: North America
 subregion: Caribbean
-
 languages:
   - name: English
     script: Latin
@@ -22,29 +23,52 @@ languages:
     role: regional
     country_name:
       en: Grenada
-
 administrative_divisions:
-  level1: { type: Parish, label_en: Parish, count: 6, source: ../../data/gd_parishes.json }
-  level2: { type: Dependency, label_en: Dependency, count: 1 }
-
+  level1:
+    type: Parish
+    label_en: Parish
+    count: 6
+    source: ../../data/gd_parishes.json
+  level2:
+    type: Dependency
+    label_en: Dependency
+    count: 1
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, street_address, city, parish, country]
+      order:
+        - recipient
+        - building
+        - street_address
+        - city
+        - parish
+        - country
     - context: international
-      order: [recipient, building, street_address, city, parish, country]
-
+      order:
+        - recipient
+        - building
+        - street_address
+        - city
+        - parish
+        - country
 postal_code:
   required: false
-  description: "Grenada does not use a postal code system"
-
+  description: Grenada does not use a postal code system
 validation:
   rules:
-    - "Parish is required"
-    - "City/town name recommended"
-
+    - Parish is required
+    - City/town name recommended
 examples:
-  domestic: "Grand Anse Main Road, St. George's, St. George, Grenada"
-  international: "Grand Anse Main Road, St. George's, St. George, Grenada"
-
-status: { un_member: true, recognized: true, disputed: false }
+  domestic: Grand Anse Main Road, St. George's, St. George, Grenada
+  international: Grand Anse Main Road, St. George's, St. George, Grenada
+status:
+  un_member: true
+  recognized: true
+  disputed: false
+geo:
+  center:
+    latitude: 12.1165
+    longitude: -61.679
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.569Z"

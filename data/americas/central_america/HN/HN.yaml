@@ -3,14 +3,11 @@ name:
   local:
     - lang: es
       value: Honduras
-
 iso_codes:
   alpha2: HN
   alpha3: HND
   numeric: "340"
-
 continent: North America
-
 languages:
   - name: Spanish
     role: national_primary
@@ -18,7 +15,6 @@ languages:
     role: regional
   - name: English
     role: international_aux
-
 administrative_divisions:
   level1:
     type: Departamento
@@ -27,18 +23,36 @@ administrative_divisions:
     type: Municipio
   level3:
     type: Colonia / Barrio
-
 address_format:
   order_variants:
-    - domestic_es: [recipient, building, street_address, colonia, municipio, departamento, country]
-    - international: [recipient, building, street_address, municipio, departamento, postal_code, country]
-
+    - domestic_es:
+        - recipient
+        - building
+        - street_address
+        - colonia
+        - municipio
+        - departamento
+        - country
+    - international:
+        - recipient
+        - building
+        - street_address
+        - municipio
+        - departamento
+        - postal_code
+        - country
 postal_code:
   stability: low
   required_for_international: true
-  regex: "^[0-9]{5}$"
+  regex: ^[0-9]{5}$
   example: "21101"
-
 examples:
-  domestic: "Colonia Palmira, Avenida República Argentina, Tegucigalpa, Honduras"
-  international: "Colonia Palmira, Avenida República Argentina, Tegucigalpa, 21101, Honduras"
+  domestic: Colonia Palmira, Avenida República Argentina, Tegucigalpa, Honduras
+  international: Colonia Palmira, Avenida República Argentina, Tegucigalpa, 21101, Honduras
+geo:
+  center:
+    latitude: 15.2
+    longitude: -86.2419
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.575Z"

@@ -5,15 +5,12 @@ name:
       value: Aolepān Aorōkin M̧ajeļ
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: MH
   alpha3: MHL
   numeric: "584"
-
 continent: Oceania
 subregion: Micronesia
-
 languages:
   - name: Marshallese
     script: Latin
@@ -26,38 +23,51 @@ languages:
     role: official
     country_name: Marshall Islands
     required_for_shipping: true
-
 administrative_divisions:
   level1:
     type: Municipality
     label_en: Municipality
     count: 33
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, atoll, postal_code, country]
+      order:
+        - recipient
+        - street_address
+        - city
+        - atoll
+        - postal_code
+        - country
     - context: international
-      order: [recipient, street_address, city, atoll, postal_code, country]
-
+      order:
+        - recipient
+        - street_address
+        - city
+        - atoll
+        - postal_code
+        - country
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit US-style ZIP code (969xx series)"
+    regex: ^[0-9]{5}$
+    description: 5-digit US-style ZIP code (969xx series)
     example: "96960"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Uses US-style ZIP codes"
-    - "Atoll name is important for delivery"
-
+    - Uses US-style ZIP codes
+    - Atoll name is important for delivery
 examples:
-  domestic_raw: "PO Box 123, Majuro, Majuro Atoll, MH 96960"
-  domestic_normalized: "PO Box 123 Majuro Majuro Atoll MH 96960"
-  international: "PO Box 123, Majuro, Majuro Atoll, MH 96960, Marshall Islands"
-
+  domestic_raw: PO Box 123, Majuro, Majuro Atoll, MH 96960
+  domestic_normalized: PO Box 123 Majuro Majuro Atoll MH 96960
+  international: PO Box 123, Majuro, Majuro Atoll, MH 96960, Marshall Islands
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 7.1315
+    longitude: 171.1845
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.674Z"

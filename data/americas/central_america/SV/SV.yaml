@@ -3,20 +3,16 @@ name:
   local:
     - lang: es
       value: El Salvador
-
 iso_codes:
   alpha2: SV
   alpha3: SLV
   numeric: "222"
-
 continent: North America
-
 languages:
   - name: Spanish
     role: national_primary
   - name: English
     role: optional_international
-
 administrative_divisions:
   level1:
     type: Departamento
@@ -25,18 +21,36 @@ administrative_divisions:
     type: Municipio
   level3:
     type: Colonia / Barrio / Residencial
-
 address_format:
   order_variants:
-    - domestic_es: [recipient, building, street_address, colonia, municipio, departamento, country]
-    - international: [recipient, building, street_address, municipio, departamento, postal_code, country]
-
+    - domestic_es:
+        - recipient
+        - building
+        - street_address
+        - colonia
+        - municipio
+        - departamento
+        - country
+    - international:
+        - recipient
+        - building
+        - street_address
+        - municipio
+        - departamento
+        - postal_code
+        - country
 postal_code:
   stability: medium
   required_for_international: true
-  regex: "^[0-9]{4}$"
+  regex: ^[0-9]{4}$
   example: "01101"
-
 examples:
-  domestic: "Calle Principal, Colonia Escalón, San Salvador, El Salvador"
-  international: "Calle Principal, Colonia Escalón, San Salvador, 01101, El Salvador"
+  domestic: Calle Principal, Colonia Escalón, San Salvador, El Salvador
+  international: Calle Principal, Colonia Escalón, San Salvador, 01101, El Salvador
+geo:
+  center:
+    latitude: 13.7942
+    longitude: -88.8965
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.576Z"

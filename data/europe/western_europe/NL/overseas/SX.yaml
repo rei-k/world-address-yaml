@@ -1,4 +1,4 @@
-name: 
+name:
   en: Sint Maarten
   local:
     - lang: nl
@@ -9,15 +9,12 @@ name:
       value: Sint Maarten
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: SX
   alpha3: SXM
   numeric: "534"
-
 continent: North America
 subregion: Caribbean
-
 languages:
   - name: Dutch
     script: Latin
@@ -30,14 +27,12 @@ languages:
     role: official
     country_name:
       en: Sint Maarten
-
 administrative_divisions:
   level1:
     type: District
     label_local: District
     label_en: District
     count: null
-
 address_format:
   order_variants:
     - context: domestic
@@ -54,18 +49,22 @@ address_format:
         - house_number
         - city
         - country
-
   postal_code:
     required: false
-    description: "No postal codes used"
+    description: No postal codes used
     example: ""
-
 examples:
-  domestic_raw: "Front Street 45, Philipsburg"
-  domestic_normalized: "Front Street 45 Philipsburg"
-  international: "Front Street 45, Philipsburg, Sint Maarten"
-
+  domestic_raw: Front Street 45, Philipsburg
+  domestic_normalized: Front Street 45 Philipsburg
+  international: Front Street 45, Philipsburg, Sint Maarten
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 18.0425
+    longitude: -63.0548
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.668Z"

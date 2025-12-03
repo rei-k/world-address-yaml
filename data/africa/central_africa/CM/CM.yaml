@@ -9,15 +9,12 @@ name:
       value: Cameroon
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: CM
   alpha3: CMR
   numeric: "120"
-
 continent: Africa
 subregion: Central Africa
-
 languages:
   - name: French
     script: Latin
@@ -30,7 +27,6 @@ languages:
     role: official
     required_for_shipping: true
     country_name: Cameroon
-
 administrative_divisions:
   level1:
     type: Region
@@ -48,34 +44,58 @@ administrative_divisions:
     label_local: Arrondissement
     label_en: Subdivision
     count: null
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, subdivision, department, region, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - subdivision
+        - department
+        - region
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, city, region, country]
-
-  building: { required: false, example: "Immeuble Star Building" }
-  floor: { required: false, example: "3ème étage" }
-  room: { required: false, example: "Bureau 305" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - city
+        - region
+        - country
+  building:
+    required: false
+    example: Immeuble Star Building
+  floor:
+    required: false
+    example: 3ème étage
+  room:
+    required: false
+    example: Bureau 305
   postal_code:
     required: false
     required_for_international: false
-    description: "Postal codes not widely used"
-
+    description: Postal codes not widely used
 validation:
   allow_latin_transliteration: true
   rules:
-    - "City name is required"
-
+    - City name is required
 examples:
-  domestic_raw: "Boulevard du 20 Mai, Yaoundé"
-  domestic_normalized: "Boulevard du 20 Mai, Yaoundé"
-  international: "Boulevard du 20 Mai, Yaoundé, Cameroon"
-
+  domestic_raw: Boulevard du 20 Mai, Yaoundé
+  domestic_normalized: Boulevard du 20 Mai, Yaoundé
+  international: Boulevard du 20 Mai, Yaoundé, Cameroon
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 7.3697
+    longitude: 12.3547
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.510Z"

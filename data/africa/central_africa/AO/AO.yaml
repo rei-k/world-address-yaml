@@ -5,15 +5,12 @@ name:
       value: Angola
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: AO
   alpha3: AGO
   numeric: "024"
-
 continent: Africa
 subregion: Central Africa
-
 languages:
   - name: Portuguese
     script: Latin
@@ -26,7 +23,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Angola
-
 administrative_divisions:
   level1:
     type: Province
@@ -44,35 +40,59 @@ administrative_divisions:
     label_local: Comuna
     label_en: Commune
     count: null
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, commune, municipality, province, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - commune
+        - municipality
+        - province
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, city, province, country]
-
-  building: { required: false, example: "Edifício Atlântico" }
-  floor: { required: false, example: "7º Andar" }
-  room: { required: false, example: "Sala 702" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - city
+        - province
+        - country
+  building:
+    required: false
+    example: Edifício Atlântico
+  floor:
+    required: false
+    example: 7º Andar
+  room:
+    required: false
+    example: Sala 702
   postal_code:
     required: false
     required_for_international: false
-    description: "Postal codes not widely used"
-
+    description: Postal codes not widely used
 validation:
   allow_latin_transliteration: true
   rules:
-    - "City name is required"
-    - "Province name is required"
-
+    - City name is required
+    - Province name is required
 examples:
-  domestic_raw: "Avenida 4 de Fevereiro, Luanda"
-  domestic_normalized: "Avenida 4 de Fevereiro, Luanda"
-  international: "Avenida 4 de Fevereiro, Luanda, Angola"
-
+  domestic_raw: Avenida 4 de Fevereiro, Luanda
+  domestic_normalized: Avenida 4 de Fevereiro, Luanda
+  international: Avenida 4 de Fevereiro, Luanda, Angola
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -11.2027
+    longitude: 17.8739
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.500Z"

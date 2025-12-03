@@ -5,22 +5,18 @@ name:
       value: Bénin
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: BJ
   alpha3: BEN
   numeric: "204"
-
 continent: Africa
 subregion: Western Africa
-
 languages:
   - name: French
     script: Latin
     direction: ltr
     role: official
     country_name: Bénin
-
 administrative_divisions:
   level1:
     type: Department
@@ -40,39 +36,64 @@ administrative_divisions:
     label_en: District
     count: null
     source: ../../data/bj_arrondissements.json
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, arrondissement, commune, department, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - arrondissement
+        - commune
+        - department
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, commune, department, postal_code, country]
-
-  building: { required: false, example: "Résidence Cotonou" }
-  floor: { required: false, example: "3e étage" }
-  room: { required: false, example: "Appt 12" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - commune
+        - department
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Résidence Cotonou
+  floor:
+    required: false
+    example: 3e étage
+  room:
+    required: false
+    example: Appt 12
   postal_code:
     required: false
     required_for_international: true
-    regex: "^[0-9A-Za-z\\-]{3,10}$"
+    regex: ^[0-9A-Za-z\-]{3,10}$
     length: null
-    description: "Benin uses various postal codes such as '01BP123'; often optional domestically but **recommended for international shipping**"
-    example: "01BP123"
-
+    description: Benin uses various postal codes such as '01BP123'; often optional domestically but **recommended for international shipping**
+    example: 01BP123
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Department must be included"
-    - "Commune must be included"
-    - "Postal code recommended for international shipments"
-
+    - Department must be included
+    - Commune must be included
+    - Postal code recommended for international shipments
 examples:
-  domestic_raw: "Résidence Cotonou, Rue 2100, Arr. 5, Cotonou, Littoral, Bénin"
-  domestic_normalized: "Rue 2100 Arrondissement 5 Cotonou Littoral"
-  international: "Résidence Cotonou, Rue 2100, Cotonou 01BP123, Littoral, Benin"
-
+  domestic_raw: Résidence Cotonou, Rue 2100, Arr. 5, Cotonou, Littoral, Bénin
+  domestic_normalized: Rue 2100 Arrondissement 5 Cotonou Littoral
+  international: Résidence Cotonou, Rue 2100, Cotonou 01BP123, Littoral, Benin
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 9.3077
+    longitude: 2.3158
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.553Z"

@@ -9,15 +9,12 @@ name:
       value: Comores
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: KM
   alpha3: COM
   numeric: "174"
-
 continent: Africa
 subregion: Eastern Africa
-
 languages:
   - name: Comorian
     script: Arabic
@@ -40,7 +37,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Comoros
-
 administrative_divisions:
   level1:
     type: Island
@@ -56,35 +52,59 @@ administrative_divisions:
     label_local: Préfecture
     label_en: Prefecture
     count: null
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, prefecture, city, island, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - prefecture
+        - city
+        - island
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, city, island, country]
-
-  building: { required: false, example: "Itsandra Beach Hotel" }
-  floor: { required: false, example: "2nd Floor" }
-  room: { required: false, example: "Room 205" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - city
+        - island
+        - country
+  building:
+    required: false
+    example: Itsandra Beach Hotel
+  floor:
+    required: false
+    example: 2nd Floor
+  room:
+    required: false
+    example: Room 205
   postal_code:
     required: false
     required_for_international: false
-    description: "Postal codes not widely used"
-
+    description: Postal codes not widely used
 validation:
   allow_latin_transliteration: true
   rules:
-    - "City name is required"
-    - "Island name recommended"
-
+    - City name is required
+    - Island name recommended
 examples:
-  domestic_raw: "Avenue des Ministères, Moroni, Grande Comore"
-  domestic_normalized: "Avenue des Ministères, Moroni"
-  international: "Avenue des Ministères, Moroni, Comoros"
-
+  domestic_raw: Avenue des Ministères, Moroni, Grande Comore
+  domestic_normalized: Avenue des Ministères, Moroni
+  international: Avenue des Ministères, Moroni, Comoros
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -11.6455
+    longitude: 43.3333
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.527Z"

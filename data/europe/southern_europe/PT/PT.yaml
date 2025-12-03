@@ -1,19 +1,16 @@
-name: 
+name:
   en: Portugal
   local:
     - lang: pt
       value: Portugal
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: PT
   alpha3: PRT
   numeric: "620"
-
 continent: Europe
 subregion: Southern Europe
-
 languages:
   - name: Portuguese
     script: Latin
@@ -26,14 +23,12 @@ languages:
     role: auxiliary
     country_name:
       en: Portugal
-
 administrative_divisions:
   level1:
     type: District
     label_local: Distrito
     label_en: District
     count: 18
-
 address_format:
   order_variants:
     - context: domestic
@@ -52,19 +47,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{4}-[0-9]{3}$"
-    description: "7-digit postal code written as NNNN-NNN"
-    example: "1100-200"
-
+    regex: ^[0-9]{4}-[0-9]{3}$
+    description: 7-digit postal code written as NNNN-NNN
+    example: 1100-200
 examples:
-  domestic_raw: "Rua Augusta 1, 1100-200 Lisboa"
-  domestic_normalized: "Rua Augusta 1 1100-200 Lisboa"
-  international: "Rua Augusta 1, 1100-200 Lisboa, Portugal"
-
+  domestic_raw: Rua Augusta 1, 1100-200 Lisboa
+  domestic_normalized: Rua Augusta 1 1100-200 Lisboa
+  international: Rua Augusta 1, 1100-200 Lisboa, Portugal
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 39.3999
+    longitude: -8.2245
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.653Z"

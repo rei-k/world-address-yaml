@@ -5,15 +5,12 @@ name:
       value: République du Congo
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: CG
   alpha3: COG
   numeric: "178"
-
 continent: Africa
 subregion: Central Africa
-
 languages:
   - name: French
     script: Latin
@@ -26,7 +23,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Republic of the Congo
-
 administrative_divisions:
   level1:
     type: Department
@@ -39,34 +35,58 @@ administrative_divisions:
     label_local: District
     label_en: District
     count: null
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, district, city, department, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - district
+        - city
+        - department
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, city, department, country]
-
-  building: { required: false, example: "Tour Nabemba" }
-  floor: { required: false, example: "12ème étage" }
-  room: { required: false, example: "Bureau 1205" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - city
+        - department
+        - country
+  building:
+    required: false
+    example: Tour Nabemba
+  floor:
+    required: false
+    example: 12ème étage
+  room:
+    required: false
+    example: Bureau 1205
   postal_code:
     required: false
     required_for_international: false
-    description: "Postal codes not widely used"
-
+    description: Postal codes not widely used
 validation:
   allow_latin_transliteration: true
   rules:
-    - "City name is required"
-
+    - City name is required
 examples:
-  domestic_raw: "Avenue de l'Indépendance, Brazzaville"
-  domestic_normalized: "Avenue de l'Indépendance, Brazzaville"
-  international: "Avenue de l'Indépendance, Brazzaville, Republic of the Congo"
-
+  domestic_raw: Avenue de l'Indépendance, Brazzaville
+  domestic_normalized: Avenue de l'Indépendance, Brazzaville
+  international: Avenue de l'Indépendance, Brazzaville, Republic of the Congo
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -0.228
+    longitude: 15.8277
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.507Z"

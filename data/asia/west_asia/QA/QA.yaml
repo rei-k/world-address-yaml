@@ -5,15 +5,12 @@ name:
       value: قطر
       script: Arabic
       direction: rtl
-
 iso_codes:
   alpha2: QA
   alpha3: QAT
   numeric: "634"
-
 continent: Asia
 subregion: West Asia
-
 languages:
   - name: Arabic
     script: Arabic
@@ -23,7 +20,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Qatar
-
 administrative_divisions:
   level1:
     type: Municipality
@@ -31,7 +27,6 @@ administrative_divisions:
     label_en: Municipality
     count: 8
     source: ../../data/qa_municipalities.json
-
 address_format:
   order_variants:
     - context: domestic
@@ -54,17 +49,21 @@ address_format:
         - municipality
         - postal_code
         - country
-
   postal_code:
     required: false
-    description: "Postal codes not used; address based on zone and street numbers"
-
+    description: Postal codes not used; address based on zone and street numbers
 examples:
-  domestic_raw: "Zone 56, Street 340, Building 12, Doha"
-  domestic_normalized: "Zone 56 Street 340 Building 12 Doha"
-  international: "Building 12, Street 340, Zone 56, Doha, Qatar"
-
+  domestic_raw: Zone 56, Street 340, Building 12, Doha
+  domestic_normalized: Zone 56 Street 340 Building 12 Doha
+  international: Building 12, Street 340, Zone 56, Doha, Qatar
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 25.3548
+    longitude: 51.1839
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.627Z"

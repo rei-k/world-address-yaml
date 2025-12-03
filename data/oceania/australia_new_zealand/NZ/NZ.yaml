@@ -9,15 +9,12 @@ name:
       value: Aotearoa
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: NZ
   alpha3: NZL
   numeric: "554"
-
 continent: Oceania
 subregion: Australia and New Zealand
-
 languages:
   - name: English
     script: Latin
@@ -30,7 +27,6 @@ languages:
     direction: ltr
     role: official
     country_name: Aotearoa
-
 administrative_divisions:
   level1:
     type: Region
@@ -39,34 +35,51 @@ administrative_divisions:
   level2:
     type: Territorial Authority
     label_en: District / City
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, unit, street_address, suburb, city, postal_code, country]
+      order:
+        - recipient
+        - unit
+        - street_address
+        - suburb
+        - city
+        - postal_code
+        - country
     - context: international
-      order: [recipient, unit, street_address, suburb, city, postal_code, country]
-
-  unit: { required: false, example: "Unit 3" }
-
+      order:
+        - recipient
+        - unit
+        - street_address
+        - suburb
+        - city
+        - postal_code
+        - country
+  unit:
+    required: false
+    example: Unit 3
   postal_code:
     required: true
-    regex: "^[0-9]{4}$"
-    description: "4-digit numeric postcode"
+    regex: ^[0-9]{4}$
+    description: 4-digit numeric postcode
     example: "1010"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Postcode is 4 digits"
-    - "City or town name should be included"
-
+    - Postcode is 4 digits
+    - City or town name should be included
 examples:
-  domestic_raw: "Unit 3, 123 Queen Street, Auckland Central, Auckland 1010"
-  domestic_normalized: "Unit 3 123 Queen Street Auckland Central Auckland 1010"
-  international: "Unit 3, 123 Queen Street, Auckland Central, Auckland 1010, New Zealand"
-
+  domestic_raw: Unit 3, 123 Queen Street, Auckland Central, Auckland 1010
+  domestic_normalized: Unit 3 123 Queen Street Auckland Central Auckland 1010
+  international: Unit 3, 123 Queen Street, Auckland Central, Auckland 1010, New Zealand
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -40.9006
+    longitude: 174.886
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.670Z"

@@ -5,15 +5,12 @@ name:
       value: الأردن
       script: Arabic
       direction: rtl
-
 iso_codes:
   alpha2: JO
   alpha3: JOR
   numeric: "400"
-
 continent: Asia
 subregion: West Asia
-
 languages:
   - name: Arabic
     script: Arabic
@@ -26,7 +23,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Jordan
-
 administrative_divisions:
   level1:
     type: Governorate
@@ -34,7 +30,6 @@ administrative_divisions:
     label_en: Governorate
     count: 12
     source: ../../data/jo_governorates.json
-
 address_format:
   order_variants:
     - context: domestic
@@ -61,25 +56,28 @@ address_format:
         - governorate
         - postal_code
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric postal code"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric postal code
     example: "11118"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Governorate name is required"
+    - Governorate name is required
     - "Postal code format: 5 digits"
-
 examples:
-  domestic_raw: "شارع الملك عبدالله الثاني، عمّان 11118"
-  domestic_normalized: "King Abdullah II Street, Amman 11118"
-  international: "Room 502, King Abdullah II Street, Amman 11118, Jordan"
-
+  domestic_raw: شارع الملك عبدالله الثاني، عمّان 11118
+  domestic_normalized: King Abdullah II Street, Amman 11118
+  international: Room 502, King Abdullah II Street, Amman 11118, Jordan
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 30.5852
+    longitude: 36.2384
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.625Z"

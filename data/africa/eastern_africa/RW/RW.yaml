@@ -13,15 +13,12 @@ name:
       value: Rwanda
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: RW
   alpha3: RWA
   numeric: "646"
-
 continent: Africa
 subregion: Eastern Africa
-
 languages:
   - name: Kinyarwanda
     script: Latin
@@ -44,7 +41,6 @@ languages:
     direction: ltr
     role: official
     country_name: Rwanda
-
 administrative_divisions:
   level1:
     type: Province
@@ -62,35 +58,60 @@ administrative_divisions:
     label_local: Umurenge
     label_en: Sector
     count: null
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, sector, district, province, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - sector
+        - district
+        - province
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, sector, district, province, country]
-
-  building: { required: false, example: "Kigali City Tower" }
-  floor: { required: false, example: "8th Floor" }
-  room: { required: false, example: "Suite 802" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - sector
+        - district
+        - province
+        - country
+  building:
+    required: false
+    example: Kigali City Tower
+  floor:
+    required: false
+    example: 8th Floor
+  room:
+    required: false
+    example: Suite 802
   postal_code:
     required: false
     required_for_international: false
-    description: "Postal codes not widely used"
-
+    description: Postal codes not widely used
 validation:
   allow_latin_transliteration: true
   rules:
-    - "District name is required"
-    - "Province name is required"
-
+    - District name is required
+    - Province name is required
 examples:
-  domestic_raw: "KN 3 Avenue, Nyarugenge, Kigali"
-  domestic_normalized: "KN 3 Avenue, Nyarugenge, Kigali"
-  international: "KN 3 Avenue, Nyarugenge, Kigali, Rwanda"
-
+  domestic_raw: KN 3 Avenue, Nyarugenge, Kigali
+  domestic_normalized: KN 3 Avenue, Nyarugenge, Kigali
+  international: KN 3 Avenue, Nyarugenge, Kigali, Rwanda
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -1.9403
+    longitude: 29.8739
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.533Z"

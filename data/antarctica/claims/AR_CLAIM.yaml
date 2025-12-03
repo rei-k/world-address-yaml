@@ -1,11 +1,9 @@
 name:
   en: Argentine Antarctica
   local: Antártida Argentina
-
 claimant_country:
   name: Argentina
   alpha2: AR
-
 languages:
   - name: Spanish
     code: es
@@ -28,26 +26,29 @@ languages:
       recipient: Recipient
       station_name: Research Station
       operating_country: Operating Country
-
 claim_details:
-  sector: "25°W to 74°W, south of 60°S"
+  sector: 25°W to 74°W, south of 60°S
   area_km2: 965597
   established: 1943
   formal_claim: 1948
   overlaps_with:
     - British Antarctic Territory
     - Chilean Antarctic Territory
-
 address_notes:
-  - "Mail to Argentine bases routed through Argentina"
-  - "Argentina operates several year-round and summer stations"
-
+  - Mail to Argentine bases routed through Argentina
+  - Argentina operates several year-round and summer stations
 major_stations:
   - Marambio Base
   - Esperanza Base
   - Orcadas Base
   - Carlini Base
-
 status:
   recognized: false
-  note: "Claim suspended under Antarctic Treaty; overlaps with British and Chilean claims"
+  note: Claim suspended under Antarctic Treaty; overlaps with British and Chilean claims
+geo:
+  center:
+    latitude: -69
+    longitude: -55
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:55:11.673Z"

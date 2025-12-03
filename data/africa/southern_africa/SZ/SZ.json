@@ -80,5 +80,14 @@
   "examples": {
     "domestic": "Plot 123, Mbabane, Hhohho Region, Eswatini",
     "international": "Plot 123, Mbabane, Hhohho Region, H100, Eswatini"
+  },
+  "geo": {
+    "center": {
+      "latitude": -26.5225,
+      "longitude": 31.4659,
+      "accuracy": 1000,
+      "source": "database",
+      "captured_at": "2025-12-03T16:54:11.550Z"
+    }
   }
 }

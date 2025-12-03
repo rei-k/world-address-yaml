@@ -1,31 +1,33 @@
 name:
   en: King Sejong Station
   local: 세종과학기지
-
 operating_country:
   name: South Korea
   alpha2: KR
   program: Korea Polar Research Institute (KOPRI)
-
 location:
   coordinates:
     latitude: -62.223
     longitude: -58.786
   region: King George Island, South Shetland Islands
   claim_area: Chilean Antarctic Territory (overlapping claims)
-
 operational:
   type: year_round
   established: 1988
   capacity_winter: 17
   capacity_summer: 60
-
 address_format:
   mail_routing:
     via_country: Chile
     via_city: Punta Arenas
-  example: "Name, King Sejong Station, c/o Korea Polar Research Institute, 26 Songdomirae-ro, Yeonsu-gu, Incheon 21990, South Korea"
-
+  example: Name, King Sejong Station, c/o Korea Polar Research Institute, 26 Songdomirae-ro, Yeonsu-gu, Incheon 21990, South Korea
 status:
   active: true
-  note: "South Korea's first Antarctic research station"
+  note: South Korea's first Antarctic research station
+geo:
+  center:
+    latitude: -62.2236
+    longitude: -58.7861
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:55:11.684Z"

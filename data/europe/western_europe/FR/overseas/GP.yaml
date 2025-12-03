@@ -1,19 +1,16 @@
-name: 
+name:
   en: Guadeloupe
   local:
     - lang: fr
       value: Guadeloupe
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: GP
   alpha3: GLP
   numeric: "312"
-
 continent: North America
 subregion: Caribbean
-
 languages:
   - name: French
     script: Latin
@@ -26,14 +23,12 @@ languages:
     role: auxiliary
     country_name:
       en: Guadeloupe
-
 administrative_divisions:
   level1:
     type: Arrondissement
     label_local: Arrondissement
     label_en: District
     count: 2
-
 address_format:
   order_variants:
     - context: domestic
@@ -52,19 +47,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^971[0-9]{2}$"
-    description: "Postal codes start with 971"
+    regex: ^971[0-9]{2}$
+    description: Postal codes start with 971
     example: "97100"
-
 examples:
-  domestic_raw: "Boulevard Légitimus, 97100 Basse-Terre"
-  domestic_normalized: "Boulevard Légitimus 97100 Basse-Terre"
-  international: "Boulevard Légitimus, 97100 Basse-Terre, Guadeloupe"
-
+  domestic_raw: Boulevard Légitimus, 97100 Basse-Terre
+  domestic_normalized: Boulevard Légitimus 97100 Basse-Terre
+  international: Boulevard Légitimus, 97100 Basse-Terre, Guadeloupe
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 16.265
+    longitude: -61.551
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.659Z"

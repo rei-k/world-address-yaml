@@ -1,4 +1,4 @@
-name: 
+name:
   en: Switzerland
   local:
     - lang: de
@@ -17,15 +17,12 @@ name:
       value: Svizra
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: CH
   alpha3: CHE
   numeric: "756"
-
 continent: Europe
 subregion: Western Europe
-
 languages:
   - name: German
     code: de
@@ -118,14 +115,12 @@ languages:
       province: Canton
       postal_code: Postal Code
       country: Country
-
 administrative_divisions:
   level1:
     type: Canton
     label_local: Kanton/Canton/Cantone/Chantun
     label_en: Canton
     count: 26
-
 address_format:
   order_variants:
     - context: domestic
@@ -145,19 +140,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{4}$"
-    description: "4-digit numeric postal code"
+    regex: ^[0-9]{4}$
+    description: 4-digit numeric postal code
     example: "8001"
-
 examples:
-  domestic_raw: "Bahnhofstrasse 1, 8001 Zürich"
-  domestic_normalized: "Bahnhofstrasse 1 8001 Zürich"
-  international: "Bahnhofstrasse 1, 8001 Zürich, Switzerland"
-
+  domestic_raw: Bahnhofstrasse 1, 8001 Zürich
+  domestic_normalized: Bahnhofstrasse 1 8001 Zürich
+  international: Bahnhofstrasse 1, 8001 Zürich, Switzerland
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 46.8182
+    longitude: 8.2275
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.657Z"

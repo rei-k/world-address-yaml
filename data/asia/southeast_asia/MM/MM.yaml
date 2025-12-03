@@ -5,15 +5,12 @@ name:
       value: မြန်မာ
       script: Myanmar
       direction: ltr
-
 iso_codes:
   alpha2: MM
   alpha3: MMR
   numeric: "104"
-
 continent: Asia
 subregion: Southeast Asia
-
 languages:
   - name: Burmese
     script: Myanmar
@@ -23,7 +20,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Myanmar
-
 administrative_divisions:
   level1:
     type: State/Region/Union Territory
@@ -31,29 +27,53 @@ administrative_divisions:
     label_en: State / Region / Union Territory
     count: 15
     source: ../../data/mm_states.json
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, state, city, township, street_address, building, room, postal_code, country]
+      order:
+        - recipient
+        - state
+        - city
+        - township
+        - street_address
+        - building
+        - room
+        - postal_code
+        - country
     - context: international
-      order: [recipient, building, room, street_address, township, city, state, postal_code, country]
-
-  building: { required: false, example: "Sule Square" }
-  room: { required: false, example: "502" }
-
+      order:
+        - recipient
+        - building
+        - room
+        - street_address
+        - township
+        - city
+        - state
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Sule Square
+  room:
+    required: false
+    example: "502"
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric
     example: "11181"
-
 examples:
-  domestic_raw: "Sule Square, Yangon 11181"
-  domestic_normalized: "Sule Square Yangon 11181"
-  international: "Room 502, Sule Square, Yangon 11181, Myanmar"
-
+  domestic_raw: Sule Square, Yangon 11181
+  domestic_normalized: Sule Square Yangon 11181
+  international: Room 502, Sule Square, Yangon 11181, Myanmar
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 21.9162
+    longitude: 95.956
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.620Z"

@@ -9,14 +9,11 @@ name:
       value: Madeira
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: PT-30
   alpha3: null
   numeric: null
-
 region_of: Portugal
-
 languages:
   - name: Portuguese
     script: Latin
@@ -29,14 +26,19 @@ languages:
     role: auxiliary
     country_name:
       en: Madeira
-
 address_format:
   postal_code:
     required: true
-    regex: "^9[0-9]{3}-[0-9]{3}$"
-    description: "Postal codes in the range 90xx–92xx for Madeira"
-    example: "9000-082"
-
+    regex: ^9[0-9]{3}-[0-9]{3}$
+    description: Postal codes in the range 90xx–92xx for Madeira
+    example: 9000-082
 examples:
-  domestic_raw: "Avenida Arriaga 10, 9000-082 Funchal"
-  international: "Avenida Arriaga 10, 9000-082 Funchal, Madeira, Portugal"
+  domestic_raw: Avenida Arriaga 10, 9000-082 Funchal
+  international: Avenida Arriaga 10, 9000-082 Funchal, Madeira, Portugal
+geo:
+  center:
+    latitude: 32.7607
+    longitude: -16.9595
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:55:45.037Z"

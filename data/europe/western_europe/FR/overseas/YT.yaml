@@ -1,19 +1,16 @@
-name: 
+name:
   en: Mayotte
   local:
     - lang: fr
       value: Mayotte
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: YT
   alpha3: MYT
   numeric: "175"
-
 continent: Africa
 subregion: Indian Ocean
-
 languages:
   - name: French
     script: Latin
@@ -26,14 +23,12 @@ languages:
     role: auxiliary
     country_name:
       en: Mayotte
-
 administrative_divisions:
   level1:
     type: Canton
     label_local: Canton
     label_en: District
     count: 17
-
 address_format:
   order_variants:
     - context: domestic
@@ -52,19 +47,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^976[0-9]{2}$"
-    description: "Postal codes start with 976"
+    regex: ^976[0-9]{2}$
+    description: Postal codes start with 976
     example: "97600"
-
 examples:
-  domestic_raw: "Boulevard Halidi Sélémani, 97600 Mamoudzou"
-  domestic_normalized: "Boulevard Halidi Sélémani 97600 Mamoudzou"
-  international: "Boulevard Halidi Sélémani, 97600 Mamoudzou, Mayotte"
-
+  domestic_raw: Boulevard Halidi Sélémani, 97600 Mamoudzou
+  domestic_normalized: Boulevard Halidi Sélémani 97600 Mamoudzou
+  international: Boulevard Halidi Sélémani, 97600 Mamoudzou, Mayotte
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -12.8275
+    longitude: 45.1662
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.664Z"

@@ -5,13 +5,10 @@ name:
       value: Papua
       script: Latin
       direction: ltr
-
 parent_country:
   alpha2: ID
   name: Indonesia
-
 subregion: Melanesia (cultural region spanning Indonesia and Oceania)
-
 languages:
   - name: Indonesian
     script: Latin
@@ -22,15 +19,14 @@ languages:
     script: Latin
     direction: ltr
     role: local
-    note: "Over 250 indigenous languages spoken"
-
+    note: Over 250 indigenous languages spoken
 administrative_divisions:
   level1:
     type: Province
     label_local: Provinsi
     label_en: Province
     count: 6
-    note: "Papua region split into 6 provinces as of 2022"
+    note: Papua region split into 6 provinces as of 2022
     names:
       - Papua
       - Papua Barat
@@ -42,31 +38,51 @@ administrative_divisions:
     type: Regency / City
     label_local: Kabupaten / Kota
     label_en: Regency / City
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, number, village, district, regency, province, postal_code, country]
+      order:
+        - recipient
+        - street_address
+        - number
+        - village
+        - district
+        - regency
+        - province
+        - postal_code
+        - country
     - context: international
-      order: [recipient, street_address, number, village, district, regency, province, postal_code, country]
-
+      order:
+        - recipient
+        - street_address
+        - number
+        - village
+        - district
+        - regency
+        - province
+        - postal_code
+        - country
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric postal code (same as Indonesia)"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric postal code (same as Indonesia)
     example: "99111"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Uses Indonesian postal code system"
-    - "Province name should be included for clarity"
-
+    - Uses Indonesian postal code system
+    - Province name should be included for clarity
 examples:
-  domestic_raw: "Jl. Ahmad Yani 12, Kelurahan Jayapura Utara, Jayapura, Papua, 99111"
-  domestic_normalized: "Jl. Ahmad Yani 12 Jayapura Utara Jayapura Papua 99111"
-  international: "Jl. Ahmad Yani 12, Jayapura 99111, Papua, Indonesia"
-
+  domestic_raw: Jl. Ahmad Yani 12, Kelurahan Jayapura Utara, Jayapura, Papua, 99111
+  domestic_normalized: Jl. Ahmad Yani 12 Jayapura Utara Jayapura Papua 99111
+  international: Jl. Ahmad Yani 12, Jayapura 99111, Papua, Indonesia
 status:
   special_region: true
-  note: "Special autonomy region of Indonesia with significant cultural and geographical ties to Oceania"
+  note: Special autonomy region of Indonesia with significant cultural and geographical ties to Oceania
+geo:
+  center:
+    latitude: -4.2699
+    longitude: 138.0804
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:55:11.699Z"

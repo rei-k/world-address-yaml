@@ -1,19 +1,16 @@
-name: 
+name:
   en: Lithuania
   local:
     - lang: lt
       value: Lietuva
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: LT
   alpha3: LTU
   numeric: "440"
-
 continent: Europe
 subregion: Northern Europe
-
 languages:
   - name: Lithuanian
     script: Latin
@@ -26,14 +23,12 @@ languages:
     role: auxiliary
     country_name:
       en: Lithuania
-
 administrative_divisions:
   level1:
     type: County
     label_local: Apskritis
     label_en: County
     count: 10
-
 address_format:
   order_variants:
     - context: domestic
@@ -52,19 +47,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^LT-[0-9]{5}$"
-    description: "LT- followed by 5 digits"
-    example: "LT-01100"
-
+    regex: ^LT-[0-9]{5}$
+    description: LT- followed by 5 digits
+    example: LT-01100
 examples:
-  domestic_raw: "Gedimino pr. 1, LT-01100 Vilnius"
-  domestic_normalized: "Gedimino pr. 1 LT-01100 Vilnius"
-  international: "Gedimino pr. 1, LT-01100 Vilnius, Lithuania"
-
+  domestic_raw: Gedimino pr. 1, LT-01100 Vilnius
+  domestic_normalized: Gedimino pr. 1 LT-01100 Vilnius
+  international: Gedimino pr. 1, LT-01100 Vilnius, Lithuania
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 55.1694
+    longitude: 23.8813
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.645Z"

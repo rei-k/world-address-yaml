@@ -9,15 +9,12 @@ name:
       value: جنوب السودان
       script: Arabic
       direction: rtl
-
 iso_codes:
   alpha2: SS
   alpha3: SSD
   numeric: "728"
-
 continent: Africa
 subregion: Northern Africa
-
 languages:
   - name: English
     script: Latin
@@ -30,7 +27,6 @@ languages:
     direction: rtl
     role: co-official
     country_name: جنوب السودان
-
 administrative_divisions:
   level1:
     type: State
@@ -48,35 +44,60 @@ administrative_divisions:
     label_local: Payam
     label_en: District
     count: null
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, payam, county, city, state, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - payam
+        - county
+        - city
+        - state
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, city, state, country]
-
-  building: { required: false, example: "Crown Hotel Building" }
-  floor: { required: false, example: "2nd Floor" }
-  room: { required: false, example: "Suite 205" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - city
+        - state
+        - country
+  building:
+    required: false
+    example: Crown Hotel Building
+  floor:
+    required: false
+    example: 2nd Floor
+  room:
+    required: false
+    example: Suite 205
   postal_code:
     required: false
     required_for_international: false
-    description: "Postal code system not established"
-
+    description: Postal code system not established
 validation:
   allow_latin_transliteration: true
   rules:
-    - "State name is required"
-    - "City name is required"
-
+    - State name is required
+    - City name is required
 examples:
-  domestic_raw: "Ministries Road, Juba, Central Equatoria"
-  domestic_normalized: "Ministries Road, Juba, Central Equatoria"
-  international: "Ministries Road, Juba, Central Equatoria, South Sudan"
-
+  domestic_raw: Ministries Road, Juba, Central Equatoria
+  domestic_normalized: Ministries Road, Juba, Central Equatoria
+  international: Ministries Road, Juba, Central Equatoria, South Sudan
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 6.877
+    longitude: 31.307
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.547Z"

@@ -5,15 +5,12 @@ name:
       value: Azərbaycan
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: AZ
   alpha3: AZE
   numeric: "031"
-
 continent: Asia
 subregion: Caucasus
-
 languages:
   - name: Azerbaijani
     script: Latin
@@ -26,7 +23,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Azerbaijan
-
 administrative_divisions:
   level1:
     type: District
@@ -37,36 +33,59 @@ administrative_divisions:
     type: City
     label_local: Şəhər
     label_en: City
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, number, building, apartment, city, district, postal_code, country]
+      order:
+        - recipient
+        - street_address
+        - number
+        - building
+        - apartment
+        - city
+        - district
+        - postal_code
+        - country
     - context: international
-      order: [recipient, apartment, building, street_address, number, city, district, postal_code, country]
-
-  building: { required: false, example: "bina 3" }
-  apartment: { required: false, example: "mənzil 45" }
-
+      order:
+        - recipient
+        - apartment
+        - building
+        - street_address
+        - number
+        - city
+        - district
+        - postal_code
+        - country
+  building:
+    required: false
+    example: bina 3
+  apartment:
+    required: false
+    example: mənzil 45
   postal_code:
     required: true
-    regex: "^AZ [0-9]{4}$"
+    regex: ^AZ [0-9]{4}$
     description: "Postal code format: AZ followed by space and 4 digits"
-    example: "AZ 1000"
-
+    example: AZ 1000
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Postal code begins with AZ followed by space and 4 digits"
-    - "Latin script is used"
-
+    - Postal code begins with AZ followed by space and 4 digits
+    - Latin script is used
 examples:
-  domestic_raw: "Neftçilər prospekti 12, bina 3, mənzil 45, Bakı, AZ 1000"
-  domestic_normalized: "Neftçilər prospekti 12 bina 3 mənzil 45 Bakı AZ 1000"
-  international: "Apt 45, Bldg 3, Neftchilar Ave 12, Baku AZ 1000, Azerbaijan"
-
+  domestic_raw: Neftçilər prospekti 12, bina 3, mənzil 45, Bakı, AZ 1000
+  domestic_normalized: Neftçilər prospekti 12 bina 3 mənzil 45 Bakı AZ 1000
+  international: Apt 45, Bldg 3, Neftchilar Ave 12, Baku AZ 1000, Azerbaijan
 status:
   un_member: true
   recognized: true
   disputed: true
-  note: "Nagorno-Karabakh is a disputed region"
+  note: Nagorno-Karabakh is a disputed region
+geo:
+  center:
+    latitude: 40.1431
+    longitude: 47.5769
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.631Z"

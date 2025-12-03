@@ -5,15 +5,12 @@ name:
       value: Türkiye
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: TR
   alpha3: TUR
   numeric: "792"
-
 continent: Asia
 subregion: West Asia
-
 languages:
   - name: Turkish
     script: Latin
@@ -23,7 +20,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Turkey
-
 administrative_divisions:
   level1:
     type: Province
@@ -31,7 +27,6 @@ administrative_divisions:
     label_en: Province
     count: 81
     source: ../../data/tr_provinces.json
-
 address_format:
   order_variants:
     - context: domestic
@@ -58,19 +53,23 @@ address_format:
         - province
         - postal_code
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric
     example: "34340"
-
 examples:
-  domestic_raw: "Kanyon AVM, Şişli, İstanbul 34340"
-  domestic_normalized: "Kanyon AVM Şişli İstanbul 34340"
-  international: "Room 502, 5F Kanyon AVM, Şişli, İstanbul 34340, Turkey"
-
+  domestic_raw: Kanyon AVM, Şişli, İstanbul 34340
+  domestic_normalized: Kanyon AVM Şişli İstanbul 34340
+  international: Room 502, 5F Kanyon AVM, Şişli, İstanbul 34340, Turkey
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 38.9637
+    longitude: 35.2433
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.628Z"

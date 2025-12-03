@@ -1,19 +1,16 @@
-name: 
+name:
   en: United Kingdom
   local:
     - lang: en
       value: United Kingdom of Great Britain and Northern Ireland
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: GB
   alpha3: GBR
   numeric: "826"
-
 continent: Europe
 subregion: Northern Europe
-
 languages:
   - name: English
     script: Latin
@@ -38,7 +35,6 @@ languages:
     country_name:
       ga: An Ríocht Aontaithe
       en: United Kingdom
-
 administrative_divisions:
   level1:
     type: Country
@@ -50,7 +46,6 @@ administrative_divisions:
       - Scotland
       - Wales
       - Northern Ireland
-
 address_format:
   order_variants:
     - context: domestic
@@ -71,19 +66,23 @@ address_format:
         - city
         - postal_code
         - country
-
   postal_code:
     required: true
-    regex: "^[A-Z]{1,2}[0-9R][0-9A-Z]? ?[0-9][A-Z]{2}$"
-    description: "Alphanumeric postcode system"
-    example: "SW1A 2AA"
-
+    regex: ^[A-Z]{1,2}[0-9R][0-9A-Z]? ?[0-9][A-Z]{2}$
+    description: Alphanumeric postcode system
+    example: SW1A 2AA
 examples:
-  domestic_raw: "10 Downing Street, London SW1A 2AA"
-  domestic_normalized: "10 Downing Street London SW1A 2AA"
-  international: "10 Downing Street, SW1A 2AA London, United Kingdom"
-
+  domestic_raw: 10 Downing Street, London SW1A 2AA
+  domestic_normalized: 10 Downing Street London SW1A 2AA
+  international: 10 Downing Street, SW1A 2AA London, United Kingdom
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 55.3781
+    longitude: -3.436
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.639Z"

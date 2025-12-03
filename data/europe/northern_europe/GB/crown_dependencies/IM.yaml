@@ -1,4 +1,4 @@
-name: 
+name:
   en: Isle of Man
   local:
     - lang: en
@@ -9,15 +9,12 @@ name:
       value: Ellan Vannin
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: IM
   alpha3: IMN
   numeric: "833"
-
 continent: Europe
 subregion: Northern Europe
-
 languages:
   - name: English
     script: Latin
@@ -33,7 +30,6 @@ languages:
     country_name:
       gv: Ellan Vannin
       en: Isle of Man
-
 administrative_divisions:
   level1:
     type: Sheading
@@ -47,7 +43,6 @@ administrative_divisions:
       - Michael
       - Middle
       - Rushen
-
 address_format:
   order_variants:
     - context: domestic
@@ -64,25 +59,28 @@ address_format:
         - city
         - postal_code
         - country
-
   postal_code:
     required: true
-    regex: "^IM[0-9]{1,2} ?[0-9][A-Z]{2}$"
-    description: "Isle of Man postcode format"
-    example: "IM1 1AA"
-
+    regex: ^IM[0-9]{1,2} ?[0-9][A-Z]{2}$
+    description: Isle of Man postcode format
+    example: IM1 1AA
 validation:
   allow_latin_transliteration: true
   rules:
     - "Postal code format: IM followed by digits and letters"
-    - "City name required"
-
+    - City name required
 examples:
-  domestic_raw: "Circular Road, Douglas, IM1 1AA"
-  domestic_normalized: "Circular Road Douglas IM1 1AA"
-  international: "Circular Road, Douglas IM1 1AA, Isle of Man"
-
+  domestic_raw: Circular Road, Douglas, IM1 1AA
+  domestic_normalized: Circular Road Douglas IM1 1AA
+  international: Circular Road, Douglas IM1 1AA, Isle of Man
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 54.2361
+    longitude: -4.5481
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.640Z"

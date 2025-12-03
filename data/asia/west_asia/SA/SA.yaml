@@ -5,15 +5,12 @@ name:
       value: المملكة العربية السعودية
       script: Arabic
       direction: rtl
-
 iso_codes:
   alpha2: SA
   alpha3: SAU
   numeric: "682"
-
 continent: Asia
 subregion: West Asia
-
 languages:
   - name: Arabic
     script: Arabic
@@ -23,7 +20,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Saudi Arabia
-
 administrative_divisions:
   level1:
     type: Province
@@ -31,7 +27,6 @@ administrative_divisions:
     label_en: Province
     count: 13
     source: ../../data/sa_provinces.json
-
 address_format:
   order_variants:
     - context: domestic
@@ -58,19 +53,23 @@ address_format:
         - province
         - postal_code
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric
     example: "12233"
-
 examples:
-  domestic_raw: "King Fahd Road, Riyadh 12233"
-  domestic_normalized: "King Fahd Road Riyadh 12233"
-  international: "Room 502, King Fahd Road, Riyadh 12233, Saudi Arabia"
-
+  domestic_raw: King Fahd Road, Riyadh 12233
+  domestic_normalized: King Fahd Road Riyadh 12233
+  international: Room 502, King Fahd Road, Riyadh 12233, Saudi Arabia
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 23.8859
+    longitude: 45.0792
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.627Z"

@@ -1,19 +1,16 @@
-name: 
+name:
   en: Sweden
   local:
     - lang: sv
       value: Sverige
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: SE
   alpha3: SWE
   numeric: "752"
-
 continent: Europe
 subregion: Northern Europe
-
 languages:
   - name: Swedish
     script: Latin
@@ -26,14 +23,12 @@ languages:
     role: auxiliary
     country_name:
       en: Sweden
-
 administrative_divisions:
   level1:
     type: County
     label_local: Län
     label_en: County
     count: 21
-
 address_format:
   order_variants:
     - context: domestic
@@ -52,19 +47,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{3} ?[0-9]{2}$"
-    description: "5 digits written as 3+2, e.g. 123 45"
-    example: "111 20"
-
+    regex: ^[0-9]{3} ?[0-9]{2}$
+    description: 5 digits written as 3+2, e.g. 123 45
+    example: 111 20
 examples:
-  domestic_raw: "Drottninggatan 50, 111 20 Stockholm"
-  domestic_normalized: "Drottninggatan 50 11120 Stockholm"
-  international: "Drottninggatan 50, 111 20 Stockholm, Sweden"
-
+  domestic_raw: Drottninggatan 50, 111 20 Stockholm
+  domestic_normalized: Drottninggatan 50 11120 Stockholm
+  international: Drottninggatan 50, 111 20 Stockholm, Sweden
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 60.1282
+    longitude: 18.6435
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.647Z"

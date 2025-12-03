@@ -5,8 +5,14 @@ name:
       value: Lakshadweep
       script: Latin
       direction: ltr
-
 region_of: India
 type: Union Territory
-postal_code_format: "682###"
+postal_code_format: 682###
 example: "682555"
+geo:
+  center:
+    latitude: 10.5667
+    longitude: 72.6417
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:55:11.696Z"

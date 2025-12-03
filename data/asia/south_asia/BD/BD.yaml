@@ -5,15 +5,12 @@ name:
       value: বাংলাদেশ
       script: Bengali
       direction: ltr
-
 iso_codes:
   alpha2: BD
   alpha3: BGD
   numeric: "050"
-
 continent: Asia
 subregion: South Asia
-
 languages:
   - name: Bengali
     script: Bengali
@@ -23,7 +20,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Bangladesh
-
 administrative_divisions:
   level1:
     type: Division
@@ -31,29 +27,51 @@ administrative_divisions:
     label_en: Division
     count: 8
     source: ../../data/bd_divisions.json
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, division, district, street_address, building, room, postal_code, country]
+      order:
+        - recipient
+        - division
+        - district
+        - street_address
+        - building
+        - room
+        - postal_code
+        - country
     - context: international
-      order: [recipient, building, room, street_address, district, division, postal_code, country]
-
-  building: { required: false, example: "Bashundhara City" }
-  room: { required: false, example: "502" }
-
+      order:
+        - recipient
+        - building
+        - room
+        - street_address
+        - district
+        - division
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Bashundhara City
+  room:
+    required: false
+    example: "502"
   postal_code:
     required: true
-    regex: "^[0-9]{4}$"
-    description: "4-digit numeric"
+    regex: ^[0-9]{4}$
+    description: 4-digit numeric
     example: "1215"
-
 examples:
-  domestic_raw: "Bashundhara City, Dhaka 1215"
-  domestic_normalized: "Bashundhara City Dhaka 1215"
-  international: "Room 502, Bashundhara City, Dhaka 1215, Bangladesh"
-
+  domestic_raw: Bashundhara City, Dhaka 1215
+  domestic_normalized: Bashundhara City Dhaka 1215
+  international: Room 502, Bashundhara City, Dhaka 1215, Bangladesh
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 23.685
+    longitude: 90.3563
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.613Z"

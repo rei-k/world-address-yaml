@@ -9,15 +9,12 @@ name:
       value: Papua Niugini
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: PG
   alpha3: PNG
   numeric: "598"
-
 continent: Oceania
 subregion: Melanesia
-
 languages:
   - name: English
     script: Latin
@@ -34,7 +31,6 @@ languages:
     script: Latin
     direction: ltr
     role: official
-
 administrative_divisions:
   level1:
     type: Province
@@ -43,32 +39,46 @@ administrative_divisions:
   level2:
     type: District
     label_en: District
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, city, province, postal_code, country]
+      order:
+        - recipient
+        - street_address
+        - city
+        - province
+        - postal_code
+        - country
     - context: international
-      order: [recipient, street_address, city, province, postal_code, country]
-
+      order:
+        - recipient
+        - street_address
+        - city
+        - province
+        - postal_code
+        - country
   postal_code:
     required: true
-    regex: "^[0-9]{3}$"
-    description: "3-digit numeric postal code"
+    regex: ^[0-9]{3}$
+    description: 3-digit numeric postal code
     example: "111"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Postal code is 3 digits"
-    - "Province name is recommended"
-
+    - Postal code is 3 digits
+    - Province name is recommended
 examples:
-  domestic_raw: "PO Box 1234, Waigani, National Capital District, 131"
-  domestic_normalized: "PO Box 1234 Waigani NCD 131"
-  international: "PO Box 1234, Waigani, Port Moresby 131, Papua New Guinea"
-
+  domestic_raw: PO Box 1234, Waigani, National Capital District, 131
+  domestic_normalized: PO Box 1234 Waigani NCD 131
+  international: PO Box 1234, Waigani, Port Moresby 131, Papua New Guinea
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -6.315
+    longitude: 143.9555
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.672Z"

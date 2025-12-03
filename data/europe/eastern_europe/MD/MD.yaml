@@ -5,15 +5,12 @@ name:
       value: Moldova
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: MD
   alpha3: MDA
   numeric: "498"
-
 continent: Europe
 subregion: Eastern Europe
-
 languages:
   - name: Romanian
     script: Latin
@@ -31,7 +28,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Moldova
-
 administrative_divisions:
   level1:
     type: District
@@ -42,35 +38,58 @@ administrative_divisions:
     type: City
     label_local: Oraș
     label_en: City
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, number, building, apartment, city, district, postal_code, country]
+      order:
+        - recipient
+        - street_address
+        - number
+        - building
+        - apartment
+        - city
+        - district
+        - postal_code
+        - country
     - context: international
-      order: [recipient, apartment, building, street_address, number, city, district, postal_code, country]
-
-  building: { required: false, example: "bl. 5" }
-  apartment: { required: false, example: "ap. 23" }
-
+      order:
+        - recipient
+        - apartment
+        - building
+        - street_address
+        - number
+        - city
+        - district
+        - postal_code
+        - country
+  building:
+    required: false
+    example: bl. 5
+  apartment:
+    required: false
+    example: ap. 23
   postal_code:
     required: true
-    regex: "^MD-[0-9]{4}$"
+    regex: ^MD-[0-9]{4}$
     description: "Postal code format: MD- followed by 4 digits"
-    example: "MD-2001"
-
+    example: MD-2001
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Postal code begins with MD- followed by 4 digits"
-    - "City name must be included"
-
+    - Postal code begins with MD- followed by 4 digits
+    - City name must be included
 examples:
-  domestic_raw: "str. Ștefan cel Mare 123, bl. 5, ap. 23, Chișinău, MD-2001"
-  domestic_normalized: "str. Ștefan cel Mare 123 bl. 5 ap. 23 Chișinău MD-2001"
-  international: "Ap. 23, Bl. 5, str. Stefan cel Mare 123, Chisinau MD-2001, Moldova"
-
+  domestic_raw: str. Ștefan cel Mare 123, bl. 5, ap. 23, Chișinău, MD-2001
+  domestic_normalized: str. Ștefan cel Mare 123 bl. 5 ap. 23 Chișinău MD-2001
+  international: Ap. 23, Bl. 5, str. Stefan cel Mare 123, Chisinau MD-2001, Moldova
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 47.4116
+    longitude: 28.3699
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.634Z"

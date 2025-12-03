@@ -9,15 +9,12 @@ name:
       value: إريتريا
       script: Arabic
       direction: rtl
-
 iso_codes:
   alpha2: ER
   alpha3: ERI
   numeric: "232"
-
 continent: Africa
 subregion: Eastern Africa
-
 languages:
   - name: Tigrinya
     script: Ethiopic
@@ -35,7 +32,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Eritrea
-
 administrative_divisions:
   level1:
     type: Region
@@ -48,34 +44,58 @@ administrative_divisions:
     label_local: ንኡስ ዞባ
     label_en: Sub-Region
     count: null
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, subregion, city, region, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - subregion
+        - city
+        - region
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, city, region, country]
-
-  building: { required: false, example: "Himbol Building" }
-  floor: { required: false, example: "3rd Floor" }
-  room: { required: false, example: "Suite 305" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - city
+        - region
+        - country
+  building:
+    required: false
+    example: Himbol Building
+  floor:
+    required: false
+    example: 3rd Floor
+  room:
+    required: false
+    example: Suite 305
   postal_code:
     required: false
     required_for_international: false
-    description: "Postal codes not widely used"
-
+    description: Postal codes not widely used
 validation:
   allow_latin_transliteration: true
   rules:
-    - "City name is required"
-
+    - City name is required
 examples:
-  domestic_raw: "Harnet Avenue, Asmara"
-  domestic_normalized: "Harnet Avenue, Asmara"
-  international: "Harnet Avenue, Asmara, Eritrea"
-
+  domestic_raw: Harnet Avenue, Asmara
+  domestic_normalized: Harnet Avenue, Asmara
+  international: Harnet Avenue, Asmara, Eritrea
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 15.1794
+    longitude: 39.7823
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.523Z"

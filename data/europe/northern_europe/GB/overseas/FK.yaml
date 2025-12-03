@@ -1,4 +1,4 @@
-name: 
+name:
   en: Falkland Islands
   local:
     - lang: en
@@ -9,15 +9,12 @@ name:
       value: Islas Malvinas
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: FK
   alpha3: FLK
   numeric: "238"
-
 continent: South America
 subregion: South Atlantic
-
 languages:
   - name: English
     script: Latin
@@ -30,14 +27,12 @@ languages:
     country_name:
       es: Islas Malvinas
       en: Falkland Islands
-
 administrative_divisions:
   level1:
     type: Island
     label_local: Island
     label_en: Island
     count: 2
-
 address_format:
   order_variants:
     - context: domestic
@@ -54,19 +49,23 @@ address_format:
         - locality
         - postal_code
         - country
-
   postal_code:
     required: true
-    regex: "^FIQQ 1ZZ$"
-    description: "Single code FIQQ 1ZZ"
-    example: "FIQQ 1ZZ"
-
+    regex: ^FIQQ 1ZZ$
+    description: Single code FIQQ 1ZZ
+    example: FIQQ 1ZZ
 examples:
-  domestic_raw: "Stanley FIQQ 1ZZ"
-  domestic_normalized: "Stanley FIQQ 1ZZ"
-  international: "Stanley, FIQQ 1ZZ, Falkland Islands"
-
+  domestic_raw: Stanley FIQQ 1ZZ
+  domestic_normalized: Stanley FIQQ 1ZZ
+  international: Stanley, FIQQ 1ZZ, Falkland Islands
 status:
   un_member: false
   recognized: true
   disputed: true
+geo:
+  center:
+    latitude: -51.7963
+    longitude: -59.5236
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.641Z"

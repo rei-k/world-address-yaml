@@ -5,15 +5,12 @@ name:
       value: Hrvatska
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: HR
   alpha3: HRV
   numeric: "191"
-
 continent: Europe
 subregion: Southeastern Europe
-
 languages:
   - name: Croatian
     script: Latin
@@ -26,7 +23,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Croatia
-
 administrative_divisions:
   level1:
     type: County
@@ -37,32 +33,46 @@ administrative_divisions:
     type: City / Municipality
     label_local: Grad / Općina
     label_en: City / Municipality
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, number, postal_code, city, country]
+      order:
+        - recipient
+        - street_address
+        - number
+        - postal_code
+        - city
+        - country
     - context: international
-      order: [recipient, street_address, number, postal_code, city, country]
-
+      order:
+        - recipient
+        - street_address
+        - number
+        - postal_code
+        - city
+        - country
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric postal code"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric postal code
     example: "10000"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Postal code is 5 digits"
-    - "HR prefix may be used for international mail"
-
+    - Postal code is 5 digits
+    - HR prefix may be used for international mail
 examples:
-  domestic_raw: "Ilica 123, 10000 Zagreb"
-  domestic_normalized: "Ilica 123 10000 Zagreb"
-  international: "Ilica 123, 10000 Zagreb, Croatia"
-
+  domestic_raw: Ilica 123, 10000 Zagreb
+  domestic_normalized: Ilica 123 10000 Zagreb
+  international: Ilica 123, 10000 Zagreb, Croatia
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 45.1
+    longitude: 15.2
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.648Z"

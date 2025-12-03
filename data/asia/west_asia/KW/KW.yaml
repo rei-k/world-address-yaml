@@ -5,15 +5,12 @@ name:
       value: الكويت
       script: Arabic
       direction: rtl
-
 iso_codes:
   alpha2: KW
   alpha3: KWT
   numeric: "414"
-
 continent: Asia
 subregion: West Asia
-
 languages:
   - name: Arabic
     script: Arabic
@@ -23,7 +20,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Kuwait
-
 administrative_divisions:
   level1:
     type: Governorate
@@ -31,7 +27,6 @@ administrative_divisions:
     label_en: Governorate
     count: 6
     source: ../../data/kw_governorates.json
-
 address_format:
   order_variants:
     - context: domestic
@@ -58,19 +53,23 @@ address_format:
         - governorate
         - postal_code
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric
     example: "13001"
-
 examples:
-  domestic_raw: "Block 1, Street 10, Building 5, Hawalli 13001"
-  domestic_normalized: "Block 1 Street 10 Building 5 Hawalli 13001"
-  international: "Room 305, Building 5, Street 10, Block 1, Hawalli 13001, Kuwait"
-
+  domestic_raw: Block 1, Street 10, Building 5, Hawalli 13001
+  domestic_normalized: Block 1 Street 10 Building 5 Hawalli 13001
+  international: Room 305, Building 5, Street 10, Block 1, Hawalli 13001, Kuwait
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 29.3117
+    longitude: 47.4818
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.625Z"

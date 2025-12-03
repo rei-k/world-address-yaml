@@ -5,15 +5,12 @@ name:
       value: Հայաստան
       script: Armenian
       direction: ltr
-
 iso_codes:
   alpha2: AM
   alpha3: ARM
   numeric: "051"
-
 continent: Asia
 subregion: West Asia
-
 languages:
   - name: Armenian
     script: Armenian
@@ -23,7 +20,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Armenia
-
 administrative_divisions:
   level1:
     type: Province
@@ -31,7 +27,6 @@ administrative_divisions:
     label_en: Province
     count: 11
     source: ../../data/am_provinces.json
-
 address_format:
   order_variants:
     - context: domestic
@@ -54,19 +49,23 @@ address_format:
         - province
         - postal_code
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{4}$"
-    description: "4-digit numeric"
+    regex: ^[0-9]{4}$
+    description: 4-digit numeric
     example: "0010"
-
 examples:
-  domestic_raw: "Yerevan 0010"
-  domestic_normalized: "Yerevan 0010"
-  international: "Room 203, Yerevan 0010, Armenia"
-
+  domestic_raw: Yerevan 0010
+  domestic_normalized: Yerevan 0010
+  international: Room 203, Yerevan 0010, Armenia
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 40.0691
+    longitude: 45.0382
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.629Z"

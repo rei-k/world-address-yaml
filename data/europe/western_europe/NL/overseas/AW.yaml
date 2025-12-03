@@ -1,4 +1,4 @@
-name: 
+name:
   en: Aruba
   local:
     - lang: nl
@@ -9,15 +9,12 @@ name:
       value: Aruba
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: AW
   alpha3: ABW
   numeric: "533"
-
 continent: North America
 subregion: Caribbean
-
 languages:
   - name: Dutch
     script: Latin
@@ -36,14 +33,12 @@ languages:
     role: widely_spoken
     country_name:
       en: Aruba
-
 administrative_divisions:
   level1:
     type: Region
     label_local: Regio
     label_en: Region
     count: 8
-
 address_format:
   order_variants:
     - context: domestic
@@ -60,18 +55,22 @@ address_format:
         - house_number
         - city
         - country
-
   postal_code:
     required: false
-    description: "Aruba does not use postal codes"
+    description: Aruba does not use postal codes
     example: ""
-
 examples:
-  domestic_raw: "Caya G. F. Betico Croes 23, Oranjestad"
-  domestic_normalized: "Caya G. F. Betico Croes 23 Oranjestad"
-  international: "Caya G. F. Betico Croes 23, Oranjestad, Aruba"
-
+  domestic_raw: Caya G. F. Betico Croes 23, Oranjestad
+  domestic_normalized: Caya G. F. Betico Croes 23 Oranjestad
+  international: Caya G. F. Betico Croes 23, Oranjestad, Aruba
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 12.5211
+    longitude: -69.9683
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.666Z"

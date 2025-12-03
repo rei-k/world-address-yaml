@@ -1,19 +1,16 @@
-name: 
+name:
   en: Monaco
   local:
     - lang: fr
       value: Monaco
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: MC
   alpha3: MCO
   numeric: "492"
-
 continent: Europe
 subregion: Western Europe
-
 languages:
   - name: French
     script: Latin
@@ -27,14 +24,12 @@ languages:
     script: Latin
     role: heritage
     country_name: Munegu
-
 administrative_divisions:
   level1:
     type: Ward
     label_local: Quartier
     label_en: Ward
     count: 10
-
 address_format:
   order_variants:
     - context: domestic
@@ -53,19 +48,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^980[0-9]{2}$"
-    description: "Postal codes start with 980"
+    regex: ^980[0-9]{2}$
+    description: Postal codes start with 980
     example: "98000"
-
 examples:
-  domestic_raw: "Avenue Saint-Martin 5, 98000 Monaco"
-  domestic_normalized: "Avenue Saint-Martin 5 98000 Monaco"
-  international: "Avenue Saint-Martin 5, 98000 Monaco, Monaco"
-
+  domestic_raw: Avenue Saint-Martin 5, 98000 Monaco
+  domestic_normalized: Avenue Saint-Martin 5 98000 Monaco
+  international: Avenue Saint-Martin 5, 98000 Monaco, Monaco
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 43.7384
+    longitude: 7.4246
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.666Z"

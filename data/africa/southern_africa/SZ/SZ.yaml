@@ -5,14 +5,11 @@ name:
       value: Eswatini
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: SZ
   alpha3: SWZ
   numeric: "748"
-
 continent: Africa
-
 languages:
   - name: siSwati
     script: Latin
@@ -23,7 +20,6 @@ languages:
     direction: ltr
     role: official_administrative
     required_for_shipping: true
-
 administrative_divisions:
   level1:
     type: Region
@@ -35,19 +31,35 @@ administrative_divisions:
   level3:
     type: Chiefdom / Locality
     count: null
-
 address_format:
   order_variants:
-    - domestic: [recipient, building, locality, inkhundla, region, country]
-    - international: [recipient, building, locality, region, postal_code, country]
-
+    - domestic:
+        - recipient
+        - building
+        - locality
+        - inkhundla
+        - region
+        - country
+    - international:
+        - recipient
+        - building
+        - locality
+        - region
+        - postal_code
+        - country
 postal_code:
   required: false
   required_for_international: true
   stability: medium
-  regex: "^[A-Z]{1}[0-9]{3}$"
-  example: "H100"
-
+  regex: ^[A-Z]{1}[0-9]{3}$
+  example: H100
 examples:
-  domestic: "Plot 123, Mbabane, Hhohho Region, Eswatini"
-  international: "Plot 123, Mbabane, Hhohho Region, H100, Eswatini"
+  domestic: Plot 123, Mbabane, Hhohho Region, Eswatini
+  international: Plot 123, Mbabane, Hhohho Region, H100, Eswatini
+geo:
+  center:
+    latitude: -26.5225
+    longitude: 31.4659
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.550Z"

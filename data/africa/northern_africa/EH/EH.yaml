@@ -1,4 +1,4 @@
-name: 
+name:
   en: Western Sahara
   local:
     - lang: ar
@@ -9,15 +9,12 @@ name:
       value: Sáhara Occidental
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: EH
   alpha3: ESH
   numeric: "732"
-
 continent: Africa
 subregion: Northern Africa
-
 languages:
   - name: Arabic
     script: Arabic
@@ -39,14 +36,12 @@ languages:
     country_name:
       ar: الصحراء الغربية
       en: Western Sahara
-
 administrative_divisions:
   level1:
     type: Region
     label_local: منطقة
     label_en: Region
     count: 3
-
 address_format:
   order_variants:
     - context: domestic
@@ -63,19 +58,23 @@ address_format:
         - city
         - region
         - country
-
   postal_code:
     required: false
-    description: "No formal postal code system"
+    description: No formal postal code system
     example: ""
-
 examples:
-  domestic_raw: "Laayoune"
-  domestic_normalized: "Laayoune"
-  international: "Laayoune, Western Sahara"
-
+  domestic_raw: Laayoune
+  domestic_normalized: Laayoune
+  international: Laayoune, Western Sahara
 status:
   un_member: false
   recognized: false
   disputed: true
-  notes: "Disputed territory claimed by Morocco and the Sahrawi Arab Democratic Republic"
+  notes: Disputed territory claimed by Morocco and the Sahrawi Arab Democratic Republic
+geo:
+  center:
+    latitude: 24.2155
+    longitude: -12.8858
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.544Z"
