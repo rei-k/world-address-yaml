@@ -4,37 +4,60 @@ A comprehensive SDK for handling international address formats, validation, and 
 
 ## 📦 Packages
 
-| Package | Description | Install |
-|---------|-------------|---------|
-| `@vey/core` | Core SDK with validation and formatting | `npm install @vey/core` |
-| `@vey/react` | React hooks and components | `npm install @vey/react` |
-| `@vey/vue` | Vue composables and components | `npm install @vey/vue` |
-| `@vey/widget` | Universal Shadow Widget (framework-agnostic) | `npm install @vey/widget` |
-| `@vey/webhooks` | Webhook utilities and handlers | `npm install @vey/webhooks` |
-| `@vey/qr-nfc` | QR code and NFC integration | `npm install @vey/qr-nfc` |
-| `@vey/graphql` | GraphQL schema and resolvers | `npm install @vey/graphql` |
-| `@vey/grpc` | gRPC protocol definitions | `npm install @vey/grpc` |
-| `veyform-sdk` | CLI tool | `npx veyform-sdk init` |
+> **注意 / Note**: これらのパッケージは現在**ローカル開発中**です。npm への公開準備を進めています。
+> 
+> **Note**: These packages are currently **in local development**. They are not yet published to npm.
+
+| Package | Status | Description |
+|---------|--------|-------------|
+| `@vey/core` | 🔨 **開発中 / In Development** | Core SDK with validation, formatting, PID, ZKP, and geocoding |
+| `@vey/react` | 📋 **計画中 / Planned** | React hooks and components |
+| `@vey/vue` | 📋 **計画中 / Planned** | Vue composables and components |
+| `@vey/angular` | 📋 **計画中 / Planned** | Angular modules |
+| `@vey/widget` | 📋 **計画中 / Planned** | Universal Shadow Widget (framework-agnostic) |
+| `@vey/webhooks` | 📋 **計画中 / Planned** | Webhook utilities and handlers |
+| `@vey/qr-nfc` | 📋 **計画中 / Planned** | QR code and NFC integration |
+| `@vey/graphql` | 📋 **計画中 / Planned** | GraphQL schema and resolvers |
+| `@vey/grpc` | 📋 **計画中 / Planned** | gRPC protocol definitions |
+| `veyform-sdk` | 📋 **計画中 / Planned** | CLI tool |
+
+### 🚀 ローカル開発環境セットアップ / Local Development Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/rei-k/world-address-yaml.git
+cd world-address-yaml/sdk/core
+
+# Install dependencies
+npm install
+
+# Build the SDK
+npm run build
+
+# Run tests
+npm test
+```
 
 ## 🚀 Quick Start
 
-### 1. Initialize your project
+> **重要 / Important**: 現在、パッケージは npm に公開されていません。以下の手順でローカル開発環境を使用してください。
+>
+> **Important**: Packages are not yet published to npm. Please use the local development setup below.
+
+### 1. Clone and Setup
 
 ```bash
-npx veyform-sdk init
+git clone https://github.com/rei-k/world-address-yaml.git
+cd world-address-yaml/sdk/core
+npm install
+npm run build
 ```
 
-### 2. Install dependencies
+### 2. Import in your project (local development)
 
-```bash
-# For React projects
-npm install @vey/core @vey/react
-
-# For Vue projects
-npm install @vey/core @vey/vue
-
-# For any framework (universal widget)
-npm install @vey/core @vey/widget
+```typescript
+// Import from local build
+import { validateAddress, formatAddress, encodePID } from './path/to/sdk/core/dist';
 ```
 
 ### 3. Use in your application

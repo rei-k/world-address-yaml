@@ -1,0 +1,196 @@
+name:
+  en: Japan
+  local:
+    - lang: ja
+      value: 日本
+      script: Kanji
+      direction: ltr
+
+iso_codes:
+  alpha2: JP
+  alpha3: JPN
+  numeric: "392"
+
+continent: Asia
+subregion: East Asia
+
+languages:
+  - name: Japanese
+    code: ja
+    script: Kanji
+    direction: ltr
+    role: official
+    country_name: 日本
+    field_labels:
+      recipient: 宛名
+      building: 建物名
+      floor: 階
+      room: 号室
+      street_address: 住所
+      district: 地区
+      ward: 区
+      city: 市町村
+      province: 都道府県
+      postal_code: 郵便番号
+      country: 国
+  - name: English
+    code: en
+    script: Latin
+    direction: ltr
+    role: auxiliary
+    required_for_shipping: true
+    country_name: Japan
+    field_labels:
+      recipient: Recipient
+      building: Building
+      floor: Floor
+      room: Room
+      street_address: Street Address
+      district: District
+      ward: Ward
+      city: City
+      province: Prefecture
+      postal_code: Postal Code
+      country: Country
+
+administrative_divisions:
+  level1:
+    type: Prefecture
+    label_local: 都道府県
+    label_en: Prefecture
+    count: 47
+    source: ../../data/jp_prefectures.json
+
+address_format:
+  order_variants:
+    - context: domestic
+      order: [recipient, prefecture, city, ward, street_address, building, floor, room, postal_code, country]
+    - context: international
+      order: [recipient, room, floor, building, street_address, ward, city, prefecture, postal_code, country]
+
+  building: { required: false, example: "新宿パークタワー" }
+  floor: { required: false, example: "12F" }
+  room: { required: false, example: "1205" }
+
+  postal_code:
+    required: true
+    regex: "^[0-9]{3}-[0-9]{4}$"
+    length: 7
+    description: "7-digit numeric code with hyphen"
+    example: "100-0001"
+
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - "Prefecture name must never be omitted"
+    - "Postal code must be 7 digits with hyphen"
+
+examples:
+  domestic_raw: "〒100-0001 東京都千代田区千代田1-1 皇居"
+  domestic_normalized: "東京都 千代田区 千代田1-1 皇居 100-0001"
+  international: "Imperial Palace, 1-1 Chiyoda, Chiyoda-ku, Tokyo 100-0001, Japan"
+
+status:
+  un_member: true
+  recognized: true
+  disputed: false
+
+# POS（販売時点情報管理）関連情報
+pos:
+  currency:
+    code: JPY
+    symbol: "¥"
+    symbol_position: before
+    decimal_places: 0
+    decimal_separator: "."
+    thousands_separator: ","
+
+  tax:
+    type: Consumption Tax
+    rate:
+      standard: 0.10
+      reduced:
+        - rate: 0.08
+          category: food_beverages
+        - rate: 0.08
+          category: newspapers
+    included_in_price: true
+    invoice_requirement: required
+
+  receipt:
+    required_fields:
+      - business_name
+      - business_address
+      - registration_number
+      - date
+      - items
+      - tax_breakdown
+      - total
+    paper_width: "80mm"
+    electronic_allowed: true
+    retention_period: "7 years"
+
+  fiscal:
+    fiscal_device_required: false
+    registration_required: true
+    reporting_frequency: annually
+
+  payment_methods:
+    - type: cash
+      name: 現金
+      prevalence: high
+    - type: credit_card
+      name: クレジットカード
+      prevalence: high
+    - type: mobile
+      name: Suica/PASMO
+      prevalence: high
+    - type: qr_code
+      name: PayPay
+      prevalence: high
+    - type: qr_code
+      name: LINE Pay
+      prevalence: medium
+
+  locale:
+    date_format: "YYYY/MM/DD"
+    time_format: "24h"
+    timezone: "Asia/Tokyo"
+    week_start: sunday
+
+  business_hours:
+    typical_open: "10:00"
+    typical_close: "20:00"
+    sunday_trading: true
+    public_holidays_trading: true
+
+# 緯度経度関連情報（Geo-coordinates）
+geo:
+  # 日本の地理的中心（Center of Japan - approximate）
+  center:
+    latitude: 36.2048
+    longitude: 138.2529
+    accuracy: 1000
+    source: database
+    captured_at: "2024-01-01T00:00:00Z"
+  
+  # 日本の地理的範囲（Geographical bounds of Japan）
+  bounds:
+    northeast:
+      latitude: 45.5220
+      longitude: 153.9870
+    southwest:
+      latitude: 24.0500
+      longitude: 122.9340
+  
+  verified: true
+  verified_at: "2024-01-01T00:00:00Z"
+
+# 緯度経度保険設定（Geo-Insurance Configuration）
+# 配送・住所検証における座標活用のフォールバック機能
+geo_insurance:
+  enabled: true
+  tolerance_meters: 100
+  min_confidence: 0.8
+  auto_correct: false
+  fallback_behavior: warn
