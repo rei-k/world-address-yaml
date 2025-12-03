@@ -330,6 +330,7 @@ Alipay生活号（公式アカウント）と統合して、ユーザーにプ�
 
 ## 🔗 関連リンク / Related Links
 
+- [Alipay AI Capabilities](./AI-CAPABILITIES.md) - AI機能とアルゴリズム詳細
 - [Alipay Mini-Program 開発ドキュメント](https://opendocs.alipay.com/mini/developer)
 - [Ant Design Mini](https://mini.ant.design/)
 - [VEY Common Module](../common/docs/README.md)
