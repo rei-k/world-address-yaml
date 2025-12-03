@@ -274,6 +274,9 @@ async function fetchCountry(countryCode) {
     const jsonPath = path.join(outputDir, `${countryCode}.json`);
     const yamlPath = path.join(outputDir, `${countryCode}.yaml`);
 
+    // Check if this is a new file or an update (before writing)
+    const isNewFile = !fs.existsSync(jsonPath);
+
     // Check if data has changed
     const hasChanged = hasDataChanged(jsonPath, finalData);
 
@@ -297,10 +300,10 @@ async function fetchCountry(countryCode) {
     logger.debug(`Saved ${yamlPath}`);
 
     // Track whether this is new or updated
-    if (fs.existsSync(jsonPath)) {
-      stats.changes.updated++;
-    } else {
+    if (isNewFile) {
       stats.changes.new++;
+    } else {
+      stats.changes.updated++;
     }
 
     stats.countries.success++;
