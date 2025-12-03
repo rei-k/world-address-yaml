@@ -1,4 +1,4 @@
-name: 
+name:
   en: Curaçao
   local:
     - lang: nl
@@ -9,15 +9,12 @@ name:
       value: Kòrsou
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: CW
   alpha3: CUW
   numeric: "531"
-
 continent: North America
 subregion: Caribbean
-
 languages:
   - name: Dutch
     script: Latin
@@ -36,14 +33,12 @@ languages:
     role: official
     country_name:
       en: Curaçao
-
 administrative_divisions:
   level1:
     type: District
     label_local: Wijk
     label_en: District
     count: 3
-
 address_format:
   order_variants:
     - context: domestic
@@ -62,18 +57,22 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: false
-    description: "Postal codes exist but are rarely used"
+    description: Postal codes exist but are rarely used
     example: ""
-
 examples:
-  domestic_raw: "Breedestraat 12, Willemstad"
-  domestic_normalized: "Breedestraat 12 Willemstad"
-  international: "Breedestraat 12, Willemstad, Curaçao"
-
+  domestic_raw: Breedestraat 12, Willemstad
+  domestic_normalized: Breedestraat 12 Willemstad
+  international: Breedestraat 12, Willemstad, Curaçao
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 12.1696
+    longitude: -68.99
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.667Z"

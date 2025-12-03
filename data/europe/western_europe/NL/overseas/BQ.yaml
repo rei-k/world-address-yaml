@@ -1,19 +1,16 @@
-name: 
+name:
   en: Caribbean Netherlands
   local:
     - lang: nl
       value: Caribisch Nederland
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: BQ
   alpha3: BES
   numeric: "535"
-
 continent: North America
 subregion: Caribbean
-
 languages:
   - name: Dutch
     script: Latin
@@ -32,7 +29,6 @@ languages:
     country_name:
       pap: Boneiru / Sint Eustatius / Saba
       en: Bonaire / Sint Eustatius / Saba
-
 administrative_divisions:
   level1:
     type: Special Municipality
@@ -43,7 +39,6 @@ administrative_divisions:
       - Bonaire
       - Sint Eustatius
       - Saba
-
 address_format:
   order_variants:
     - context: domestic
@@ -60,18 +55,22 @@ address_format:
         - house_number
         - city
         - country
-
   postal_code:
     required: false
-    description: "No standardized postal codes"
+    description: No standardized postal codes
     example: ""
-
 examples:
-  domestic_raw: "Kaya Grandi 12, Kralendijk, Bonaire"
-  domestic_normalized: "Kaya Grandi 12 Kralendijk Bonaire"
-  international: "Kaya Grandi 12, Kralendijk, Bonaire, Caribbean Netherlands"
-
+  domestic_raw: Kaya Grandi 12, Kralendijk, Bonaire
+  domestic_normalized: Kaya Grandi 12 Kralendijk Bonaire
+  international: Kaya Grandi 12, Kralendijk, Bonaire, Caribbean Netherlands
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 12.1784
+    longitude: -68.2385
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.667Z"

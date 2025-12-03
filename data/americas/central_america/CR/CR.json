@@ -72,5 +72,14 @@
   "examples": {
     "domestic": "Avenida Central, San José, Costa Rica",
     "international": "Avenida Central, San José, 10101, Costa Rica"
+  },
+  "geo": {
+    "center": {
+      "latitude": 9.7489,
+      "longitude": -83.7534,
+      "accuracy": 1000,
+      "source": "database",
+      "captured_at": "2025-12-03T16:54:11.574Z"
+    }
   }
 }

@@ -13,15 +13,12 @@ name:
       value: Босна и Херцеговина
       script: Cyrillic
       direction: ltr
-
 iso_codes:
   alpha2: BA
   alpha3: BIH
   numeric: "070"
-
 continent: Europe
 subregion: Southeastern Europe
-
 languages:
   - name: Bosnian
     script: Latin
@@ -44,43 +41,56 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Bosnia and Herzegovina
-
 administrative_divisions:
   level1:
     type: Entity
     label_local: Entitet
     label_en: Entity
     count: 2
-    note: "Federation of Bosnia and Herzegovina, Republika Srpska (plus Brčko District)"
+    note: Federation of Bosnia and Herzegovina, Republika Srpska (plus Brčko District)
   level2:
     type: Canton / Region
     label_en: Canton / Region
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, number, postal_code, city, country]
+      order:
+        - recipient
+        - street_address
+        - number
+        - postal_code
+        - city
+        - country
     - context: international
-      order: [recipient, street_address, number, postal_code, city, country]
-
+      order:
+        - recipient
+        - street_address
+        - number
+        - postal_code
+        - city
+        - country
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric postal code"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric postal code
     example: "71000"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Postal code is 5 digits"
-    - "Three official languages accepted"
-
+    - Postal code is 5 digits
+    - Three official languages accepted
 examples:
-  domestic_raw: "Maršala Tita 12, 71000 Sarajevo"
-  domestic_normalized: "Maršala Tita 12 71000 Sarajevo"
-  international: "Maršala Tita 12, 71000 Sarajevo, Bosnia and Herzegovina"
-
+  domestic_raw: Maršala Tita 12, 71000 Sarajevo
+  domestic_normalized: Maršala Tita 12 71000 Sarajevo
+  international: Maršala Tita 12, 71000 Sarajevo, Bosnia and Herzegovina
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 43.9159
+    longitude: 17.6791
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.648Z"

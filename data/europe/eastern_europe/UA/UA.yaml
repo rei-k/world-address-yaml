@@ -5,15 +5,12 @@ name:
       value: Україна
       script: Cyrillic
       direction: ltr
-
 iso_codes:
   alpha2: UA
   alpha3: UKR
   numeric: "804"
-
 continent: Europe
 subregion: Eastern Europe
-
 languages:
   - name: Ukrainian
     script: Cyrillic
@@ -26,7 +23,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Ukraine
-
 administrative_divisions:
   level1:
     type: Oblast
@@ -41,35 +37,58 @@ administrative_divisions:
     type: City
     label_local: Місто
     label_en: City
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, number, building, apartment, city, oblast, postal_code, country]
+      order:
+        - recipient
+        - street_address
+        - number
+        - building
+        - apartment
+        - city
+        - oblast
+        - postal_code
+        - country
     - context: international
-      order: [recipient, apartment, building, street_address, number, city, oblast, postal_code, country]
-
-  building: { required: false, example: "буд. 5" }
-  apartment: { required: false, example: "кв. 12" }
-
+      order:
+        - recipient
+        - apartment
+        - building
+        - street_address
+        - number
+        - city
+        - oblast
+        - postal_code
+        - country
+  building:
+    required: false
+    example: буд. 5
+  apartment:
+    required: false
+    example: кв. 12
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric postal code"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric postal code
     example: "01001"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Postal code is 5 digits"
-    - "Cyrillic script is official but Latin transliteration accepted for international shipping"
-
+    - Postal code is 5 digits
+    - Cyrillic script is official but Latin transliteration accepted for international shipping
 examples:
-  domestic_raw: "вул. Хрещатик 22, буд. 5, кв. 12, Київ, Київська область, 01001"
-  domestic_normalized: "вул. Хрещатик 22 буд. 5 кв. 12 Київ 01001"
-  international: "Apt 12, Bldg 5, vul. Khreshchatyk 22, Kyiv 01001, Ukraine"
-
+  domestic_raw: вул. Хрещатик 22, буд. 5, кв. 12, Київ, Київська область, 01001
+  domestic_normalized: вул. Хрещатик 22 буд. 5 кв. 12 Київ 01001
+  international: Apt 12, Bldg 5, vul. Khreshchatyk 22, Kyiv 01001, Ukraine
 status:
   un_member: true
   recognized: true
   disputed: true
+geo:
+  center:
+    latitude: 48.3794
+    longitude: 31.1656
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.636Z"

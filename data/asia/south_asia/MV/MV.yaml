@@ -5,15 +5,12 @@ name:
       value: ދިވެހިރާއްޖޭގެ
       script: Thaana
       direction: rtl
-
 iso_codes:
   alpha2: MV
   alpha3: MDV
   numeric: "462"
-
 continent: Asia
 subregion: South Asia
-
 languages:
   - name: Dhivehi
     script: Thaana
@@ -23,7 +20,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Maldives
-
 administrative_divisions:
   level1:
     type: Atoll/City
@@ -31,28 +27,50 @@ administrative_divisions:
     label_en: Atoll / City
     count: 20+
     source: ../../data/mv_atolls.json
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, island, atoll, street_address, building, room, postal_code, country]
+      order:
+        - recipient
+        - island
+        - atoll
+        - street_address
+        - building
+        - room
+        - postal_code
+        - country
     - context: international
-      order: [recipient, building, room, street_address, island, atoll, postal_code, country]
-
-  building: { required: false, example: "Hotel Jen Malé" }
-  room: { required: false, example: "301" }
-
+      order:
+        - recipient
+        - building
+        - room
+        - street_address
+        - island
+        - atoll
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Hotel Jen Malé
+  room:
+    required: false
+    example: "301"
   postal_code:
     required: false
-    description: "Not widely used"
+    description: Not widely used
     coverage: none
-
 examples:
-  domestic_raw: "Hotel Jen, Malé"
-  domestic_normalized: "Hotel Jen Malé"
-  international: "Room 301, Hotel Jen, Malé, Maldives"
-
+  domestic_raw: Hotel Jen, Malé
+  domestic_normalized: Hotel Jen Malé
+  international: Room 301, Hotel Jen, Malé, Maldives
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 3.2028
+    longitude: 73.2207
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.616Z"

@@ -9,15 +9,12 @@ name:
       value: تشاد
       script: Arabic
       direction: rtl
-
 iso_codes:
   alpha2: TD
   alpha3: TCD
   numeric: "148"
-
 continent: Africa
 subregion: Central Africa
-
 languages:
   - name: French
     script: Latin
@@ -35,7 +32,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Chad
-
 administrative_divisions:
   level1:
     type: Province
@@ -53,34 +49,59 @@ administrative_divisions:
     label_local: Sous-Préfecture
     label_en: Sub-Prefecture
     count: null
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, subprefecture, department, city, province, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - subprefecture
+        - department
+        - city
+        - province
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, city, province, country]
-
-  building: { required: false, example: "Immeuble Hilton" }
-  floor: { required: false, example: "6ème étage" }
-  room: { required: false, example: "Bureau 605" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - city
+        - province
+        - country
+  building:
+    required: false
+    example: Immeuble Hilton
+  floor:
+    required: false
+    example: 6ème étage
+  room:
+    required: false
+    example: Bureau 605
   postal_code:
     required: false
     required_for_international: false
-    description: "Postal codes not widely used"
-
+    description: Postal codes not widely used
 validation:
   allow_latin_transliteration: true
   rules:
-    - "City name is required"
-
+    - City name is required
 examples:
-  domestic_raw: "Avenue Charles de Gaulle, N'Djamena"
-  domestic_normalized: "Avenue Charles de Gaulle, N'Djamena"
-  international: "Avenue Charles de Gaulle, N'Djamena, Chad"
-
+  domestic_raw: Avenue Charles de Gaulle, N'Djamena
+  domestic_normalized: Avenue Charles de Gaulle, N'Djamena
+  international: Avenue Charles de Gaulle, N'Djamena, Chad
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 15.4542
+    longitude: 18.7322
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.519Z"

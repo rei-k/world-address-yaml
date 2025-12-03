@@ -1,19 +1,16 @@
-name: 
+name:
   en: Jersey
   local:
     - lang: en
       value: Jersey
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: JE
   alpha3: JEY
   numeric: "832"
-
 continent: Europe
 subregion: Northern Europe
-
 languages:
   - name: English
     script: Latin
@@ -26,14 +23,12 @@ languages:
     country_name:
       fr: Jersey
       en: Jersey
-
 administrative_divisions:
   level1:
     type: Parish
     label_local: Parish
     label_en: Parish
     count: 12
-
 address_format:
   order_variants:
     - context: domestic
@@ -52,19 +47,23 @@ address_format:
         - parish
         - postal_code
         - country
-
   postal_code:
     required: true
-    regex: "^JE[0-9]{1,2} ?[0-9][A-Z]{2}$"
-    description: "Jersey postcode format"
-    example: "JE2 3AA"
-
+    regex: ^JE[0-9]{1,2} ?[0-9][A-Z]{2}$
+    description: Jersey postcode format
+    example: JE2 3AA
 examples:
-  domestic_raw: "1 King Street, St Helier, JE2 3AA"
-  domestic_normalized: "1 King Street St Helier JE2 3AA"
-  international: "1 King Street, St Helier JE2 3AA, Jersey"
-
+  domestic_raw: 1 King Street, St Helier, JE2 3AA
+  domestic_normalized: 1 King Street St Helier JE2 3AA
+  international: 1 King Street, St Helier JE2 3AA, Jersey
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 49.2144
+    longitude: -2.1313
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.640Z"

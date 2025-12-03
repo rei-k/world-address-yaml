@@ -5,15 +5,12 @@ name:
       value: Северна Македонија
       script: Cyrillic
       direction: ltr
-
 iso_codes:
   alpha2: MK
   alpha3: MKD
   numeric: "807"
-
 continent: Europe
 subregion: Southeastern Europe
-
 languages:
   - name: Macedonian
     script: Cyrillic
@@ -31,39 +28,52 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: North Macedonia
-
 administrative_divisions:
   level1:
     type: Municipality
     label_local: Општина
     label_en: Municipality
     count: 80
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, number, postal_code, city, country]
+      order:
+        - recipient
+        - street_address
+        - number
+        - postal_code
+        - city
+        - country
     - context: international
-      order: [recipient, street_address, number, postal_code, city, country]
-
+      order:
+        - recipient
+        - street_address
+        - number
+        - postal_code
+        - city
+        - country
   postal_code:
     required: true
-    regex: "^[0-9]{4}$"
-    description: "4-digit numeric postal code"
+    regex: ^[0-9]{4}$
+    description: 4-digit numeric postal code
     example: "1000"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Postal code is 4 digits"
-    - "Both Cyrillic and Latin scripts accepted"
-
+    - Postal code is 4 digits
+    - Both Cyrillic and Latin scripts accepted
 examples:
-  domestic_raw: "Бул. Партизански одреди 12, 1000 Скопје"
-  domestic_normalized: "Bul. Partizanski odredi 12 1000 Skopje"
-  international: "Bul. Partizanski odredi 12, 1000 Skopje, North Macedonia"
-
+  domestic_raw: Бул. Партизански одреди 12, 1000 Скопје
+  domestic_normalized: Bul. Partizanski odredi 12 1000 Skopje
+  international: Bul. Partizanski odredi 12, 1000 Skopje, North Macedonia
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 41.6086
+    longitude: 21.7453
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.649Z"

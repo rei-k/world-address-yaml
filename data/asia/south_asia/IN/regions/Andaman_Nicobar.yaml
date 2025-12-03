@@ -5,8 +5,14 @@ name:
       value: Andaman and Nicobar Islands
       script: Latin
       direction: ltr
-
 region_of: India
 type: Union Territory
-postal_code_format: "744###"
+postal_code_format: 744###
 example: "744101"
+geo:
+  center:
+    latitude: 11.7401
+    longitude: 92.6586
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:55:11.696Z"

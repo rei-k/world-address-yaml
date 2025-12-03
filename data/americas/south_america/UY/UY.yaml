@@ -5,15 +5,12 @@ name:
       value: Uruguay
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: UY
   alpha3: URY
   numeric: "858"
-
 continent: South America
 subregion: Southern America
-
 languages:
   - name: Spanish
     script: Latin
@@ -26,7 +23,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Uruguay
-
 administrative_divisions:
   level1:
     type: Department
@@ -37,34 +33,53 @@ administrative_divisions:
     type: Municipality
     label_local: Municipio
     label_en: Municipality
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, number, apartment, city, department, postal_code, country]
+      order:
+        - recipient
+        - street_address
+        - number
+        - apartment
+        - city
+        - department
+        - postal_code
+        - country
     - context: international
-      order: [recipient, apartment, street_address, number, city, department, postal_code, country]
-
-  apartment: { required: false, example: "Apto 302" }
-
+      order:
+        - recipient
+        - apartment
+        - street_address
+        - number
+        - city
+        - department
+        - postal_code
+        - country
+  apartment:
+    required: false
+    example: Apto 302
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric postal code"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric postal code
     example: "11000"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Postal code is 5 digits"
-    - "Department name is recommended"
-
+    - Postal code is 5 digits
+    - Department name is recommended
 examples:
-  domestic_raw: "18 de Julio 1234, Apto 302, Montevideo, Montevideo, 11100"
-  domestic_normalized: "18 de Julio 1234 Apto 302 Montevideo 11100"
-  international: "Apt 302, 18 de Julio 1234, Montevideo 11100, Uruguay"
-
+  domestic_raw: 18 de Julio 1234, Apto 302, Montevideo, Montevideo, 11100
+  domestic_normalized: 18 de Julio 1234 Apto 302 Montevideo 11100
+  international: Apt 302, 18 de Julio 1234, Montevideo 11100, Uruguay
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -32.5228
+    longitude: -55.7658
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.597Z"

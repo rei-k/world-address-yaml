@@ -10,12 +10,10 @@ name:
     - lang: zu
       value: iNingizimu Afrika
       script: Latin
-
 iso_codes:
   alpha2: ZA
   alpha3: ZAF
   numeric: "710"
-
 languages:
   - name: English
     code: en
@@ -108,7 +106,6 @@ languages:
     script: Latin
     direction: ltr
     role: official
-
 administrative_divisions:
   level1:
     type: Province
@@ -120,25 +117,45 @@ administrative_divisions:
   level3:
     type: Suburb / Township / Locality
     count: null
-
 address_format:
   order_variants:
     - street_delivery:
-        order: [recipient, building, floor, room, street_address, suburb, municipality, province, postal_code, country]
+        order:
+          - recipient
+          - building
+          - floor
+          - room
+          - street_address
+          - suburb
+          - municipality
+          - province
+          - postal_code
+          - country
     - pobox_delivery:
-        order: [recipient, pobox, suburb, municipality, province, postal_code, country]
-
+        order:
+          - recipient
+          - pobox
+          - suburb
+          - municipality
+          - province
+          - postal_code
+          - country
 postal_code:
   required_for_international: true
   stability: high
-  regex: "^[0-9]{4}$"
+  regex: ^[0-9]{4}$
   example: "8001"
-
 validation:
   rules:
-    - "Province required"
-    - "Street vs PO Box must be detected"
-
+    - Province required
+    - Street vs PO Box must be detected
 examples:
-  street: "12 Long St, Gardens, Cape Town, Western Cape 8001, South Africa"
-  pobox: "PO Box 123, Cape Town 8000, South Africa"
+  street: 12 Long St, Gardens, Cape Town, Western Cape 8001, South Africa
+  pobox: PO Box 123, Cape Town 8000, South Africa
+geo:
+  center:
+    latitude: -30.5595
+    longitude: 22.9375
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.551Z"

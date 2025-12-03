@@ -1,4 +1,4 @@
-name: 
+name:
   en: Belgium
   local:
     - lang: nl
@@ -13,15 +13,12 @@ name:
       value: Belgien
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: BE
   alpha3: BEL
   numeric: "056"
-
 continent: Europe
 subregion: Western Europe
-
 languages:
   - name: Dutch
     script: Latin
@@ -35,7 +32,6 @@ languages:
     script: Latin
     role: official
     country_name: Belgien
-
 administrative_divisions:
   level1:
     type: Region
@@ -46,7 +42,6 @@ administrative_divisions:
       - Flanders
       - Wallonia
       - Brussels-Capital
-
 address_format:
   order_variants:
     - context: domestic
@@ -65,19 +60,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{4}$"
-    description: "4-digit numeric postal code"
+    regex: ^[0-9]{4}$
+    description: 4-digit numeric postal code
     example: "1000"
-
 examples:
-  domestic_raw: "Rue de la Loi 16, 1000 Bruxelles"
-  domestic_normalized: "Rue de la Loi 16 1000 Bruxelles"
-  international: "Rue de la Loi 16, 1000 Bruxelles, Belgium"
-
+  domestic_raw: Rue de la Loi 16, 1000 Bruxelles
+  domestic_normalized: Rue de la Loi 16 1000 Bruxelles
+  international: Rue de la Loi 16, 1000 Bruxelles, Belgium
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 50.5039
+    longitude: 4.4699
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.656Z"

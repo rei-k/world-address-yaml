@@ -71,5 +71,14 @@
   "examples": {
     "domestic": "Calle Principal, Colonia Escalón, San Salvador, El Salvador",
     "international": "Calle Principal, Colonia Escalón, San Salvador, 01101, El Salvador"
+  },
+  "geo": {
+    "center": {
+      "latitude": 13.7942,
+      "longitude": -88.8965,
+      "accuracy": 1000,
+      "source": "database",
+      "captured_at": "2025-12-03T16:54:11.576Z"
+    }
   }
 }

@@ -1,19 +1,16 @@
-name: 
+name:
   en: Wallis and Futuna
   local:
     - lang: fr
       value: Wallis-et-Futuna
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: WF
   alpha3: WLF
   numeric: "876"
-
 continent: Oceania
 subregion: Polynesia
-
 languages:
   - name: French
     script: Latin
@@ -26,7 +23,6 @@ languages:
     role: auxiliary
     country_name:
       en: Wallis and Futuna
-
 administrative_divisions:
   level1:
     type: District
@@ -37,7 +33,6 @@ administrative_divisions:
       - Uvea
       - Sigave
       - Alo
-
 address_format:
   order_variants:
     - context: domestic
@@ -56,19 +51,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^986[0-9]{2}$"
-    description: "Postal codes start with 986"
+    regex: ^986[0-9]{2}$
+    description: Postal codes start with 986
     example: "98600"
-
 examples:
-  domestic_raw: "Route Mata'Utu, 98600 Wallis"
-  domestic_normalized: "Route Mata'Utu 98600 Wallis"
-  international: "Route Mata'Utu, 98600 Wallis, Wallis and Futuna"
-
+  domestic_raw: Route Mata'Utu, 98600 Wallis
+  domestic_normalized: Route Mata'Utu 98600 Wallis
+  international: Route Mata'Utu, 98600 Wallis, Wallis and Futuna
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -13.7687
+    longitude: -177.1561
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.664Z"

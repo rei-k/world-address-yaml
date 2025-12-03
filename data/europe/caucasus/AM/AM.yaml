@@ -5,15 +5,12 @@ name:
       value: Hayastan
       script: Armenian
       direction: ltr
-
 iso_codes:
   alpha2: AM
   alpha3: ARM
   numeric: "051"
-
 continent: Asia
 subregion: Caucasus
-
 languages:
   - name: Armenian
     script: Armenian
@@ -26,7 +23,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Armenia
-
 administrative_divisions:
   level1:
     type: Province
@@ -37,35 +33,58 @@ administrative_divisions:
     type: Community
     label_local: Hamaynk
     label_en: Community
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, number, building, apartment, city, province, postal_code, country]
+      order:
+        - recipient
+        - street_address
+        - number
+        - building
+        - apartment
+        - city
+        - province
+        - postal_code
+        - country
     - context: international
-      order: [recipient, apartment, building, street_address, number, city, province, postal_code, country]
-
-  building: { required: false, example: "Building 5" }
-  apartment: { required: false, example: "Apt 23" }
-
+      order:
+        - recipient
+        - apartment
+        - building
+        - street_address
+        - number
+        - city
+        - province
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Building 5
+  apartment:
+    required: false
+    example: Apt 23
   postal_code:
     required: true
-    regex: "^[0-9]{4}$"
-    description: "4-digit numeric postal code"
+    regex: ^[0-9]{4}$
+    description: 4-digit numeric postal code
     example: "0010"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Postal code is 4 digits"
-    - "Armenian script is official but Latin transliteration accepted for international shipping"
-
+    - Postal code is 4 digits
+    - Armenian script is official but Latin transliteration accepted for international shipping
 examples:
-  domestic_raw: "Mashtots Ave 12, Building 5, Apt 23, Yerevan, 0010"
-  domestic_normalized: "Mashtots Ave 12 Bldg 5 Apt 23 Yerevan 0010"
-  international: "Apt 23, Bldg 5, Mashtots Ave 12, Yerevan 0010, Armenia"
-
+  domestic_raw: Mashtots Ave 12, Building 5, Apt 23, Yerevan, 0010
+  domestic_normalized: Mashtots Ave 12 Bldg 5 Apt 23 Yerevan 0010
+  international: Apt 23, Bldg 5, Mashtots Ave 12, Yerevan 0010, Armenia
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 40.0691
+    longitude: 45.0382
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.630Z"

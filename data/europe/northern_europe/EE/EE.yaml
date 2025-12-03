@@ -1,19 +1,16 @@
-name: 
+name:
   en: Estonia
   local:
     - lang: et
       value: Eesti
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: EE
   alpha3: EST
   numeric: "233"
-
 continent: Europe
 subregion: Northern Europe
-
 languages:
   - name: Estonian
     script: Latin
@@ -36,14 +33,12 @@ languages:
     required_for_shipping: true
     country_name:
       en: Estonia
-
 administrative_divisions:
   level1:
     type: County
     label_local: Maakond
     label_en: County
     count: 15
-
 address_format:
   order_variants:
     - context: domestic
@@ -62,25 +57,28 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric postal code"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric postal code
     example: "10111"
-
 validation:
   allow_latin_transliteration: true
   rules:
     - "Postal code format: 5 digits"
-    - "City name required"
-
+    - City name required
 examples:
-  domestic_raw: "Pärnu mnt 10, 10111 Tallinn"
-  domestic_normalized: "Pärnu mnt 10 10111 Tallinn"
-  international: "Pärnu mnt 10, 10111 Tallinn, Estonia"
-
+  domestic_raw: Pärnu mnt 10, 10111 Tallinn
+  domestic_normalized: Pärnu mnt 10 10111 Tallinn
+  international: Pärnu mnt 10, 10111 Tallinn, Estonia
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 58.5953
+    longitude: 25.0136
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.638Z"

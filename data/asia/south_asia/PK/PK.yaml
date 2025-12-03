@@ -5,15 +5,12 @@ name:
       value: پاکستان
       script: Arabic
       direction: rtl
-
 iso_codes:
   alpha2: PK
   alpha3: PAK
   numeric: "586"
-
 continent: Asia
 subregion: South Asia
-
 languages:
   - name: Urdu
     script: Arabic
@@ -24,7 +21,6 @@ languages:
     role: official
     required_for_shipping: true
     country_name: Pakistan
-
 administrative_divisions:
   level1:
     type: Province/Territory
@@ -32,29 +28,53 @@ administrative_divisions:
     label_en: Province / Territory
     count: 8
     source: ../../data/pk_provinces.json
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, province, district, tehsil, street_address, building, room, postal_code, country]
+      order:
+        - recipient
+        - province
+        - district
+        - tehsil
+        - street_address
+        - building
+        - room
+        - postal_code
+        - country
     - context: international
-      order: [recipient, building, room, street_address, tehsil, district, province, postal_code, country]
-
-  building: { required: false, example: "Centaurus Mall" }
-  room: { required: false, example: "702" }
-
+      order:
+        - recipient
+        - building
+        - room
+        - street_address
+        - tehsil
+        - district
+        - province
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Centaurus Mall
+  room:
+    required: false
+    example: "702"
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric
     example: "44000"
-
 examples:
-  domestic_raw: "Centaurus Mall, Islamabad 44000"
-  domestic_normalized: "Centaurus Mall Islamabad 44000"
-  international: "Room 702, Centaurus Mall, Islamabad 44000, Pakistan"
-
+  domestic_raw: Centaurus Mall, Islamabad 44000
+  domestic_normalized: Centaurus Mall Islamabad 44000
+  international: Room 702, Centaurus Mall, Islamabad 44000, Pakistan
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 30.3753
+    longitude: 69.3451
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.617Z"

@@ -9,15 +9,12 @@ name:
       value: Burundi
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: BI
   alpha3: BDI
   numeric: "108"
-
 continent: Africa
 subregion: Eastern Africa
-
 languages:
   - name: Kirundi
     script: Latin
@@ -35,7 +32,6 @@ languages:
     role: official
     required_for_shipping: true
     country_name: Burundi
-
 administrative_divisions:
   level1:
     type: Province
@@ -53,35 +49,59 @@ administrative_divisions:
     label_local: Colline
     label_en: Hill
     count: null
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, commune, city, province, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - commune
+        - city
+        - province
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, city, province, country]
-
-  building: { required: false, example: "Immeuble Trade Point" }
-  floor: { required: false, example: "4ème étage" }
-  room: { required: false, example: "Bureau 401" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - city
+        - province
+        - country
+  building:
+    required: false
+    example: Immeuble Trade Point
+  floor:
+    required: false
+    example: 4ème étage
+  room:
+    required: false
+    example: Bureau 401
   postal_code:
     required: false
     required_for_international: false
-    description: "Postal codes not widely used"
-
+    description: Postal codes not widely used
 validation:
   allow_latin_transliteration: true
   rules:
-    - "City name is required"
-    - "Province name is required"
-
+    - City name is required
+    - Province name is required
 examples:
-  domestic_raw: "Boulevard de l'Uprona, Bujumbura"
-  domestic_normalized: "Boulevard de l'Uprona, Bujumbura"
-  international: "Boulevard de l'Uprona, Bujumbura, Burundi"
-
+  domestic_raw: Boulevard de l'Uprona, Bujumbura
+  domestic_normalized: Boulevard de l'Uprona, Bujumbura
+  international: Boulevard de l'Uprona, Bujumbura, Burundi
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -3.3731
+    longitude: 29.9189
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.520Z"

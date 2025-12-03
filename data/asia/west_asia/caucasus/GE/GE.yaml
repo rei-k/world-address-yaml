@@ -5,15 +5,12 @@ name:
       value: საქართველო
       script: Georgian
       direction: ltr
-
 iso_codes:
   alpha2: GE
   alpha3: GEO
   numeric: "268"
-
 continent: Asia
 subregion: West Asia
-
 languages:
   - name: Georgian
     script: Georgian
@@ -23,7 +20,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Georgia
-
 administrative_divisions:
   level1:
     type: Region
@@ -31,7 +27,6 @@ administrative_divisions:
     label_en: Region
     count: 9
     source: ../../data/ge_regions.json
-
 address_format:
   order_variants:
     - context: domestic
@@ -54,19 +49,23 @@ address_format:
         - region
         - postal_code
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{4}$"
-    description: "4-digit numeric"
+    regex: ^[0-9]{4}$
+    description: 4-digit numeric
     example: "0105"
-
 examples:
-  domestic_raw: "Rustaveli Avenue, Tbilisi 0105"
-  domestic_normalized: "Rustaveli Avenue Tbilisi 0105"
-  international: "Room 402, Rustaveli Avenue, Tbilisi 0105, Georgia"
-
+  domestic_raw: Rustaveli Avenue, Tbilisi 0105
+  domestic_normalized: Rustaveli Avenue Tbilisi 0105
+  international: Room 402, Rustaveli Avenue, Tbilisi 0105, Georgia
 status:
   un_member: true
   recognized: true
   disputed: true
+geo:
+  center:
+    latitude: 42.3154
+    longitude: 43.3569
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.630Z"

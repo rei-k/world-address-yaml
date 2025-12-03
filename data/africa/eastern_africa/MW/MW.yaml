@@ -9,15 +9,12 @@ name:
       value: Malaŵi
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: MW
   alpha3: MWI
   numeric: "454"
-
 continent: Africa
 subregion: Eastern Africa
-
 languages:
   - name: English
     script: Latin
@@ -30,7 +27,6 @@ languages:
     direction: ltr
     role: official
     country_name: Malaŵi
-
 administrative_divisions:
   level1:
     type: Region
@@ -48,34 +44,58 @@ administrative_divisions:
     label_local: Traditional Authority
     label_en: Traditional Authority
     count: null
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, area, district, region, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - area
+        - district
+        - region
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, city, district, country]
-
-  building: { required: false, example: "Umoyo House" }
-  floor: { required: false, example: "4th Floor" }
-  room: { required: false, example: "Suite 402" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - city
+        - district
+        - country
+  building:
+    required: false
+    example: Umoyo House
+  floor:
+    required: false
+    example: 4th Floor
+  room:
+    required: false
+    example: Suite 402
   postal_code:
     required: false
     required_for_international: false
-    description: "Postal codes not widely used"
-
+    description: Postal codes not widely used
 validation:
   allow_latin_transliteration: true
   rules:
-    - "City name is required"
-
+    - City name is required
 examples:
-  domestic_raw: "Victoria Avenue, Blantyre"
-  domestic_normalized: "Victoria Avenue, Blantyre"
-  international: "Victoria Avenue, Blantyre, Malawi"
-
+  domestic_raw: Victoria Avenue, Blantyre
+  domestic_normalized: Victoria Avenue, Blantyre
+  international: Victoria Avenue, Blantyre, Malawi
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -13.2543
+    longitude: 34.3015
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.531Z"

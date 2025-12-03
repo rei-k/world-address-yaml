@@ -5,15 +5,12 @@ name:
       value: الإمارات العربية المتحدة
       script: Arabic
       direction: rtl
-
 iso_codes:
   alpha2: AE
   alpha3: ARE
   numeric: "784"
-
 continent: Asia
 subregion: West Asia
-
 languages:
   - name: Arabic
     script: Arabic
@@ -23,7 +20,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: United Arab Emirates
-
 administrative_divisions:
   level1:
     type: Emirate
@@ -31,7 +27,6 @@ administrative_divisions:
     label_en: Emirate
     count: 7
     source: ../../data/ae_emirates.json
-
 address_format:
   order_variants:
     - context: domestic
@@ -54,17 +49,21 @@ address_format:
         - emirate
         - postal_code
         - country
-
   postal_code:
     required: false
-    description: "Postal codes not widely used; P.O. boxes are common"
-
+    description: Postal codes not widely used; P.O. boxes are common
 examples:
-  domestic_raw: "Downtown Dubai, P.O. Box 12345"
-  domestic_normalized: "Downtown Dubai PO Box 12345"
-  international: "Room 402, Downtown Dubai, P.O. Box 12345, United Arab Emirates"
-
+  domestic_raw: Downtown Dubai, P.O. Box 12345
+  domestic_normalized: Downtown Dubai PO Box 12345
+  international: Room 402, Downtown Dubai, P.O. Box 12345, United Arab Emirates
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 23.4241
+    longitude: 53.8478
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.623Z"

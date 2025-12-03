@@ -5,15 +5,12 @@ name:
       value: Singapura
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: SG
   alpha3: SGP
   numeric: "702"
-
 continent: Asia
 subregion: Southeast Asia
-
 languages:
   - name: Malay
     script: Latin
@@ -32,37 +29,60 @@ languages:
     script: Tamil
     role: official
     country_name: சிங்கப்பூர்
-
 administrative_divisions:
   level1:
     type: Planning Area
     label_en: Planning Area
     count: 55
     source: ../../data/sg_planning_areas.json
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, block, street_address, building, floor, room, postal_code, country]
+      order:
+        - recipient
+        - block
+        - street_address
+        - building
+        - floor
+        - room
+        - postal_code
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, block, postal_code, country]
-
-  building: { required: false, example: "Marina Bay Sands" }
-  floor: { required: false, example: "35F" }
-  room: { required: false, example: "3508" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - block
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Marina Bay Sands
+  floor:
+    required: false
+    example: 35F
+  room:
+    required: false
+    example: "3508"
   postal_code:
     required: true
-    regex: "^[0-9]{6}$"
-    description: "6-digit numeric"
+    regex: ^[0-9]{6}$
+    description: 6-digit numeric
     example: "018956"
-
 examples:
-  domestic_raw: "10 Bayfront Avenue, Marina Bay Sands, Singapore 018956"
-  domestic_normalized: "Marina Bay Sands 10 Bayfront Avenue Singapore 018956"
-  international: "Room 3508, Marina Bay Sands, 10 Bayfront Avenue, Singapore 018956"
-
+  domestic_raw: 10 Bayfront Avenue, Marina Bay Sands, Singapore 018956
+  domestic_normalized: Marina Bay Sands 10 Bayfront Avenue Singapore 018956
+  international: Room 3508, Marina Bay Sands, 10 Bayfront Avenue, Singapore 018956
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 1.3521
+    longitude: 103.8198
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.621Z"

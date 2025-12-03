@@ -5,15 +5,12 @@ name:
       value: ព្រះរាជាណាចក្រកម្ពុជា
       script: Khmer
       direction: ltr
-
 iso_codes:
   alpha2: KH
   alpha3: KHM
   numeric: "116"
-
 continent: Asia
 subregion: Southeast Asia
-
 languages:
   - name: Khmer
     script: Khmer
@@ -23,7 +20,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Cambodia
-
 administrative_divisions:
   level1:
     type: Province/Municipality
@@ -31,29 +27,53 @@ administrative_divisions:
     label_en: Province / Capital
     count: 25
     source: ../../data/kh_provinces.json
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, province, district, commune, street_address, building, room, postal_code, country]
+      order:
+        - recipient
+        - province
+        - district
+        - commune
+        - street_address
+        - building
+        - room
+        - postal_code
+        - country
     - context: international
-      order: [recipient, building, room, street_address, commune, district, province, postal_code, country]
-
-  building: { required: false, example: "Olympic Mall" }
-  room: { required: false, example: "301" }
-
+      order:
+        - recipient
+        - building
+        - room
+        - street_address
+        - commune
+        - district
+        - province
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Olympic Mall
+  room:
+    required: false
+    example: "301"
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric
     example: "120101"
-
 examples:
-  domestic_raw: "Phnom Penh, Chamkarmon, Olympic Mall 301, 120101"
-  domestic_normalized: "Olympic Mall 301 Chamkarmon Phnom Penh 120101"
-  international: "Room 301, Olympic Mall, Chamkarmon, Phnom Penh 120101, Cambodia"
-
+  domestic_raw: Phnom Penh, Chamkarmon, Olympic Mall 301, 120101
+  domestic_normalized: Olympic Mall 301 Chamkarmon Phnom Penh 120101
+  international: Room 301, Olympic Mall, Chamkarmon, Phnom Penh 120101, Cambodia
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 12.5657
+    longitude: 104.991
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.619Z"

@@ -1,25 +1,27 @@
 name:
   en: Ross Dependency
   local: Ross Dependency
-
 claimant_country:
   name: New Zealand
   alpha2: NZ
-
 claim_details:
-  sector: "150°W to 160°E, south of 60°S"
+  sector: 150°W to 160°E, south of 60°S
   area_km2: 450000
   established: 1923
   overlaps_with: []
-
 address_notes:
-  - "Mail routed through Christchurch, New Zealand"
-  - "Includes Ross Island and McMurdo Sound area"
-
+  - Mail routed through Christchurch, New Zealand
+  - Includes Ross Island and McMurdo Sound area
 major_stations:
   - Scott Base (New Zealand)
   - McMurdo Station (US, in Ross Dependency)
-
 status:
   recognized: false
-  note: "Claim suspended under Antarctic Treaty; no overlapping claims"
+  note: Claim suspended under Antarctic Treaty; no overlapping claims
+geo:
+  center:
+    latitude: -80
+    longitude: 175
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:55:11.679Z"

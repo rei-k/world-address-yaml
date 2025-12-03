@@ -3,14 +3,11 @@ name:
   local:
     - lang: es
       value: Guatemala
-
 iso_codes:
   alpha2: GT
   alpha3: GTM
   numeric: "320"
-
 continent: North America
-
 languages:
   - name: Spanish
     role: national_primary
@@ -18,7 +15,6 @@ languages:
     role: regional_indigenous
   - name: English
     role: international_aux
-
 administrative_divisions:
   level1:
     type: Departamento
@@ -29,18 +25,38 @@ administrative_divisions:
     type: Zona (urban standardized)
   level4:
     type: Colonia / Barrio
-
 address_format:
   order_variants:
-    - domestic_es: [recipient, building, street_address, zona, colonia, municipio, departamento, country]
-    - international: [recipient, building, street_address, colonia, municipio, departamento, postal_code, country]
-
+    - domestic_es:
+        - recipient
+        - building
+        - street_address
+        - zona
+        - colonia
+        - municipio
+        - departamento
+        - country
+    - international:
+        - recipient
+        - building
+        - street_address
+        - colonia
+        - municipio
+        - departamento
+        - postal_code
+        - country
 postal_code:
   required_for_international: true
   stability: medium
-  regex: "^[0-9]{5}$"
+  regex: ^[0-9]{5}$
   example: "01001"
-
 examples:
-  domestic: "7a Avenida 12-23, Zona 1, Ciudad de Guatemala, Guatemala"
-  international: "7a Avenida 12-23, Zona 1, Ciudad de Guatemala, 01001, Guatemala"
+  domestic: 7a Avenida 12-23, Zona 1, Ciudad de Guatemala, Guatemala
+  international: 7a Avenida 12-23, Zona 1, Ciudad de Guatemala, 01001, Guatemala
+geo:
+  center:
+    latitude: 15.7835
+    longitude: -90.2308
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.574Z"

@@ -1,19 +1,16 @@
-name: 
+name:
   en: Netherlands
   local:
     - lang: nl
       value: Nederland
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: NL
   alpha3: NLD
   numeric: "528"
-
 continent: Europe
 subregion: Western Europe
-
 languages:
   - name: Dutch
     script: Latin
@@ -32,7 +29,6 @@ languages:
     role: auxiliary
     country_name:
       en: Netherlands
-
 administrative_divisions:
   level1:
     type: Province
@@ -52,7 +48,6 @@ administrative_divisions:
       - Utrecht
       - Zeeland
       - Zuid-Holland
-
 address_format:
   order_variants:
     - context: domestic
@@ -71,19 +66,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{4} ?[A-Z]{2}$"
-    description: "4 digits + 2 uppercase letters"
-    example: "1012 AB"
-
+    regex: ^[0-9]{4} ?[A-Z]{2}$
+    description: 4 digits + 2 uppercase letters
+    example: 1012 AB
 examples:
-  domestic_raw: "Damrak 1-5, 1012 AB Amsterdam"
-  domestic_normalized: "Damrak 1-5 1012 AB Amsterdam"
-  international: "Damrak 1-5, 1012 AB Amsterdam, Netherlands"
-
+  domestic_raw: Damrak 1-5, 1012 AB Amsterdam
+  domestic_normalized: Damrak 1-5 1012 AB Amsterdam
+  international: Damrak 1-5, 1012 AB Amsterdam, Netherlands
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 52.1326
+    longitude: 5.2913
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.666Z"

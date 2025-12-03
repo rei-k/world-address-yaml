@@ -9,15 +9,12 @@ name:
       value: إسرائيل
       script: Arabic
       direction: rtl
-
 iso_codes:
   alpha2: IL
   alpha3: ISR
   numeric: "376"
-
 continent: Asia
 subregion: West Asia
-
 languages:
   - name: Hebrew
     script: Hebrew
@@ -31,7 +28,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Israel
-
 administrative_divisions:
   level1:
     type: District
@@ -39,7 +35,6 @@ administrative_divisions:
     label_en: District
     count: 6
     source: ../../data/il_districts.json
-
 address_format:
   order_variants:
     - context: domestic
@@ -64,19 +59,23 @@ address_format:
         - district
         - postal_code
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{7}$"
-    description: "7-digit numeric"
+    regex: ^[0-9]{7}$
+    description: 7-digit numeric
     example: "6100001"
-
 examples:
-  domestic_raw: "Azrieli Center, Tel Aviv 6100001"
-  domestic_normalized: "Azrieli Center Tel Aviv 6100001"
-  international: "Room 1001, 10F Azrieli Center, Tel Aviv 6100001, Israel"
-
+  domestic_raw: Azrieli Center, Tel Aviv 6100001
+  domestic_normalized: Azrieli Center Tel Aviv 6100001
+  international: Room 1001, 10F Azrieli Center, Tel Aviv 6100001, Israel
 status:
   un_member: true
   recognized: true
   disputed: true
+geo:
+  center:
+    latitude: 31.0461
+    longitude: 34.8516
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.624Z"

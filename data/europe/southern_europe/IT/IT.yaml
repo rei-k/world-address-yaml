@@ -1,19 +1,16 @@
-name: 
+name:
   en: Italy
   local:
     - lang: it
       value: Italia
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: IT
   alpha3: ITA
   numeric: "380"
-
 continent: Europe
 subregion: Southern Europe
-
 languages:
   - name: Italian
     script: Latin
@@ -26,21 +23,25 @@ languages:
     role: auxiliary
     country_name:
       en: Italy
-
 administrative_divisions:
   level1:
     type: Region
     label_local: Regione
     label_en: Region
     count: 20
-
 address_format:
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit CAP"
+    regex: ^[0-9]{5}$
+    description: 5-digit CAP
     example: "00184"
-
 examples:
-  domestic_raw: "Via Nazionale 1, 00184 Roma"
-  international: "Via Nazionale 1, 00184 Roma, Italy"
+  domestic_raw: Via Nazionale 1, 00184 Roma
+  international: Via Nazionale 1, 00184 Roma, Italy
+geo:
+  center:
+    latitude: 41.8719
+    longitude: 12.5674
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.653Z"

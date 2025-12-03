@@ -9,15 +9,12 @@ name:
       value: Paraguái
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: PY
   alpha3: PRY
   numeric: "600"
-
 continent: South America
 subregion: Southern America
-
 languages:
   - name: Spanish
     script: Latin
@@ -35,7 +32,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Paraguay
-
 administrative_divisions:
   level1:
     type: Department
@@ -46,34 +42,53 @@ administrative_divisions:
     type: District
     label_local: Distrito
     label_en: District
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, number, neighborhood, city, department, postal_code, country]
+      order:
+        - recipient
+        - street_address
+        - number
+        - neighborhood
+        - city
+        - department
+        - postal_code
+        - country
     - context: international
-      order: [recipient, street_address, number, neighborhood, city, department, postal_code, country]
-
-  neighborhood: { required: false, example: "Barrio San Roque" }
-
+      order:
+        - recipient
+        - street_address
+        - number
+        - neighborhood
+        - city
+        - department
+        - postal_code
+        - country
+  neighborhood:
+    required: false
+    example: Barrio San Roque
   postal_code:
     required: true
-    regex: "^[0-9]{4}$"
-    description: "4-digit numeric postal code"
+    regex: ^[0-9]{4}$
+    description: 4-digit numeric postal code
     example: "1209"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Postal code is 4 digits"
-    - "Neighborhood name is commonly used"
-
+    - Postal code is 4 digits
+    - Neighborhood name is commonly used
 examples:
-  domestic_raw: "Av. España 1234, Barrio San Roque, Asunción, Asunción, 1209"
-  domestic_normalized: "Av. España 1234 Barrio San Roque Asunción 1209"
-  international: "Av. España 1234, Barrio San Roque, Asunción 1209, Paraguay"
-
+  domestic_raw: Av. España 1234, Barrio San Roque, Asunción, Asunción, 1209
+  domestic_normalized: Av. España 1234 Barrio San Roque Asunción 1209
+  international: Av. España 1234, Barrio San Roque, Asunción 1209, Paraguay
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -23.4425
+    longitude: -58.4438
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.596Z"

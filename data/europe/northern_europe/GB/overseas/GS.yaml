@@ -1,33 +1,28 @@
-name: 
+name:
   en: South Georgia and the South Sandwich Islands
   local:
     - lang: en
       value: South Georgia and the South Sandwich Islands
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: GS
   alpha3: SGS
   numeric: "239"
-
 continent: South America
 subregion: South Atlantic
-
 languages:
   - name: English
     script: Latin
     role: official
     country_name:
       en: South Georgia and the South Sandwich Islands
-
 administrative_divisions:
   level1:
     type: Territory
     label_local: Territory
     label_en: Territory
     count: null
-
 address_format:
   order_variants:
     - context: domestic
@@ -42,19 +37,23 @@ address_format:
         - locality
         - postal_code
         - country
-
   postal_code:
     required: true
-    regex: "^SIQQ 1ZZ$"
-    description: "Single code SIQQ 1ZZ"
-    example: "SIQQ 1ZZ"
-
+    regex: ^SIQQ 1ZZ$
+    description: Single code SIQQ 1ZZ
+    example: SIQQ 1ZZ
 examples:
-  domestic_raw: "King Edward Point SIQQ 1ZZ"
-  domestic_normalized: "King Edward Point SIQQ 1ZZ"
-  international: "King Edward Point, SIQQ 1ZZ, South Georgia and the South Sandwich Islands"
-
+  domestic_raw: King Edward Point SIQQ 1ZZ
+  domestic_normalized: King Edward Point SIQQ 1ZZ
+  international: King Edward Point, SIQQ 1ZZ, South Georgia and the South Sandwich Islands
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -54.4296
+    longitude: -36.5879
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.642Z"

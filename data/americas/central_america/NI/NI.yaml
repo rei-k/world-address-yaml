@@ -3,21 +3,17 @@ name:
   local:
     - lang: es
       value: Nicaragua
-
 iso_codes:
   alpha2: NI
   alpha3: NIC
   numeric: "558"
-
 continent: North America
-
 languages:
   - name: Spanish
     role: national_primary
   - name: English (RAAN/RAAS Coast)
     role: regional_secondary
     required_for_shipping: true
-
 administrative_divisions:
   level1:
     type: Departamento / Región Autónoma
@@ -25,18 +21,36 @@ administrative_divisions:
     type: Municipio
   level3:
     type: Barrio / Sector
-
 address_format:
   order_variants:
-    - domestic_descriptive: [recipient, building, reference_point, street_address, barrio, municipio, departamento, country]
-    - international: [recipient, street_address, municipio, departamento, postal_code, country]
-
+    - domestic_descriptive:
+        - recipient
+        - building
+        - reference_point
+        - street_address
+        - barrio
+        - municipio
+        - departamento
+        - country
+    - international:
+        - recipient
+        - street_address
+        - municipio
+        - departamento
+        - postal_code
+        - country
 postal_code:
   stability: low
   required_for_international: true
-  regex: "^[0-9]{5}$"
+  regex: ^[0-9]{5}$
   example: "11011"
-
 examples:
-  domestic: "De la Rotonda del Periodista 2 cuadras al sur, Barrio Bolonia, Managua, Nicaragua"
-  international: "Barrio Bolonia, Managua, 11011, Nicaragua"
+  domestic: De la Rotonda del Periodista 2 cuadras al sur, Barrio Bolonia, Managua, Nicaragua
+  international: Barrio Bolonia, Managua, 11011, Nicaragua
+geo:
+  center:
+    latitude: 12.8654
+    longitude: -85.2072
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.575Z"

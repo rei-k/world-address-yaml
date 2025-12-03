@@ -1,19 +1,16 @@
-name: 
+name:
   en: Spain
   local:
     - lang: es
       value: España
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: ES
   alpha3: ESP
   numeric: "724"
-
 continent: Europe
 subregion: Southern Europe
-
 languages:
   - name: Spanish
     script: Latin
@@ -26,14 +23,12 @@ languages:
     role: auxiliary
     country_name:
       en: Spain
-
 administrative_divisions:
   level1:
     type: Autonomous Community
     label_local: Comunidad Autónoma
     label_en: Autonomous Community
     count: 17
-
 address_format:
   order_variants:
     - context: domestic
@@ -54,19 +49,23 @@ address_format:
         - city
         - province
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric postal code"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric postal code
     example: "28013"
-
 examples:
-  domestic_raw: "Calle Mayor 1, 28013 Madrid"
-  domestic_normalized: "Calle Mayor 1 28013 Madrid"
-  international: "Calle Mayor 1, 28013 Madrid, Spain"
-
+  domestic_raw: Calle Mayor 1, 28013 Madrid
+  domestic_normalized: Calle Mayor 1 28013 Madrid
+  international: Calle Mayor 1, 28013 Madrid, Spain
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 40.4637
+    longitude: -3.7492
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.652Z"

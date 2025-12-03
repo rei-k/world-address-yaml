@@ -1,25 +1,27 @@
 name:
   en: Queen Maud Land
   local: Dronning Maud Land
-
 claimant_country:
   name: Norway
   alpha2: "NO"
-
 claim_details:
-  sector: "20°W to 45°E, between 60°S and the South Pole"
+  sector: 20°W to 45°E, between 60°S and the South Pole
   area_km2: 2700000
   established: 1939
   overlaps_with: []
-  note: "Norwegian claim does not extend to the South Pole (unique among claims)"
-
+  note: Norwegian claim does not extend to the South Pole (unique among claims)
 address_notes:
-  - "Mail routed through Norway"
-  - "Norway operates Troll Station (year-round since 2005)"
-
+  - Mail routed through Norway
+  - Norway operates Troll Station (year-round since 2005)
 major_stations:
   - Troll Station
-
 status:
   recognized: false
-  note: "Claim suspended under Antarctic Treaty; no overlapping claims"
+  note: Claim suspended under Antarctic Treaty; no overlapping claims
+geo:
+  center:
+    latitude: -72
+    longitude: 5
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:55:11.678Z"

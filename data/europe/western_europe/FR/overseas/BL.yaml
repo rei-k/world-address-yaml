@@ -1,19 +1,16 @@
-name: 
+name:
   en: Saint Barthélemy
   local:
     - lang: fr
       value: Saint-Barthélemy
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: BL
   alpha3: BLM
   numeric: "652"
-
 continent: North America
 subregion: Caribbean
-
 languages:
   - name: French
     script: Latin
@@ -26,14 +23,12 @@ languages:
     role: widely_spoken
     country_name:
       en: Saint Barthélemy
-
 administrative_divisions:
   level1:
     type: Parish
     label_local: Quartier
     label_en: Parish
     count: 40
-
 address_format:
   order_variants:
     - context: domestic
@@ -52,19 +47,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^97133$"
-    description: "All addresses use postal code 97133"
+    regex: ^97133$
+    description: All addresses use postal code 97133
     example: "97133"
-
 examples:
-  domestic_raw: "Rue du Général de Gaulle, 97133 Gustavia"
-  domestic_normalized: "Rue du Général de Gaulle 97133 Gustavia"
-  international: "Rue du Général de Gaulle, 97133 Gustavia, Saint-Barthélemy"
-
+  domestic_raw: Rue du Général de Gaulle, 97133 Gustavia
+  domestic_normalized: Rue du Général de Gaulle 97133 Gustavia
+  international: Rue du Général de Gaulle, 97133 Gustavia, Saint-Barthélemy
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 17.9
+    longitude: -62.8333
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.659Z"

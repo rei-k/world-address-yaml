@@ -9,14 +9,11 @@ name:
       value: Azores
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: PT-20
   alpha3: null
   numeric: null
-
 region_of: Portugal
-
 languages:
   - name: Portuguese
     script: Latin
@@ -29,14 +26,19 @@ languages:
     role: auxiliary
     country_name:
       en: Azores
-
 address_format:
   postal_code:
     required: true
-    regex: "^9[0-9]{3}-[0-9]{3}$"
-    description: "Postal codes in the range 95xx–98xx for Azores municipalities"
-    example: "9500-321"
-
+    regex: ^9[0-9]{3}-[0-9]{3}$
+    description: Postal codes in the range 95xx–98xx for Azores municipalities
+    example: 9500-321
 examples:
-  domestic_raw: "Rua Direita 12, 9500-321 Ponta Delgada"
-  international: "Rua Direita 12, 9500-321 Ponta Delgada, Azores, Portugal"
+  domestic_raw: Rua Direita 12, 9500-321 Ponta Delgada
+  international: Rua Direita 12, 9500-321 Ponta Delgada, Azores, Portugal
+geo:
+  center:
+    latitude: 38.5244
+    longitude: -28.0631
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:55:45.036Z"

@@ -1,4 +1,4 @@
-name: 
+name:
   en: Ireland
   local:
     - lang: ga
@@ -9,15 +9,12 @@ name:
       value: Ireland
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: IE
   alpha3: IRL
   numeric: "372"
-
 continent: Europe
 subregion: Northern Europe
-
 languages:
   - name: Irish
     script: Latin
@@ -30,14 +27,12 @@ languages:
     role: official
     country_name:
       en: Ireland
-
 administrative_divisions:
   level1:
     type: County
     label_local: Contae
     label_en: County
     count: 26
-
 address_format:
   order_variants:
     - context: domestic
@@ -58,19 +53,23 @@ address_format:
         - city
         - eircode
         - country
-
   postal_code:
     required: true
-    regex: "^[A-Z0-9]{3} ?[A-Z0-9]{4}$"
+    regex: ^[A-Z0-9]{3} ?[A-Z0-9]{4}$
     description: "Eircode: 7-character alphanumeric (e.g., D02 XY12)"
-    example: "D02 XY12"
-
+    example: D02 XY12
 examples:
-  domestic_raw: "12 Nassau Street, Dublin 2, D02 XY12"
-  domestic_normalized: "12 Nassau Street Dublin 2 D02 XY12"
-  international: "12 Nassau Street, D02 XY12 Dublin, Ireland"
-
+  domestic_raw: 12 Nassau Street, Dublin 2, D02 XY12
+  domestic_normalized: 12 Nassau Street Dublin 2 D02 XY12
+  international: 12 Nassau Street, D02 XY12 Dublin, Ireland
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 53.4129
+    longitude: -8.2439
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.644Z"

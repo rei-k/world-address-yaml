@@ -9,15 +9,12 @@ name:
       value: Algérie
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: DZ
   alpha3: DZA
   numeric: "012"
-
 continent: Africa
 subregion: Northern Africa
-
 languages:
   - name: Arabic
     script: Arabic
@@ -40,7 +37,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Algeria
-
 administrative_divisions:
   level1:
     type: Wilaya
@@ -58,38 +54,64 @@ administrative_divisions:
     label_local: بلدية
     label_en: Municipality
     count: null
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, commune, daira, wilaya, postal_code, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - commune
+        - daira
+        - wilaya
+        - postal_code
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, city, wilaya, postal_code, country]
-
-  building: { required: false, example: "Immeuble El-Djazair" }
-  floor: { required: false, example: "4ème étage" }
-  room: { required: false, example: "Bureau 402" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - city
+        - wilaya
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Immeuble El-Djazair
+  floor:
+    required: false
+    example: 4ème étage
+  room:
+    required: false
+    example: Bureau 402
   postal_code:
     required: true
     required_for_international: true
-    regex: "^[0-9]{5}$"
+    regex: ^[0-9]{5}$
     length: 5
-    description: "5-digit postal code"
+    description: 5-digit postal code
     example: "16000"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Wilaya name is required"
+    - Wilaya name is required
     - "Postal code format: 5 digits"
-
 examples:
-  domestic_raw: "شارع ديدوش مراد، 16000 الجزائر العاصمة"
-  domestic_normalized: "Rue Didouche Mourad, 16000 Algiers"
-  international: "Rue Didouche Mourad, 16000 Algiers, Algeria"
-
+  domestic_raw: شارع ديدوش مراد، 16000 الجزائر العاصمة
+  domestic_normalized: Rue Didouche Mourad, 16000 Algiers
+  international: Rue Didouche Mourad, 16000 Algiers, Algeria
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 28.0339
+    longitude: 1.6596
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.542Z"

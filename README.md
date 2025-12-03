@@ -86,7 +86,7 @@ Veybookにアカウントを持ち、住所を登録している場合：
 - **フルスキーマ対応 / Full Schema Support**: 257 (100%)
 - **平均完成度 / Average Completeness**: 99%
 - **POS対応 / POS Support**: 2 countries (JP, US)
-- **緯度経度対応 / Geo-coordinates**: 1 country (JP)
+- **緯度経度対応 / Geo-coordinates**: 257 countries (100%)
 
 完全なデータ統計を見るには:
 ```bash

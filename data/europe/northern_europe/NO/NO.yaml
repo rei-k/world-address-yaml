@@ -1,4 +1,4 @@
-name: 
+name:
   en: Norway
   local:
     - lang: "no"
@@ -9,15 +9,12 @@ name:
       value: Noreg
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: "NO"
   alpha3: NOR
   numeric: "578"
-
 continent: Europe
 subregion: Northern Europe
-
 languages:
   - name: Norwegian Bokmål
     script: Latin
@@ -36,14 +33,12 @@ languages:
     role: auxiliary
     country_name:
       en: Norway
-
 administrative_divisions:
   level1:
     type: County
     label_local: Fylke
     label_en: County
     count: 11
-
 address_format:
   order_variants:
     - context: domestic
@@ -62,19 +57,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{4}$"
-    description: "4-digit numeric postal code"
+    regex: ^[0-9]{4}$
+    description: 4-digit numeric postal code
     example: "0150"
-
 examples:
-  domestic_raw: "Karl Johans gate 15, 0150 Oslo"
-  domestic_normalized: "Karl Johans gate 15 0150 Oslo"
-  international: "Karl Johans gate 15, 0150 Oslo, Norway"
-
+  domestic_raw: Karl Johans gate 15, 0150 Oslo
+  domestic_normalized: Karl Johans gate 15 0150 Oslo
+  international: Karl Johans gate 15, 0150 Oslo, Norway
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 60.472
+    longitude: 8.4689
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.646Z"

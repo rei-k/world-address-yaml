@@ -5,15 +5,12 @@ name:
       value: Lesotho
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: LS
   alpha3: LSO
   numeric: "426"
-
 continent: Africa
 subregion: Southern Africa
-
 languages:
   - name: Sesotho
     script: Latin
@@ -24,7 +21,6 @@ languages:
     direction: ltr
     role: official_administrative
     required_for_shipping: true
-
 administrative_divisions:
   level1:
     type: District
@@ -36,15 +32,32 @@ administrative_divisions:
   level3:
     type: Village
     count: null
-
 address_format:
   order_variants:
-    - domestic: [recipient, building, street_address, village, district, country]
-    - international: [recipient, building, street_address, district, postal_code, country]
-
+    - domestic:
+        - recipient
+        - building
+        - street_address
+        - village
+        - district
+        - country
+    - international:
+        - recipient
+        - building
+        - street_address
+        - district
+        - postal_code
+        - country
 postal_code:
   required: false
   required_for_international: true
   stability: medium
-  regex: "^[0-9]{3}$"
+  regex: ^[0-9]{3}$
   example: "100"
+geo:
+  center:
+    latitude: -29.61
+    longitude: 28.2336
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.549Z"

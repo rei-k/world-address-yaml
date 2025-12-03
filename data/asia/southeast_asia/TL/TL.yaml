@@ -9,15 +9,12 @@ name:
       value: Timór-Leste
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: TL
   alpha3: TLS
   numeric: "626"
-
 continent: Asia
 subregion: Southeast Asia
-
 languages:
   - name: Portuguese
     script: Latin
@@ -31,7 +28,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: East Timor
-
 administrative_divisions:
   level1:
     type: Municipality
@@ -39,28 +35,50 @@ administrative_divisions:
     label_en: Municipality
     count: 13
     source: ../../data/tl_municipalities.json
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, municipality, suco, street_address, building, room, postal_code, country]
+      order:
+        - recipient
+        - municipality
+        - suco
+        - street_address
+        - building
+        - room
+        - postal_code
+        - country
     - context: international
-      order: [recipient, building, room, street_address, suco, municipality, postal_code, country]
-
-  building: { required: false, example: "Hotel Timor" }
-  room: { required: false, example: "201" }
-
+      order:
+        - recipient
+        - building
+        - room
+        - street_address
+        - suco
+        - municipality
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Hotel Timor
+  room:
+    required: false
+    example: "201"
   postal_code:
     required: false
-    description: "Postal codes are not widely used"
+    description: Postal codes are not widely used
     coverage: none
-
 examples:
-  domestic_raw: "Hotel Timor, Dili"
-  domestic_normalized: "Hotel Timor Dili"
-  international: "Room 201, Hotel Timor, Dili, Timor-Leste"
-
+  domestic_raw: Hotel Timor, Dili
+  domestic_normalized: Hotel Timor Dili
+  international: Room 201, Hotel Timor, Dili, Timor-Leste
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -8.8742
+    longitude: 125.7275
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.622Z"

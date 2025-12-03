@@ -1,4 +1,4 @@
-name: 
+name:
   en: Gibraltar
   local:
     - lang: en
@@ -9,15 +9,12 @@ name:
       value: Gibraltar
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: GI
   alpha3: GIB
   numeric: "292"
-
 continent: Europe
 subregion: Southern Europe
-
 languages:
   - name: English
     script: Latin
@@ -30,14 +27,12 @@ languages:
     country_name:
       es: Gibraltar
       en: Gibraltar
-
 administrative_divisions:
   level1:
     type: District
     label_local: District
     label_en: District
     count: null
-
 address_format:
   order_variants:
     - context: domestic
@@ -54,18 +49,22 @@ address_format:
         - street
         - city
         - country
-
   postal_code:
     required: false
-    description: "No postal codes in use"
+    description: No postal codes in use
     example: ""
-
 examples:
-  domestic_raw: "12 Main Street, Gibraltar"
-  domestic_normalized: "12 Main Street Gibraltar"
-  international: "12 Main Street, Gibraltar"
-
+  domestic_raw: 12 Main Street, Gibraltar
+  domestic_normalized: 12 Main Street Gibraltar
+  international: 12 Main Street, Gibraltar
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 36.1408
+    longitude: -5.3536
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.641Z"

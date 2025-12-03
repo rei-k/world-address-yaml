@@ -9,16 +9,13 @@ name:
       value: Косово
       script: Cyrillic
       direction: ltr
-
 iso_codes:
   alpha2: XK
   alpha3: XKX
   numeric: ""
-  note: "ISO 3166-1 user-assigned code; not officially assigned"
-
+  note: ISO 3166-1 user-assigned code; not officially assigned
 continent: Europe
 subregion: Southeastern Europe
-
 languages:
   - name: Albanian
     script: Latin
@@ -36,40 +33,53 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Kosovo
-
 administrative_divisions:
   level1:
     type: Municipality
     label_local: Komuna
     label_en: Municipality
     count: 38
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, number, postal_code, city, country]
+      order:
+        - recipient
+        - street_address
+        - number
+        - postal_code
+        - city
+        - country
     - context: international
-      order: [recipient, street_address, number, postal_code, city, country]
-
+      order:
+        - recipient
+        - street_address
+        - number
+        - postal_code
+        - city
+        - country
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric postal code"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric postal code
     example: "10000"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Postal code is 5 digits"
-    - "Both Albanian and Serbian scripts accepted"
-
+    - Postal code is 5 digits
+    - Both Albanian and Serbian scripts accepted
 examples:
-  domestic_raw: "Rruga Agim Ramadani 12, 10000 Prishtinë"
-  domestic_normalized: "Rruga Agim Ramadani 12 10000 Prishtinë"
-  international: "Rruga Agim Ramadani 12, 10000 Pristina, Kosovo"
-
+  domestic_raw: Rruga Agim Ramadani 12, 10000 Prishtinë
+  domestic_normalized: Rruga Agim Ramadani 12 10000 Prishtinë
+  international: Rruga Agim Ramadani 12, 10000 Pristina, Kosovo
 status:
   un_member: false
   recognized: partial
   disputed: true
-  note: "Partially recognized state; recognized by ~100 UN member states"
+  note: Partially recognized state; recognized by ~100 UN member states
+geo:
+  center:
+    latitude: 42.6026
+    longitude: 20.903
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.650Z"

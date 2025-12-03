@@ -5,15 +5,12 @@ name:
       value: عمان
       script: Arabic
       direction: rtl
-
 iso_codes:
   alpha2: OM
   alpha3: OMN
   numeric: "512"
-
 continent: Asia
 subregion: West Asia
-
 languages:
   - name: Arabic
     script: Arabic
@@ -23,7 +20,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Oman
-
 administrative_divisions:
   level1:
     type: Governorate
@@ -31,7 +27,6 @@ administrative_divisions:
     label_en: Governorate
     count: 11
     source: ../../data/om_governorates.json
-
 address_format:
   order_variants:
     - context: domestic
@@ -54,19 +49,23 @@ address_format:
         - governorate
         - postal_code
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{3}$"
-    description: "3-digit numeric"
+    regex: ^[0-9]{3}$
+    description: 3-digit numeric
     example: "112"
-
 examples:
-  domestic_raw: "Madinat Qaboos, Muscat 112"
-  domestic_normalized: "Madinat Qaboos Muscat 112"
-  international: "Building 8, Madinat Qaboos, Muscat 112, Oman"
-
+  domestic_raw: Madinat Qaboos, Muscat 112
+  domestic_normalized: Madinat Qaboos Muscat 112
+  international: Building 8, Madinat Qaboos, Muscat 112, Oman
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 21.4735
+    longitude: 55.9754
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.626Z"

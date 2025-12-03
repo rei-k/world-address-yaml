@@ -1,33 +1,28 @@
-name: 
+name:
   en: British Virgin Islands
   local:
     - lang: en
       value: British Virgin Islands
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: VG
   alpha3: VGB
   numeric: "092"
-
 continent: North America
 subregion: Caribbean
-
 languages:
   - name: English
     script: Latin
     role: official
     country_name:
       en: British Virgin Islands
-
 administrative_divisions:
   level1:
     type: Island
     label_local: Island
     label_en: Island
     count: 4
-
 address_format:
   order_variants:
     - context: domestic
@@ -44,19 +39,23 @@ address_format:
         - city
         - postal_code
         - country
-
   postal_code:
     required: true
-    regex: "^VG[0-9]{4}$"
-    description: "VG followed by 4 digits"
-    example: "VG1110"
-
+    regex: ^VG[0-9]{4}$
+    description: VG followed by 4 digits
+    example: VG1110
 examples:
-  domestic_raw: "Main Street, Road Town, VG1110 Tortola"
-  domestic_normalized: "Main Street Road Town VG1110 Tortola"
-  international: "Main Street, Road Town, VG1110 Tortola, British Virgin Islands"
-
+  domestic_raw: Main Street, Road Town, VG1110 Tortola
+  domestic_normalized: Main Street Road Town VG1110 Tortola
+  international: Main Street, Road Town, VG1110 Tortola, British Virgin Islands
 status:
   un_member: false
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 18.4207
+    longitude: -64.6399
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.644Z"

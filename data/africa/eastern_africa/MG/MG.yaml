@@ -9,15 +9,12 @@ name:
       value: Madagascar
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: MG
   alpha3: MDG
   numeric: "450"
-
 continent: Africa
 subregion: Eastern Africa
-
 languages:
   - name: Malagasy
     script: Latin
@@ -35,7 +32,6 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Madagascar
-
 administrative_divisions:
   level1:
     type: Province
@@ -53,38 +49,63 @@ administrative_divisions:
     label_local: Fivondronana
     label_en: District
     count: null
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, building, floor, room, street_address, district, region, province, postal_code, country]
+      order:
+        - recipient
+        - building
+        - floor
+        - room
+        - street_address
+        - district
+        - region
+        - province
+        - postal_code
+        - country
     - context: international
-      order: [recipient, room, floor, building, street_address, city, postal_code, country]
-
-  building: { required: false, example: "Immeuble ARO" }
-  floor: { required: false, example: "5ème étage" }
-  room: { required: false, example: "Bureau 503" }
-
+      order:
+        - recipient
+        - room
+        - floor
+        - building
+        - street_address
+        - city
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Immeuble ARO
+  floor:
+    required: false
+    example: 5ème étage
+  room:
+    required: false
+    example: Bureau 503
   postal_code:
     required: true
     required_for_international: true
-    regex: "^[0-9]{3}$"
+    regex: ^[0-9]{3}$
     length: 3
-    description: "3-digit postal code"
+    description: 3-digit postal code
     example: "101"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "City name is required"
+    - City name is required
     - "Postal code format: 3 digits"
-
 examples:
-  domestic_raw: "Lalana Rainitovo, 101 Antananarivo"
-  domestic_normalized: "Rue Rainitovo, 101 Antananarivo"
-  international: "Rue Rainitovo, 101 Antananarivo, Madagascar"
-
+  domestic_raw: Lalana Rainitovo, 101 Antananarivo
+  domestic_normalized: Rue Rainitovo, 101 Antananarivo
+  international: Rue Rainitovo, 101 Antananarivo, Madagascar
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -18.7669
+    longitude: 46.8691
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.528Z"

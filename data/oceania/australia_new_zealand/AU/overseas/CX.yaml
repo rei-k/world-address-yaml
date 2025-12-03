@@ -5,18 +5,14 @@ name:
       value: Christmas Island
       script: Latin
       direction: ltr
-
 parent_country:
   alpha2: AU
   name: Australia
-
 iso_codes:
   alpha2: CX
   alpha3: CXR
   numeric: "162"
-
 subregion: Indian Ocean
-
 languages:
   - name: English
     script: Latin
@@ -32,33 +28,45 @@ languages:
     script: Latin
     direction: ltr
     role: community
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, locality, postal_code, country]
+      order:
+        - recipient
+        - street_address
+        - locality
+        - postal_code
+        - country
     - context: international
-      order: [recipient, street_address, locality, postal_code, country]
-
+      order:
+        - recipient
+        - street_address
+        - locality
+        - postal_code
+        - country
   postal_code:
     required: true
-    regex: "^6798$"
-    description: "Single postcode for Christmas Island"
+    regex: ^6798$
+    description: Single postcode for Christmas Island
     example: "6798"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Christmas Island uses Australian postal system"
+    - Christmas Island uses Australian postal system
     - "Single postcode: 6798"
-
 examples:
-  domestic_raw: "123 Murray Road, Settlement, Christmas Island 6798"
-  domestic_normalized: "123 Murray Road Settlement 6798"
-  international: "123 Murray Road, Settlement, Christmas Island 6798, Australia"
-
+  domestic_raw: 123 Murray Road, Settlement, Christmas Island 6798
+  domestic_normalized: 123 Murray Road Settlement 6798
+  international: 123 Murray Road, Settlement, Christmas Island 6798, Australia
 status:
   un_member: false
   recognized: true
   disputed: false
-  note: "External territory of Australia in the Indian Ocean"
+  note: External territory of Australia in the Indian Ocean
+geo:
+  center:
+    latitude: -10.4475
+    longitude: 105.6904
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.669Z"

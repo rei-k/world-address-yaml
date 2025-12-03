@@ -9,15 +9,12 @@ name:
       value: Киргизия
       script: Cyrillic
       direction: ltr
-
 iso_codes:
   alpha2: KG
   alpha3: KGZ
   numeric: "417"
-
 continent: Asia
 subregion: Central Asia
-
 languages:
   - name: Kyrgyz
     script: Cyrillic
@@ -31,7 +28,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Kyrgyzstan
-
 administrative_divisions:
   level1:
     type: Region/City
@@ -39,29 +35,53 @@ administrative_divisions:
     label_en: Region / City
     count: 9
     source: ../../data/kg_regions.json
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, region, city, district, street_address, building, room, postal_code, country]
+      order:
+        - recipient
+        - region
+        - city
+        - district
+        - street_address
+        - building
+        - room
+        - postal_code
+        - country
     - context: international
-      order: [recipient, building, room, street_address, district, city, region, postal_code, country]
-
-  building: { required: false, example: "Bishkek Park Mall" }
-  room: { required: false, example: "403" }
-
+      order:
+        - recipient
+        - building
+        - room
+        - street_address
+        - district
+        - city
+        - region
+        - postal_code
+        - country
+  building:
+    required: false
+    example: Bishkek Park Mall
+  room:
+    required: false
+    example: "403"
   postal_code:
     required: true
-    regex: "^[0-9]{6}$"
-    description: "6-digit numeric"
+    regex: ^[0-9]{6}$
+    description: 6-digit numeric
     example: "720001"
-
 examples:
-  domestic_raw: "Bishkek Park Mall, Bishkek 720001"
-  domestic_normalized: "Bishkek Park Mall Bishkek 720001"
-  international: "Room 403, Bishkek Park Mall, Bishkek 720001, Kyrgyzstan"
-
+  domestic_raw: Bishkek Park Mall, Bishkek 720001
+  domestic_normalized: Bishkek Park Mall Bishkek 720001
+  international: Room 403, Bishkek Park Mall, Bishkek 720001, Kyrgyzstan
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 41.2044
+    longitude: 74.7661
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.603Z"

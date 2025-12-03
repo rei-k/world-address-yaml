@@ -5,22 +5,18 @@ name:
       value: Namibia
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: NA
   alpha3: NAM
   numeric: "516"
-
 continent: Africa
 subregion: Southern Africa
-
 languages:
   - name: English
     role: official_administrative
     required_for_shipping: true
   - name: Oshiwambo / Nama / Herero / Afrikaans
     role: regional_place_names
-
 administrative_divisions:
   level1:
     type: Region
@@ -32,15 +28,33 @@ administrative_divisions:
   level3:
     type: Settlement / Village
     count: null
-
 address_format:
   order_variants:
-    - domestic: [recipient, building, street_address, settlement, constituency, region, country]
-    - international: [recipient, building, street_address, region, postal_code, country]
-
+    - domestic:
+        - recipient
+        - building
+        - street_address
+        - settlement
+        - constituency
+        - region
+        - country
+    - international:
+        - recipient
+        - building
+        - street_address
+        - region
+        - postal_code
+        - country
 postal_code:
   required: false
   required_for_international: true
   stability: low
-  regex: "^[0-9]{5}$"
+  regex: ^[0-9]{5}$
   example: "9000"
+geo:
+  center:
+    latitude: -22.9576
+    longitude: 18.4904
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.549Z"

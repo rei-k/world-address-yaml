@@ -5,16 +5,12 @@ name:
       value: Archipiélago Juan Fernández
       script: Latin
       direction: ltr
-
 parent_country:
   alpha2: CL
   name: Chile
-
 iso_codes:
-  note: "No separate ISO code; part of Chile (CL)"
-
+  note: No separate ISO code; part of Chile (CL)
 subregion: South Pacific
-
 languages:
   - name: Spanish
     script: Latin
@@ -27,41 +23,52 @@ languages:
     role: auxiliary
     required_for_shipping: true
     country_name: Juan Fernández Islands
-
 administrative_divisions:
   level1:
     type: Commune
     label_local: Comuna
     label_en: Commune
-    note: "Part of Valparaíso Region"
-
+    note: Part of Valparaíso Region
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, san_juan_bautista, postal_code, country]
+      order:
+        - recipient
+        - street_address
+        - san_juan_bautista
+        - postal_code
+        - country
     - context: international
-      order: [recipient, street_address, san_juan_bautista, postal_code, country]
-
+      order:
+        - recipient
+        - street_address
+        - san_juan_bautista
+        - postal_code
+        - country
   postal_code:
     required: true
-    regex: "^[0-9]{7}$"
-    description: "7-digit numeric postal code (Chilean system)"
+    regex: ^[0-9]{7}$
+    description: 7-digit numeric postal code (Chilean system)
     example: "2500000"
-
 validation:
   allow_latin_transliteration: true
   rules:
-    - "Main settlement is San Juan Bautista on Robinson Crusoe Island"
-    - "Uses Chilean postal code format"
-
+    - Main settlement is San Juan Bautista on Robinson Crusoe Island
+    - Uses Chilean postal code format
 examples:
-  domestic_raw: "Calle Principal s/n, San Juan Bautista, Juan Fernández, 2500000"
-  domestic_normalized: "Calle Principal s/n San Juan Bautista 2500000"
-  international: "Calle Principal s/n, San Juan Bautista, Juan Fernández Islands 2500000, Chile"
-
+  domestic_raw: Calle Principal s/n, San Juan Bautista, Juan Fernández, 2500000
+  domestic_normalized: Calle Principal s/n San Juan Bautista 2500000
+  international: Calle Principal s/n, San Juan Bautista, Juan Fernández Islands 2500000, Chile
 status:
   special_territory: true
   un_member: false
   recognized: true
   disputed: false
-  note: "Chilean archipelago famous as the inspiration for Robinson Crusoe"
+  note: Chilean archipelago famous as the inspiration for Robinson Crusoe
+geo:
+  center:
+    latitude: -33.6348
+    longitude: -78.8311
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:55:11.666Z"

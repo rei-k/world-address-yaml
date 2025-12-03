@@ -1,19 +1,16 @@
-name: 
+name:
   en: Germany
   local:
     - lang: de
       value: Deutschland
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: DE
   alpha3: DEU
   numeric: "276"
-
 continent: Europe
 subregion: Western Europe
-
 languages:
   - name: German
     script: Latin
@@ -27,7 +24,6 @@ languages:
     script: Latin
     role: regional
     country_name: Frysk
-
 administrative_divisions:
   level1:
     type: State
@@ -51,7 +47,6 @@ administrative_divisions:
       - Sachsen-Anhalt
       - Schleswig-Holstein
       - Thüringen
-
 address_format:
   order_variants:
     - context: domestic
@@ -74,19 +69,23 @@ address_format:
         - postal_code
         - city
         - country
-
   postal_code:
     required: true
-    regex: "^[0-9]{5}$"
-    description: "5-digit numeric postal code"
+    regex: ^[0-9]{5}$
+    description: 5-digit numeric postal code
     example: "10115"
-
 examples:
-  domestic_raw: "Musterstraße 12, 10115 Berlin"
-  domestic_normalized: "Musterstraße 12 10115 Berlin"
-  international: "Musterstraße 12, 10115 Berlin, Germany"
-
+  domestic_raw: Musterstraße 12, 10115 Berlin
+  domestic_normalized: Musterstraße 12 10115 Berlin
+  international: Musterstraße 12, 10115 Berlin, Germany
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: 51.1657
+    longitude: 10.4515
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.658Z"

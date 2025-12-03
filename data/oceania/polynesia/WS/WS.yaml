@@ -5,15 +5,12 @@ name:
       value: Samoa
       script: Latin
       direction: ltr
-
 iso_codes:
   alpha2: WS
   alpha3: WSM
   numeric: "882"
-
 continent: Oceania
 subregion: Polynesia
-
 languages:
   - name: Samoan
     script: Latin
@@ -26,32 +23,44 @@ languages:
     role: official
     country_name: Samoa
     required_for_shipping: true
-
 administrative_divisions:
   level1:
     type: District
     label_local: Itumalo
     label_en: District
     count: 11
-
 address_format:
   order_variants:
     - context: domestic
-      order: [recipient, street_address, village, district, country]
+      order:
+        - recipient
+        - street_address
+        - village
+        - district
+        - country
     - context: international
-      order: [recipient, street_address, village, district, country]
-
+      order:
+        - recipient
+        - street_address
+        - village
+        - district
+        - country
   postal_code:
     required: false
-    description: "Postal codes are not commonly used in Samoa"
+    description: Postal codes are not commonly used in Samoa
     coverage: none
-
 examples:
-  domestic_raw: "PO Box 123, Beach Road, Apia, Tuamasaga"
-  domestic_normalized: "PO Box 123 Beach Road Apia Tuamasaga"
-  international: "PO Box 123, Beach Road, Apia, Samoa"
-
+  domestic_raw: PO Box 123, Beach Road, Apia, Tuamasaga
+  domestic_normalized: PO Box 123 Beach Road Apia Tuamasaga
+  international: PO Box 123, Beach Road, Apia, Samoa
 status:
   un_member: true
   recognized: true
   disputed: false
+geo:
+  center:
+    latitude: -13.759
+    longitude: -172.1046
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.676Z"

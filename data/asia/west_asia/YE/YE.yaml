@@ -5,15 +5,12 @@ name:
       value: اليمن
       script: Arabic
       direction: rtl
-
 iso_codes:
   alpha2: YE
   alpha3: YEM
   numeric: "887"
-
 continent: Asia
 subregion: West Asia
-
 languages:
   - name: Arabic
     script: Arabic
@@ -23,7 +20,6 @@ languages:
     script: Latin
     role: auxiliary
     country_name: Yemen
-
 administrative_divisions:
   level1:
     type: Governorate
@@ -31,7 +27,6 @@ administrative_divisions:
     label_en: Governorate
     count: 22
     source: ../../data/ye_governorates.json
-
 address_format:
   order_variants:
     - context: domestic
@@ -52,17 +47,21 @@ address_format:
         - district
         - governorate
         - country
-
   postal_code:
     required: false
-    description: "Postal codes not in common use"
-
+    description: Postal codes not in common use
 examples:
-  domestic_raw: "Tahrir Square, Sana'a"
-  domestic_normalized: "Tahrir Square Sana'a"
-  international: "Building 22, Tahrir Square, Sana'a, Yemen"
-
+  domestic_raw: Tahrir Square, Sana'a
+  domestic_normalized: Tahrir Square Sana'a
+  international: Building 22, Tahrir Square, Sana'a, Yemen
 status:
   un_member: true
   recognized: true
   disputed: true
+geo:
+  center:
+    latitude: 15.5527
+    longitude: 48.5164
+    accuracy: 1000
+    source: database
+    captured_at: "2025-12-03T16:54:11.629Z"
