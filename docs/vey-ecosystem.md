@@ -469,7 +469,7 @@ The Vey ecosystem is built on the following technical foundation:
 - 📖 [クラウド住所帳システム詳細](./cloud-address-book.md)
 - 🔐 [ZKPプロトコル](./zkp-protocol.md)
 - 🛒 [ECサイト統合ガイド](./ec-integration-flow.md)
-- 📱 [QR/NFC統合ガイド](./qr-nfc-integration.md)
+- 📱 [QR/NFC SDK](../sdk/qr-nfc/README.md)
 
 ---
 
