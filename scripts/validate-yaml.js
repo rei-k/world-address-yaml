@@ -70,9 +70,27 @@ function validateYamlFile(filePath) {
       return false;
     }
     
+    // Skip validation for special files (meta.yaml, schema.yaml)
+    const fileName = path.basename(filePath);
+    if (fileName === 'meta.yaml' || fileName === 'schema.yaml') {
+      validFiles++;
+      return true;
+    }
+    
+    // For regions, overseas territories, claims, stations, and subregions, only require name.en
+    const isSpecialRegion = filePath.includes('/regions/') || 
+                           filePath.includes('/overseas/') ||
+                           filePath.includes('/claims/') ||
+                           filePath.includes('/stations/') ||
+                           filePath.includes('/subregions/');
+    
+    const requiredForThisFile = isSpecialRegion 
+      ? ['name.en']
+      : REQUIRED_FIELDS;
+    
     // Check required fields
     const missingFields = [];
-    for (const field of REQUIRED_FIELDS) {
+    for (const field of requiredForThisFile) {
       if (!hasNestedField(data, field)) {
         missingFields.push(field);
       }
@@ -88,20 +106,22 @@ function validateYamlFile(filePath) {
       return false;
     }
     
-    // Check recommended fields (warnings only)
-    const missingRecommended = [];
-    for (const field of RECOMMENDED_FIELDS) {
-      if (!hasNestedField(data, field)) {
-        missingRecommended.push(field);
+    // Check recommended fields (warnings only) - only for regular countries
+    if (!isSpecialRegion) {
+      const missingRecommended = [];
+      for (const field of RECOMMENDED_FIELDS) {
+        if (!hasNestedField(data, field)) {
+          missingRecommended.push(field);
+        }
       }
-    }
-    
-    if (missingRecommended.length > 0) {
-      errors.push({
-        file: filePath,
-        type: 'WARNING',
-        message: `Missing recommended fields: ${missingRecommended.join(', ')}`
-      });
+      
+      if (missingRecommended.length > 0) {
+        errors.push({
+          file: filePath,
+          type: 'WARNING',
+          message: `Missing recommended fields: ${missingRecommended.join(', ')}`
+        });
+      }
     }
     
     validFiles++;
