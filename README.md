@@ -17,6 +17,7 @@
 - [Vey Ecosystem](#-veyエコシステム--vey-ecosystem)
 - [Project Status](#-プロジェクトステータス--project-status)
 - [Features](#-features)
+- [Application Screenshots](#-アプリケーションスクリーンショット--application-screenshots)
 - [Installation & Usage](#-使用方法)
 - [Data Structure](#-データ形式)
 - [SDK & Developer Tools](#-sdk開発者向けツール)
@@ -134,6 +135,58 @@ For detailed information about the Vey ecosystem:
 - **99% Average Completeness** - High-quality, comprehensive data coverage
 - **100% Schema Support** - All 257 countries follow standardized schema
 - **Continuous Validation** - GitHub Actions CI/CD for quality assurance
+
+---
+
+## 📸 アプリケーションスクリーンショット / Application Screenshots
+
+### 主要機能の概要 / Feature Overview
+
+![Feature Overview](./docs/images/features/feature-overview.svg)
+
+Veyエコシステムは6つの主要機能で構成されています：
+
+1. **📝 Address Management** - 257カ国対応のクラウド住所管理
+2. **📱 QR/NFC Sharing** - プライバシー保護された住所共有
+3. **🔐 Privacy Protection** - AES-256暗号化 + ゼロ知識証明
+4. **🛍️ E-commerce Integration** - ワンクリックチェックアウト
+5. **👥 Friend Management** - 生住所を見せずに友達管理
+6. **🌍 International Support** - グローバル対応
+
+### QR/NFC共有フロー / QR/NFC Sharing Flow
+
+![QR/NFC Sharing Flow](./docs/images/features/qr-nfc-flow.svg)
+
+**プライバシー第一の住所共有:**
+- QRコード/NFCでワンタップ友達追加
+- 友達は生住所を見ることなくギフトを送信可能
+- 配送業者のみが最終段階で住所にアクセス
+
+### ゼロ知識証明プロトコル / Zero-Knowledge Proof Protocol
+
+![Zero-Knowledge Proof Protocol](./docs/images/features/zkp-flow.svg)
+
+**住所を公開せずに配送を実現:**
+- ECサイトは生住所を保存せず、トークンのみ管理
+- ZK証明で配送可能性を検証
+- 配送業者は配送時のみ住所にアクセス可能
+- 配送完了後24時間で自動削除
+
+### ミニプログラムUI / Mini-Program UI
+
+![Mini-Program UI Flow](./docs/images/mini-programs/ui-flow.svg)
+
+**検索・スキャン中心の設計:**
+- 住所入力フォーム不要
+- Search → Scan → Select → Confirm の4ステップで完結
+- WeChat / Alipay ミニプログラム対応
+
+詳細は以下をご覧ください：
+- **[Veybook アプリケーション](./Vey/apps/Veybook/README.md)** - クラウド住所帳の詳細
+- **[Mini-Programs](./mini-programs/README.md)** - WeChat/Alipay ミニプログラム
+- **[Vey エコシステム](./Vey/README.md)** - 全体システム概要
+
+---
 
 ## 📊 プロジェクトステータス / Project Status
 

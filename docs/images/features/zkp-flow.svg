@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+  <!-- Background -->
+  <rect width="1200" height="700" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="600" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    Zero-Knowledge Proof Address Protocol
+  </text>
+  
+  <!-- User Section -->
+  <g transform="translate(100, 100)">
+    <rect width="250" height="450" rx="10" fill="#3498db" opacity="0.1" stroke="#3498db" stroke-width="3"/>
+    <text x="125" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      👤 User
+    </text>
+    
+    <!-- Step 1 -->
+    <g transform="translate(25, 60)">
+      <circle cx="10" cy="10" r="8" fill="#3498db"/>
+      <text x="25" y="15" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">1. Register Address</text>
+      <text x="25" y="35" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        Raw: 東京都渋谷区...
+      </text>
+      <text x="25" y="50" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        PID: JP-13-113-01
+      </text>
+    </g>
+    
+    <!-- Step 2 -->
+    <g transform="translate(25, 130)">
+      <circle cx="10" cy="10" r="8" fill="#3498db"/>
+      <text x="25" y="15" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">2. Receive VC</text>
+      <text x="25" y="35" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        Verifiable Credential
+      </text>
+      <text x="25" y="50" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        with encrypted address
+      </text>
+    </g>
+    
+    <!-- Step 6 -->
+    <g transform="translate(25, 380)">
+      <circle cx="10" cy="10" r="8" fill="#2ecc71"/>
+      <text x="25" y="15" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">6. Delivery Complete</text>
+      <text x="25" y="35" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        ✅ Package delivered
+      </text>
+    </g>
+  </g>
+  
+  <!-- E-commerce Section -->
+  <g transform="translate(450, 100)">
+    <rect width="250" height="450" rx="10" fill="#9b59b6" opacity="0.1" stroke="#9b59b6" stroke-width="3"/>
+    <text x="125" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      🛍️ E-commerce
+    </text>
+    
+    <!-- Step 3 -->
+    <g transform="translate(25, 60)">
+      <circle cx="10" cy="10" r="8" fill="#9b59b6"/>
+      <text x="25" y="15" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">3. Checkout</text>
+      <text x="25" y="35" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        User selects address
+      </text>
+      <text x="25" y="50" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        (token only)
+      </text>
+    </g>
+    
+    <!-- Step 4 -->
+    <g transform="translate(25, 130)">
+      <circle cx="10" cy="10" r="8" fill="#9b59b6"/>
+      <text x="25" y="15" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">4. Verify ZK Proof</text>
+      <text x="25" y="35" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        Can deliver to PID?
+      </text>
+      <rect x="25" y="45" width="150" height="20" fill="#2ecc71" opacity="0.3" rx="3"/>
+      <text x="100" y="59" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#2ecc71">
+        ✓ Valid (no raw address!)
+      </text>
+    </g>
+    
+    <!-- Step 5 -->
+    <g transform="translate(25, 210)">
+      <circle cx="10" cy="10" r="8" fill="#9b59b6"/>
+      <text x="25" y="15" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">5. Create Order</text>
+      <text x="25" y="35" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        Order #12345
+      </text>
+      <text x="25" y="50" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        PID token stored
+      </text>
+      <rect x="25" y="60" width="180" height="20" fill="#e74c3c" opacity="0.3" rx="3"/>
+      <text x="115" y="74" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#e74c3c">
+        🔒 NO RAW ADDRESS STORED
+      </text>
+    </g>
+  </g>
+  
+  <!-- Delivery Section -->
+  <g transform="translate(800, 100)">
+    <rect width="250" height="450" rx="10" fill="#f39c12" opacity="0.1" stroke="#f39c12" stroke-width="3"/>
+    <text x="125" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      📦 Delivery Carrier
+    </text>
+    
+    <!-- Step 5a -->
+    <g transform="translate(25, 60)">
+      <circle cx="10" cy="10" r="8" fill="#f39c12"/>
+      <text x="25" y="15" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">5a. Pickup Order</text>
+      <text x="25" y="35" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        Receive from EC site
+      </text>
+    </g>
+    
+    <!-- Step 5b -->
+    <g transform="translate(25, 130)">
+      <circle cx="10" cy="10" r="8" fill="#f39c12"/>
+      <text x="25" y="15" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">5b. Request Address</text>
+      <text x="25" y="35" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        Query with PID token
+      </text>
+      <text x="25" y="50" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        + delivery credentials
+      </text>
+    </g>
+    
+    <!-- Step 5c -->
+    <g transform="translate(25, 210)">
+      <circle cx="10" cy="10" r="8" fill="#f39c12"/>
+      <text x="25" y="15" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">5c. Get Address</text>
+      <rect x="25" y="25" width="180" height="20" fill="#2ecc71" opacity="0.3" rx="3"/>
+      <text x="115" y="39" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#2ecc71">
+        ✓ ONLY for this delivery
+      </text>
+      <text x="25" y="55" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        東京都渋谷区...
+      </text>
+    </g>
+    
+    <!-- Step 5d -->
+    <g transform="translate(25, 290)">
+      <circle cx="10" cy="10" r="8" fill="#f39c12"/>
+      <text x="25" y="15" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">5d. Deliver</text>
+      <text x="25" y="35" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        📍 Navigate to address
+      </text>
+      <text x="25" y="50" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        📦 Complete delivery
+      </text>
+    </g>
+    
+    <!-- Step 5e -->
+    <g transform="translate(25, 360)">
+      <circle cx="10" cy="10" r="8" fill="#2ecc71"/>
+      <text x="25" y="15" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">5e. Auto-Delete</text>
+      <text x="25" y="35" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        🗑️ Address purged
+      </text>
+      <text x="25" y="50" font-family="Arial, sans-serif" font-size="11" fill="#7f8c8d">
+        after 24h
+      </text>
+    </g>
+  </g>
+  
+  <!-- Arrows -->
+  <!-- User to EC -->
+  <line x1="350" y1="180" x2="450" y2="180" stroke="#3498db" stroke-width="2" marker-end="url(#arrow1)"/>
+  <text x="400" y="170" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#3498db">Token</text>
+  
+  <!-- EC to Delivery -->
+  <line x1="700" y1="270" x2="800" y2="270" stroke="#9b59b6" stroke-width="2" marker-end="url(#arrow2)"/>
+  <text x="750" y="260" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#9b59b6">PID</text>
+  
+  <!-- Key Feature Box -->
+  <g transform="translate(50, 580)">
+    <rect width="1100" height="80" rx="10" fill="#ecf0f1" stroke="#34495e" stroke-width="2"/>
+    <text x="550" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      🔐 Key Privacy Features
+    </text>
+    <text x="550" y="48" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#34495e">
+      ✓ E-commerce NEVER sees raw address  |  ✓ Zero-knowledge proof validates deliverability  |  ✓ Last-mile disclosure only
+    </text>
+    <text x="550" y="68" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#34495e">
+      ✓ Automatic address deletion after delivery  |  ✓ Full audit trail  |  ✓ User has complete control
+    </text>
+  </g>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrow1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#3498db"/>
+    </marker>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#9b59b6"/>
+    </marker>
+  </defs>
+</svg>

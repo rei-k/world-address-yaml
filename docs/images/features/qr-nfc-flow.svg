@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600">
+  <!-- Background -->
+  <rect width="1200" height="600" fill="#ffffff"/>
+  
+  <!-- Title -->
+  <text x="600" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    QR/NFC Address Sharing Flow
+  </text>
+  
+  <!-- Step 1: User A -->
+  <g transform="translate(100, 100)">
+    <rect width="200" height="120" rx="10" fill="#3498db" opacity="0.2" stroke="#3498db" stroke-width="2"/>
+    <text x="100" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      👤 User A
+    </text>
+    <text x="100" y="60" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      Generate QR Code
+    </text>
+    <text x="100" y="85" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#7f8c8d">
+      or Enable NFC
+    </text>
+    <rect x="60" y="95" width="80" height="15" fill="#2ecc71" rx="3"/>
+    <text x="100" y="106" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#ffffff">
+      ENCRYPTED
+    </text>
+  </g>
+  
+  <!-- Arrow 1 -->
+  <g transform="translate(320, 160)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#3498db" stroke-width="3" marker-end="url(#arrowblue)"/>
+    <text x="40" y="-10" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#3498db">
+      QR/NFC
+    </text>
+  </g>
+  
+  <!-- Step 2: Scan/Tap -->
+  <g transform="translate(420, 100)">
+    <rect width="200" height="120" rx="10" fill="#2ecc71" opacity="0.2" stroke="#2ecc71" stroke-width="2"/>
+    <text x="100" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      📱 Scan/Tap
+    </text>
+    <text x="100" y="60" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      User B scans QR
+    </text>
+    <text x="100" y="85" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#7f8c8d">
+      or taps NFC
+    </text>
+    <rect x="60" y="95" width="80" height="15" fill="#e74c3c" rx="3"/>
+    <text x="100" y="106" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#ffffff">
+      NO ADDRESS
+    </text>
+  </g>
+  
+  <!-- Arrow 2 -->
+  <g transform="translate(640, 160)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#2ecc71" stroke-width="3" marker-end="url(#arrowgreen)"/>
+    <text x="40" y="-10" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#2ecc71">
+      Token
+    </text>
+  </g>
+  
+  <!-- Step 3: Add Friend -->
+  <g transform="translate(740, 100)">
+    <rect width="200" height="120" rx="10" fill="#9b59b6" opacity="0.2" stroke="#9b59b6" stroke-width="2"/>
+    <text x="100" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      👥 Add Friend
+    </text>
+    <text x="100" y="60" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      Friend request sent
+    </text>
+    <text x="100" y="85" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#7f8c8d">
+      to User A
+    </text>
+    <rect x="60" y="95" width="80" height="15" fill="#f39c12" rx="3"/>
+    <text x="100" y="106" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#ffffff">
+      PENDING
+    </text>
+  </g>
+  
+  <!-- Step 4: Accept -->
+  <g transform="translate(740, 280)">
+    <rect width="200" height="120" rx="10" fill="#1abc9c" opacity="0.2" stroke="#1abc9c" stroke-width="2"/>
+    <text x="100" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      ✅ Accept
+    </text>
+    <text x="100" y="60" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      User A accepts
+    </text>
+    <text x="100" y="85" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#7f8c8d">
+      Friend request
+    </text>
+    <rect x="60" y="95" width="80" height="15" fill="#2ecc71" rx="3"/>
+    <text x="100" y="106" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#ffffff">
+      CONNECTED
+    </text>
+  </g>
+  
+  <!-- Arrow 3 (down) -->
+  <g transform="translate(840, 240)">
+    <line x1="0" y1="0" x2="0" y2="20" stroke="#9b59b6" stroke-width="3" marker-end="url(#arrowpurple)"/>
+  </g>
+  
+  <!-- Step 5: Send Gift -->
+  <g transform="translate(420, 280)">
+    <rect width="200" height="120" rx="10" fill="#e74c3c" opacity="0.2" stroke="#e74c3c" stroke-width="2"/>
+    <text x="100" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      🎁 Send Gift
+    </text>
+    <text x="100" y="60" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      User B can now
+    </text>
+    <text x="100" y="85" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#7f8c8d">
+      send to User A
+    </text>
+    <rect x="50" y="95" width="100" height="15" fill="#2ecc71" rx="3"/>
+    <text x="100" y="106" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#ffffff">
+      NO RAW ADDRESS
+    </text>
+  </g>
+  
+  <!-- Arrow 4 -->
+  <g transform="translate(640, 340)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#1abc9c" stroke-width="3" marker-end="url(#arrowcyan)"/>
+    <text x="40" y="-10" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#1abc9c">
+      Connected
+    </text>
+  </g>
+  
+  <!-- Step 6: Delivery -->
+  <g transform="translate(100, 280)">
+    <rect width="200" height="120" rx="10" fill="#f39c12" opacity="0.2" stroke="#f39c12" stroke-width="2"/>
+    <text x="100" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      📦 Delivery
+    </text>
+    <text x="100" y="60" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      Address revealed
+    </text>
+    <text x="100" y="85" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#7f8c8d">
+      only to carrier
+    </text>
+    <rect x="50" y="95" width="100" height="15" fill="#3498db" rx="3"/>
+    <text x="100" y="106" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#ffffff">
+      LAST MILE ONLY
+    </text>
+  </g>
+  
+  <!-- Arrow 5 -->
+  <g transform="translate(320, 340)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#e74c3c" stroke-width="3" marker-end="url(#arrowred)"/>
+    <text x="40" y="-10" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#e74c3c">
+      Order
+    </text>
+  </g>
+  
+  <!-- Privacy Note -->
+  <g transform="translate(50, 450)">
+    <rect width="1100" height="100" rx="10" fill="#ecf0f1" stroke="#95a5a6" stroke-width="2"/>
+    <text x="550" y="30" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      🔐 Privacy Protection
+    </text>
+    <text x="550" y="55" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#34495e">
+      • User B never sees User A's raw address • E-commerce sites only see encrypted tokens
+    </text>
+    <text x="550" y="78" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#34495e">
+      • Address is revealed only to delivery carrier at the last mile • Zero-knowledge proof validates delivery capability
+    </text>
+  </g>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowblue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#3498db"/>
+    </marker>
+    <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2ecc71"/>
+    </marker>
+    <marker id="arrowpurple" markerWidth="10" markerHeight="10" refX="3" refY="9" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,0 L3,9 z" fill="#9b59b6"/>
+    </marker>
+    <marker id="arrowcyan" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1abc9c"/>
+    </marker>
+    <marker id="arrowred" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#e74c3c"/>
+    </marker>
+  </defs>
+</svg>

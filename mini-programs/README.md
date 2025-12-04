@@ -6,6 +6,22 @@
 
 ---
 
+## 📸 UI/UXスクリーンショット / UI/UX Screenshots
+
+### Mini-Program UIフロー / Mini-Program UI Flow
+
+![Mini-Program UI Flow](../docs/images/mini-programs/ui-flow.svg)
+
+**3画面で完結するシンプルなユーザー体験:**
+
+1. **ホーム画面** - 検索バーとクイックアクション (QRスキャン、住所管理)
+2. **QRスキャナー** - カメラでQRコードをスキャンして友達追加
+3. **確認画面** - 友達が追加され、プライバシー保護された状態でギフト送信可能
+
+**デザイン哲学**: すべての操作を Search → Scan → Select → Confirm の4ステップで完結
+
+---
+
 ## 🆕 NEW: 検索・スキャン中心のUI/UX設計 / Search & Scan-Centric UI/UX Design
 
 **住所は書かせない。入力させない。**

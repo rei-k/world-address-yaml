@@ -23,6 +23,58 @@ Veybook is a next-generation address management application that encrypts and se
 
 ---
 
+## 📸 スクリーンショット・機能概要 / Screenshots & Feature Overview
+
+### 機能一覧 / Feature Overview
+
+![Feature Overview](../../../docs/images/features/feature-overview.svg)
+
+Veybookは6つの主要機能で構成されています：
+
+1. **📝 Address Management (住所管理)** - 複数の住所をクラウドで一元管理。自動検証、257カ国対応
+2. **📱 QR/NFC Sharing (QR/NFC共有)** - スキャンするだけで友達追加。生住所を見せずにシェア
+3. **🔐 Privacy Protection (プライバシー保護)** - AES-256暗号化とゼロ知識証明で完全保護
+4. **🛍️ E-commerce Integration (EC連携)** - ワンクリックチェックアウト。住所入力不要
+5. **👥 Friend Management (友達管理)** - 友達にギフトを送る時も生住所を見せない
+6. **🌍 International Support (国際対応)** - 257カ国、多言語、現地通貨対応
+
+### QR/NFC共有フロー / QR/NFC Sharing Flow
+
+![QR/NFC Flow](../../../docs/images/features/qr-nfc-flow.svg)
+
+**プライバシー第一の住所共有:**
+
+1. **QRコード生成** - ユーザーAが暗号化されたQRコード/NFCを生成
+2. **スキャン/タップ** - ユーザーBがスキャン（生住所は見えない）
+3. **友達追加** - 友達リクエストを送信
+4. **承認** - ユーザーAが承認
+5. **ギフト送信** - ユーザーBは生住所を見ずにギフトを送れる
+6. **配送** - 配送業者のみが最終段階で住所を閲覧
+
+### ゼロ知識証明プロトコル / Zero-Knowledge Proof Protocol
+
+![ZKP Flow](../../../docs/images/features/zkp-flow.svg)
+
+**住所を公開せずに配送可能性を証明:**
+
+- 🔒 **ECサイトは生住所を見ない** - トークンのみで配送を管理
+- ✅ **配送可能性を証明** - ZK証明で配送エリア内であることを検証
+- 📊 **完全な監査証跡** - すべてのアクセスをログに記録
+- 🔑 **ユーザーが完全管理** - 住所データの主権はユーザーに
+
+### システムアーキテクチャ / System Architecture
+
+![Veybook Architecture](../../../docs/images/veybook/architecture.svg)
+
+**エンタープライズグレードのマイクロサービスアーキテクチャ:**
+
+- **クライアント層**: Web (React/Next.js)、モバイル (React Native)、ミニプログラム (WeChat/Alipay)
+- **APIゲートウェイ**: GraphQL/REST、レート制限、認証、ロードバランシング
+- **マイクロサービス**: 住所、ユーザー、認証、ZKP、通知サービス
+- **データ層**: PostgreSQL (暗号化済み)、Redis (キャッシュ)、S3 (静的アセット)、Elasticsearch (検索)
+
+---
+
 ## 🏗️ アーキテクチャ / Architecture
 
 ```

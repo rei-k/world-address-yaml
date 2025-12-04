@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="600" y="50" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    Veybook Feature Overview
+  </text>
+  
+  <!-- Feature 1: Address Management -->
+  <g transform="translate(100, 120)">
+    <rect width="300" height="200" rx="10" fill="#3498db" opacity="0.1" stroke="#3498db" stroke-width="2"/>
+    <text x="150" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      📝 Address Management
+    </text>
+    <text x="150" y="70" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Multiple addresses
+    </text>
+    <text x="150" y="95" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Cloud synchronization
+    </text>
+    <text x="150" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Auto-validation
+    </text>
+    <text x="150" y="145" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • 257 countries supported
+    </text>
+    <text x="150" y="180" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#7f8c8d" font-style="italic">
+      Home, Work, Other
+    </text>
+  </g>
+  
+  <!-- Feature 2: QR/NFC Sharing -->
+  <g transform="translate(450, 120)">
+    <rect width="300" height="200" rx="10" fill="#2ecc71" opacity="0.1" stroke="#2ecc71" stroke-width="2"/>
+    <text x="150" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      📱 QR/NFC Sharing
+    </text>
+    <text x="150" y="70" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Scan to add friends
+    </text>
+    <text x="150" y="95" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • No address exposure
+    </text>
+    <text x="150" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Instant sharing
+    </text>
+    <text x="150" y="145" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Wallet integration
+    </text>
+    <text x="150" y="180" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#7f8c8d" font-style="italic">
+      Google/Apple Wallet
+    </text>
+  </g>
+  
+  <!-- Feature 3: Privacy Protection -->
+  <g transform="translate(800, 120)">
+    <rect width="300" height="200" rx="10" fill="#e74c3c" opacity="0.1" stroke="#e74c3c" stroke-width="2"/>
+    <text x="150" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      🔐 Privacy Protection
+    </text>
+    <text x="150" y="70" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • End-to-End encryption
+    </text>
+    <text x="150" y="95" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Zero-knowledge proof
+    </text>
+    <text x="150" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • No data leakage
+    </text>
+    <text x="150" y="145" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • User sovereignty
+    </text>
+    <text x="150" y="180" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#7f8c8d" font-style="italic">
+      AES-256 + ZKP
+    </text>
+  </g>
+  
+  <!-- Feature 4: E-commerce Integration -->
+  <g transform="translate(100, 380)">
+    <rect width="300" height="200" rx="10" fill="#9b59b6" opacity="0.1" stroke="#9b59b6" stroke-width="2"/>
+    <text x="150" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      🛍️ E-commerce
+    </text>
+    <text x="150" y="70" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • One-click checkout
+    </text>
+    <text x="150" y="95" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • No address input
+    </text>
+    <text x="150" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Delivery verification
+    </text>
+    <text x="150" y="145" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Multiple platforms
+    </text>
+    <text x="150" y="180" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#7f8c8d" font-style="italic">
+      Seamless integration
+    </text>
+  </g>
+  
+  <!-- Feature 5: Friend Management -->
+  <g transform="translate(450, 380)">
+    <rect width="300" height="200" rx="10" fill="#f39c12" opacity="0.1" stroke="#f39c12" stroke-width="2"/>
+    <text x="150" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      👥 Friend Management
+    </text>
+    <text x="150" y="70" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Add by QR/NFC
+    </text>
+    <text x="150" y="95" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Privacy-preserved
+    </text>
+    <text x="150" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Send gifts easily
+    </text>
+    <text x="150" y="145" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Access control
+    </text>
+    <text x="150" y="180" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#7f8c8d" font-style="italic">
+      Social address book
+    </text>
+  </g>
+  
+  <!-- Feature 6: International Support -->
+  <g transform="translate(800, 380)">
+    <rect width="300" height="200" rx="10" fill="#1abc9c" opacity="0.1" stroke="#1abc9c" stroke-width="2"/>
+    <text x="150" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      🌍 International
+    </text>
+    <text x="150" y="70" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • 257 countries
+    </text>
+    <text x="150" y="95" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Multi-language
+    </text>
+    <text x="150" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Local formats
+    </text>
+    <text x="150" y="145" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#34495e">
+      • Currency support
+    </text>
+    <text x="150" y="180" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#7f8c8d" font-style="italic">
+      Global ready
+    </text>
+  </g>
+  
+  <!-- Footer -->
+  <text x="600" y="750" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#7f8c8d">
+    Veybook - Next-generation cloud address book
+  </text>
+</svg>
