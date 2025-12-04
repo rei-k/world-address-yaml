@@ -1,0 +1,278 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#ffffff"/>
+  
+  <!-- Title -->
+  <text x="600" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    Veybook System Architecture
+  </text>
+  
+  <!-- Client Layer -->
+  <g transform="translate(0, 80)">
+    <rect x="50" y="0" width="1100" height="120" rx="10" fill="#ecf0f1" stroke="#95a5a6" stroke-width="2"/>
+    <text x="600" y="25" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      Client Applications
+    </text>
+    
+    <!-- Web App -->
+    <g transform="translate(150, 40)">
+      <rect width="200" height="60" rx="8" fill="#3498db" opacity="0.9"/>
+      <text x="100" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#fff">
+        🌐 Web App
+      </text>
+      <text x="100" y="45" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#fff">
+        React + Next.js
+      </text>
+    </g>
+    
+    <!-- Mobile App -->
+    <g transform="translate(450, 40)">
+      <rect width="200" height="60" rx="8" fill="#2ecc71" opacity="0.9"/>
+      <text x="100" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#fff">
+        📱 Mobile App
+      </text>
+      <text x="100" y="45" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#fff">
+        React Native
+      </text>
+    </g>
+    
+    <!-- Mini Programs -->
+    <g transform="translate(750, 40)">
+      <rect width="200" height="60" rx="8" fill="#9b59b6" opacity="0.9"/>
+      <text x="100" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#fff">
+        🏪 Mini-Programs
+      </text>
+      <text x="100" y="45" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#fff">
+        WeChat + Alipay
+      </text>
+    </g>
+  </g>
+  
+  <!-- API Gateway -->
+  <g transform="translate(0, 250)">
+    <line x1="250" y1="0" x2="250" y2="40" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="550" y1="0" x2="550" y2="40" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="850" y1="0" x2="850" y2="40" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrow)"/>
+    
+    <rect x="300" y="40" width="600" height="80" rx="10" fill="#34495e"/>
+    <text x="600" y="70" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#fff">
+      🚀 API Gateway
+    </text>
+    <text x="600" y="95" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#ecf0f1">
+      GraphQL + REST • Rate Limiting • Authentication • Load Balancing
+    </text>
+  </g>
+  
+  <!-- Service Layer -->
+  <g transform="translate(0, 380)">
+    <line x1="600" y1="0" x2="600" y2="40" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrow)"/>
+    
+    <rect x="50" y="40" width="1100" height="180" rx="10" fill="#f8f9fa" stroke="#bdc3c7" stroke-width="2"/>
+    <text x="600" y="70" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      Microservices
+    </text>
+    
+    <!-- Address Service -->
+    <g transform="translate(100, 90)">
+      <rect width="180" height="110" rx="8" fill="#3498db" opacity="0.2" stroke="#3498db" stroke-width="2"/>
+      <text x="90" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+        📍 Address Service
+      </text>
+      <text x="90" y="48" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • Address CRUD
+      </text>
+      <text x="90" y="65" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • Validation
+      </text>
+      <text x="90" y="82" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • PID generation
+      </text>
+      <text x="90" y="99" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • Geocoding
+      </text>
+    </g>
+    
+    <!-- User Service -->
+    <g transform="translate(310, 90)">
+      <rect width="180" height="110" rx="8" fill="#2ecc71" opacity="0.2" stroke="#2ecc71" stroke-width="2"/>
+      <text x="90" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+        👤 User Service
+      </text>
+      <text x="90" y="48" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • Profile mgmt
+      </text>
+      <text x="90" y="65" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • Friend list
+      </text>
+      <text x="90" y="82" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • Preferences
+      </text>
+      <text x="90" y="99" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • Privacy settings
+      </text>
+    </g>
+    
+    <!-- Auth Service -->
+    <g transform="translate(520, 90)">
+      <rect width="180" height="110" rx="8" fill="#e74c3c" opacity="0.2" stroke="#e74c3c" stroke-width="2"/>
+      <text x="90" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+        🔐 Auth Service
+      </text>
+      <text x="90" y="48" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • OAuth 2.0
+      </text>
+      <text x="90" y="65" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • JWT tokens
+      </text>
+      <text x="90" y="82" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • 2FA
+      </text>
+      <text x="90" y="99" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • Social login
+      </text>
+    </g>
+    
+    <!-- ZKP Service -->
+    <g transform="translate(730, 90)">
+      <rect width="180" height="110" rx="8" fill="#9b59b6" opacity="0.2" stroke="#9b59b6" stroke-width="2"/>
+      <text x="90" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+        🔒 ZKP Service
+      </text>
+      <text x="90" y="48" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • Proof generation
+      </text>
+      <text x="90" y="65" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • Verification
+      </text>
+      <text x="90" y="82" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • VC issuance
+      </text>
+      <text x="90" y="99" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • Privacy engine
+      </text>
+    </g>
+    
+    <!-- Notification Service -->
+    <g transform="translate(940, 90)">
+      <rect width="180" height="110" rx="8" fill="#f39c12" opacity="0.2" stroke="#f39c12" stroke-width="2"/>
+      <text x="90" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+        🔔 Notification
+      </text>
+      <text x="90" y="48" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • Push notif
+      </text>
+      <text x="90" y="65" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • Email
+      </text>
+      <text x="90" y="82" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • SMS
+      </text>
+      <text x="90" y="99" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#34495e">
+        • Webhooks
+      </text>
+    </g>
+  </g>
+  
+  <!-- Data Layer -->
+  <g transform="translate(0, 610)">
+    <line x1="190" y1="0" x2="190" y2="30" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="400" y1="0" x2="400" y2="30" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="610" y1="0" x2="610" y2="30" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="820" y1="0" x2="820" y2="30" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="1030" y1="0" x2="1030" y2="30" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrow)"/>
+    
+    <rect x="50" y="30" width="1100" height="150" rx="10" fill="#2c3e50"/>
+    <text x="600" y="60" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#fff">
+      Data Storage & Cache
+    </text>
+    
+    <!-- PostgreSQL -->
+    <g transform="translate(100, 80)">
+      <rect width="200" height="80" rx="8" fill="#336791"/>
+      <text x="100" y="30" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#fff">
+        🐘 PostgreSQL
+      </text>
+      <text x="100" y="50" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#ecf0f1">
+        Encrypted addresses
+      </text>
+      <text x="100" y="65" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#ecf0f1">
+        AES-256
+      </text>
+    </g>
+    
+    <!-- Redis -->
+    <g transform="translate(350, 80)">
+      <rect width="200" height="80" rx="8" fill="#DC382D"/>
+      <text x="100" y="30" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#fff">
+        ⚡ Redis
+      </text>
+      <text x="100" y="50" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#fff">
+        Session cache
+      </text>
+      <text x="100" y="65" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#fff">
+        Rate limiting
+      </text>
+    </g>
+    
+    <!-- S3 -->
+    <g transform="translate(600, 80)">
+      <rect width="200" height="80" rx="8" fill="#569A31"/>
+      <text x="100" y="30" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#fff">
+        📦 S3/MinIO
+      </text>
+      <text x="100" y="50" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#fff">
+        QR codes
+      </text>
+      <text x="100" y="65" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#fff">
+        Static assets
+      </text>
+    </g>
+    
+    <!-- Elasticsearch -->
+    <g transform="translate(850, 80)">
+      <rect width="200" height="80" rx="8" fill="#005571"/>
+      <text x="100" y="30" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#fff">
+        🔍 Elasticsearch
+      </text>
+      <text x="100" y="50" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#fff">
+        Address search
+      </text>
+      <text x="100" y="65" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#fff">
+        Autocomplete
+      </text>
+    </g>
+  </g>
+  
+  <!-- External Services -->
+  <g transform="translate(0, 800)">
+    <rect x="50" y="0" width="1100" height="70" rx="10" fill="#95a5a6" opacity="0.3" stroke="#7f8c8d" stroke-width="2"/>
+    <text x="600" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      External Integrations
+    </text>
+    <text x="600" y="48" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#34495e">
+      Google Maps API • Payment Gateways • SMS Providers • Email Services • Delivery Partners
+    </text>
+  </g>
+  
+  <!-- Security Features -->
+  <g transform="translate(50, 70)">
+    <rect width="200" height="30" rx="5" fill="#e74c3c" opacity="0.8"/>
+    <text x="100" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#fff">
+      🔐 End-to-End Encryption
+    </text>
+  </g>
+  
+  <g transform="translate(950, 70)">
+    <rect width="200" height="30" rx="5" fill="#2ecc71" opacity="0.8"/>
+    <text x="100" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#fff">
+      ✓ Zero-Knowledge Proof
+    </text>
+  </g>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="3" refY="9" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,0 L3,9 z" fill="#7f8c8d"/>
+    </marker>
+  </defs>
+</svg>
