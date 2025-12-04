@@ -11,10 +11,16 @@ import {
   ChartBarIcon,
   DocumentTextIcon,
   Cog6ToothIcon,
+  RectangleStackIcon,
 } from '@heroicons/react/24/outline';
 
 const navigation = [
   { name: 'Overview', href: '/dashboard', icon: HomeIcon },
+  {
+    name: 'Form Builder',
+    href: '/dashboard/form-builder',
+    icon: RectangleStackIcon,
+  },
   {
     name: 'Integration Builder',
     href: '/dashboard/integration-builder',
