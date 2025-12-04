@@ -1,59 +1,108 @@
 # 🌍 World Address YAML / JSON
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Data Coverage](https://img.shields.io/badge/Countries-257-green.svg)](./data)
+[![Auto Update](https://img.shields.io/badge/Auto%20Update-Daily-brightgreen.svg)](.github/workflows/auto-fetch-libaddressinput.yml)
+
 世界各国の住所形式をYAML形式とJSON形式で構造化したオープンデータベースです。
+
+**English:** An open database of address formats from countries around the world, structured in YAML and JSON formats.
+
+---
+
+## 📋 Table of Contents
+
+- [Quick Start](#-quick-start)
+- [Overview](#-概要)
+- [Vey Ecosystem](#-veyエコシステム--vey-ecosystem)
+- [Project Status](#-プロジェクトステータス--project-status)
+- [Features](#-features)
+- [Installation & Usage](#-使用方法)
+- [Data Structure](#-データ形式)
+- [SDK & Developer Tools](#-sdk開発者向けツール)
+- [Examples](#-完全実装例--complete-examples)
+- [Contributing](#-貢献方法)
+- [Supported Countries](#-対応国地域一覧--supported-countries-and-regions)
+- [License](#-ライセンス--license)
+- [Resources](#-関連リンク)
+
+---
+
+## 🚀 Quick Start
+
+### For Developers
+
+```bash
+# Clone the repository
+git clone https://github.com/rei-k/world-address-yaml.git
+cd world-address-yaml
+
+# Install dependencies
+npm install
+
+# Fetch latest address data
+npm run fetch:libaddressinput
+
+# Validate data
+npm run validate:data
+
+# View statistics
+npm run stats:data
+```
+
+### Using the Data
+
+```javascript
+// Node.js - Load address data for Japan
+const fs = require('fs');
+const yaml = require('js-yaml');
+
+const japanData = yaml.load(
+  fs.readFileSync('data/asia/east_asia/JP/JP.yaml', 'utf8')
+);
+
+console.log(japanData.name.en); // "Japan"
+console.log(japanData.address_format.postal_code.regex); // "^[0-9]{3}-[0-9]{4}$"
+```
+
+```python
+# Python - Load address data for USA
+import yaml
+
+with open('data/americas/north_america/US/US.yaml', 'r', encoding='utf-8') as f:
+    us_data = yaml.safe_load(f)
+
+print(us_data['name']['en'])  # "United States"
+print(us_data['address_format']['postal_code']['regex'])  # "^\d{5}(-\d{4})?$"
+```
+
+---
 
 ## 🎯 Veyエコシステム / Vey Ecosystem
 
-**Vey（ヴェイ）** は "convey"（配達する、運ぶ）に由来する名前で、このプロジェクトの中核となるエコシステムです。
+**Vey（ヴェイ）** は "convey"（配達する、運ぶ）に由来し、このプロジェクトの中核となるエコシステムです。
 
 **Vey** derives from "convey" (to deliver, to transport) and represents the core ecosystem of this project.
 
-### ビジョン / Vision
+### Vision
 
-- 📧 **メールのような配送体験**: メールアドレスのように、シンプルかつ確実に届く配送システムを目指します
-- 💳 **クレジットカードのような利便性**: QRコード・NFC対応で、支払いと同じくらい簡単に住所を扱えることを目指します
-- 🔐 **プライバシー第一**: ゼロ知識証明により、住所を公開せずに配送を実現します
+- 📧 **Email-like Delivery**: Simple and reliable delivery system like email addresses
+- 💳 **Credit Card-like Convenience**: Easy address handling with QR/NFC support
+- 🔐 **Privacy First**: Zero-knowledge proof for delivery without exposing addresses
 
-### Veyエコシステムの主要サービス / Core Services
+### Core Applications
 
-#### 📱 Veybook（ヴェイブック）
+| Application | Description |
+|-------------|-------------|
+| **📱 Veybook** | Cloud address book with social login integration, QR/NFC support, and end-to-end encryption |
+| **🏪 Veypos** | Global POS system supporting multi-currency, tax compliance, and Veybook integration |
 
-**クラウド住所帳アプリケーション** - あなたの住所を安全に管理
+### Learn More
 
-- ソーシャルログインで簡単登録
-- アカウントに住所を登録すれば、どのECサイトでもワンクリックで配送先を設定
-- 友達をQR/NFCで追加し、生住所を見ずに配送先登録
-- すべての住所データを暗号化して保存
-- Google Wallet/Apple Walletと連携
-
-#### 🏪 Veypos（ヴェイポス）
-
-**POS（販売時点情報管理）アプリケーション**
-
-- 各国の税制・通貨・レシート要件に完全対応
-- Veybookと連携し、顧客の住所を安全に管理
-- QR/NFCでの決済と配送先登録を同時に実現
-- グローバル展開する小売・飲食店に最適
-
-### ソーシャルログイン統合 / Social Login Integration
-
-Veybookにアカウントを持ち、住所を登録している場合：
-
-1. ECサイトでソーシャルログイン（Google、Apple、LINEなど）
-2. Veybookに保存された住所が自動的に連携
-3. 住所入力不要で即座にチェックアウト完了
-
-これにより、毎回の住所入力の手間を省き、入力ミスも防ぐことができます。
-
-詳細は以下をご覧ください:
-- **[Veyエコシステム完全版](./Vey/)** - アプリケーション、図表、統合ガイドの完全なドキュメント
-- **[システム全体図](./Vey/diagrams/system-overview.md)** - アーキテクチャと各コンポーネント間の関係
-- **[データフロー図](./Vey/diagrams/data-flows.md)** - システム内のデータの流れ
-- **[ユーザージャーニー](./Vey/diagrams/user-journeys.md)** - 主要なユーザー体験フロー
-- **[技術統合図](./Vey/diagrams/technical-integration.md)** - API仕様と技術的な統合
-- **[セキュリティアーキテクチャ](./Vey/diagrams/security-architecture.md)** - セキュリティ設計と実装
-
-従来のドキュメント: **[Veyエコシステムドキュメント](./docs/vey-ecosystem.md)**
+For detailed information about the Vey ecosystem:
+- **[Vey Ecosystem Documentation](./Vey/)** - Complete documentation with diagrams and integration guides
+- **[System Architecture](./Vey/diagrams/system-overview.md)** - Architecture overview
+- **[Use Cases](./docs/vey-ecosystem.md)** - Real-world scenarios and examples
 
 ## 📋 概要
 
@@ -62,6 +111,29 @@ Veybookにアカウントを持ち、住所を登録している場合：
 - 🚚 **配送実務**: 国際配送のためのフォーム設計や住所ラベル生成
 - 📚 **研究・分析**: 各国の住所制度の比較研究や標準化
 - 🔐 **クラウド住所帳**: ゼロ知識証明を活用したプライバシー保護型住所管理システム
+
+## ✨ Features
+
+### Core Features
+- **🌐 257 Countries & Regions** - Comprehensive coverage of world address formats
+- **📄 Dual Format** - Both YAML (human-readable) and JSON (machine-readable) formats
+- **🔄 Auto-Updated** - Daily updates from Google's libaddressinput API at midnight JST
+- **✅ Validated Data** - Automated validation of YAML syntax and required fields
+- **🗺️ Geo-coordinates** - Latitude/longitude support for 257 countries
+- **🏪 POS Data** - Point-of-sale information (tax, currency, receipt requirements) for key countries
+
+### Advanced Features
+- **🔑 Address PID** - Hierarchical place identifiers for unique address identification
+- **🔐 ZKP Protocol** - Zero-knowledge proof for privacy-preserving address verification
+- **📱 QR/NFC Support** - Mobile wallet integration (Google Wallet/Apple Wallet)
+- **🛠️ Developer SDKs** - TypeScript/JavaScript SDK and framework integrations (React, Vue)
+- **🔍 Search Engine** - Address search and autocomplete capabilities
+- **🤖 AI Integration** - AI-powered address validation and correction
+
+### Data Quality
+- **99% Average Completeness** - High-quality, comprehensive data coverage
+- **100% Schema Support** - All 257 countries follow standardized schema
+- **Continuous Validation** - GitHub Actions CI/CD for quality assurance
 
 ## 📊 プロジェクトステータス / Project Status
 
@@ -104,247 +176,108 @@ npm run stats:data
 
 詳細な使い方ガイドは **[完全実装例ガイド](./docs/examples/COMPLETE_EXAMPLES.md)** をご覧ください。
 
-## 🆕 クラウド住所帳システム / Cloud Address Book System
+## 🔐 クラウド住所帳システム / Cloud Address Book System
 
-**NEW!** ゼロ知識証明（ZKP）を中心とした、プライバシー保護型のクラウド住所帳システムを提供します。
+A privacy-preserving cloud address book system powered by Zero-Knowledge Proof (ZKP) technology.
 
-### 特徴
+### Key Features
 
-- 🔒 **完全なプライバシー保護**: ECサイトや第三者は生住所を一切見ることができません
-- ✅ **検証可能な配送**: ZK証明により、住所を公開せずに配送可能性を証明
-- 📊 **完全な監査可能性**: すべてのアクセスを記録し、不正利用を防止
-- 🔑 **ユーザー主権**: ユーザーが自分の住所データを完全に管理
-- 🌍 **グローバル対応**: すべての国の住所形式に対応
-- 📱 **モバイルウォレット統合**: Google Wallet/Apple Walletとシームレスに連携
+| Feature | Description |
+|---------|-------------|
+| 🔒 **Privacy Protection** | E-commerce sites and third parties never see raw addresses |
+| ✅ **Verifiable Delivery** | Prove delivery capability without revealing address |
+| 📊 **Full Auditability** | All access is logged to prevent unauthorized use |
+| 🔑 **User Sovereignty** | Users have complete control over their address data |
+| 📱 **Mobile Wallet** | Seamless integration with Google Wallet/Apple Wallet |
 
-### 主要機能
+### How It Works
 
-1. **住所登録・管理**
-   - AMF（Address Mapping Framework）による住所正規化
-   - PID（Place ID）自動生成
-   - エンドツーエンド暗号化
-   - Verifiable Credential（VC）発行
+1. **Register Address** → AMF normalization + PID generation + E2E encryption
+2. **Add Friends** → QR/NFC sharing without exposing raw addresses
+3. **E-commerce Checkout** → ZK proof verification for delivery capability
+4. **Last Mile Delivery** → Address disclosure only when necessary
 
-2. **友達管理**
-   - 生住所を見ずに配送先を登録
-   - QR/NFCによる簡単な友達追加
-   - PIDベースの安全な住所共有
+### Documentation
 
-3. **配送統合**
-   - ECサイトでのZK証明ベース配送先検証
-   - 配送業者へのアクセス制御
-   - ラストワンマイルでのみ住所開示
-   - 完全な監査ログ
+- 📖 [System Overview](./docs/cloud-address-book.md) - Complete system architecture
+- 🔐 [ZKP Protocol](./docs/zkp-protocol.md) - Zero-knowledge proof details
+- 🛒 [E-commerce Integration](./docs/ec-integration-flow.md) - Checkout flow guide
+- 💻 [Implementation Guide](./docs/cloud-address-book-implementation.md) - Code examples
+- 📚 [API Reference](./docs/zkp-api.md) - Complete API documentation
+- 🤖 [AI Capabilities](./docs/ai/ai-capabilities.md) - AI-powered features
 
-4. **QR/NFC対応**
-   - 端末内での住所暗号化
-   - Google Wallet/Apple Wallet連携
-   - ホテル、金融機関での住所証明
+### Quick Example
 
-### クイックスタート
-
-```bash
-# SDKのインストール
-npm install @vey/core
-
-# 基本的な使用例
+```typescript
 import { createAddressClient, normalizeAddress, encodePID } from '@vey/core';
 
-// 住所の正規化とPID生成
+// Normalize address and generate PID
 const normalized = await normalizeAddress(rawAddress, 'JP');
 const pid = encodePID(normalized);
 console.log(pid); // "JP-13-113-01-T07-B12-BN02-R342"
+
+// Verify delivery capability with ZK proof (address stays private)
+const result = await verifyDeliveryZKP(pid, {
+  allowedCountries: ['JP'],
+  allowedRegions: ['13', '14']
+});
 ```
-
-### ドキュメント
-
-#### システム設計
-- 📖 [クラウド住所帳システム概要](./docs/cloud-address-book.md) - システムの全体像と主要フロー
-- 🔍 [住所検索エンジン](./docs/address-search-engine.md) - 検索UIで入力工程を削除する新規格
-- 🤖 [AI機能強化戦略](./docs/ai/ai-capabilities.md) - 検索精度・安全性・相互運用性を向上させる5つのAI機能
-- 🚚 [送り状AI・アルゴリズム](./docs/ai/waybill-ai-capabilities.md) - 送り状の生成・検索・管理における10のAI機能
-- 🔐 [ZKPクオリティ向上AI](./docs/ai/zkp-quality-ai.md) - ゼロ知識証明の安全性・正しさ・性能・UXを向上させる10のAI機能
-- 🏗️ [システムアーキテクチャ](./docs/cloud-address-book-architecture.md) - 技術アーキテクチャとデータフロー
-- 🔧 [サーバーサイドアーキテクチャ](./docs/server-architecture.md) - コアAPI・SDK役割整理
-- 🌐 [SDK言語・エコシステム分類](./docs/sdk-classification.md) - 各言語向けSDK仕様
-
-#### 実装ガイド
-- 💻 [実装ガイド](./docs/cloud-address-book-implementation.md) - コード例とベストプラクティス
-- 🛒 [ECサイト統合フロー](./docs/ec-integration-flow.md) - チェックアウトフロー完全ガイド
-- 🔐 [ZKPプロトコル](./docs/zkp-protocol.md) - ゼロ知識証明プロトコルの詳細
-- 📚 [API仕様](./docs/zkp-api.md) - APIリファレンス
-- 🔎 [住所検索エンジンAPI](./docs/address-search-engine-api.md) - 検索エンジンAPIリファレンス
-
-### ロードマップ
-
-- ✅ **v1 MVP**: AMF + PID + 暗号化保存のクラウド住所帳
-- 🔄 **v2**: 国コード・地域レベルのZK証明
-- 📋 **v3**: 配送業者統合と高度なアクセス制御
-- 🎯 **v4**: DID/VC完全連携とマルチキャリア対応
-- 🚀 **v5**: Google Wallet/Apple Wallet完全統合
 
 ## 📂 データ形式
 
 全てのデータはYAMLとJSONの両形式で提供されています：
 
-- **YAML**: 人間が読みやすく編集しやすい形式
-- **JSON**: プログラムからの利用に最適化された形式
+| Format | Use Case |
+|--------|----------|
+| **YAML** | Human-readable, easy to edit, version control friendly |
+| **JSON** | Machine-readable, optimized for programming |
 
-各国・地域のデータは同じディレクトリ内に `.yaml` と `.json` の両方のファイルとして配置されています。
-
-## 🔄 自動データ更新 / Automatic Data Updates
-
-このリポジトリは、Google の libaddressinput API から住所データを自動的に取得し、毎日更新します。
-
-### libaddressinput データ
-
-- **データソース**: https://chromium-i18n.appspot.com/ssl-address/data
-- **更新頻度**: 毎日深夜0時（日本時間）
-- **保存先**: `data/libaddressinput/`
-- **形式**: YAML および JSON
-
-libaddressinput は Google が提供する国際住所メタデータで、以下の情報を含みます：
-
-- 住所フォーマット（各国の標準的な住所表記順序）
-- 必須フィールド（住所として必要な項目）
-- 郵便番号パターン（正規表現）
-- 郵便番号の例
-- 行政区画（都道府県・州など）
-- 言語情報
-
-### 手動実行
-
-```bash
-# スクリプトを直接実行
-node scripts/fetch-libaddressinput.js
-
-# または GitHub Actions から手動実行
-# リポジトリの Actions タブ → "Auto-fetch libaddressinput data" → "Run workflow"
-```
-
-詳細は [scripts/README.md](./scripts/README.md) をご覧ください。
-
-## 📁 ディレクトリ構造
+### File Structure
 
 ```
-world-address-yaml/
-├── data/                     # 住所データ（YAML・JSON）
-│   ├── africa/               # アフリカ
-│   │   ├── central_africa/
-│   │   ├── eastern_africa/
-│   │   ├── northern_africa/
-│   │   ├── southern_africa/
-│   │   └── west_africa/
-│   ├── americas/             # アメリカ大陸
-│   │   ├── caribbean/
-│   │   ├── central_america/
-│   │   ├── north_america/
-│   │   └── south_america/
-│   ├── antarctica/           # 南極
-│   │   ├── claims/           # 領有権主張地域
-│   │   └── stations/         # 研究基地
-│   ├── asia/                 # アジア
-│   │   ├── central_asia/
-│   │   ├── east_asia/
-│   │   ├── south_asia/
-│   │   ├── southeast_asia/
-│   │   └── west_asia/
-│   ├── europe/               # ヨーロッパ
-│   │   ├── caucasus/
-│   │   ├── eastern_europe/
-│   │   ├── northern_europe/
-│   │   ├── southeastern_europe/
-│   │   ├── southern_europe/
-│   │   └── western_europe/
-│   ├── oceania/              # オセアニア
-│   │   ├── australia_new_zealand/
-│   │   ├── melanesia/
-│   │   ├── micronesia/
-│   │   └── polynesia/
-│   └── libaddressinput/      # Google libaddressinput データ（自動更新）
-│       ├── A/                # 国コード A で始まる国
-│       ├── B/                # 国コード B で始まる国
-│       └── ...
-├── docs/                     # ドキュメント
-│   ├── schema/               # スキーマ型定義
-│   └── examples/             # サンプルデータ
-├── scripts/                  # 自動化スクリプト
-│   ├── fetch-libaddressinput.js  # libaddressinput データ取得スクリプト
-│   └── README.md             # スクリプト説明
-├── sdk/                      # 開発者向けSDK
-│   ├── core/                 # コアSDK
-│   ├── react/                # React用コンポーネント
-│   ├── vue/                  # Vue用コンポーザブル
-│   ├── widget/               # ユニバーサルウィジェット
-│   ├── webhooks/             # Webhookユーティリティ
-│   ├── qr-nfc/               # QRコード・NFC統合
-│   ├── graphql/              # GraphQLスキーマ
-│   ├── grpc/                 # gRPCプロトコル定義
-│   └── cli/                  # CLIツール
-├── .github/                  # GitHub 設定
-│   └── workflows/            # GitHub Actions ワークフロー
-│       └── auto-fetch-libaddressinput.yml  # 自動データ更新
-└── README.md                 # プロジェクト説明
+data/
+├── {continent}/
+│   └── {region}/
+│       └── {ISO-CODE}/
+│           ├── {ISO-CODE}.yaml    # Main country data
+│           ├── {ISO-CODE}.json    # Same data in JSON
+│           ├── overseas/          # Overseas territories (if any)
+│           └── regions/           # Special regions (if any)
+└── libaddressinput/              # Auto-updated from Google API
+    └── {A-Z}/                     # Organized by country code prefix
 ```
 
-## 📝 データ形式
+**Example:**
+```
+data/asia/east_asia/JP/JP.yaml          # Japan
+data/americas/north_america/US/US.yaml  # United States
+data/americas/north_america/US/overseas/PR.yaml  # Puerto Rico
+```
 
-### ファイル命名規則とディレクトリ構造
+### Schema Levels
 
-全ての国は専用のディレクトリを持ち、その中に国コードと同じ名前のファイルが配置されています：
+This project provides three levels of address schema:
 
-- 国ファイル: `{地域}/{ISO 3166-1 alpha-2コード}/{ISO 3166-1 alpha-2コード}.yaml` および `.json`
-  - 例: `data/asia/east_asia/JP/JP.yaml`, `data/americas/north_america/US/US.yaml`
-- 海外領土・特別地域: `{国コード}/overseas/{地域名}.yaml` または `{国コード}/regions/{地域名}.yaml`
-  - 例: `data/americas/north_america/US/overseas/PR.yaml` (プエルトリコ)
-  - 例: `data/asia/southeast_asia/ID/regions/Papua.yaml` (パプア)
-
-### スキーマレベル
-
-このプロジェクトでは3つのスキーマレベルを提供しています：
-
-#### 🚚 配送実務レベル（届くレベル）
-
-最小限の入力で確実に届くことを目指した、フォーム設計や配送ラベル生成向けのスキーマです。
+#### 1. 🚚 Shipping Level (Essential)
+Minimal fields required for reliable delivery - suitable for form design and label generation.
 
 ```yaml
 name:
-  en: Japan                    # 英語名（必須）
-
+  en: Japan
 iso_codes:
-  alpha2: JP                   # ISO 3166-1 alpha-2（必須）
-
+  alpha2: JP
 languages:
   - name: English
     script: Latin
-    direction: ltr
-    role: shipping_required
-
 address_format:
   order: [recipient, street_address, city, province, postal_code, country]
-  
-  recipient:
-    required: true
-  street_address:
-    required: true
-  city:
-    required: true
-  province:
-    required: true
-    label_en: Prefecture
   postal_code:
     required: true
     regex: "^[0-9]{3}-[0-9]{4}$"
-  country:
-    required: true
-
-examples:
-  international: "..."
 ```
 
-#### 📚 研究レベル（学術・比較用）
-
-各国の住所制度を比較・分析・標準化する研究用途向けの詳細スキーマです。
+#### 2. 📚 Research Level (Comprehensive)
+Detailed schema for comparative analysis and standardization research.
 
 ```yaml
 name:
@@ -352,243 +285,251 @@ name:
   local:
     - lang: ja
       value: 日本
-      script: Kanji
-      direction: ltr
-
 iso_codes:
   alpha2: JP
   alpha3: JPN
   numeric: "392"
-
-continent: Asia
-subregion: East Asia
-
-languages:
-  - name: Japanese
-    script: Kanji
-    direction: ltr
-    role: official
-    country_name: 日本
-
 administrative_divisions:
   level1:
     type: Prefecture
-    label_local: 都道府県
-    label_en: Prefecture
     count: 47
-
-address_format:
-  order_variants:
-    - context: domestic
-      order: [recipient, prefecture, city, ward, street_address, ...]
-    - context: international
-      order: [recipient, room, floor, building, street_address, ...]
-
 validation:
-  allow_latin_transliteration: true
   rules:
     - "Prefecture name must never be omitted"
-
-examples:
-  domestic_raw: "〒100-0001 東京都千代田区千代田1-1 皇居"
-  domestic_normalized: "東京都 千代田区 千代田1-1 皇居 100-0001"
-  international: "Imperial Palace, 1-1 Chiyoda, Chiyoda-ku, Tokyo 100-0001, Japan"
-
-status:
-  un_member: true
-  recognized: true
-  disputed: false
 ```
 
-#### 🏪 POSレベル（販売時点情報管理用）
-
-POSシステムでの決済・レシート発行・税務処理に必要な情報を提供する、小売・飲食店向けのスキーマです。
+#### 3. 🏪 POS Level (Point-of-Sale)
+Complete schema including currency, tax, receipt requirements for retail/restaurant systems.
 
 ```yaml
 pos:
   currency:
-    code: JPY                  # ISO 4217 通貨コード
-    symbol: "¥"                # 通貨記号
-    symbol_position: before    # 記号の位置（before / after）
-    decimal_places: 0          # 小数点以下桁数
-    decimal_separator: "."     # 小数点記号
-    thousands_separator: ","   # 千区切り記号
-
+    code: JPY
+    symbol: "¥"
+    decimal_places: 0
   tax:
-    type: Consumption Tax      # 税の種類
+    type: Consumption Tax
     rate:
-      standard: 0.10           # 標準税率
-      reduced:                 # 軽減税率
+      standard: 0.10
+      reduced:
         - rate: 0.08
           category: food_beverages
-    included_in_price: true    # 内税（true）/ 外税（false）
-    invoice_requirement: required  # インボイス制度
-
   receipt:
-    required_fields:           # 法的必須項目
+    required_fields:
       - business_name
       - registration_number
-      - date
-      - items
       - tax_breakdown
-      - total
-    paper_width: "80mm"        # 標準レシート幅
-    electronic_allowed: true   # 電子レシート可否
-    retention_period: "7 years"  # 保存義務期間
-
-  fiscal:
-    fiscal_device_required: false  # 財務デバイス必須か
-    registration_required: true    # 事業者登録必須か
-    reporting_frequency: annually  # 申告頻度
-
-  payment_methods:             # 主要決済手段
-    - type: cash
-      name: 現金
-      prevalence: high
-    - type: mobile
-      name: Suica/PASMO
-      prevalence: high
-    - type: qr_code
-      name: PayPay
-      prevalence: high
-
-  locale:
-    date_format: "YYYY/MM/DD"  # 日付形式
-    time_format: "24h"         # 時刻形式
-    timezone: "Asia/Tokyo"     # タイムゾーン
-    week_start: sunday         # 週の開始曜日
-
-  business_hours:
-    typical_open: "10:00"      # 一般的な開店時間
-    typical_close: "20:00"     # 一般的な閉店時間
-    sunday_trading: true       # 日曜営業の一般性
-    public_holidays_trading: true  # 祝日営業の一般性
 ```
+
+For complete schema documentation, see [Schema Documentation](./docs/schema/README.md).
+
+## 🔄 自動データ更新 / Automatic Data Updates
+
+This repository automatically fetches and updates address data from Google's libaddressinput API daily.
+
+### Configuration
+
+| Setting | Value |
+|---------|-------|
+| **Data Source** | https://chromium-i18n.appspot.com/ssl-address/data |
+| **Update Frequency** | Daily at midnight JST (15:00 UTC) |
+| **Storage Location** | `data/libaddressinput/` |
+| **Formats** | YAML and JSON |
+
+### What's Included
+
+Google's libaddressinput provides international address metadata including:
+- Address formats (standard address notation order for each country)
+- Required fields (mandatory address components)
+- Postal code patterns (regex validation)
+- Postal code examples
+- Administrative divisions (states, provinces, etc.)
+- Language information
+
+### Manual Execution
+
+```bash
+# Run the script directly
+node scripts/fetch-libaddressinput-v2.js
+
+# Or use npm script
+npm run fetch:libaddressinput
+
+# Or trigger via GitHub Actions
+# Go to: Actions tab → "Auto-fetch libaddressinput data" → "Run workflow"
+```
+
+For more details, see [scripts/README.md](./scripts/README.md).
+
+## 📁 ディレクトリ構造
+
+```
+world-address-yaml/
+├── data/                      # Address data (YAML & JSON)
+│   ├── africa/               # African countries
+│   ├── americas/             # North, Central, South America & Caribbean
+│   ├── antarctica/           # Antarctica (claims & research stations)
+│   ├── asia/                 # Asian countries
+│   ├── europe/               # European countries
+│   ├── oceania/              # Oceania & Pacific islands
+│   └── libaddressinput/      # Google libaddressinput data (auto-updated)
+├── docs/                      # Documentation
+│   ├── schema/               # Schema type definitions
+│   ├── examples/             # Sample data & tutorials
+│   └── ai/                   # AI capabilities documentation
+├── scripts/                   # Automation scripts
+│   ├── fetch-libaddressinput-v2.js  # Data fetcher (recommended)
+│   ├── validate-yaml.js      # Data validation
+│   └── utils/                # Shared utilities
+├── sdk/                       # Developer SDKs
+│   ├── core/                 # Core SDK (TypeScript)
+│   ├── react/                # React components
+│   ├── vue/                  # Vue composables
+│   └── ...                   # Other platform SDKs
+├── Vey/                       # Vey ecosystem documentation
+│   ├── apps/                 # Application specs (Veybook, Veypos)
+│   └── diagrams/             # System diagrams
+└── .github/workflows/         # CI/CD automation
+```
+
+For detailed directory explanations, see the original structure below in the full documentation.
+
+## 📝 ファイル命名規則 / File Naming Rules
+
+## 📝 ファイル命名規則 / File Naming Rules
+
+All countries have dedicated directories with files named after their ISO 3166-1 alpha-2 code:
+
+- **Country files**: `{region}/{ISO-CODE}/{ISO-CODE}.yaml` and `.json`
+  - Example: `data/asia/east_asia/JP/JP.yaml`, `data/americas/north_america/US/US.yaml`
+- **Overseas territories**: `{ISO-CODE}/overseas/{region}.yaml`
+  - Example: `data/americas/north_america/US/overseas/PR.yaml` (Puerto Rico)
+- **Special regions**: `{ISO-CODE}/regions/{region}.yaml`
+  - Example: `data/asia/southeast_asia/ID/regions/Papua.yaml` (Papua, Indonesia)
+
+---
 
 ## 🛠️ SDK（開発者向けツール）
 
-本プロジェクトでは、様々なフレームワークやプラットフォームで利用可能なSDKを提供しています。
+## 🛠️ SDK（開発者向けツール）
 
-> **注意**: これらのパッケージは現在**ローカル開発中**です。npm への公開準備を進めています。
+SDKs for various frameworks and platforms to work with address data.
 
-### 📦 利用可能なパッケージ
+> **Note**: Packages are currently in **local development**. NPM publication is in preparation.
 
-| パッケージ | 状態 | 説明 |
-|-----------|------|------|
-| `@vey/core` | 🔨 **開発中** | コアSDK（バリデーション・フォーマット・PID・ZKP） |
-| `@vey/react` | 📋 **計画中** | React用フック・コンポーネント |
-| `@vey/vue` | 📋 **計画中** | Vue用コンポーザブル |
-| `@vey/widget` | 📋 **計画中** | Universal Shadow Widget（フレームワーク非依存） |
-| その他 | 📋 **計画中** | webhooks, qr-nfc, graphql, grpc, CLI |
+### Available Packages
 
-詳細は **[SDK README](./sdk/README.md)** をご覧ください。
+| Package | Status | Description |
+|---------|--------|-------------|
+| `@vey/core` | 🔨 In Development | Core SDK (validation, formatting, PID, ZKP) |
+| `@vey/react` | 📋 Planned | React hooks & components |
+| `@vey/vue` | 📋 Planned | Vue composables |
+| `@vey/widget` | 📋 Planned | Universal Shadow Widget (framework-agnostic) |
+| Others | 📋 Planned | webhooks, qr-nfc, graphql, grpc, CLI |
 
-### 🚀 クイックスタート（ローカル開発）
+For detailed documentation, see **[SDK README](./sdk/README.md)**.
+
+### Quick Start (Local Development)
 
 ```bash
-# リポジトリのクローン
+# Clone repository
 git clone https://github.com/rei-k/world-address-yaml.git
 cd world-address-yaml/sdk/core
 
-# 依存関係のインストール
+# Install & build
 npm install
-
-# ビルド
 npm run build
 ```
 
-### 基本的な使用例
+### Basic Usage Example
 
 ```typescript
 import { validateAddress, encodePID, normalizeAddress } from '@vey/core';
 
-// 住所のバリデーション
+// Validate address
 const result = validateAddress({
   country: 'JP',
   postalCode: '100-0001',
   prefecture: '東京都'
 });
 
-// 住所の正規化とPID生成
+// Normalize address and generate PID
 const normalized = normalizeAddress(address, 'JP');
 const pid = encodePID(normalized);
 console.log(pid); // "JP-13-101-01"
 ```
 
-完全なAPI仕様とコード例は [SDK README](./sdk/README.md) を参照してください。
+See [SDK README](./sdk/README.md) for complete API specification and examples.
 
 ## 🔑 住所PID (Place ID)
 
-住所PIDは階層的な住所識別子で、以下の用途に対応しています：
+Hierarchical address identifier for unique global address identification.
 
-- **一意識別** - 世界中の住所を1つのIDで区別
-- **ZK証明** - 住所を公開せずに正当性を検証
-- **配送ルーティング** - WMS/TMS/Carrierシステムと互換
-
-### PIDフォーマット
+### Format
 
 ```
 <Country>-<Admin1>-<Admin2>-<Locality>-<Sublocality>-<Block>-<Building>-<Unit>
 ```
 
-例: `JP-13-113-01-T07-B12-BN02-R342`
+**Example**: `JP-13-113-01-T07-B12-BN02-R342`
 
-| フィールド | 内容 | コード例 |
-|-----------|------|---------|
-| Country | 国/地域 (ISO 3166-1 alpha-2) | `JP` |
-| Admin1 | 第1行政階層（都道府県） | `13` = 東京 |
-| Admin2 | 第2行政階層（市区町村） | `113` = 渋谷区 |
-| Locality | 市/区/郡 | `01` |
-| Sublocality | 町/丁目 | `T07` = 東7丁目 |
-| Block | 番地/ブロック | `B12` = 12番地 |
-| Building | 建物/ビル | `BN02` = build-02 |
-| Unit | 部屋/ユニット | `R342` = 342号室 |
+| Component | Description | Example |
+|-----------|-------------|---------|
+| Country | ISO 3166-1 alpha-2 | `JP` |
+| Admin1 | 1st administrative level (Prefecture) | `13` (Tokyo) |
+| Admin2 | 2nd administrative level (City/Ward) | `113` (Shibuya-ku) |
+| Locality | City/District | `01` |
+| Sublocality | Town/Chome | `T07` (7-chome) |
+| Block | Block/Banchi | `B12` (12-banchi) |
+| Building | Building | `BN02` (Building-02) |
+| Unit | Room/Unit | `R342` (Room 342) |
 
-### 使用例
+### Usage
 
 ```typescript
 import { encodePID, decodePID, validatePID } from '@vey/core';
 
-// PIDエンコード
+// Encode PID
 const pid = encodePID({
   country: 'JP',
   admin1: '13',
   admin2: '113',
   locality: '01'
 });
-// 結果: 'JP-13-113-01'
+// Result: 'JP-13-113-01'
 
-// PIDデコード
+// Decode PID
 const components = decodePID('JP-13-113-01');
 
-// PIDバリデーション
+// Validate PID
 const result = validatePID('JP-13-113');
 if (result.valid) {
-  console.log('有効なPID:', result.components);
+  console.log('Valid PID:', result.components);
 }
 ```
 
-詳細は [SDK README](./sdk/README.md#-address-pid-place-id) をご覧ください。
+For details, see [SDK README - Address PID](./sdk/README.md#-address-pid-place-id).
+
+---
 
 ## 🌍 緯度経度との関係性 (Geo-coordinates Relationship)
 
-住所データと緯度経度の関係性を定義し、座標情報を活用した「保険」機能を提供します。
+Geo-coordinate integration for address verification and "insurance" functionality.
 
-### 概要
+### Overview
+- **Address-Coordinate Mapping** - Associate latitude/longitude with addresses
+- **Coordinate Verification** - Verify delivery location using GPS
+- **Fallback Feature** - Use coordinates when address is ambiguous
 
-- **住所と座標のマッピング** - 各住所に緯度経度を関連付け
-- **座標検証** - 配送・位置確認時の座標ベース検証
-- **フォールバック機能** - 住所が曖昧な場合の座標による補完
-
-### データ構造
+### Data Structure
 
 ```yaml
 geo:
   center:
-    latitude: 35.6812      # 緯度
-    longitude: 139.7671    # 経度
-    accuracy: 10           # 精度（メートル）
-    source: geocoder       # 取得元
+    latitude: 35.6812
+    longitude: 139.7671
+    accuracy: 10        # meters
+    source: geocoder
   bounds:
     northeast:
       latitude: 35.6830
@@ -599,76 +540,64 @@ geo:
   verified: true
 ```
 
-### 緯度経度を保険とする技術
-
-座標情報を住所検証の「保険」として活用する機能です：
+### Usage Example
 
 ```typescript
-import { 
-  verifyAddressWithGeo,
-  createGeoAddress,
-  calculateDistance 
-} from '@vey/core';
+import { verifyAddressWithGeo, createGeoAddress } from '@vey/core';
 
-// 住所と座標の関係性を作成
+// Create geo-enabled address
 const address = createGeoAddress(
   'JP-13-101-01',
   { latitude: 35.6812, longitude: 139.7671 }
 );
 
-// 配達員の現在位置で住所を検証（保険機能）
+// Verify delivery location (insurance feature)
 const driverLocation = {
   latitude: 35.6815,
   longitude: 139.7668,
-  accuracy: 5,
-  source: 'gps'
+  accuracy: 5
 };
 
 const result = verifyAddressWithGeo(address, driverLocation, {
-  toleranceMeters: 100,   // 許容距離
-  minConfidence: 0.8      // 最小信頼度
+  toleranceMeters: 100,
+  minConfidence: 0.8
 });
 
 if (result.valid) {
-  console.log('配達員は正しい位置にいます');
-  console.log(`信頼度: ${result.confidence}`);
-} else {
-  console.log(`配達員は${result.distance}m離れた位置にいます`);
+  console.log('Driver is at correct location');
+  console.log(`Confidence: ${result.confidence}`);
 }
 ```
 
-### 利用シーン
+### Use Cases
+- **Delivery Verification** - Confirm driver is at correct address using GPS
+- **Address Completion** - Reverse geocoding to complete address from coordinates
+- **Fraud Detection** - Detect mismatches between address and coordinates
+- **Offline Support** - Fallback to coordinates when address lookup fails
 
-| シーン | 説明 |
-|-------|------|
-| 配送検証 | 配達員が正しい住所にいることを座標で確認 |
-| 住所補完 | 座標から住所を逆引きして補完 |
-| 不正検出 | 住所と座標の不一致を検出 |
-| オフライン対応 | 座標情報による住所特定のフォールバック |
-
-詳細は [Schema Documentation](./docs/schema/README.md) をご覧ください。
+For details, see [Schema Documentation](./docs/schema/README.md).
 
 ## 🔐 ZKPアドレスプロトコル (ZKP Address Protocol)
 
-プライバシー保護型の住所管理・配送システムです。ゼロ知識証明（Zero-Knowledge Proof）を活用し、ECサイトやキャリアに生住所を公開せずに配送を実現します。
+Privacy-preserving address management and delivery system using Zero-Knowledge Proof (ZKP).
 
-### 概要
+### Overview
 
-ZKPアドレスプロトコルは4つの主要なフローで構成されています：
+Four main flows power the ZKP Address Protocol:
 
-1. **住所登録・認証フロー** - ユーザーが住所を登録し、検証済みの住所クレデンシャル（VC）を取得
-2. **配送依頼・送り状発行フロー** - ECサイトが配送先の有効性をZK証明で確認（生住所は見ない）
-3. **配送実行・追跡フロー** - キャリアが必要な範囲でのみ住所情報にアクセス
-4. **住所更新・失効フロー** - 住所変更時の安全な更新と旧住所の失効
+1. **Address Registration** → User registers address and receives verified credential (VC)
+2. **Delivery Request** → E-commerce verifies delivery capability via ZK proof (without seeing raw address)
+3. **Delivery Execution** → Carrier accesses address information only as needed
+4. **Address Update** → Safe update when address changes, with old address revocation
 
-### 特徴
+### Key Features
 
-- 🔒 **プライバシー保護**: ECサイトは生住所を一切見ない
-- ✅ **検証可能**: ZK証明で配送可能性を検証
-- 📊 **監査可能**: すべてのアクセスを記録
-- 🔑 **ユーザー主権**: ユーザーが自分の住所データを管理
+- 🔒 **Privacy Protection**: E-commerce sites never see raw addresses
+- ✅ **Verifiable**: ZK proof validates delivery capability
+- 📊 **Auditable**: All access is logged
+- 🔑 **User Sovereignty**: Users control their address data
 
-### クイックスタート
+### Quick Example
 
 ```typescript
 import {
@@ -677,16 +606,16 @@ import {
   createZKPWaybill
 } from '@vey/core';
 
-// 1. Address Provider: ユーザーにAddress PID Credentialを発行
+// 1. Address Provider: Issue Address PID Credential to user
 const vc = createAddressPIDCredential(
-  'did:key:user123',      // ユーザーDID
-  'did:web:vey.example',  // プロバイダDID
-  'JP-13-113-01',         // 住所PID
-  'JP',                   // 国コード
-  '13'                    // 都道府県コード
+  'did:key:user123',      // User DID
+  'did:web:vey.example',  // Provider DID
+  'JP-13-113-01',         // Address PID
+  'JP',                   // Country code
+  '13'                    // Prefecture code
 );
 
-// 2. EC Site: 配送条件を満たすかZK証明で検証
+// 2. E-commerce: Verify delivery conditions with ZK proof
 const response = validateShippingRequest(
   {
     pid: 'JP-13-113-01',
@@ -698,10 +627,10 @@ const response = validateShippingRequest(
     timestamp: new Date().toISOString()
   },
   zkCircuit,
-  fullAddress // プロバイダのみが持つ生住所
+  fullAddress // Only provider has the raw address
 );
 
-// 3. 配送可能であればZKP付き送り状を作成
+// 3. If deliverable, create waybill with ZKP
 if (response.valid && response.zkProof) {
   const waybill = createZKPWaybill(
     'WB-001',
@@ -709,158 +638,157 @@ if (response.valid && response.zkProof) {
     response.zkProof,
     'TN-001'
   );
-  // ECサイトはPIDトークンとZK証明のみを保存
-  // 生住所は保存しない！
+  // E-commerce stores only PID token and ZK proof
+  // Raw address is NOT stored!
 }
 ```
 
-### ドキュメント
+### Documentation
 
-- [ZKP Protocol Documentation](./docs/zkp-protocol.md) - プロトコル詳細
-- [API Reference](./docs/zkp-api.md) - API仕様
-- [Complete Flow Example](./docs/examples/zkp/complete-flow.ts) - 全フローの実装例
-- [EC Integration Example](./docs/examples/zkp/ec-integration.ts) - ECサイト統合例
+- [ZKP Protocol Documentation](./docs/zkp-protocol.md) - Complete protocol details
+- [API Reference](./docs/zkp-api.md) - API specifications
+- [Complete Flow Example](./docs/examples/zkp/complete-flow.ts) - Full implementation
+- [E-commerce Integration](./docs/examples/zkp/ec-integration.ts) - Integration guide
 
-詳細は [ZKP Protocol Documentation](./docs/zkp-protocol.md) をご覧ください。
+For details, see [ZKP Protocol Documentation](./docs/zkp-protocol.md).
 
 ## 🔧 使用方法
 
-### データの読み込み
+### Loading Data
 
-任意のYAML/JSONパーサーを使用してデータを読み込むことができます。
+Use any YAML/JSON parser to load the address data.
 
-**Python (YAML):**
+**Python:**
 ```python
 import yaml
+# Or: import json
 
 with open('data/asia/east_asia/JP/JP.yaml', 'r', encoding='utf-8') as f:
     japan_data = yaml.safe_load(f)
+    # Or: japan_data = json.load(f) for JSON
 
-print(japan_data['name']['en'])  # Japan
-print(japan_data['address_format']['postal_code']['regex'])  # ^[0-9]{3}-[0-9]{4}$
+print(japan_data['name']['en'])  # "Japan"
+print(japan_data['address_format']['postal_code']['regex'])  # "^[0-9]{3}-[0-9]{4}$"
 ```
 
-**Python (JSON):**
-```python
-import json
-
-with open('data/asia/east_asia/JP/JP.json', 'r', encoding='utf-8') as f:
-    japan_data = json.load(f)
-
-print(japan_data['name']['en'])  # Japan
-print(japan_data['address_format']['postal_code']['regex'])  # ^[0-9]{3}-[0-9]{4}$
-```
-
-**JavaScript/Node.js (YAML):**
+**JavaScript/Node.js:**
 ```javascript
 const yaml = require('js-yaml');
 const fs = require('fs');
 
+// YAML
 const japanData = yaml.load(fs.readFileSync('data/asia/east_asia/JP/JP.yaml', 'utf8'));
-console.log(japanData.name.en);  // Japan
-```
 
-**JavaScript/Node.js (JSON):**
-```javascript
-const fs = require('fs');
+// Or JSON
+// const japanData = JSON.parse(fs.readFileSync('data/asia/east_asia/JP/JP.json', 'utf8'));
 
-const japanData = JSON.parse(fs.readFileSync('data/asia/east_asia/JP/JP.json', 'utf8'));
-console.log(japanData.name.en);  // Japan
+console.log(japanData.name.en);  // "Japan"
 ```
 
 ## 🤝 貢献方法
 
-### 新しい国・地域のデータを追加する
+Contributions are welcome! Here's how you can help:
 
-1. 適切な大陸・地域のディレクトリに移動
-2. 国コード（ISO 3166-1 alpha-2）と同じ名前のディレクトリを作成
-3. そのディレクトリ内に `{国コード}.yaml` ファイルを作成
-4. `docs/schema/README.md` のスキーマに従ってデータを記述
-5. 対応するJSONファイルも作成（YAMLから自動変換可能）
-6. データのバリデーションを実行
-7. Pull Requestを作成
+### Adding New Country/Region Data
 
-例: 新しい国 "XY" を追加する場合
+1. Navigate to the appropriate continent/region directory
+2. Create a directory named after the ISO 3166-1 alpha-2 code
+3. Create `{ISO-CODE}.yaml` file following the schema in `docs/schema/README.md`
+4. Generate corresponding JSON file (can be auto-converted from YAML)
+5. Validate your data: `npm run validate:data`
+6. Create a Pull Request
+
+**Example:** Adding new country "XY"
 ```
 data/asia/east_asia/XY/
   ├── XY.yaml
   └── XY.json
 ```
 
-### データの検証 / Data Validation
+### Data Validation
 
-データを追加・変更した際は、必ず以下のバリデーションを実行してください：
+Always validate your changes before submitting:
 
 ```bash
-# YAMLファイルの構文と必須フィールドをチェック
+# Validate YAML syntax and required fields
 npm run validate:data
 
-# データ完成度の統計を表示
+# View data completeness statistics
 npm run stats:data
 ```
 
-これらのチェックは GitHub Actions でも自動実行されます。
+These checks also run automatically via GitHub Actions.
 
-### データの修正・改善
+### Improving Existing Data
 
-1. 誤りを発見した場合はIssueを作成
-2. 修正がある場合はPull Requestで提案
+1. Found an error? Create an Issue
+2. Have a fix? Submit a Pull Request
 
-### 注意事項
+### Guidelines
 
-- 政治的に敏感な地域（係争地域、部分承認国など）については、`status` フィールドで状況を明記
-- 海外領土は各国のディレクトリ内の `overseas/` サブディレクトリに配置
-- 特殊な行政区画は各国のディレクトリ内の `regions/` サブディレクトリに配置
-- 全ての国は専用のディレクトリを持ち、将来的な拡張に備えた構造になっています
+- **Political sensitivity**: Use the `status` field for disputed territories
+- **Overseas territories**: Place in `{country}/overseas/` subdirectory
+- **Special regions**: Place in `{country}/regions/` subdirectory
+- **Future-proof**: Each country has its own directory for extensibility
+
+For development setup and best practices, see [DEVELOPMENT.md](./DEVELOPMENT.md).
 
 ## 🔧 開発者向け / For Developers
 
-### セットアップ
+### Setup
 
 ```bash
-# リポジトリのクローン
+# Clone repository
 git clone https://github.com/rei-k/world-address-yaml.git
 cd world-address-yaml
 
-# 依存関係のインストール
+# Install dependencies
 npm install
 ```
 
-### 利用可能なスクリプト
+### Available Scripts
 
-```bash
-# libaddressinput データの取得
-npm run fetch:libaddressinput
+| Command | Description |
+|---------|-------------|
+| `npm run fetch:libaddressinput` | Fetch libaddressinput data from Google API |
+| `npm run validate:data` | Validate all YAML data files |
+| `npm run stats:data` | Display data completeness statistics |
+| `npm run lint` | Lint JavaScript code |
+| `npm run format` | Format code with Prettier |
 
-# データバリデーション
-npm run validate:data
+### Continuous Integration
 
-# データ統計の表示
-npm run stats:data
+GitHub Actions automatically validates:
+- ✅ YAML syntax
+- ✅ Required fields presence
+- ✅ Data structure consistency
 
-# コードのリント
-npm run lint
+See [.github/workflows/data-validation.yml](.github/workflows/data-validation.yml) for details.
 
-# コードのフォーマット
-npm run format
-```
+### Auto-Update Workflow
 
-### 自動テスト
+**Schedule:** Daily at midnight JST (15:00 UTC)
 
-Pull Request や Push 時に、GitHub Actions が自動的に以下をチェックします：
+The workflow:
+1. Fetches latest data from libaddressinput API
+2. Updates data files if changes detected
+3. Commits and pushes changes automatically
 
-- ✅ YAML構文の検証
-- ✅ 必須フィールドの存在確認
-- ✅ データ構造の整合性チェック
+**Manual Trigger:** Actions tab → "Auto-fetch libaddressinput data" → Run workflow
 
-詳細は [.github/workflows/data-validation.yml](.github/workflows/data-validation.yml) を参照してください。
+For detailed development guide, see [DEVELOPMENT.md](./DEVELOPMENT.md).
 
-## 📊 収録状況
+## 📊 収録状況 / Data Coverage
 
-- **総ファイル数**: 279件（YAML + JSON = 558ファイル）
-- **大陸**: 6大陸（アフリカ、アメリカ、南極、アジア、ヨーロッパ、オセアニア）
-- **特殊地域**: 海外領土、係争地域、研究基地なども収録
-- **データ形式**: YAML および JSON
+- **Total Countries**: 257
+- **Continents**: 6 (Africa, Americas, Antarctica, Asia, Europe, Oceania)
+- **Special Territories**: Overseas territories, disputed regions, research stations
+- **Formats**: YAML and JSON
+- **Average Completeness**: 99%
+- **POS Support**: 2 countries (JP, US) - expanding to 20+ countries
+- **Geo-coordinates**: 257 countries (100%)
+
+For complete list, see [Supported Countries & Regions](#-対応国地域一覧--supported-countries-and-regions) below.
 
 ## 🗺️ 対応国・地域一覧 / Supported Countries and Regions
 
@@ -1349,26 +1277,26 @@ Pull Request や Push 時に、GitHub Actions が自動的に以下をチェッ�
 
 ## 📜 ライセンス / License
 
-このプロジェクトは **MIT License** の下で公開されています。
+This project is licensed under the **MIT License**.
 
-### 利用範囲 / Usage
+✅ **Commercial use allowed** - Free to use in commercial services  
+✅ **Modification allowed** - Free to modify and extend data  
+✅ **Redistribution allowed** - Free to redistribute data  
 
-✅ **商用利用可能** - 商用サービスでの利用が可能です  
-✅ **改変可能** - データの改変・拡張が可能です  
-✅ **再配布可能** - データの再配布が可能です  
+### Attribution (Optional but Appreciated)
 
-### 注意事項 / Notes
+If you use this data, please consider crediting the source:
 
-- **出典表記のお願い**: このデータを利用する場合は、可能な限り出典を明記してください
-  ```
-  Data source: World Address YAML (https://github.com/rei-k/world-address-yaml)
-  ```
+```
+Data source: World Address YAML (https://github.com/rei-k/world-address-yaml)
+```
 
-- **libaddressinput データ**: `data/libaddressinput/` 配下のデータは Google の libaddressinput API から取得したものです。Google のライセンス条項も確認してください。
+### Important Notes
 
-- **保証について**: このデータは「現状のまま」提供されており、正確性や完全性についての保証はありません。重要な用途に使用する場合は、独自の検証を行ってください。
+- **libaddressinput data**: Data under `data/libaddressinput/` is sourced from Google's libaddressinput API. Please also review Google's license terms.
+- **No warranty**: This data is provided "as is" without warranty of accuracy or completeness. For critical applications, please perform your own verification.
 
-詳細は [LICENSE](./LICENSE) ファイルをご覧ください。
+For full license text, see [LICENSE](./LICENSE).
 
 ## 🔗 関連リンク
 
