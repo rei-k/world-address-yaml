@@ -10,7 +10,8 @@
     "lint": "next lint",
     "test": "vitest",
     "test:e2e": "playwright test",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "generate-countries": "node scripts/generate-countries-index.js"
   },
   "dependencies": {
     "next": "^14.0.0",
