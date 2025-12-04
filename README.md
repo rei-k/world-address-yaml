@@ -133,7 +133,7 @@ All important applications in the Vey ecosystem with their frontend UI/UX featur
 - **Delivery Options:** Visual delivery method selection with estimated times and carbon offset information
 
 #### 🚚 VeyExpress - Delivery Integration Platform
-**Description:** Multi-carrier delivery integration platform with AI-powered optimization and 254-country support
+**Description:** Multi-carrier delivery integration platform with AI-powered optimization and 257-country support
 
 **Frontend UI/UX Features:**
 - **Comprehensive Dashboard:** 7-category dashboard with delivery search, active shipments summary, and world map visualization
