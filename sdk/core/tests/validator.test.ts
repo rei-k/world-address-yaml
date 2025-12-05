@@ -68,6 +68,39 @@ describe('validateAddress', () => {
     expect(result.errors).toHaveLength(0);
   });
 
+  it('should detect territorial restriction violations in Japan', () => {
+    const address: AddressInput = {
+      recipient: 'John Doe',
+      street_address: '1-1 Chiyoda',
+      city: 'Dokdo', // Blocked Korean name for Japanese territory
+      province: 'Tokyo',
+      postal_code: '100-0001',
+      country: 'JP',
+    };
+
+    const result = validateAddress(address, japanFormat);
+
+    expect(result.valid).toBe(false);
+    expect(result.errors.some(e => e.code === 'TERRITORIAL_RESTRICTION')).toBe(true);
+  });
+
+  it('should provide territorial suggestion for alternative naming', () => {
+    const address: AddressInput = {
+      recipient: 'John Doe',
+      street_address: '1-1 Chiyoda',
+      city: 'Dokdo', // Has alternative suggestion: 竹島
+      province: 'Tokyo',
+      postal_code: '100-0001',
+      country: 'JP',
+    };
+
+    const result = validateAddress(address, japanFormat);
+
+    // Check for suggestion warning
+    expect(result.warnings.some(w => w.code === 'TERRITORIAL_SUGGESTION')).toBe(true);
+    expect(result.warnings.some(w => w.message.includes('Suggestion:'))).toBe(true);
+  });
+
   it('should return errors for missing required fields', () => {
     const address: AddressInput = {
       recipient: 'John Doe',
@@ -231,5 +264,29 @@ describe('getFieldOrder', () => {
     const order = getFieldOrder(simpleFormat);
 
     expect(order).toEqual(['recipient', 'street_address', 'city', 'postal_code']);
+  });
+
+  it('should return default order when no order or order_variants specified', () => {
+    const noOrderFormat: CountryAddressFormat = {
+      ...japanFormat,
+      address_format: {
+        recipient: { required: true },
+        street_address: { required: true },
+        city: { required: true },
+        postal_code: { required: true },
+      },
+    };
+
+    const order = getFieldOrder(noOrderFormat);
+
+    // Should return default order
+    expect(order).toEqual([
+      'recipient',
+      'street_address',
+      'city',
+      'province',
+      'postal_code',
+      'country',
+    ]);
   });
 });

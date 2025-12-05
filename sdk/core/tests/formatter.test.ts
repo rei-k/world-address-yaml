@@ -164,6 +164,38 @@ describe('formatShippingLabel', () => {
     expect(lines[1]).toBe('1-1 Chiyoda');
     expect(lines).not.toContain('');
   });
+
+  it('should include district in shipping label', () => {
+    const address: AddressInput = {
+      recipient: 'John Doe',
+      street_address: '1-1 Chiyoda',
+      district: 'Marunouchi',
+      city: 'Chiyoda-ku',
+      province: 'Tokyo',
+      postal_code: '100-0001',
+      country: 'Japan',
+    };
+
+    const result = formatShippingLabel(address, japanFormat);
+
+    expect(result).toContain('Marunouchi');
+  });
+
+  it('should include ward in shipping label', () => {
+    const address: AddressInput = {
+      recipient: 'John Doe',
+      street_address: '1-1 Chiyoda',
+      ward: 'Chiyoda Ward',
+      city: 'Chiyoda-ku',
+      province: 'Tokyo',
+      postal_code: '100-0001',
+      country: 'Japan',
+    };
+
+    const result = formatShippingLabel(address, japanFormat);
+
+    expect(result).toContain('Chiyoda Ward');
+  });
 });
 
 describe('getPostalCodeExample', () => {
