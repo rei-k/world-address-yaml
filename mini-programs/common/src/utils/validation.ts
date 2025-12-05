@@ -4,6 +4,10 @@
  */
 
 import { ShippingFormData, ShippingItem, ValidationResult } from '../types';
+import {
+  isBlockedTerritorialName,
+  validateJapaneseTerritorialInput,
+} from '../config/territorial-restrictions';
 
 /**
  * Validation error codes for internationalization
@@ -16,6 +20,7 @@ export const ValidationErrorCodes = {
   ITEM_QUANTITY_INVALID: 'ERR_ITEM_QUANTITY_INVALID',
   ITEM_WEIGHT_INVALID: 'ERR_ITEM_WEIGHT_INVALID',
   ITEM_VALUE_INVALID: 'ERR_ITEM_VALUE_INVALID',
+  TERRITORIAL_RESTRICTION: 'ERR_TERRITORIAL_RESTRICTION',
 } as const;
 
 /**
@@ -125,4 +130,41 @@ export function isValidPostalCode(postalCode: string, countryCode: string): bool
   if (!pattern) return true; // Skip validation for unknown countries
   
   return pattern.test(postalCode);
+}
+
+/**
+ * Validate address location for territorial restrictions
+ * Ensures Japanese territories can only be entered in Japanese
+ */
+export function validateAddressLocation(
+  location: string,
+  countryCode: string,
+  languageCode?: string
+): ValidationResult {
+  // Only apply restrictions for Japan
+  if (countryCode !== 'JP') {
+    return { valid: true, warnings: [] };
+  }
+  
+  // Check for blocked territorial names
+  const territorialValidation = validateJapaneseTerritorialInput(location, languageCode);
+  
+  if (!territorialValidation.valid) {
+    return {
+      valid: false,
+      reason: territorialValidation.reason,
+      warnings: territorialValidation.suggestion
+        ? [`Suggestion: Use "${territorialValidation.suggestion}" instead`]
+        : [],
+    };
+  }
+  
+  return { valid: true, warnings: [] };
+}
+
+/**
+ * Check if location contains blocked territorial names
+ */
+export function containsBlockedTerritorialName(location: string): boolean {
+  return isBlockedTerritorialName(location);
 }

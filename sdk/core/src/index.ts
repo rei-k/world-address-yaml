@@ -86,6 +86,16 @@ export {
   getFieldOrder,
 } from './validator';
 
+// Territorial Restrictions
+export {
+  isBlockedTerritorialName,
+  isBlockedLanguageForJapan,
+  getTerritorialRestrictionInfo,
+  validateJapaneseTerritorialInput,
+  JAPANESE_TERRITORIAL_RESTRICTIONS,
+} from './territorial-restrictions';
+export type { TerritorialRestriction } from './territorial-restrictions';
+
 // Formatter
 export {
   formatAddress,

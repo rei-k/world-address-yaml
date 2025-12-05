@@ -10,13 +10,18 @@ import type {
   ValidationWarning,
   AddressField,
 } from './types';
+import {
+  isBlockedTerritorialName,
+  validateJapaneseTerritorialInput,
+} from './territorial-restrictions';
 
 /**
  * Validates an address against a country's format rules
  */
 export function validateAddress(
   address: AddressInput,
-  format: CountryAddressFormat
+  format: CountryAddressFormat,
+  options?: { languageCode?: string }
 ): ValidationResult {
   const errors: ValidationError[] = [];
   const warnings: ValidationWarning[] = [];
@@ -37,6 +42,34 @@ export function validateAddress(
     'postal_code',
     'country',
   ] as const;
+
+  // Check territorial restrictions for Japan
+  if (address.country === 'JP' || format.iso_codes?.alpha2 === 'JP') {
+    const locationFields: (keyof AddressInput)[] = ['city', 'province', 'district', 'ward', 'street_address'];
+    for (const field of locationFields) {
+      const value = address[field];
+      if (value && typeof value === 'string') {
+        const territorialResult = validateJapaneseTerritorialInput(
+          value,
+          options?.languageCode
+        );
+        if (!territorialResult.valid) {
+          errors.push({
+            field: field as string,
+            code: 'TERRITORIAL_RESTRICTION',
+            message: territorialResult.reason || 'Location name violates territorial restrictions',
+          });
+          if (territorialResult.suggestion) {
+            warnings.push({
+              field: field as string,
+              code: 'TERRITORIAL_SUGGESTION',
+              message: `Suggestion: Use "${territorialResult.suggestion}" instead`,
+            });
+          }
+        }
+      }
+    }
+  }
 
   for (const field of fields) {
     const fieldDef = addressFormat[field] as AddressField | undefined;
