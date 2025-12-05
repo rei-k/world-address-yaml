@@ -48,19 +48,85 @@ export interface CountryOption {
   subregion: string;
 }
 
-/** Language preference storage options */
+/**
+ * Language preference storage configuration
+ * 
+ * Controls how user language preferences are persisted across sessions.
+ * By default, preferences are stored in localStorage for persistence across browser sessions.
+ * 
+ * @example
+ * ```typescript
+ * // Store in localStorage (persists across browser sessions)
+ * const config = {
+ *   languageStorage: {
+ *     enabled: true,
+ *     storageType: 'localStorage',
+ *     storageKey: 'my_app_language'
+ *   }
+ * };
+ * 
+ * // Store in sessionStorage (cleared when browser tab closes)
+ * const config = {
+ *   languageStorage: {
+ *     enabled: true,
+ *     storageType: 'sessionStorage'
+ *   }
+ * };
+ * 
+ * // Disable persistence
+ * const config = {
+ *   languageStorage: {
+ *     enabled: false
+ *   }
+ * };
+ * ```
+ */
 export interface LanguageStorageConfig {
-  /** Enable language preference persistence */
+  /** 
+   * Enable or disable language preference persistence
+   * @default true
+   */
   enabled?: boolean;
   
-  /** Storage type (localStorage or sessionStorage) */
+  /** 
+   * Storage type for persisting language preference
+   * - `localStorage`: Persists across browser sessions
+   * - `sessionStorage`: Cleared when browser tab/window closes
+   * @default 'localStorage'
+   */
   storageType?: 'localStorage' | 'sessionStorage';
   
-  /** Storage key name (default: 'veyform_language_preference') */
+  /** 
+   * Custom storage key name
+   * @default 'veyform_language_preference'
+   */
   storageKey?: string;
 }
 
-/** Language change callback */
+/**
+ * Callback function invoked when the form language changes
+ * 
+ * Use this callback to respond to language changes in real-time, such as:
+ * - Updating UI labels and text
+ * - Fetching language-specific resources
+ * - Tracking analytics events
+ * - Syncing with external state management
+ * 
+ * @param language - The new language code (ISO 639-1 format, e.g., 'en', 'ja', 'zh')
+ * @param previousLanguage - The previous language code, if any
+ * 
+ * @example
+ * ```typescript
+ * const veyform = createVeyform({
+ *   apiKey: 'your-api-key',
+ *   onLanguageChange: (newLang, prevLang) => {
+ *     console.log(`Language changed from ${prevLang} to ${newLang}`);
+ *     // Update your application's language state
+ *     i18n.changeLanguage(newLang);
+ *   }
+ * });
+ * ```
+ */
 export type LanguageChangeCallback = (language: string, previousLanguage?: string) => void;
 
 /** Veyform initialization options */
@@ -80,10 +146,26 @@ export interface VeyformConfig {
   /** Allowed countries for this site (ISO alpha-2 codes) */
   allowedCountries?: string[];
   
-  /** Default language code (ISO 639-1) */
+  /** 
+   * Default language code (ISO 639-1 format, e.g., 'en', 'ja', 'zh', 'ko')
+   * 
+   * This language will be used when:
+   * - No saved language preference exists
+   * - Saved language preference is invalid or not in allowedLanguages
+   * 
+   * @default 'en'
+   */
   defaultLanguage?: string;
   
-  /** Allowed languages */
+  /** 
+   * Allowed languages for the form
+   * 
+   * If specified, only these languages can be selected. Attempts to set
+   * other languages will be rejected with a console warning.
+   * If not specified, defaults to ['en', 'ja', 'zh', 'ko'].
+   * 
+   * @example ['en', 'ja', 'zh', 'ko', 'es', 'fr']
+   */
   allowedLanguages?: string[];
   
   /** Use continent filter tabs */
@@ -101,10 +183,34 @@ export interface VeyformConfig {
   /** Custom analytics endpoint */
   analyticsEndpoint?: string;
   
-  /** Language preference storage configuration */
+  /** 
+   * Language preference storage configuration
+   * 
+   * Controls how user language preferences are persisted across sessions.
+   * When enabled, the selected language is automatically saved and restored
+   * when the user returns.
+   * 
+   * @see {@link LanguageStorageConfig} for configuration options
+   * @default { enabled: true, storageType: 'localStorage', storageKey: 'veyform_language_preference' }
+   */
   languageStorage?: LanguageStorageConfig;
   
-  /** Callback when language changes */
+  /** 
+   * Callback invoked when the form language changes
+   * 
+   * This callback is triggered after the language has been successfully changed
+   * via `setLanguage()`. Use it to update your application's UI, fetch
+   * language-specific resources, or track analytics.
+   * 
+   * @see {@link LanguageChangeCallback} for callback signature details
+   * @example
+   * ```typescript
+   * onLanguageChange: (newLang, prevLang) => {
+   *   console.log(`Language changed from ${prevLang} to ${newLang}`);
+   *   updateUILabels(newLang);
+   * }
+   * ```
+   */
   onLanguageChange?: LanguageChangeCallback;
 }
 
@@ -244,6 +350,9 @@ export function getCountryFlag(countryCode: string): string {
 
 /**
  * Veyform class - Main SDK interface
+ * 
+ * Provides a comprehensive address form system with multi-language support,
+ * country-specific validation, and automatic language preference persistence.
  */
 export class Veyform {
   private config: VeyformConfig;
@@ -251,6 +360,47 @@ export class Veyform {
   private sessionId: string;
   private formState: FormState;
 
+  /**
+   * Create a new Veyform instance
+   * 
+   * Initializes the form with the provided configuration, including:
+   * - Language preference loading from browser storage (if enabled)
+   * - Domain auto-detection for multi-tenant support (if enabled)
+   * - Session ID generation for analytics tracking
+   * - Default language fallback when no saved preference exists
+   * 
+   * @param config - Veyform configuration options
+   * 
+   * @remarks
+   * The constructor automatically loads saved language preferences from storage.
+   * Language preference loading priority:
+   * 1. Saved preference from storage (if valid and in allowedLanguages)
+   * 2. defaultLanguage from config
+   * 3. 'en' (hardcoded fallback)
+   * 
+   * @example
+   * ```typescript
+   * // Basic initialization
+   * const veyform = new Veyform({
+   *   apiKey: 'your-api-key',
+   *   defaultLanguage: 'en'
+   * });
+   * 
+   * // With language storage and callback
+   * const veyform = new Veyform({
+   *   apiKey: 'your-api-key',
+   *   defaultLanguage: 'en',
+   *   allowedLanguages: ['en', 'ja', 'zh'],
+   *   languageStorage: {
+   *     enabled: true,
+   *     storageType: 'localStorage'
+   *   },
+   *   onLanguageChange: (newLang, prevLang) => {
+   *     console.log(`Language changed: ${prevLang} → ${newLang}`);
+   *   }
+   * });
+   * ```
+   */
   constructor(config: VeyformConfig) {
     this.config = {
       validationLevel: 'strict',
@@ -290,7 +440,23 @@ export class Veyform {
   }
 
   /**
-   * Initialize Veyform instance
+   * Initialize Veyform instance (static factory method)
+   * 
+   * Alternative way to create a Veyform instance using a static method.
+   * This is functionally identical to using the constructor directly.
+   * 
+   * @param config - Veyform configuration options
+   * @returns A new Veyform instance
+   * 
+   * @see {@link Veyform.constructor} for detailed initialization behavior
+   * 
+   * @example
+   * ```typescript
+   * const veyform = Veyform.init({
+   *   apiKey: 'your-api-key',
+   *   defaultLanguage: 'en'
+   * });
+   * ```
    */
   static init(config: VeyformConfig): Veyform {
     return new Veyform(config);
@@ -390,7 +556,35 @@ export class Veyform {
   }
 
   /**
-   * Change form language with persistence and callback support
+   * Change the form language
+   * 
+   * Updates the current language for the form and all its field labels and placeholders.
+   * This method performs the following actions:
+   * 1. Validates the language is in the allowedLanguages list (if configured)
+   * 2. Updates the form state with the new language
+   * 3. Persists the language preference to storage (if enabled)
+   * 4. Triggers the onLanguageChange callback (if configured)
+   * 5. Tracks a language_changed analytics event (if enabled)
+   * 
+   * @param language - ISO 639-1 language code (e.g., 'en', 'ja', 'zh', 'ko')
+   * 
+   * @throws {void} Does not throw errors. Invalid languages are logged as warnings.
+   * 
+   * @example
+   * ```typescript
+   * // Change to Japanese
+   * veyform.setLanguage('ja');
+   * 
+   * // Change to Chinese with callback
+   * const veyform = createVeyform({
+   *   apiKey: 'your-api-key',
+   *   allowedLanguages: ['en', 'ja', 'zh'],
+   *   onLanguageChange: (newLang, prevLang) => {
+   *     console.log(`Changed from ${prevLang} to ${newLang}`);
+   *   }
+   * });
+   * veyform.setLanguage('zh'); // Triggers callback
+   * ```
    */
   setLanguage(language: string): void {
     // Validate language is allowed if allowedLanguages is configured
@@ -414,21 +608,68 @@ export class Veyform {
   }
 
   /**
-   * Get current language
+   * Get the current language code
+   * 
+   * Returns the currently active language for the form. This is the language
+   * used for displaying field labels, placeholders, and validation messages.
+   * 
+   * @returns The current language code (ISO 639-1 format)
+   * 
+   * @example
+   * ```typescript
+   * const currentLang = veyform.getLanguage();
+   * console.log(currentLang); // 'en', 'ja', 'zh', etc.
+   * 
+   * // Use current language to get localized form fields
+   * const fields = veyform.getFormFields('JP', veyform.getLanguage());
+   * ```
    */
   getLanguage(): string {
     return this.formState.language;
   }
 
   /**
-   * Get available languages
+   * Get the list of available languages
+   * 
+   * Returns an array of language codes that can be used with setLanguage().
+   * If allowedLanguages was specified in the configuration, returns that list.
+   * Otherwise, returns the default supported languages: ['en', 'ja', 'zh', 'ko'].
+   * 
+   * @returns Array of ISO 639-1 language codes
+   * 
+   * @example
+   * ```typescript
+   * const languages = veyform.getAvailableLanguages();
+   * console.log(languages); // ['en', 'ja', 'zh', 'ko']
+   * 
+   * // Build a language switcher UI
+   * languages.forEach(lang => {
+   *   const button = document.createElement('button');
+   *   button.textContent = lang.toUpperCase();
+   *   button.onclick = () => veyform.setLanguage(lang);
+   *   languageSwitcher.appendChild(button);
+   * });
+   * ```
    */
   getAvailableLanguages(): string[] {
     return this.config.allowedLanguages || ['en', 'ja', 'zh', 'ko'];
   }
 
   /**
-   * Save language preference to storage
+   * Save language preference to browser storage
+   * 
+   * Private helper method that persists the selected language to localStorage
+   * or sessionStorage based on configuration. This method is automatically
+   * called by setLanguage() when language storage is enabled.
+   * 
+   * @param language - The language code to save
+   * 
+   * @remarks
+   * - Silently returns if storage is disabled or in non-browser environment
+   * - Logs warning to console if storage operation fails (e.g., quota exceeded)
+   * - Uses the configured storage type and key from languageStorage config
+   * 
+   * @private
    */
   private saveLanguagePreference(language: string): void {
     if (!this.config.languageStorage?.enabled) return;
@@ -446,7 +687,21 @@ export class Veyform {
   }
 
   /**
-   * Load language preference from storage
+   * Load language preference from browser storage
+   * 
+   * Private helper method that retrieves the previously saved language preference
+   * from localStorage or sessionStorage. This method is automatically called
+   * during Veyform initialization to restore the user's language preference.
+   * 
+   * @returns The saved language code, or null if no valid preference exists
+   * 
+   * @remarks
+   * - Returns null if storage is disabled or in non-browser environment
+   * - Validates saved language against allowedLanguages if configured
+   * - Returns null for invalid/disallowed saved languages
+   * - Logs warning to console if storage operation fails
+   * 
+   * @private
    */
   private loadLanguagePreference(): string | null {
     if (!this.config.languageStorage?.enabled) return null;
@@ -472,7 +727,39 @@ export class Veyform {
   }
 
   /**
-   * Clear saved language preference
+   * Clear the saved language preference
+   * 
+   * Removes the persisted language preference from browser storage.
+   * After calling this method, the next Veyform instance will use the
+   * defaultLanguage instead of a saved preference.
+   * 
+   * This method is useful for:
+   * - Implementing a "Reset to default" feature
+   * - User logout/session cleanup
+   * - Testing different language configurations
+   * - Clearing user preferences on request
+   * 
+   * @remarks
+   * - Does nothing if storage is disabled or in non-browser environment
+   * - Logs warning to console if storage operation fails
+   * - Does not change the current form's language (only affects future instances)
+   * 
+   * @example
+   * ```typescript
+   * // Clear saved preference
+   * veyform.clearLanguagePreference();
+   * 
+   * // Next instance will use default language
+   * const newVeyform = createVeyform({
+   *   apiKey: 'your-api-key',
+   *   defaultLanguage: 'en'
+   * });
+   * // Will start with 'en' instead of saved preference
+   * 
+   * // To also change current form's language
+   * veyform.clearLanguagePreference();
+   * veyform.setLanguage('en'); // Reset to default
+   * ```
    */
   clearLanguagePreference(): void {
     if (!this.config.languageStorage?.enabled) return;
@@ -691,7 +978,45 @@ export class Veyform {
 }
 
 /**
- * Export factory function for easier initialization
+ * Create a new Veyform instance (factory function)
+ * 
+ * Convenience factory function for creating Veyform instances.
+ * This is the recommended way to create Veyform instances as it provides
+ * a cleaner, more functional API.
+ * 
+ * @param config - Veyform configuration options
+ * @returns A new Veyform instance
+ * 
+ * @see {@link Veyform.constructor} for detailed initialization behavior
+ * @see {@link VeyformConfig} for all available configuration options
+ * 
+ * @example
+ * ```typescript
+ * // Basic usage
+ * const veyform = createVeyform({
+ *   apiKey: 'your-api-key',
+ *   defaultLanguage: 'en'
+ * });
+ * 
+ * // Full configuration with language features
+ * const veyform = createVeyform({
+ *   apiKey: 'your-api-key',
+ *   defaultCountry: 'JP',
+ *   defaultLanguage: 'en',
+ *   allowedLanguages: ['en', 'ja', 'zh', 'ko'],
+ *   allowedCountries: ['JP', 'US', 'CN', 'KR'],
+ *   languageStorage: {
+ *     enabled: true,
+ *     storageType: 'localStorage',
+ *     storageKey: 'my_app_lang'
+ *   },
+ *   onLanguageChange: (newLang, prevLang) => {
+ *     console.log(`Language: ${prevLang} → ${newLang}`);
+ *     updateApplicationLanguage(newLang);
+ *   },
+ *   enableAnalytics: true
+ * });
+ * ```
  */
 export function createVeyform(config: VeyformConfig): Veyform {
   return Veyform.init(config);
