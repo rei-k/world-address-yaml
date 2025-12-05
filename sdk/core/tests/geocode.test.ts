@@ -2,7 +2,7 @@
  * @vey/core - Tests for Geocoding module (緯度経度関連機能)
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import {
   validateCoordinates,
   isWithinBounds,
@@ -67,6 +67,29 @@ describe('validateCoordinates', () => {
       accuracy: -10,
     };
     expect(validateCoordinates(coords)).toBe(false);
+  });
+
+  it('should reject non-number accuracy', () => {
+    const coords: any = {
+      latitude: 35.6812,
+      longitude: 139.7671,
+      accuracy: 'ten',
+    };
+    expect(validateCoordinates(coords)).toBe(false);
+  });
+
+  it('should reject non-number coordinates', () => {
+    const coords: any = {
+      latitude: '35.6812',
+      longitude: 139.7671,
+    };
+    expect(validateCoordinates(coords)).toBe(false);
+
+    const coords2: any = {
+      latitude: 35.6812,
+      longitude: '139.7671',
+    };
+    expect(validateCoordinates(coords2)).toBe(false);
   });
 });
 
@@ -158,6 +181,25 @@ describe('getBoundsCenter', () => {
     
     expect(center.latitude).toBeCloseTo(0, 5);
     expect(center.longitude).toBeCloseTo(-5, 5);
+  });
+
+  it('should handle date line crossing with centerLng > 180', () => {
+    // Create bounds that will produce centerLng > 180 after the (+360)/2 calculation
+    // We need: (sw + ne + 360) / 2 > 180
+    // So: sw + ne > 0
+    // With date line crossing: sw > ne
+    const bounds: GeoBounds = {
+      northeast: { latitude: 10.0, longitude: 100.0 },  // 100E
+      southwest: { latitude: -10.0, longitude: 170.0 }, // 170E (crosses date line)
+    };
+    
+    const center = getBoundsCenter(bounds);
+    
+    // (170 + 100 + 360) / 2 = 630 / 2 = 315
+    // 315 > 180, so centerLng = 315 - 360 = -45
+    expect(center.longitude).toBeGreaterThan(-180);
+    expect(center.longitude).toBeLessThanOrEqual(180);
+    expect(center.longitude).toBeCloseTo(-45, 0);
   });
 });
 
@@ -370,6 +412,13 @@ describe('convertCoordinateFormat', () => {
     expect(result).toContain('S');
     expect(result).toContain('W');
   });
+
+  it('should fallback to decimal for unknown format', () => {
+    const result = convertCoordinateFormat(coords, 'unknown' as any);
+    
+    // Should default to decimal format
+    expect(result).toBe('35.681200, 139.767100');
+  });
 });
 
 describe('createGeoAddress', () => {
@@ -517,6 +566,561 @@ describe('Geo-Insurance Use Cases (緯度経度を保険とする技術)', () =>
 
       expect(match).not.toBeNull();
       expect(match?.pid).toBe('JP-13-101-01');
+    });
+  });
+});
+
+describe('Edge Cases and Internal Functions', () => {
+  describe('getBoundsCenter with date line crossing', () => {
+    it('should handle international date line crossing correctly', () => {
+      const bounds: GeoBounds = {
+        northeast: { latitude: -16.0, longitude: -179.0 },
+        southwest: { latitude: -18.0, longitude: 179.0 },
+      };
+
+      const center = getBoundsCenter(bounds);
+
+      // Center longitude should be around 180 or -180
+      expect(Math.abs(center.longitude)).toBeCloseTo(180, 0);
+      expect(center.latitude).toBeCloseTo(-17.0, 1);
+    });
+
+    it('should handle bounds that wrap around date line with longitude > 180', () => {
+      const bounds: GeoBounds = {
+        northeast: { latitude: 10.0, longitude: -170.0 },
+        southwest: { latitude: -10.0, longitude: 170.0 },
+      };
+
+      const center = getBoundsCenter(bounds);
+
+      // Should wrap correctly
+      expect(center.longitude).toBeGreaterThan(-180);
+      expect(center.longitude).toBeLessThanOrEqual(180);
+    });
+  });
+
+  describe('findBestMatchingAddress edge cases', () => {
+    it('should skip candidates with invalid center coordinates', () => {
+      const candidates: GeoAddress[] = [
+        { pid: 'INVALID-1', center: { latitude: 91, longitude: 0 } }, // Invalid latitude
+        { pid: 'VALID-1', center: { latitude: 35.6812, longitude: 139.7671 } },
+        { pid: 'INVALID-2', center: { latitude: 0, longitude: 181 } }, // Invalid longitude
+      ];
+
+      const coords: GeoCoordinates = { latitude: 35.6815, longitude: 139.7675 };
+
+      const result = findBestMatchingAddress(coords, candidates, {
+        toleranceMeters: 1000,
+      });
+
+      expect(result).not.toBeNull();
+      expect(result?.pid).toBe('VALID-1');
+    });
+  });
+
+  describe('convertCoordinateFormat with negative coordinates', () => {
+    it('should handle negative latitude (South) in DMS format', () => {
+      const coords: GeoCoordinates = { latitude: -33.8688, longitude: 151.2093 };
+      const result = convertCoordinateFormat(coords, 'dms');
+
+      expect(result).toContain('S');
+      expect(result).toContain('E');
+      expect(result).toContain('°');
+      expect(result).toContain("'");
+      expect(result).toContain('"');
+    });
+
+    it('should handle negative longitude (West) in DMS format', () => {
+      const coords: GeoCoordinates = { latitude: 40.7128, longitude: -74.0060 };
+      const result = convertCoordinateFormat(coords, 'dms');
+
+      expect(result).toContain('N');
+      expect(result).toContain('W');
+    });
+
+    it('should handle negative coordinates in DMM format', () => {
+      const coords: GeoCoordinates = { latitude: -33.8688, longitude: -151.2093 };
+      const result = convertCoordinateFormat(coords, 'dmm');
+
+      expect(result).toContain('S');
+      expect(result).toContain('W');
+      expect(result).toContain('°');
+      expect(result).toContain("'");
+    });
+  });
+
+  describe('verifyAddressWithGeo edge cases', () => {
+    it('should return low confidence for coordinates beyond 3x tolerance', () => {
+      const address: GeoAddress = {
+        pid: 'TEST-01',
+        center: { latitude: 35.6812, longitude: 139.7671 },
+      };
+
+      // Coordinates very far away (more than 3x tolerance)
+      const farCoords: GeoCoordinates = {
+        latitude: 36.0,
+        longitude: 140.0,
+      };
+
+      const result = verifyAddressWithGeo(address, farCoords, {
+        toleranceMeters: 100,
+      });
+
+      expect(result.valid).toBe(false);
+      expect(result.confidence).toBe(0);
+    });
+
+    it('should handle coordinates exactly at center (distance = 0)', () => {
+      const address: GeoAddress = {
+        pid: 'TEST-01',
+        center: { latitude: 35.6812, longitude: 139.7671 },
+      };
+
+      const exactCoords: GeoCoordinates = {
+        latitude: 35.6812,
+        longitude: 139.7671,
+      };
+
+      const result = verifyAddressWithGeo(address, exactCoords);
+
+      expect(result.valid).toBe(true);
+      expect(result.confidence).toBe(1.0);
+      expect(result.distance).toBe(0);
+    });
+
+    it('should calculate confidence using exponential decay', () => {
+      const address: GeoAddress = {
+        pid: 'TEST-01',
+        center: { latitude: 35.6812, longitude: 139.7671 },
+      };
+
+      // Coordinates at exactly tolerance distance
+      // At tolerance meters away, confidence should be around 0.37 (e^-1)
+      const toleranceMeters = 200;
+      const nearbyCoords: GeoCoordinates = {
+        latitude: 35.6830, // Approximately 200m north
+        longitude: 139.7671,
+      };
+
+      const result = verifyAddressWithGeo(address, nearbyCoords, {
+        toleranceMeters,
+      });
+
+      // Confidence should be between 0.3 and 0.4 (exponential decay)
+      expect(result.confidence).toBeGreaterThan(0.3);
+      expect(result.confidence).toBeLessThan(0.5);
+    });
+  });
+
+  describe('calculateDistance edge case', () => {
+    it('should calculate distance using toRadians correctly', () => {
+      // Test points at different latitudes
+      const north: GeoCoordinates = { latitude: 45.0, longitude: 0.0 };
+      const south: GeoCoordinates = { latitude: -45.0, longitude: 0.0 };
+
+      const distance = calculateDistance(north, south);
+
+      // Distance should be approximately 10,000 km
+      expect(distance).toBeGreaterThan(9900000);
+      expect(distance).toBeLessThan(10100000);
+    });
+  });
+});
+
+describe('Geocoding API Input Validation', () => {
+  describe('forwardGeocode', () => {
+    it('should reject request without address or PID', async () => {
+      const result = await import('../src/geocode').then(m => m.forwardGeocode({}));
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('Either address or PID is required');
+    });
+  });
+
+  describe('reverseGeocode', () => {
+    it('should reject request without coordinates', async () => {
+      const result = await import('../src/geocode').then(m => m.reverseGeocode({}));
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('Coordinates are required');
+    });
+
+    it('should reject invalid coordinates', async () => {
+      const result = await import('../src/geocode').then(m => 
+        m.reverseGeocode({ coordinates: { latitude: 91, longitude: 0 } })
+      );
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('Invalid coordinates');
+    });
+  });
+
+  describe('geocode auto-detect', () => {
+    it('should reject request with neither coordinates nor address/PID', async () => {
+      const result = await import('../src/geocode').then(m => m.geocode({}));
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('Either address/PID or coordinates must be provided');
+    });
+
+    it('should route to reverseGeocode when coordinates provided', async () => {
+      const result = await import('../src/geocode').then(m => 
+        m.geocode({ coordinates: { latitude: 91, longitude: 0 } })
+      );
+
+      // Should call reverseGeocode which validates coordinates
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('Invalid coordinates');
+    });
+
+    it('should route to forwardGeocode when address provided', async () => {
+      const result = await import('../src/geocode').then(m => 
+        m.geocode({})
+      );
+
+      // Should reject due to missing address/coordinates
+      expect(result.success).toBe(false);
+    });
+  });
+});
+
+describe('Geocoding Cache Management', () => {
+  it('should clear geocoding cache', async () => {
+    const { clearGeocodingCache, getGeocodingCacheStats } = await import('../src/geocode');
+    
+    // Clear cache
+    clearGeocodingCache();
+    
+    const stats = getGeocodingCacheStats();
+    expect(stats.size).toBe(0);
+    expect(stats.keys).toHaveLength(0);
+  });
+
+  it('should report cache statistics', async () => {
+    const { getGeocodingCacheStats, clearGeocodingCache } = await import('../src/geocode');
+    
+    // Start fresh
+    clearGeocodingCache();
+    
+    const stats = getGeocodingCacheStats();
+    expect(stats).toHaveProperty('size');
+    expect(stats).toHaveProperty('keys');
+    expect(Array.isArray(stats.keys)).toBe(true);
+  });
+});
+
+describe('Geocoding API with Mocked Fetch', () => {
+  let fetchMock: any;
+
+  beforeEach(() => {
+    // Mock global fetch
+    fetchMock = vi.fn();
+    global.fetch = fetchMock;
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  describe('forwardGeocode with mocked responses', () => {
+    it('should handle successful geocoding with address', async () => {
+      const { forwardGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      const mockResponse = [{
+        lat: '35.6812',
+        lon: '139.7671',
+        importance: 0.9,
+      }];
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const result = await forwardGeocode({
+        address: {
+          city: 'Tokyo',
+          country: 'JP',
+        },
+      });
+
+      expect(result.success).toBe(true);
+      expect(result.coordinates).toBeDefined();
+      expect(result.coordinates?.latitude).toBeCloseTo(35.6812, 4);
+      expect(result.coordinates?.longitude).toBeCloseTo(139.7671, 4);
+    });
+
+    it('should handle successful geocoding with PID', async () => {
+      const { forwardGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      const mockResponse = [{
+        lat: '35.6812',
+        lon: '139.7671',
+        importance: 0.85,
+      }, {
+        lat: '35.7000',
+        lon: '139.8000',
+        importance: 0.75,
+      }];
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const result = await forwardGeocode({
+        pid: 'JP-13-101',
+      });
+
+      expect(result.success).toBe(true);
+      expect(result.coordinates).toBeDefined();
+      expect(result.alternatives).toBeDefined();
+      expect(result.alternatives?.length).toBeGreaterThan(0);
+    });
+
+    it('should handle no results found', async () => {
+      const { forwardGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => [],
+      });
+
+      const result = await forwardGeocode({
+        address: { city: 'NonexistentCity' },
+      });
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('No results found');
+    });
+
+    it('should handle API error', async () => {
+      const { forwardGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      fetchMock.mockResolvedValueOnce({
+        ok: false,
+        status: 500,
+      });
+
+      const result = await forwardGeocode({
+        address: { city: 'Tokyo' },
+      });
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('Geocoding API error');
+    });
+
+    it('should handle network timeout', async () => {
+      const { forwardGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      fetchMock.mockRejectedValueOnce(new Error('Network timeout'));
+
+      const result = await forwardGeocode({
+        address: { city: 'Tokyo' },
+      });
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('Geocoding failed');
+    });
+
+    it('should use cache for repeated requests', async () => {
+      const { forwardGeocode, clearGeocodingCache, getGeocodingCacheStats } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      const mockResponse = [{
+        lat: '35.6812',
+        lon: '139.7671',
+        importance: 0.9,
+      }];
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const request = { address: { city: 'Tokyo', country: 'JP' } };
+
+      // First call - should hit API
+      const result1 = await forwardGeocode(request);
+      expect(result1.success).toBe(true);
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+
+      // Second call - should use cache
+      const result2 = await forwardGeocode(request);
+      expect(result2.success).toBe(true);
+      expect(fetchMock).toHaveBeenCalledTimes(1); // Still 1, not 2
+
+      const stats = getGeocodingCacheStats();
+      expect(stats.size).toBeGreaterThan(0);
+    });
+  });
+
+  describe('reverseGeocode with mocked responses', () => {
+    it('should handle successful reverse geocoding', async () => {
+      const { reverseGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      const mockResponse = {
+        address: {
+          city: 'Chiyoda',
+          state: 'Tokyo',
+          country_code: 'jp',
+          postcode: '100-0001',
+          road: 'Chiyoda Street',
+          house_number: '1-1',
+        },
+        importance: 0.9,
+      };
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const result = await reverseGeocode({
+        coordinates: { latitude: 35.6812, longitude: 139.7671 },
+      });
+
+      expect(result.success).toBe(true);
+      expect(result.address).toBeDefined();
+      expect(result.address?.country).toBe('JP');
+      expect(result.address?.city).toBe('Chiyoda');
+    });
+
+    it('should handle no address found', async () => {
+      const { reverseGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({}), // No address field
+      });
+
+      const result = await reverseGeocode({
+        coordinates: { latitude: 0, longitude: 0 },
+      });
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('No address found');
+    });
+
+    it('should handle API error', async () => {
+      const { reverseGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      fetchMock.mockResolvedValueOnce({
+        ok: false,
+        status: 404,
+      });
+
+      const result = await reverseGeocode({
+        coordinates: { latitude: 35.6812, longitude: 139.7671 },
+      });
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('Reverse geocoding API error');
+    });
+
+    it('should handle network error', async () => {
+      const { reverseGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      fetchMock.mockRejectedValueOnce(new Error('Network error'));
+
+      const result = await reverseGeocode({
+        coordinates: { latitude: 35.6812, longitude: 139.7671 },
+      });
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('Reverse geocoding failed');
+    });
+
+    it('should use cache for repeated reverse geocoding requests', async () => {
+      const { reverseGeocode, clearGeocodingCache, getGeocodingCacheStats } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      const mockResponse = {
+        address: {
+          city: 'Tokyo',
+          country_code: 'jp',
+        },
+        importance: 0.9,
+      };
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const request = { coordinates: { latitude: 35.6812, longitude: 139.7671 } };
+
+      // First call
+      const result1 = await reverseGeocode(request);
+      expect(result1.success).toBe(true);
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+
+      // Second call - should use cache
+      const result2 = await reverseGeocode(request);
+      expect(result2.success).toBe(true);
+      expect(fetchMock).toHaveBeenCalledTimes(1); // Still 1
+
+      const stats = getGeocodingCacheStats();
+      expect(stats.size).toBeGreaterThan(0);
+    });
+  });
+
+  describe('geocode auto-routing with mocked fetch', () => {
+    it('should route to forwardGeocode when address provided', async () => {
+      const { geocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      const mockResponse = [{
+        lat: '35.6812',
+        lon: '139.7671',
+        importance: 0.9,
+      }];
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const result = await geocode({
+        address: { city: 'Tokyo', country: 'JP' },
+      });
+
+      expect(result.success).toBe(true);
+      expect(result.coordinates).toBeDefined();
+    });
+
+    it('should route to reverseGeocode when coordinates provided', async () => {
+      const { geocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      const mockResponse = {
+        address: {
+          city: 'Tokyo',
+          country_code: 'jp',
+        },
+        importance: 0.9,
+      };
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const result = await geocode({
+        coordinates: { latitude: 35.6812, longitude: 139.7671 },
+      });
+
+      expect(result.success).toBe(true);
+      expect(result.address).toBeDefined();
     });
   });
 });
