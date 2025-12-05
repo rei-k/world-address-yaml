@@ -20,7 +20,7 @@
     {
       "name": "Arabic",
       "script": "Arabic",
-      "direction": "ltr",
+      "direction": "rtl",
       "role": "official",
       "country_name": "قطاع غزة"
     },

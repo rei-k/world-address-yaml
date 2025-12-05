@@ -13,7 +13,7 @@ note: Different address system from Gaza - distinct road naming conventions
 languages:
   - name: Arabic
     script: Arabic
-    direction: ltr
+    direction: rtl
     role: official
     country_name: الضفة الغربية
   - name: English
