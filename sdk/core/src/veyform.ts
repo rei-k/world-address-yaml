@@ -48,6 +48,18 @@ export interface CountryOption {
   subregion: string;
 }
 
+/** Language storage configuration */
+export interface LanguageStorageConfig {
+  /** Storage type to use for persisting language preference */
+  type: 'localStorage' | 'sessionStorage' | 'none';
+  
+  /** Custom storage key (defaults to 'veyform_language') */
+  key?: string;
+}
+
+/** Callback function triggered when language changes */
+export type LanguageChangeCallback = (newLanguage: string, oldLanguage: string) => void;
+
 /** Veyform initialization options */
 export interface VeyformConfig {
   /** API key for authentication */
@@ -70,6 +82,12 @@ export interface VeyformConfig {
   
   /** Allowed languages */
   allowedLanguages?: string[];
+  
+  /** Language storage configuration */
+  languageStorage?: LanguageStorageConfig;
+  
+  /** Callback triggered when language changes */
+  onLanguageChange?: LanguageChangeCallback;
   
   /** Use continent filter tabs */
   useContinentFilter?: boolean;
@@ -236,6 +254,7 @@ export class Veyform {
       enableAnalytics: true,
       useContinentFilter: true,
       defaultLanguage: 'en',
+      languageStorage: { type: 'localStorage', key: 'veyform_language' },
       ...config
     };
 
@@ -247,9 +266,13 @@ export class Veyform {
     // Generate session ID
     this.sessionId = this.generateSessionId();
 
+    // Load saved language preference or use default
+    const savedLanguage = this.loadLanguagePreference();
+    const initialLanguage = savedLanguage || this.config.defaultLanguage!;
+
     // Initialize form state
     this.formState = {
-      language: this.config.defaultLanguage!,
+      language: initialLanguage,
       values: {},
       errors: {},
       touched: {},
@@ -359,11 +382,80 @@ export class Veyform {
   }
 
   /**
-   * Change form language
+   * Change form language with validation, persistence, and callbacks
+   * @param language - Language code (ISO 639-1)
+   * @throws Error if language is not in allowedLanguages list
    */
   setLanguage(language: string): void {
+    // Validate against allowed languages if configured
+    if (this.config.allowedLanguages && this.config.allowedLanguages.length > 0) {
+      if (!this.config.allowedLanguages.includes(language)) {
+        throw new Error(
+          `Language '${language}' is not in the allowed languages list: ${this.config.allowedLanguages.join(', ')}`
+        );
+      }
+    }
+
+    const oldLanguage = this.formState.language;
+    
+    // Only proceed if language actually changed
+    if (oldLanguage === language) {
+      return;
+    }
+
+    // Update form state
     this.formState.language = language;
+
+    // Persist to storage
+    this.saveLanguagePreference(language);
+
+    // Trigger callback if configured
+    if (this.config.onLanguageChange) {
+      this.config.onLanguageChange(language, oldLanguage);
+    }
+
+    // Track analytics event
     this.trackEvent('language_changed', { language });
+  }
+
+  /**
+   * Get current language setting
+   * @returns Current language code
+   */
+  getLanguage(): string {
+    return this.formState.language;
+  }
+
+  /**
+   * Get list of available languages
+   * @returns Array of allowed language codes, or empty array if all languages allowed
+   */
+  getAvailableLanguages(): string[] {
+    return this.config.allowedLanguages || [];
+  }
+
+  /**
+   * Clear saved language preference from storage
+   */
+  clearLanguagePreference(): void {
+    if (!this.config.languageStorage || this.config.languageStorage.type === 'none') {
+      return;
+    }
+
+    const storageKey = this.config.languageStorage.key || 'veyform_language';
+
+    if (typeof window !== 'undefined') {
+      try {
+        if (this.config.languageStorage.type === 'localStorage') {
+          window.localStorage.removeItem(storageKey);
+        } else if (this.config.languageStorage.type === 'sessionStorage') {
+          window.sessionStorage.removeItem(storageKey);
+        }
+      } catch (error) {
+        // Silent fail for storage operations
+        console.warn('Failed to clear language preference:', error);
+      }
+    }
   }
 
   /**
@@ -513,6 +605,9 @@ export class Veyform {
   private detectDeviceType(): 'mobile' | 'desktop' | 'tablet' {
     if (typeof window === 'undefined') return 'desktop';
     
+    // Check if navigator and userAgent exist
+    if (!window.navigator || !window.navigator.userAgent) return 'desktop';
+    
     const ua = window.navigator.userAgent;
     if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
       return 'tablet';
@@ -541,6 +636,82 @@ export class Veyform {
     this.formState.completionRate = requiredFields.length > 0
       ? (completedFields.length / requiredFields.length) * 100
       : 0;
+  }
+
+  /**
+   * Save language preference to storage
+   * @param language - Language code to save
+   */
+  private saveLanguagePreference(language: string): void {
+    if (!this.config.languageStorage || this.config.languageStorage.type === 'none') {
+      return;
+    }
+
+    const storageKey = this.config.languageStorage.key || 'veyform_language';
+
+    if (typeof window !== 'undefined') {
+      try {
+        const storageData = JSON.stringify({
+          language,
+          timestamp: Date.now()
+        });
+
+        if (this.config.languageStorage.type === 'localStorage') {
+          window.localStorage.setItem(storageKey, storageData);
+        } else if (this.config.languageStorage.type === 'sessionStorage') {
+          window.sessionStorage.setItem(storageKey, storageData);
+        }
+      } catch (error) {
+        // Silent fail for storage operations
+        console.warn('Failed to save language preference:', error);
+      }
+    }
+  }
+
+  /**
+   * Load language preference from storage
+   * @returns Saved language code or null if not found/invalid
+   */
+  private loadLanguagePreference(): string | null {
+    if (!this.config.languageStorage || this.config.languageStorage.type === 'none') {
+      return null;
+    }
+
+    const storageKey = this.config.languageStorage.key || 'veyform_language';
+
+    if (typeof window !== 'undefined') {
+      try {
+        let storageData: string | null = null;
+
+        if (this.config.languageStorage.type === 'localStorage') {
+          storageData = window.localStorage.getItem(storageKey);
+        } else if (this.config.languageStorage.type === 'sessionStorage') {
+          storageData = window.sessionStorage.getItem(storageKey);
+        }
+
+        if (storageData) {
+          const parsed = JSON.parse(storageData);
+          const language = parsed.language;
+
+          // Validate against allowed languages if configured
+          if (this.config.allowedLanguages && this.config.allowedLanguages.length > 0) {
+            if (this.config.allowedLanguages.includes(language)) {
+              return language;
+            }
+            // Invalid language in storage, clear it
+            this.clearLanguagePreference();
+            return null;
+          }
+
+          return language;
+        }
+      } catch (error) {
+        // Silent fail for storage operations
+        console.warn('Failed to load language preference:', error);
+      }
+    }
+
+    return null;
   }
 
   /**
