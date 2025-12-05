@@ -2,7 +2,7 @@
  * @vey/core - Tests for Geocoding module (緯度経度関連機能)
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import {
   validateCoordinates,
   isWithinBounds,
@@ -76,6 +76,20 @@ describe('validateCoordinates', () => {
       accuracy: 'ten',
     };
     expect(validateCoordinates(coords)).toBe(false);
+  });
+
+  it('should reject non-number coordinates', () => {
+    const coords: any = {
+      latitude: '35.6812',
+      longitude: 139.7671,
+    };
+    expect(validateCoordinates(coords)).toBe(false);
+
+    const coords2: any = {
+      latitude: 35.6812,
+      longitude: '139.7671',
+    };
+    expect(validateCoordinates(coords2)).toBe(false);
   });
 });
 
@@ -792,5 +806,321 @@ describe('Geocoding Cache Management', () => {
     expect(stats).toHaveProperty('size');
     expect(stats).toHaveProperty('keys');
     expect(Array.isArray(stats.keys)).toBe(true);
+  });
+});
+
+describe('Geocoding API with Mocked Fetch', () => {
+  let fetchMock: any;
+
+  beforeEach(() => {
+    // Mock global fetch
+    fetchMock = vi.fn();
+    global.fetch = fetchMock;
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  describe('forwardGeocode with mocked responses', () => {
+    it('should handle successful geocoding with address', async () => {
+      const { forwardGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      const mockResponse = [{
+        lat: '35.6812',
+        lon: '139.7671',
+        importance: 0.9,
+      }];
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const result = await forwardGeocode({
+        address: {
+          city: 'Tokyo',
+          country: 'JP',
+        },
+      });
+
+      expect(result.success).toBe(true);
+      expect(result.coordinates).toBeDefined();
+      expect(result.coordinates?.latitude).toBeCloseTo(35.6812, 4);
+      expect(result.coordinates?.longitude).toBeCloseTo(139.7671, 4);
+    });
+
+    it('should handle successful geocoding with PID', async () => {
+      const { forwardGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      const mockResponse = [{
+        lat: '35.6812',
+        lon: '139.7671',
+        importance: 0.85,
+      }, {
+        lat: '35.7000',
+        lon: '139.8000',
+        importance: 0.75,
+      }];
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const result = await forwardGeocode({
+        pid: 'JP-13-101',
+      });
+
+      expect(result.success).toBe(true);
+      expect(result.coordinates).toBeDefined();
+      expect(result.alternatives).toBeDefined();
+      expect(result.alternatives?.length).toBeGreaterThan(0);
+    });
+
+    it('should handle no results found', async () => {
+      const { forwardGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => [],
+      });
+
+      const result = await forwardGeocode({
+        address: { city: 'NonexistentCity' },
+      });
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('No results found');
+    });
+
+    it('should handle API error', async () => {
+      const { forwardGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      fetchMock.mockResolvedValueOnce({
+        ok: false,
+        status: 500,
+      });
+
+      const result = await forwardGeocode({
+        address: { city: 'Tokyo' },
+      });
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('Geocoding API error');
+    });
+
+    it('should handle network timeout', async () => {
+      const { forwardGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      fetchMock.mockRejectedValueOnce(new Error('Network timeout'));
+
+      const result = await forwardGeocode({
+        address: { city: 'Tokyo' },
+      });
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('Geocoding failed');
+    });
+
+    it('should use cache for repeated requests', async () => {
+      const { forwardGeocode, clearGeocodingCache, getGeocodingCacheStats } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      const mockResponse = [{
+        lat: '35.6812',
+        lon: '139.7671',
+        importance: 0.9,
+      }];
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const request = { address: { city: 'Tokyo', country: 'JP' } };
+
+      // First call - should hit API
+      const result1 = await forwardGeocode(request);
+      expect(result1.success).toBe(true);
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+
+      // Second call - should use cache
+      const result2 = await forwardGeocode(request);
+      expect(result2.success).toBe(true);
+      expect(fetchMock).toHaveBeenCalledTimes(1); // Still 1, not 2
+
+      const stats = getGeocodingCacheStats();
+      expect(stats.size).toBeGreaterThan(0);
+    });
+  });
+
+  describe('reverseGeocode with mocked responses', () => {
+    it('should handle successful reverse geocoding', async () => {
+      const { reverseGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      const mockResponse = {
+        address: {
+          city: 'Chiyoda',
+          state: 'Tokyo',
+          country_code: 'jp',
+          postcode: '100-0001',
+          road: 'Chiyoda Street',
+          house_number: '1-1',
+        },
+        importance: 0.9,
+      };
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const result = await reverseGeocode({
+        coordinates: { latitude: 35.6812, longitude: 139.7671 },
+      });
+
+      expect(result.success).toBe(true);
+      expect(result.address).toBeDefined();
+      expect(result.address?.country).toBe('JP');
+      expect(result.address?.city).toBe('Chiyoda');
+    });
+
+    it('should handle no address found', async () => {
+      const { reverseGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({}), // No address field
+      });
+
+      const result = await reverseGeocode({
+        coordinates: { latitude: 0, longitude: 0 },
+      });
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('No address found');
+    });
+
+    it('should handle API error', async () => {
+      const { reverseGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      fetchMock.mockResolvedValueOnce({
+        ok: false,
+        status: 404,
+      });
+
+      const result = await reverseGeocode({
+        coordinates: { latitude: 35.6812, longitude: 139.7671 },
+      });
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('Reverse geocoding API error');
+    });
+
+    it('should handle network error', async () => {
+      const { reverseGeocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      fetchMock.mockRejectedValueOnce(new Error('Network error'));
+
+      const result = await reverseGeocode({
+        coordinates: { latitude: 35.6812, longitude: 139.7671 },
+      });
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('Reverse geocoding failed');
+    });
+
+    it('should use cache for repeated reverse geocoding requests', async () => {
+      const { reverseGeocode, clearGeocodingCache, getGeocodingCacheStats } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      const mockResponse = {
+        address: {
+          city: 'Tokyo',
+          country_code: 'jp',
+        },
+        importance: 0.9,
+      };
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const request = { coordinates: { latitude: 35.6812, longitude: 139.7671 } };
+
+      // First call
+      const result1 = await reverseGeocode(request);
+      expect(result1.success).toBe(true);
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+
+      // Second call - should use cache
+      const result2 = await reverseGeocode(request);
+      expect(result2.success).toBe(true);
+      expect(fetchMock).toHaveBeenCalledTimes(1); // Still 1
+
+      const stats = getGeocodingCacheStats();
+      expect(stats.size).toBeGreaterThan(0);
+    });
+  });
+
+  describe('geocode auto-routing with mocked fetch', () => {
+    it('should route to forwardGeocode when address provided', async () => {
+      const { geocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      const mockResponse = [{
+        lat: '35.6812',
+        lon: '139.7671',
+        importance: 0.9,
+      }];
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const result = await geocode({
+        address: { city: 'Tokyo', country: 'JP' },
+      });
+
+      expect(result.success).toBe(true);
+      expect(result.coordinates).toBeDefined();
+    });
+
+    it('should route to reverseGeocode when coordinates provided', async () => {
+      const { geocode, clearGeocodingCache } = await import('../src/geocode');
+      clearGeocodingCache();
+
+      const mockResponse = {
+        address: {
+          city: 'Tokyo',
+          country_code: 'jp',
+        },
+        importance: 0.9,
+      };
+
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const result = await geocode({
+        coordinates: { latitude: 35.6812, longitude: 139.7671 },
+      });
+
+      expect(result.success).toBe(true);
+      expect(result.address).toBeDefined();
+    });
   });
 });
