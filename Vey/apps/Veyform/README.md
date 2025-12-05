@@ -264,6 +264,7 @@ const fieldConfig = {
 
 ## 📚 ドキュメント / Documentation
 
+- **[Use Cases & Integration Domains](./USE_CASES.md) - ユースケース & 導入領域総まとめ** 🆕
 - [API Reference](./docs/api-reference.md) - API仕様
 - [Field Configuration](./docs/field-configuration.md) - フィールド設定
 - [Theme Customization](./docs/theme-customization.md) - テーマカスタマイズ

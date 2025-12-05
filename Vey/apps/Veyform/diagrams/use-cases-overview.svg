@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1400">
+  <defs>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 28px; font-weight: bold; fill: #1a1a1a; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 16px; fill: #666; }
+      .domain-title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #fff; }
+      .use-case { font-family: Arial, sans-serif; font-size: 14px; fill: #fff; }
+      .center-box { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #fff; }
+      .center-text { font-family: Arial, sans-serif; font-size: 14px; fill: #fff; }
+    </style>
+  </defs>
+  
+  <!-- Title -->
+  <text x="600" y="40" class="title" text-anchor="middle">Veyform ユースケース全体図</text>
+  <text x="600" y="65" class="subtitle" text-anchor="middle">Veyform Use Cases - Complete Overview</text>
+  
+  <!-- Central Veyform Hub -->
+  <rect x="450" y="600" width="300" height="120" rx="10" fill="#2563eb" stroke="#1e40af" stroke-width="3"/>
+  <text x="600" y="640" class="center-box" text-anchor="middle">Veyform</text>
+  <text x="600" y="665" class="center-text" text-anchor="middle">世界標準住所入力フォーム</text>
+  <text x="600" y="690" class="center-text" text-anchor="middle">257カ国対応 | QR/NFC | ZKP</text>
+  
+  <!-- EC / E-Commerce (Top Left) -->
+  <rect x="50" y="100" width="200" height="160" rx="8" fill="#10b981" stroke="#059669" stroke-width="2"/>
+  <text x="150" y="130" class="domain-title" text-anchor="middle">① EC・配送</text>
+  <text x="150" y="155" class="use-case" text-anchor="middle">• Amazon型EC</text>
+  <text x="150" y="180" class="use-case" text-anchor="middle">• Shopify / WooCommerce</text>
+  <text x="150" y="205" class="use-case" text-anchor="middle">• 越境EC</text>
+  <text x="150" y="230" class="use-case" text-anchor="middle">• ギフト配送</text>
+  <line x1="250" y1="180" x2="450" y2="660" stroke="#10b981" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Food Delivery (Top Center) -->
+  <rect x="280" y="100" width="200" height="160" rx="8" fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
+  <text x="380" y="130" class="domain-title" text-anchor="middle">② フードデリバリー</text>
+  <text x="380" y="155" class="use-case" text-anchor="middle">• Uber Eats</text>
+  <text x="380" y="180" class="use-case" text-anchor="middle">• 出前館 / DoorDash</text>
+  <text x="380" y="205" class="use-case" text-anchor="middle">• 生鮮食品配送</text>
+  <text x="380" y="230" class="use-case" text-anchor="middle">• 置き配指示</text>
+  <line x1="480" y1="180" x2="500" y2="600" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Ride Share / Taxi (Top Right) -->
+  <rect x="510" y="100" width="200" height="160" rx="8" fill="#8b5cf6" stroke="#7c3aed" stroke-width="2"/>
+  <text x="610" y="130" class="domain-title" text-anchor="middle">③ タクシー配車</text>
+  <text x="610" y="155" class="use-case" text-anchor="middle">• Uber / DiDi / GO</text>
+  <text x="610" y="180" class="use-case" text-anchor="middle">• 空港送迎予約</text>
+  <text x="610" y="205" class="use-case" text-anchor="middle">• ホテルシャトル</text>
+  <line x1="610" y1="260" x2="600" y2="600" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Hotel / Airbnb (Right Upper) -->
+  <rect x="740" y="100" width="200" height="160" rx="8" fill="#ec4899" stroke="#db2777" stroke-width="2"/>
+  <text x="840" y="130" class="domain-title" text-anchor="middle">④ ホテル・Airbnb</text>
+  <text x="840" y="155" class="use-case" text-anchor="middle">• 宿泊者カード</text>
+  <text x="840" y="180" class="use-case" text-anchor="middle">• チェックイン</text>
+  <text x="840" y="205" class="use-case" text-anchor="middle">• 海外ゲスト対応</text>
+  <text x="840" y="230" class="use-case" text-anchor="middle">• 旅館業法対応</text>
+  <line x1="740" y1="180" x2="750" y2="660" stroke="#ec4899" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Furniture / Appliance (Right Middle Upper) -->
+  <rect x="970" y="100" width="200" height="160" rx="8" fill="#06b6d4" stroke="#0891b2" stroke-width="2"/>
+  <text x="1070" y="130" class="domain-title" text-anchor="middle">⑤ 家具・家電</text>
+  <text x="1070" y="155" class="use-case" text-anchor="middle">• 洗濯機設置</text>
+  <text x="1070" y="180" class="use-case" text-anchor="middle">• 冷蔵庫配送</text>
+  <text x="1070" y="205" class="use-case" text-anchor="middle">• エアコン工事</text>
+  <line x1="970" y1="180" x2="750" y2="640" stroke="#06b6d4" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Coworking / Office (Left Middle) -->
+  <rect x="50" y="300" width="200" height="140" rx="8" fill="#84cc16" stroke="#65a30d" stroke-width="2"/>
+  <text x="150" y="330" class="domain-title" text-anchor="middle">⑥ オフィス契約</text>
+  <text x="150" y="355" class="use-case" text-anchor="middle">• コワーキング</text>
+  <text x="150" y="380" class="use-case" text-anchor="middle">• 登記住所</text>
+  <text x="150" y="405" class="use-case" text-anchor="middle">• 郵便転送先</text>
+  <line x1="250" y1="370" x2="450" y2="660" stroke="#84cc16" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Finance (Top Right Upper) -->
+  <rect x="970" y="300" width="200" height="160" rx="8" fill="#ef4444" stroke="#dc2626" stroke-width="2"/>
+  <text x="1070" y="330" class="domain-title" text-anchor="middle">⑦ 金融</text>
+  <text x="1070" y="355" class="use-case" text-anchor="middle">• 口座開設</text>
+  <text x="1070" y="380" class="use-case" text-anchor="middle">• カード申請</text>
+  <text x="1070" y="405" class="use-case" text-anchor="middle">• 住所変更</text>
+  <text x="1070" y="430" class="use-case" text-anchor="middle">• KYC本人確認</text>
+  <line x1="970" y1="380" x2="750" y2="640" stroke="#ef4444" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Government (Right Middle) -->
+  <rect x="970" y="500" width="200" height="160" rx="8" fill="#6366f1" stroke="#4f46e5" stroke-width="2"/>
+  <text x="1070" y="530" class="domain-title" text-anchor="middle">⑧ 行政サービス</text>
+  <text x="1070" y="555" class="use-case" text-anchor="middle">• 各種届け出</text>
+  <text x="1070" y="580" class="use-case" text-anchor="middle">• 住民票確認</text>
+  <text x="1070" y="605" class="use-case" text-anchor="middle">• 税申告</text>
+  <text x="1070" y="630" class="use-case" text-anchor="middle">• 引っ越しワンストップ</text>
+  <line x1="970" y1="580" x2="750" y2="660" stroke="#6366f1" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Medical (Right Lower) -->
+  <rect x="970" y="700" width="200" height="140" rx="8" fill="#14b8a6" stroke="#0d9488" stroke-width="2"/>
+  <text x="1070" y="730" class="domain-title" text-anchor="middle">⑨ 医療</text>
+  <text x="1070" y="755" class="use-case" text-anchor="middle">• 初診問診票</text>
+  <text x="1070" y="780" class="use-case" text-anchor="middle">• 保険情報</text>
+  <text x="1070" y="805" class="use-case" text-anchor="middle">• 薬局配送</text>
+  <line x1="970" y1="770" x2="750" y2="680" stroke="#14b8a6" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Education (Left Lower) -->
+  <rect x="50" y="480" width="200" height="140" rx="8" fill="#a855f7" stroke="#9333ea" stroke-width="2"/>
+  <text x="150" y="510" class="domain-title" text-anchor="middle">⑩ 教育</text>
+  <text x="150" y="535" class="use-case" text-anchor="middle">• 大学出願</text>
+  <text x="150" y="560" class="use-case" text-anchor="middle">• 留学生登録</text>
+  <text x="150" y="585" class="use-case" text-anchor="middle">• 寮届</text>
+  <line x1="250" y1="550" x2="450" y2="660" stroke="#a855f7" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Events (Bottom Left) -->
+  <rect x="50" y="660" width="200" height="140" rx="8" fill="#f97316" stroke="#ea580c" stroke-width="2"/>
+  <text x="150" y="690" class="domain-title" text-anchor="middle">⑪ イベント</text>
+  <text x="150" y="715" class="use-case" text-anchor="middle">• コンサート</text>
+  <text x="150" y="740" class="use-case" text-anchor="middle">• セミナー</text>
+  <text x="150" y="765" class="use-case" text-anchor="middle">• スポーツイベント</text>
+  <line x1="250" y1="730" x2="450" y2="680" stroke="#f97316" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- SaaS / B2B (Bottom Center Left) -->
+  <rect x="280" y="880" width="200" height="140" rx="8" fill="#0ea5e9" stroke="#0284c7" stroke-width="2"/>
+  <text x="380" y="910" class="domain-title" text-anchor="middle">⑫ SaaS・B2B</text>
+  <text x="380" y="935" class="use-case" text-anchor="middle">• Stripe Billing</text>
+  <text x="380" y="960" class="use-case" text-anchor="middle">• 請求先住所</text>
+  <text x="380" y="985" class="use-case" text-anchor="middle">• 契約書</text>
+  <line x1="480" y1="880" x2="550" y2="720" stroke="#0ea5e9" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- SNS / Matching (Bottom Center) -->
+  <rect x="510" y="880" width="200" height="160" rx="8" fill="#f43f5e" stroke="#e11d48" stroke-width="2"/>
+  <text x="610" y="910" class="domain-title" text-anchor="middle">⑬ SNS・マッチング</text>
+  <text x="610" y="935" class="use-case" text-anchor="middle">• シェアハウス応募</text>
+  <text x="610" y="960" class="use-case" text-anchor="middle">• オフ会チェックイン</text>
+  <text x="610" y="985" class="use-case" text-anchor="middle">• 匿名配送 (ZKP)</text>
+  <line x1="610" y1="880" x2="600" y2="720" stroke="#f43f5e" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Art / Creator (Bottom Right Center) -->
+  <rect x="740" y="880" width="200" height="140" rx="8" fill="#8b5cf6" stroke="#7c3aed" stroke-width="2"/>
+  <text x="840" y="910" class="domain-title" text-anchor="middle">⑭ アート通販</text>
+  <text x="840" y="935" class="use-case" text-anchor="middle">• グッズ販売</text>
+  <text x="840" y="960" class="use-case" text-anchor="middle">• 展示会招待状</text>
+  <text x="840" y="985" class="use-case" text-anchor="middle">• 海外配送</text>
+  <line x1="740" y1="880" x2="650" y2="720" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Logistics (Bottom Far Right) -->
+  <rect x="970" y="880" width="200" height="160" rx="8" fill="#22c55e" stroke="#16a34a" stroke-width="2"/>
+  <text x="1070" y="910" class="domain-title" text-anchor="middle">⑮ 物流プロAPI</text>
+  <text x="1070" y="935" class="use-case" text-anchor="middle">• FedEx / UPS / DHL</text>
+  <text x="1070" y="960" class="use-case" text-anchor="middle">• 配達員アプリ</text>
+  <text x="1070" y="985" class="use-case" text-anchor="middle">• 不在票QR</text>
+  <text x="1070" y="1010" class="use-case" text-anchor="middle">• PIDで誤配削減</text>
+  <line x1="970" y1="960" x2="750" y2="700" stroke="#22c55e" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Moving Services (Bottom Left Lower) -->
+  <rect x="50" y="840" width="200" height="140" rx="8" fill="#eab308" stroke="#ca8a04" stroke-width="2"/>
+  <text x="150" y="870" class="domain-title" text-anchor="middle">引っ越しサービス</text>
+  <text x="150" y="895" class="use-case" text-anchor="middle">• 見積りフォーム</text>
+  <text x="150" y="920" class="use-case" text-anchor="middle">• 住所変更同期</text>
+  <text x="150" y="945" class="use-case" text-anchor="middle">• 荷物配送PID</text>
+  <line x1="250" y1="910" x2="450" y2="700" stroke="#eab308" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Key Features -->
+  <rect x="50" y="1050" width="1120" height="120" rx="8" fill="#f3f4f6" stroke="#d1d5db" stroke-width="2"/>
+  <text x="600" y="1085" style="font-family: Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #1a1a1a;" text-anchor="middle">Veyform コア機能</text>
+  <text x="150" y="1115" style="font-family: Arial, sans-serif; font-size: 14px; fill: #374151;">✔ 257カ国対応</text>
+  <text x="350" y="1115" style="font-family: Arial, sans-serif; font-size: 14px; fill: #374151;">✔ 多言語UI</text>
+  <text x="500" y="1115" style="font-family: Arial, sans-serif; font-size: 14px; fill: #374151;">✔ QR/NFC共有</text>
+  <text x="700" y="1115" style="font-family: Arial, sans-serif; font-size: 14px; fill: #374151;">✔ ZKP匿名配送</text>
+  <text x="900" y="1115" style="font-family: Arial, sans-serif; font-size: 14px; fill: #374151;">✔ 自動補完</text>
+  <text x="150" y="1145" style="font-family: Arial, sans-serif; font-size: 14px; fill: #374151;">✔ AMF正規化</text>
+  <text x="350" y="1145" style="font-family: Arial, sans-serif; font-size: 14px; fill: #374151;">✔ PID生成</text>
+  <text x="500" y="1145" style="font-family: Arial, sans-serif; font-size: 14px; fill: #374151;">✔ 即時バリデーション</text>
+  <text x="700" y="1145" style="font-family: Arial, sans-serif; font-size: 14px; fill: #374151;">✔ Shopify統合</text>
+  <text x="900" y="1145" style="font-family: Arial, sans-serif; font-size: 14px; fill: #374151;">✔ API/SDK提供</text>
+  
+  <!-- Footer -->
+  <text x="600" y="1220" style="font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #1a1a1a;" text-anchor="middle">Vey = 世界住所の新しいプロトコル（住所のStripe）</text>
+  <text x="600" y="1250" style="font-family: Arial, sans-serif; font-size: 14px; fill: #666;" text-anchor="middle">住所入力が発生するすべての場面で利用できる世界標準フォーム</text>
+  
+  <!-- Legend -->
+  <rect x="50" y="1280" width="1120" height="80" rx="8" fill="#fef3c7" stroke="#fbbf24" stroke-width="2"/>
+  <text x="600" y="1310" style="font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #92400e;" text-anchor="middle">効果・実現価値</text>
+  <text x="600" y="1335" style="font-family: Arial, sans-serif; font-size: 13px; fill: #78350f;" text-anchor="middle">離脱率低下 | 誤配削減 | 多言語対応 | 表記ゆらぎ解消 | プライバシー保護 | 国際住所正規化</text>
+</svg>
