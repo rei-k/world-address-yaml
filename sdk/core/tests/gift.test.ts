@@ -19,6 +19,8 @@ import {
   type GetDeliveryCandidatesRequest,
   type SelectDeliveryLocationRequest,
 } from '../src/gift';
+import type { CarrierCode } from '../src/logistics';
+import type { GiftDeliveryCandidate, CandidateCluster } from '../src/types';
 import { GiftOrderStatus, CancellationReason } from '../src/types';
 
 describe('createGiftOrder', () => {
@@ -126,7 +128,7 @@ describe('CarrierIntentAI', () => {
   describe('extractDeliverableCandidates', () => {
     it('should extract deliverable candidates', async () => {
       const addresses = ['JP-13-113-01', 'JP-13-101-02'];
-      const carrierCode = 'DHL' as any;
+      const carrierCode: CarrierCode = 'DHL';
       const deadline = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
 
       const candidates = await ai.extractDeliverableCandidates(
@@ -141,7 +143,7 @@ describe('CarrierIntentAI', () => {
     it('should handle empty address list', async () => {
       const candidates = await ai.extractDeliverableCandidates(
         [],
-        'DHL' as any,
+        'DHL' as CarrierCode,
         new Date()
       );
 
@@ -154,7 +156,7 @@ describe('CarrierIntentAI', () => {
     it('should verify carrier compatibility', async () => {
       const result = await ai.verifyCarrierCompatibility(
         'JP-13-113-01',
-        'DHL' as any
+        'DHL' as CarrierCode
       );
 
       expect(result).toBeDefined();
@@ -167,7 +169,7 @@ describe('CarrierIntentAI', () => {
     it('should calculate success probability', async () => {
       const probability = await ai.calculateSuccessProbability(
         'JP-13-113-01',
-        'DHL' as any
+        'DHL' as CarrierCode
       );
 
       expect(typeof probability).toBe('number');
@@ -329,7 +331,7 @@ describe('LocationClusteringAI', () => {
 
   describe('clusterCandidates', () => {
     it('should cluster candidates', async () => {
-      const candidates: any[] = [
+      const candidates: GiftDeliveryCandidate[] = [
         {
           pid: 'JP-13-113-01',
           label: 'Home',
@@ -372,7 +374,7 @@ describe('LocationClusteringAI', () => {
 
   describe('calculateClusterCenter', () => {
     it('should calculate cluster center', async () => {
-      const candidates: any[] = [];
+      const candidates: GiftDeliveryCandidate[] = [];
       const center = await ai.calculateClusterCenter(candidates);
 
       expect(center).toBeDefined();
@@ -385,17 +387,31 @@ describe('LocationClusteringAI', () => {
 
   describe('selectOptimalCandidate', () => {
     it('should select optimal candidate from cluster', async () => {
-      const cluster: any = {
+      const cluster: CandidateCluster = {
+        center: { latitude: 35.6812, longitude: 139.7671 },
+        radius: 1000,
         candidates: [
           {
             pid: 'JP-13-113-01',
+            label: 'Home',
+            type: 'home',
+            carrierCompatible: true,
             aiScore: 95,
             successProbability: 0.92,
+            previousDeliveries: 10,
+            successfulDeliveries: 9,
+            priority: 'normal',
           },
           {
             pid: 'JP-13-101-02',
+            label: 'Office',
+            type: 'office',
+            carrierCompatible: true,
             aiScore: 85,
             successProbability: 0.88,
+            previousDeliveries: 5,
+            successfulDeliveries: 4,
+            priority: 'normal',
           },
         ],
       };
