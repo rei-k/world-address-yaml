@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import AddressCard from '../../components/AddressCard';
-import type { Address } from '../../../src/types';
+import AddressCard from '../components/AddressCard';
+import type { Address } from '../../src/types';
 
 export default function AddressesPage() {
   const [addresses, setAddresses] = useState<Address[]>([]);
