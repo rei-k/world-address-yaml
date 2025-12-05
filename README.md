@@ -145,18 +145,34 @@ All important applications in the Vey ecosystem with their frontend UI/UX featur
 - **Logistics Management:** Integrated DMS/OMS/WMS/TMS interfaces with drag-and-drop workflow builders
 - **Multi-Modal Transport:** Visual selector for parcel/3PL/4PL/sea/rail/air shipping options with cost/time tradeoffs
 
-#### 📝 Veyform - Address Form System
-**Description:** Universal address form system supporting 257 countries with smart auto-fill and validation
+#### 📝 Veyform - Universal Address Form System
+**Description:** Universal address form SDK supporting 257 countries with multi-language support, smart validation, and analytics
+
+**Core Features:**
+- **3-Layer Country Selection:** Continent → Country → Address Hierarchy for intuitive navigation
+- **Country Flag UI:** Visual country dropdown with flag emojis for better UX
+- **Multi-Language Support:** Synchronized labels, placeholders, and validation messages across languages (EN/JA/ZH/KO)
+- **Domain Auto-Detection:** Automatic site recognition for multi-tenant support
+- **Delivery-Level Validation:** Strict validation ensuring addresses are deliverable (postal code format, region matching, etc.)
+- **Analytics Tracking:** Anonymized usage statistics (country selection rates, completion rates, drop-off analysis)
 
 **Frontend UI/UX Features:**
 - **Adaptive Form Layout:** Dynamic form fields that adjust based on selected country's address format requirements
 - **Smart Auto-Complete:** Real-time address suggestions as user types, with postal code-based auto-fill
 - **Visual Validation:** Inline field validation with clear error messages and formatting hints (e.g., "123-4567" for JP postal codes)
+- **Continent Filter Tabs:** Optional continent tabs for faster country selection in global sites
+- **Completion Rate Indicator:** Real-time progress bar showing form completion percentage
 - **Veyvault Integration Button:** "Use Saved Address" button with modal selector showing user's saved addresses
 - **Mobile-First Design:** Touch-friendly input fields with appropriate keyboard types (numeric for postal codes, etc.)
-- **Progress Indicators:** Step-by-step progress bar for multi-step address entry flows
 - **Accessibility Features:** WCAG 2.1 AA compliant with screen reader support and keyboard navigation
-- **Theme Customization:** CSS variable-based theming system for seamless brand integration
+- **Theme Customization:** CSS variable-based theming system for seamless brand integration (light/dark/auto modes)
+
+**Developer Tools:**
+- **Developer Console:** Visual configuration interface for country setup, language settings, and code generation
+- **Admin Dashboard:** Comprehensive analytics dashboard with country usage ranking, drop-off analysis, and validation error insights
+- **Quick Integration:** Auto-generated code snippets for React, Vue, HTML, and major e-commerce platforms
+
+**📚 Documentation:** [Veyform Documentation](./docs/veyform/README.md)
 
 ### Learn More
 
