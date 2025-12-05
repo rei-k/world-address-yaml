@@ -208,6 +208,7 @@ For detailed information about the Vey ecosystem:
 - **🤖 AI Integration** - AI-powered address validation and correction
 - **📸 Image Recognition** - OCR, dimension estimation, damage detection, and document scanning
 - **🗺️ Geocoding & Reverse Geocoding** - Convert addresses to coordinates and vice versa (OpenStreetMap Nominatim)
+- **🛡️ Territorial Restrictions** - Enforcement of Japanese territorial naming policies in international forms
 
 ### Data Quality
 - **99% Average Completeness** - High-quality, comprehensive data coverage
