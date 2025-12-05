@@ -59,8 +59,8 @@ export default function AddressForm({
     // TODO: Implement auto-fill based on postal code
     // For Japan: postal code → city/prefecture auto-fill
     // For US: ZIP → city/state auto-fill
-    if (formData.country === 'JP' && postalCode.length === 8) {
-      // Simulate postal code lookup
+    if (formData.country === 'JP' && /^[0-9]{3}-[0-9]{4}$/.test(postalCode)) {
+      // Simulate postal code lookup for properly formatted Japanese postal codes
       console.log('Auto-filling from postal code:', postalCode);
     }
   };

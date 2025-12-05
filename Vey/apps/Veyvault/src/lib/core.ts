@@ -100,7 +100,7 @@ export function normalizedAddressToPIDComponents(normalized: NormalizedAddress):
 /**
  * Encrypt address data
  */
-export async function encryptAddress(address: any, publicKey: string): Promise<EncryptionResult> {
+export async function encryptAddress(address: AddressInput, publicKey: string): Promise<EncryptionResult> {
   // Mock encryption - in production this would use actual encryption
   const encrypted = Buffer.from(JSON.stringify(address)).toString('base64');
   return {
