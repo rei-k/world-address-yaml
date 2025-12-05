@@ -1,0 +1,184 @@
+{
+  "name": {
+    "en": "North Kosovo",
+    "local": [
+      {
+        "lang": "sr",
+        "value": "Северно Косово",
+        "script": "Cyrillic",
+        "direction": "ltr"
+      },
+      {
+        "lang": "sq",
+        "value": "Kosova e Veriut",
+        "script": "Latin",
+        "direction": "ltr"
+      }
+    ]
+  },
+  "iso_codes": {
+    "note": "No ISO code; Serbian-majority municipalities in northern Kosovo"
+  },
+  "subregion": "Southeastern Europe",
+  "languages": [
+    {
+      "name": "Serbian",
+      "script": "Cyrillic",
+      "role": "primary",
+      "country_name": {
+        "sr": "Северно Косово",
+        "en": "North Kosovo"
+      }
+    },
+    {
+      "name": "Albanian",
+      "script": "Latin",
+      "role": "official_kosovo",
+      "country_name": {
+        "sq": "Kosova e Veriut",
+        "en": "North Kosovo"
+      }
+    },
+    {
+      "name": "English",
+      "script": "Latin",
+      "role": "auxiliary",
+      "required_for_shipping": true,
+      "country_name": "North Kosovo"
+    }
+  ],
+  "administrative_divisions": {
+    "level1": {
+      "type": "Municipality",
+      "label_local": "Opština",
+      "label_en": "Municipality",
+      "count": 4,
+      "names": [
+        "Mitrovica North",
+        "Leposavić",
+        "Zvečan",
+        "Zubin Potok"
+      ]
+    }
+  },
+  "address_format": {
+    "order_variants": [
+      {
+        "context": "domestic",
+        "order": [
+          "recipient",
+          "street_address",
+          "number",
+          "postal_code",
+          "city",
+          "country"
+        ]
+      },
+      {
+        "context": "international",
+        "order": [
+          "recipient",
+          "street_address",
+          "number",
+          "postal_code",
+          "city",
+          "country"
+        ],
+        "note": "Postal system disputed; Serbian postal codes often used"
+      }
+    ],
+    "postal_code": {
+      "required": true,
+      "regex": "^(38[0-9]{3}|[0-9]{5})$",
+      "description": "Either Serbian postal codes (5 digits) or Kosovo postal codes (38xxx)",
+      "example": "38227",
+      "note": "Dual postal systems in use"
+    }
+  },
+  "validation": {
+    "allow_latin_transliteration": true,
+    "rules": [
+      "Both Serbian and Kosovo postal systems may be used",
+      "Address format depends on postal system used"
+    ]
+  },
+  "examples": {
+    "domestic_raw": "Улица Краља Петра 12, 38227 Митровица",
+    "domestic_normalized": "Ulica Kralja Petra 12, 38227 Mitrovica",
+    "international": "Ulica Kralja Petra 12, 38227 Mitrovica, North Kosovo"
+  },
+  "status": {
+    "un_member": false,
+    "recognized": false,
+    "disputed": true,
+    "note": "Serbian-majority region in northern Kosovo; de facto parallel institutions with Serbia; part of Kosovo per international recognition"
+  },
+  "geo": {
+    "center": {
+      "latitude": 42.8914,
+      "longitude": 20.8661,
+      "accuracy": 5000,
+      "source": "database",
+      "captured_at": "2025-12-05T19:47:00.000Z"
+    }
+  },
+  "pos": {
+    "currency": {
+      "code": "EUR",
+      "symbol": "€",
+      "symbol_position": "before",
+      "decimal_places": 2,
+      "decimal_separator": ".",
+      "thousands_separator": ",",
+      "note": "Both EUR (Kosovo official) and RSD (Serbian dinar) in use"
+    },
+    "tax": {
+      "type": "VAT",
+      "rate": {
+        "standard": null
+      },
+      "included_in_price": true,
+      "invoice_requirement": "optional"
+    },
+    "receipt": {
+      "required_fields": [
+        "business_name",
+        "date",
+        "items",
+        "total"
+      ],
+      "paper_width": "80mm",
+      "electronic_allowed": true,
+      "retention_period": "5 years"
+    },
+    "fiscal": {
+      "fiscal_device_required": false,
+      "registration_required": false,
+      "reporting_frequency": "varies"
+    },
+    "payment_methods": [
+      {
+        "type": "cash",
+        "name": "Cash",
+        "prevalence": "high"
+      },
+      {
+        "type": "credit_card",
+        "name": "Credit Card",
+        "prevalence": "medium"
+      }
+    ],
+    "locale": {
+      "date_format": "YYYY-MM-DD",
+      "time_format": "24h",
+      "timezone": "Europe/Belgrade",
+      "week_start": "monday"
+    },
+    "business_hours": {
+      "typical_open": "09:00",
+      "typical_close": "18:00",
+      "sunday_trading": true,
+      "public_holidays_trading": false
+    }
+  }
+}

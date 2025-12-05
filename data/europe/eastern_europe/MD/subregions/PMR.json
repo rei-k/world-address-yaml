@@ -1,0 +1,201 @@
+{
+  "name": {
+    "en": "Transnistria",
+    "local": [
+      {
+        "lang": "ro",
+        "value": "Transnistria",
+        "script": "Latin",
+        "direction": "ltr"
+      },
+      {
+        "lang": "ru",
+        "value": "Приднестровье",
+        "script": "Cyrillic",
+        "direction": "ltr"
+      },
+      {
+        "lang": "uk",
+        "value": "Придністров'я",
+        "script": "Cyrillic",
+        "direction": "ltr"
+      }
+    ]
+  },
+  "iso_codes": {
+    "alpha2": "PMR",
+    "alpha3": null,
+    "numeric": null,
+    "note": "User-assigned code; not officially recognized by ISO"
+  },
+  "subregion": "Eastern Europe",
+  "languages": [
+    {
+      "name": "Russian",
+      "script": "Cyrillic",
+      "role": "official",
+      "country_name": {
+        "ru": "Приднестровье",
+        "en": "Transnistria"
+      }
+    },
+    {
+      "name": "Romanian",
+      "script": "Latin",
+      "role": "official",
+      "country_name": {
+        "ro": "Transnistria",
+        "en": "Transnistria"
+      }
+    },
+    {
+      "name": "Ukrainian",
+      "script": "Cyrillic",
+      "role": "official",
+      "country_name": {
+        "uk": "Придністров'я",
+        "en": "Transnistria"
+      }
+    },
+    {
+      "name": "English",
+      "script": "Latin",
+      "role": "auxiliary",
+      "required_for_shipping": true,
+      "country_name": "Transnistria"
+    }
+  ],
+  "administrative_divisions": {
+    "level1": {
+      "type": "District",
+      "label_local": "Район",
+      "label_en": "District",
+      "count": 5
+    }
+  },
+  "address_format": {
+    "order_variants": [
+      {
+        "context": "domestic",
+        "order": [
+          "recipient",
+          "street_address",
+          "number",
+          "apartment",
+          "city",
+          "postal_code"
+        ]
+      },
+      {
+        "context": "international",
+        "order": [
+          "recipient",
+          "apartment",
+          "street_address",
+          "number",
+          "city",
+          "postal_code",
+          "country"
+        ],
+        "note": "International mail typically routed via Moldova"
+      }
+    ],
+    "apartment": {
+      "required": false,
+      "example": "кв. 12"
+    },
+    "postal_code": {
+      "required": true,
+      "regex": "^MD-[0-9]{4}$",
+      "description": "Uses Moldovan postal code format",
+      "example": "MD-3300",
+      "note": "International mail may use Moldovan postal system"
+    }
+  },
+  "validation": {
+    "allow_latin_transliteration": true,
+    "rules": [
+      "Postal code follows Moldovan format (MD-XXXX)",
+      "International shipping typically requires routing via Moldova"
+    ]
+  },
+  "examples": {
+    "domestic_raw": "ул. 25 Октября 12, кв. 5, Тирасполь, MD-3300",
+    "domestic_normalized": "ul. 25 Oktyabrya 12 kv. 5 Tiraspol MD-3300",
+    "international": "Apt 5, ul. 25 Oktyabrya 12, Tiraspol MD-3300, Transnistria (via Moldova)"
+  },
+  "status": {
+    "un_member": false,
+    "recognized": false,
+    "disputed": true,
+    "note": "De facto independent since 1990; internationally recognized as part of Moldova"
+  },
+  "geo": {
+    "center": {
+      "latitude": 46.8403,
+      "longitude": 29.9139,
+      "accuracy": 1000,
+      "source": "database",
+      "captured_at": "2025-12-05T19:47:00.000Z"
+    }
+  },
+  "pos": {
+    "currency": {
+      "code": "PRB",
+      "symbol": "р.",
+      "symbol_position": "before",
+      "decimal_places": 2,
+      "decimal_separator": ".",
+      "thousands_separator": ",",
+      "note": "Transnistrian ruble (not internationally recognized)"
+    },
+    "tax": {
+      "type": "VAT",
+      "rate": {
+        "standard": null
+      },
+      "included_in_price": true,
+      "invoice_requirement": "optional"
+    },
+    "receipt": {
+      "required_fields": [
+        "business_name",
+        "date",
+        "items",
+        "total"
+      ],
+      "paper_width": "80mm",
+      "electronic_allowed": true,
+      "retention_period": "5 years"
+    },
+    "fiscal": {
+      "fiscal_device_required": false,
+      "registration_required": false,
+      "reporting_frequency": "varies"
+    },
+    "payment_methods": [
+      {
+        "type": "cash",
+        "name": "Cash",
+        "prevalence": "high"
+      },
+      {
+        "type": "credit_card",
+        "name": "Credit Card",
+        "prevalence": "low"
+      }
+    ],
+    "locale": {
+      "date_format": "YYYY-MM-DD",
+      "time_format": "24h",
+      "timezone": "Europe/Chisinau",
+      "week_start": "monday"
+    },
+    "business_hours": {
+      "typical_open": "09:00",
+      "typical_close": "18:00",
+      "sunday_trading": true,
+      "public_holidays_trading": false
+    }
+  }
+}

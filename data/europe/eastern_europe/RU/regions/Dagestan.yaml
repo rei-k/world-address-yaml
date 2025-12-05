@@ -1,0 +1,113 @@
+name:
+  en: Dagestan
+  local:
+    - lang: ru
+      value: Дагестан
+      script: Cyrillic
+      direction: ltr
+iso_codes:
+  alpha2: RU-DA
+  alpha3: null
+  numeric: null
+region_of: Russia
+languages:
+  - name: Russian
+    script: Latin
+    role: official
+    country_name:
+      ru: Дагестан
+      en: Dagestan
+  - name: English
+    script: Latin
+    role: auxiliary
+    country_name:
+      en: Dagestan
+administrative_divisions:
+  level1:
+    type: District
+    label_local: Район
+    label_en: District
+    count: 41
+address_format:
+  order_variants:
+    - context: domestic
+      order:
+        - recipient
+        - street_address
+        - number
+        - apartment
+        - city
+        - postal_code
+        - country
+    - context: international
+      order:
+        - recipient
+        - apartment
+        - street_address
+        - number
+        - city
+        - postal_code
+        - country
+  apartment:
+    required: false
+    example: кв. 12
+  postal_code:
+    required: true
+    regex: ^367[0-9]{3}$
+    description: Postal codes in the range 367xxx for Dagestan
+    example: 367000
+examples:
+  domestic_raw: ул. Ленина 12, кв. 5, Махачкала, 367000
+  domestic_normalized: ul. Lenina 12 kv. 5 Makhachkala 367000
+  international: Apt 5, ul. Lenina 12, Makhachkala 367000, Dagestan, Russia
+geo:
+  center:
+    latitude: 42.9849
+    longitude: 47.5047
+    accuracy: 1000
+    source: database
+    captured_at: '2025-12-05T19:47:00.000Z'
+pos:
+  currency:
+    code: RUB
+    symbol: ₽
+    symbol_position: before
+    decimal_places: 2
+    decimal_separator: .
+    thousands_separator: ','
+  tax:
+    type: VAT
+    rate:
+      standard: null
+    included_in_price: true
+    invoice_requirement: optional
+  receipt:
+    required_fields:
+      - business_name
+      - date
+      - items
+      - total
+    paper_width: 80mm
+    electronic_allowed: true
+    retention_period: 5 years
+  fiscal:
+    fiscal_device_required: false
+    registration_required: false
+    reporting_frequency: varies
+  payment_methods:
+    - type: cash
+      name: Cash
+      prevalence: high
+    - type: credit_card
+      name: Credit Card
+      prevalence: high
+  locale:
+    date_format: YYYY-MM-DD
+    time_format: 24h
+    timezone: Europe/Moscow
+    week_start: monday
+  business_hours:
+    typical_open: '09:00'
+    typical_close: '18:00'
+    sunday_trading: true
+    public_holidays_trading: false

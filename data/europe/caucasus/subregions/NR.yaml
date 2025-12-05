@@ -1,0 +1,138 @@
+name:
+  en: Nagorno-Karabakh
+  local:
+    - lang: hy
+      value: Արցախ
+      script: Armenian
+      direction: ltr
+    - lang: az
+      value: Dağlıq Qarabağ
+      script: Latin
+      direction: ltr
+    - lang: ru
+      value: Нагорный Карабах
+      script: Cyrillic
+      direction: ltr
+iso_codes:
+  alpha2: NR
+  alpha3: null
+  numeric: null
+  note: User-assigned code; disputed territory
+subregion: Caucasus
+languages:
+  - name: Armenian
+    script: Armenian
+    role: de_facto_official
+    country_name:
+      hy: Արցախ
+      en: Nagorno-Karabakh
+  - name: Russian
+    script: Cyrillic
+    role: widely_spoken
+    country_name:
+      ru: Нагорный Карабах
+      en: Nagorno-Karabakh
+  - name: English
+    script: Latin
+    role: auxiliary
+    required_for_shipping: true
+    country_name: Nagorno-Karabakh
+administrative_divisions:
+  level1:
+    type: District
+    label_local: Շրջան
+    label_en: District
+address_format:
+  order_variants:
+    - context: domestic
+      order:
+        - recipient
+        - street_address
+        - number
+        - apartment
+        - city
+        - postal_code
+    - context: international
+      order:
+        - recipient
+        - apartment
+        - street_address
+        - number
+        - city
+        - postal_code
+        - country
+      note: International mail routing currently disrupted due to territorial status
+  apartment:
+    required: false
+    example: բն. 12
+  postal_code:
+    required: false
+    description: Postal system currently disrupted
+    note: Historically used Armenian postal system
+validation:
+  allow_latin_transliteration: true
+  rules:
+    - International shipping highly restricted or unavailable
+    - Territorial control has changed; verify current status
+examples:
+  domestic_raw: Ազատամարտիկների փող. 12, Ստեփանակերտ
+  domestic_normalized: Azatamartikneri st. 12, Stepanakert
+  international: Note - Territory status changed in 2023; international shipping unavailable
+status:
+  un_member: false
+  recognized: false
+  disputed: true
+  note: Formerly de facto independent (1991-2023); internationally recognized as part of Azerbaijan; territorial control transferred to Azerbaijan in September 2023
+geo:
+  center:
+    latitude: 39.8266
+    longitude: 46.7656
+    accuracy: 5000
+    source: database
+    captured_at: '2025-12-05T19:47:00.000Z'
+  note: Coordinates for historical reference; territorial status changed in 2023
+pos:
+  currency:
+    code: AMD
+    symbol: ֏
+    symbol_position: before
+    decimal_places: 2
+    decimal_separator: .
+    thousands_separator: ','
+    note: Historical; Armenian dram was used; current currency situation unclear
+  tax:
+    type: VAT
+    rate:
+      standard: null
+    included_in_price: true
+    invoice_requirement: optional
+  receipt:
+    required_fields:
+      - business_name
+      - date
+      - items
+      - total
+    paper_width: 80mm
+    electronic_allowed: true
+    retention_period: 5 years
+  fiscal:
+    fiscal_device_required: false
+    registration_required: false
+    reporting_frequency: varies
+  payment_methods:
+    - type: cash
+      name: Cash
+      prevalence: high
+    - type: credit_card
+      name: Credit Card
+      prevalence: low
+  locale:
+    date_format: YYYY-MM-DD
+    time_format: 24h
+    timezone: Asia/Baku
+    week_start: monday
+  business_hours:
+    typical_open: '09:00'
+    typical_close: '18:00'
+    sunday_trading: true
+    public_holidays_trading: false
