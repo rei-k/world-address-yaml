@@ -169,8 +169,13 @@ export class AddressService {
    * 
    * @param addressId - Address ID to set as default
    * @param userId - User ID
+   * @param addressLabel - Label of the address being set as default
    */
-  static async setDefaultAddress(addressId: string, userId: string): Promise<void> {
+  static async setDefaultAddress(
+    addressId: string,
+    userId: string,
+    addressLabel?: string
+  ): Promise<void> {
     // TODO: Implement actual API call to set default address
     // For now, just send notifications
     
@@ -178,7 +183,7 @@ export class AddressService {
     await NotificationService.sendDefaultAddressUpdatedNotification(
       userId,
       addressId,
-      'Default Address' // TODO: Get actual address label from API
+      addressLabel || 'Default Address'
     );
   }
 
@@ -203,18 +208,23 @@ export class AddressService {
    * 
    * @param address - Address data to register
    * @param userId - User ID
+   * @returns Promise with the created address ID
    */
   static async registerAddress(
     address: CreateAddressRequest,
     userId: string
-  ): Promise<void> {
+  ): Promise<string> {
     // TODO: Implement actual API call to register address
+    // For now, generate a temporary ID
+    const newAddressId = `temp-${Date.now()}`;
     
     // Send notification to Veyvault and VeyPOS
     await NotificationService.sendAddressRegisteredNotification(
       userId,
-      'new-address-id', // TODO: Get actual address ID from API response
+      newAddressId,
       address.label || address.type
     );
+
+    return newAddressId;
   }
 }

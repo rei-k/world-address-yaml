@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import AddressCard from '../components/AddressCard';
+import { showToast } from '../../src/lib/toast';
 import type { Address } from '../../src/types';
 
 export default function AddressesPage() {
@@ -28,10 +29,10 @@ export default function AddressesPage() {
     try {
       // TODO: API call to delete
       setAddresses(addresses.filter(addr => addr.id !== id));
-      alert('Address deleted successfully');
+      showToast('Address deleted successfully', { type: 'success' });
     } catch (error) {
       console.error('Error deleting address:', error);
-      alert('Failed to delete address');
+      showToast('Failed to delete address', { type: 'error' });
     }
   };
 
@@ -42,24 +43,28 @@ export default function AddressesPage() {
         ...addr,
         isPrimary: addr.id === id
       })));
-      alert('Primary address updated');
+      showToast('Primary address updated', { type: 'success' });
     } catch (error) {
       console.error('Error setting primary:', error);
-      alert('Failed to update primary address');
+      showToast('Failed to update primary address', { type: 'error' });
     }
   };
 
   const handleSetDefault = async (id: string) => {
     try {
       // TODO: API call to set default
+      const address = addresses.find(addr => addr.id === id);
       setAddresses(addresses.map(addr => ({
         ...addr,
         isDefault: addr.id === id
       })));
-      alert('Default address updated. This address will be used for hotel check-ins, financial institutions, etc.');
+      showToast(
+        `${address?.label || 'Address'} set as default for hotel check-ins and financial institutions`,
+        { type: 'success', duration: 4000 }
+      );
     } catch (error) {
       console.error('Error setting default:', error);
-      alert('Failed to update default address');
+      showToast('Failed to update default address', { type: 'error' });
     }
   };
 

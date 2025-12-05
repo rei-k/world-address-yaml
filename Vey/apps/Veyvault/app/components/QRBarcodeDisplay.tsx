@@ -234,12 +234,6 @@ export default function QRBarcodeDisplay({ address }: QRBarcodeDisplayProps) {
               size={256}
               level="H"
               includeMargin={true}
-              imageSettings={{
-                src: '/vey-logo.svg',
-                height: 40,
-                width: 40,
-                excavate: true,
-              }}
             />
           </div>
         ) : (
