@@ -1,8 +1,8 @@
 # E-commerce Purchase Flow Examples
 
-このディレクトリには、Veybookを使用したEコマース購入フローの完全な実装例が含まれています。
+このディレクトリには、Veyvaultを使用したEコマース購入フローの完全な実装例が含まれています。
 
-This directory contains complete implementation examples of the e-commerce purchase flow using Veybook.
+This directory contains complete implementation examples of the e-commerce purchase flow using Veyvault.
 
 ---
 
@@ -14,7 +14,7 @@ This directory contains complete implementation examples of the e-commerce purch
 
 ### React コンポーネント / React Components
 
-- **[VeybookCheckout.tsx](./VeybookCheckout.tsx)** - 完全なチェックアウトコンポーネント
+- **[VeyvaultCheckout.tsx](./VeyvaultCheckout.tsx)** - 完全なチェックアウトコンポーネント
 - **[checkout-styles.css](./checkout-styles.css)** - スタイルシート
 - **[usage-example.tsx](./usage-example.tsx)** - 使用例
 
@@ -36,7 +36,7 @@ npm install @vey/core @vey/react @vey/express
 ### 2. 環境変数設定 / Environment Variables
 
 ```.env
-# Veybook Configuration
+# Veyvault Configuration
 NEXT_PUBLIC_VEYBOOK_CLIENT_ID=your_veybook_client_id
 VEYBOOK_CLIENT_SECRET=your_veybook_client_secret
 
@@ -55,7 +55,7 @@ VEYEXPRESS_API_KEY=your_veyexpress_api_key
 ### 3. 基本的な使用 / Basic Usage
 
 ```tsx
-import { VeybookCheckout } from './VeybookCheckout';
+import { VeyvaultCheckout } from './VeyvaultCheckout';
 
 function CheckoutPage() {
   const [cart, setCart] = useState<CartItem[]>([
@@ -77,7 +77,7 @@ function CheckoutPage() {
   };
 
   return (
-    <VeybookCheckout
+    <VeyvaultCheckout
       cart={cart}
       onComplete={handleCheckoutComplete}
       onCancel={() => window.location.href = '/cart'}
@@ -92,7 +92,7 @@ function CheckoutPage() {
 
 ### ✅ 完了した機能
 
-1. **ステップ 1: Veybookログイン**
+1. **ステップ 1: Veyvaultログイン**
    - OAuth 2.0認証フロー
    - Google/Apple統合
    - 手動入力のフォールバック
@@ -155,7 +155,7 @@ const deliveryValidation = await veybookClient.addresses.validateDelivery({
 ### チェックアウト時間
 
 - **従来のチェックアウト**: 5-10分
-- **Veybookチェックアウト**: **約1分** ✨
+- **Veyvaultチェックアウト**: **約1分** ✨
 
 ### タイムライン
 
@@ -163,7 +163,7 @@ const deliveryValidation = await veybookClient.addresses.validateDelivery({
 従来: 商品選択 → ログイン → 住所入力(3分) → 決済入力(2分) → 完了
       ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ (8分)
 
-Veybook: 商品選択 → Veybookログイン(10秒) → 住所選択(10秒) → 決済(10秒) → 完了
+Veyvault: 商品選択 → Veyvaultログイン(10秒) → 住所選択(10秒) → 決済(10秒) → 完了
          ▼▼▼▼▼▼▼▼ (1分)
 ```
 
@@ -203,7 +203,7 @@ gtag('event', 'begin_checkout', {
   items: cart
 });
 
-// Veybookログイン
+// Veyvaultログイン
 gtag('event', 'veybook_login', {
   method: 'veybook'
 });
@@ -275,12 +275,12 @@ const testCard = {
 
 ## 🔗 API統合 / API Integration
 
-### Veybook API
+### Veyvault API
 
 ```typescript
-import { VeybookClient } from '@vey/core';
+import { VeyvaultClient } from '@vey/core';
 
-const client = new VeybookClient({
+const client = new VeyvaultClient({
   apiKey: process.env.VEYBOOK_API_KEY
 });
 
@@ -326,7 +326,7 @@ const shipment = await expressClient.shipments.create({
 
 ### よくある問題
 
-**Q: Veybookログインができない**
+**Q: Veyvaultログインができない**
 
 A: 環境変数が正しく設定されているか確認してください：
 
@@ -411,7 +411,7 @@ toast.loading('処理中...');
 ### v1.0.0 (2025-12-04)
 
 - ✨ 初回リリース
-- ✅ Veybookログイン機能
+- ✅ Veyvaultログイン機能
 - ✅ 住所選択・追加機能
 - ✅ 決済統合
 - ✅ ZKP証明対応
