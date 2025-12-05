@@ -100,7 +100,8 @@ describe('generateAddressQR', () => {
     );
     
     const payload: AddressQRPayload = JSON.parse(qrData);
-    expect(payload.auth_tag).toBeDefined(); // undefined would be included in JSON
+    // Auth tag will be undefined when not provided
+    expect(payload.auth_tag).toBeUndefined();
   });
 
   it('should use custom expiration for address QR', async () => {
