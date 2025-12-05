@@ -1,0 +1,166 @@
+{
+  "name": {
+    "en": "Akrotiri and Dhekelia",
+    "local": [
+      {
+        "lang": "en",
+        "value": "Akrotiri and Dhekelia",
+        "script": "Latin",
+        "direction": "ltr"
+      },
+      {
+        "lang": "el",
+        "value": "Ακρωτήρι και Δεκέλεια",
+        "script": "Greek",
+        "direction": "ltr"
+      }
+    ]
+  },
+  "iso_codes": {
+    "alpha2": "SBA",
+    "alpha3": null,
+    "numeric": null,
+    "note": "User-assigned code; UK Sovereign Base Areas in Cyprus"
+  },
+  "continent": "Europe",
+  "subregion": "Southern Europe",
+  "languages": [
+    {
+      "name": "English",
+      "script": "Latin",
+      "role": "official",
+      "country_name": {
+        "en": "Akrotiri and Dhekelia"
+      }
+    },
+    {
+      "name": "Greek",
+      "script": "Greek",
+      "role": "widely_spoken",
+      "country_name": {
+        "el": "Ακρωτήρι και Δεκέλεια",
+        "en": "Akrotiri and Dhekelia"
+      }
+    }
+  ],
+  "administrative_divisions": {
+    "level1": {
+      "type": "Sovereign Base Area",
+      "label_en": "Base Area",
+      "count": 2,
+      "names": [
+        "Akrotiri",
+        "Dhekelia"
+      ]
+    }
+  },
+  "address_format": {
+    "order_variants": [
+      {
+        "context": "domestic",
+        "order": [
+          "recipient",
+          "building",
+          "street",
+          "area",
+          "postal_code",
+          "country"
+        ]
+      },
+      {
+        "context": "international",
+        "order": [
+          "recipient",
+          "building",
+          "street",
+          "area",
+          "postal_code",
+          "country"
+        ]
+      }
+    ],
+    "postal_code": {
+      "required": true,
+      "regex": "^(BF1|BFPO)",
+      "description": "British Forces Post Office format",
+      "example": "BFPO 57"
+    }
+  },
+  "examples": {
+    "domestic_raw": "Building 123, RAF Akrotiri, BFPO 57",
+    "international": "Building 123, RAF Akrotiri, BFPO 57, Akrotiri, British Forces Cyprus"
+  },
+  "status": {
+    "un_member": false,
+    "recognized": true,
+    "disputed": false,
+    "note": "UK Sovereign Base Areas on Cyprus; retained by UK after Cypriot independence"
+  },
+  "geo": {
+    "center": {
+      "latitude": 34.5897,
+      "longitude": 32.9881,
+      "accuracy": 5000,
+      "source": "database",
+      "captured_at": "2025-12-05T19:47:00.000Z"
+    }
+  },
+  "pos": {
+    "currency": {
+      "code": "EUR",
+      "symbol": "€",
+      "symbol_position": "before",
+      "decimal_places": 2,
+      "decimal_separator": ".",
+      "thousands_separator": ","
+    },
+    "tax": {
+      "type": "VAT",
+      "rate": {
+        "standard": null
+      },
+      "included_in_price": true,
+      "invoice_requirement": "optional"
+    },
+    "receipt": {
+      "required_fields": [
+        "business_name",
+        "date",
+        "items",
+        "total"
+      ],
+      "paper_width": "80mm",
+      "electronic_allowed": true,
+      "retention_period": "5 years"
+    },
+    "fiscal": {
+      "fiscal_device_required": false,
+      "registration_required": false,
+      "reporting_frequency": "varies"
+    },
+    "payment_methods": [
+      {
+        "type": "cash",
+        "name": "Cash",
+        "prevalence": "high"
+      },
+      {
+        "type": "credit_card",
+        "name": "Credit Card",
+        "prevalence": "high"
+      }
+    ],
+    "locale": {
+      "date_format": "YYYY-MM-DD",
+      "time_format": "24h",
+      "timezone": "Europe/Nicosia",
+      "week_start": "monday"
+    },
+    "business_hours": {
+      "typical_open": "09:00",
+      "typical_close": "18:00",
+      "sunday_trading": true,
+      "public_holidays_trading": false
+    }
+  }
+}

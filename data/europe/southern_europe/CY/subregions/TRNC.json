@@ -1,0 +1,170 @@
+{
+  "name": {
+    "en": "Northern Cyprus",
+    "local": [
+      {
+        "lang": "tr",
+        "value": "Kuzey Kıbrıs",
+        "script": "Latin",
+        "direction": "ltr"
+      },
+      {
+        "lang": "el",
+        "value": "Βόρεια Κύπρος",
+        "script": "Greek",
+        "direction": "ltr"
+      }
+    ]
+  },
+  "iso_codes": {
+    "alpha2": "TRNC",
+    "alpha3": null,
+    "numeric": null,
+    "note": "User-assigned code; not officially recognized by ISO"
+  },
+  "subregion": "Southern Europe",
+  "languages": [
+    {
+      "name": "Turkish",
+      "script": "Latin",
+      "role": "official",
+      "country_name": {
+        "tr": "Kuzey Kıbrıs",
+        "en": "Northern Cyprus"
+      }
+    },
+    {
+      "name": "English",
+      "script": "Latin",
+      "role": "auxiliary",
+      "required_for_shipping": true,
+      "country_name": "Northern Cyprus"
+    }
+  ],
+  "administrative_divisions": {
+    "level1": {
+      "type": "District",
+      "label_local": "İlçe",
+      "label_en": "District",
+      "count": 6
+    }
+  },
+  "address_format": {
+    "order_variants": [
+      {
+        "context": "domestic",
+        "order": [
+          "recipient",
+          "street_address",
+          "number",
+          "city",
+          "postal_code"
+        ]
+      },
+      {
+        "context": "international",
+        "order": [
+          "recipient",
+          "street_address",
+          "number",
+          "city",
+          "postal_code",
+          "country"
+        ],
+        "note": "International mail typically routed via Turkey (Mersin 10)"
+      }
+    ],
+    "postal_code": {
+      "required": true,
+      "regex": "^99[0-9]{3}$",
+      "description": "5-digit postal code in range 99xxx",
+      "example": 99010,
+      "note": "Uses Turkish postal code format via Mersin 10"
+    }
+  },
+  "validation": {
+    "allow_latin_transliteration": true,
+    "rules": [
+      "Postal code is 5 digits in range 99xxx",
+      "International shipping typically requires routing via Turkey (Mersin 10)"
+    ]
+  },
+  "examples": {
+    "domestic_raw": "Atatürk Caddesi 12, Lefkoşa, 99010",
+    "domestic_normalized": "Ataturk Caddesi 12 Lefkosa 99010",
+    "international": "Ataturk Caddesi 12, Lefkosa 99010, Northern Cyprus (via Mersin 10, Turkey)"
+  },
+  "status": {
+    "un_member": false,
+    "recognized": false,
+    "disputed": true,
+    "note": "De facto independent since 1983; recognized only by Turkey; internationally recognized as part of Republic of Cyprus"
+  },
+  "geo": {
+    "center": {
+      "latitude": 35.1856,
+      "longitude": 33.3823,
+      "accuracy": 1000,
+      "source": "database",
+      "captured_at": "2025-12-05T19:47:00.000Z"
+    }
+  },
+  "pos": {
+    "currency": {
+      "code": "TRY",
+      "symbol": "₺",
+      "symbol_position": "before",
+      "decimal_places": 2,
+      "decimal_separator": ".",
+      "thousands_separator": ","
+    },
+    "tax": {
+      "type": "VAT",
+      "rate": {
+        "standard": null
+      },
+      "included_in_price": true,
+      "invoice_requirement": "optional"
+    },
+    "receipt": {
+      "required_fields": [
+        "business_name",
+        "date",
+        "items",
+        "total"
+      ],
+      "paper_width": "80mm",
+      "electronic_allowed": true,
+      "retention_period": "5 years"
+    },
+    "fiscal": {
+      "fiscal_device_required": false,
+      "registration_required": false,
+      "reporting_frequency": "varies"
+    },
+    "payment_methods": [
+      {
+        "type": "cash",
+        "name": "Cash",
+        "prevalence": "high"
+      },
+      {
+        "type": "credit_card",
+        "name": "Credit Card",
+        "prevalence": "high"
+      }
+    ],
+    "locale": {
+      "date_format": "YYYY-MM-DD",
+      "time_format": "24h",
+      "timezone": "Europe/Nicosia",
+      "week_start": "monday"
+    },
+    "business_hours": {
+      "typical_open": "09:00",
+      "typical_close": "18:00",
+      "sunday_trading": true,
+      "public_holidays_trading": false
+    }
+  }
+}
