@@ -45,23 +45,23 @@ export function validateAddress(
 
   // Check territorial restrictions for Japan
   if (address.country === 'JP' || format.iso_codes?.alpha2 === 'JP') {
-    const locationFields = ['city', 'province', 'district', 'ward', 'street_address'];
+    const locationFields: (keyof AddressInput)[] = ['city', 'province', 'district', 'ward', 'street_address'];
     for (const field of locationFields) {
       const value = address[field];
-      if (value) {
+      if (value && typeof value === 'string') {
         const territorialResult = validateJapaneseTerritorialInput(
           value,
           options?.languageCode
         );
         if (!territorialResult.valid) {
           errors.push({
-            field,
+            field: field as string,
             code: 'TERRITORIAL_RESTRICTION',
             message: territorialResult.reason || 'Location name violates territorial restrictions',
           });
           if (territorialResult.suggestion) {
             warnings.push({
-              field,
+              field: field as string,
               code: 'TERRITORIAL_SUGGESTION',
               message: `Suggestion: Use "${territorialResult.suggestion}" instead`,
             });
