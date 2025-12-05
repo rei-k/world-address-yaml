@@ -555,6 +555,21 @@ export function createBoundsFromRadius(
 const DEFAULT_GEOCODING_API = 'https://nominatim.openstreetmap.org';
 
 /**
+ * Default number of results to fetch from geocoding API
+ */
+const DEFAULT_GEOCODING_LIMIT = 5;
+
+/**
+ * Default zoom level for reverse geocoding (18 = high detail)
+ */
+const DEFAULT_REVERSE_GEOCODING_ZOOM = 18;
+
+/**
+ * Request timeout in milliseconds
+ */
+const GEOCODING_TIMEOUT_MS = 10000;
+
+/**
  * Cache for geocoding results to reduce API calls
  */
 const geocodingCache = new Map<string, GeocodingResult>();
@@ -598,38 +613,45 @@ export async function forwardGeocode(
     return cached;
   }
 
-  try {
-    let query = '';
+  let query = '';
+  
+  // Build query from address
+  if (request.address) {
+    const parts: string[] = [];
+    const addr = request.address;
     
-    // Build query from address
-    if (request.address) {
-      const parts: string[] = [];
-      const addr = request.address;
-      
-      if (addr.street_address) parts.push(addr.street_address);
-      if (addr.city) parts.push(addr.city);
-      if (addr.province) parts.push(addr.province);
-      if (addr.postal_code) parts.push(addr.postal_code);
-      if (addr.country) parts.push(addr.country);
-      
-      query = parts.join(', ');
-    } else if (request.pid) {
-      // For PID, extract country and region codes
-      query = request.pid;
-    }
+    if (addr.street_address) parts.push(addr.street_address);
+    if (addr.city) parts.push(addr.city);
+    if (addr.province) parts.push(addr.province);
+    if (addr.postal_code) parts.push(addr.postal_code);
+    if (addr.country) parts.push(addr.country);
+    
+    query = parts.join(', ');
+  } else if (request.pid) {
+    // For PID, extract country and region codes
+    query = request.pid;
+  }
 
-    // Call Nominatim API
-    const url = new URL(`${DEFAULT_GEOCODING_API}/search`);
-    url.searchParams.set('q', query);
-    url.searchParams.set('format', 'json');
-    url.searchParams.set('limit', '5');
-    url.searchParams.set('addressdetails', '1');
-    
+  // Call Nominatim API
+  const url = new URL(`${DEFAULT_GEOCODING_API}/search`);
+  url.searchParams.set('q', query);
+  url.searchParams.set('format', 'json');
+  url.searchParams.set('limit', DEFAULT_GEOCODING_LIMIT.toString());
+  url.searchParams.set('addressdetails', '1');
+  
+  // Create abort controller for timeout
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), GEOCODING_TIMEOUT_MS);
+  
+  try {
     const response = await fetch(url.toString(), {
       headers: {
         'User-Agent': '@vey/core geocoding client',
       },
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       throw new Error(`Geocoding API error: ${response.status}`);
@@ -680,6 +702,7 @@ export async function forwardGeocode(
 
     return result;
   } catch (error) {
+    clearTimeout(timeoutId);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return {
       success: false,
@@ -739,13 +762,20 @@ export async function reverseGeocode(
     url.searchParams.set('lon', longitude.toString());
     url.searchParams.set('format', 'json');
     url.searchParams.set('addressdetails', '1');
-    url.searchParams.set('zoom', '18'); // High detail level
+    url.searchParams.set('zoom', DEFAULT_REVERSE_GEOCODING_ZOOM.toString());
+    
+    // Create abort controller for timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), GEOCODING_TIMEOUT_MS);
     
     const response = await fetch(url.toString(), {
       headers: {
         'User-Agent': '@vey/core geocoding client',
       },
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       throw new Error(`Reverse geocoding API error: ${response.status}`);

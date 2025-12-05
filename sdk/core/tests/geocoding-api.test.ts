@@ -15,6 +15,11 @@ import type { GeocodingRequest } from '../src/types';
 // Note: These tests will make real API calls to OpenStreetMap Nominatim
 // In a production environment, you should mock these API calls
 
+/**
+ * API timeout for geocoding tests (10 seconds)
+ */
+const API_TIMEOUT_MS = 10000;
+
 describe('Forward Geocoding', () => {
   beforeAll(() => {
     clearGeocodingCache();
@@ -41,7 +46,7 @@ describe('Forward Geocoding', () => {
       expect(result.coordinates.source).toBe('nominatim');
     }
     expect(result.confidence).toBeGreaterThan(0);
-  }, 10000); // 10s timeout for API call
+  }, API_TIMEOUT_MS); // 10s timeout for API call
 
   it('should geocode complete address', async () => {
     const request: GeocodingRequest = {
@@ -58,7 +63,7 @@ describe('Forward Geocoding', () => {
 
     expect(result.success).toBe(true);
     expect(result.coordinates).toBeDefined();
-  }, 10000);
+  }, API_TIMEOUT_MS);
 
   it('should return error for empty address', async () => {
     const request: GeocodingRequest = {
@@ -69,7 +74,7 @@ describe('Forward Geocoding', () => {
 
     expect(result.success).toBe(false);
     expect(result.error).toBeDefined();
-  }, 10000);
+  }, API_TIMEOUT_MS);
 
   it('should use cache for repeated requests', async () => {
     const request: GeocodingRequest = {
@@ -96,7 +101,7 @@ describe('Forward Geocoding', () => {
     // Results should be identical
     expect(result1.coordinates?.latitude).toBe(result2.coordinates?.latitude);
     expect(result1.coordinates?.longitude).toBe(result2.coordinates?.longitude);
-  }, 10000);
+  }, API_TIMEOUT_MS);
 });
 
 describe('Reverse Geocoding', () => {
@@ -121,7 +126,7 @@ describe('Reverse Geocoding', () => {
       expect(result.address.city).toBeDefined();
     }
     expect(result.confidence).toBeGreaterThan(0);
-  }, 10000);
+  }, API_TIMEOUT_MS);
 
   it('should reverse geocode New York coordinates', async () => {
     const request: GeocodingRequest = {
@@ -138,7 +143,7 @@ describe('Reverse Geocoding', () => {
     if (result.address) {
       expect(result.address.country).toBe('US');
     }
-  }, 10000);
+  }, API_TIMEOUT_MS);
 
   it('should return error for invalid coordinates', async () => {
     const request: GeocodingRequest = {
@@ -181,7 +186,7 @@ describe('Auto-detect Geocoding', () => {
 
     expect(result.success).toBe(true);
     expect(result.coordinates).toBeDefined();
-  }, 10000);
+  }, API_TIMEOUT_MS);
 
   it('should auto-detect reverse geocoding', async () => {
     const request: GeocodingRequest = {
@@ -195,7 +200,7 @@ describe('Auto-detect Geocoding', () => {
 
     expect(result.success).toBe(true);
     expect(result.address).toBeDefined();
-  }, 10000);
+  }, API_TIMEOUT_MS);
 
   it('should return error when both missing', async () => {
     const request: GeocodingRequest = {};
@@ -225,7 +230,7 @@ describe('Geocoding Cache', () => {
     const stats = getGeocodingCacheStats();
     expect(stats.size).toBeGreaterThan(0);
     expect(stats.keys.length).toBeGreaterThan(0);
-  }, 10000);
+  }, API_TIMEOUT_MS);
 });
 
 describe('Integration: Forward + Reverse Geocoding', () => {
@@ -257,5 +262,5 @@ describe('Integration: Forward + Reverse Geocoding', () => {
         expect(reverseResult.address.country).toBe('AU');
       }
     }
-  }, 15000);
+  }, API_TIMEOUT_MS + 5000);
 });
