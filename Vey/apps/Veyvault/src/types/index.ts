@@ -526,3 +526,147 @@ export interface AddressTranslationResult {
   fields: Record<string, string>;
   confidence: number;
 }
+
+/**
+ * Customer/Recipient information
+ * Used for managing customer lists and delivery recipients
+ */
+export interface Customer {
+  id: string;
+  userId: string;
+  name: string;
+  email?: string;
+  phone?: string;
+  addressId?: string;
+  address?: Address;
+  companyName?: string;
+  notes?: string;
+  tags?: string[];
+  totalDeliveries?: number;
+  lastDeliveryDate?: Date;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+/**
+ * Customer list filter options
+ */
+export interface CustomerListFilter {
+  search?: string;
+  tags?: string[];
+  startDate?: Date;
+  endDate?: Date;
+  sortBy?: 'name' | 'lastDelivery' | 'totalDeliveries' | 'createdAt';
+  sortOrder?: 'asc' | 'desc';
+  limit?: number;
+  offset?: number;
+}
+
+/**
+ * PDF generation options
+ */
+export interface PDFGenerationOptions {
+  format?: 'A4' | 'Letter' | 'Label';
+  orientation?: 'portrait' | 'landscape';
+  includeQRCode?: boolean;
+  includeBarcode?: boolean;
+  includeHeader?: boolean;
+  includeFooter?: boolean;
+  language?: string;
+}
+
+/**
+ * Waybill PDF data
+ */
+export interface WaybillPDFData {
+  waybill: Waybill;
+  delivery?: DeliveryRequest;
+  senderAddress: Address;
+  recipientAddress: Address;
+  carrier?: Carrier;
+  qrCodeDataUrl?: string;
+  barcodeDataUrl?: string;
+}
+
+/**
+ * Customer list PDF data
+ */
+export interface CustomerListPDFData {
+  customers: Customer[];
+  title?: string;
+  generatedAt: Date;
+  generatedBy?: string;
+}
+
+/**
+ * Address transmission request
+ * For sending address data to delivery companies
+ */
+export interface AddressTransmissionRequest {
+  waybillId: string;
+  carrierId: string;
+  addressData: {
+    sender: Address;
+    recipient: Address;
+  };
+  packageInfo?: {
+    weight?: number;
+    dimensions?: { length: number; width: number; height: number };
+    description?: string;
+    value?: number;
+    currency?: string;
+  };
+  options?: {
+    pickupDate?: Date;
+    deliveryPreference?: string;
+    specialInstructions?: string;
+  };
+}
+
+/**
+ * Address transmission result
+ */
+export interface AddressTransmissionResult {
+  id: string;
+  waybillId: string;
+  carrierId: string;
+  status: 'pending' | 'sent' | 'confirmed' | 'failed';
+  trackingNumber?: string;
+  transmittedAt: Date;
+  confirmedAt?: Date;
+  errorMessage?: string;
+  retryCount?: number;
+}
+
+/**
+ * Batch transmission request
+ */
+export interface BatchTransmissionRequest {
+  waybillIds: string[];
+  carrierId: string;
+  options?: {
+    pickupDate?: Date;
+    notifyOnCompletion?: boolean;
+  };
+}
+
+/**
+ * Batch transmission result
+ */
+export interface BatchTransmissionResult {
+  total: number;
+  successful: number;
+  failed: number;
+  results: AddressTransmissionResult[];
+}
+
+/**
+ * Print options for waybills
+ */
+export interface PrintOptions {
+  waybillIds: string[];
+  layout?: 'single' | 'grid' | 'list';
+  includeQRCode?: boolean;
+  includeBarcode?: boolean;
+  copies?: number;
+}

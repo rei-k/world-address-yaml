@@ -4,11 +4,13 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { QRCodeSVG } from 'qrcode.react';
-import type { DeliveryRequest, Waybill, WalletPass } from '@/src/types';
+import type { DeliveryRequest, Waybill, WalletPass, Address } from '@/src/types';
 import { 
   createGoogleWalletPass, 
   createAppleWalletPass 
 } from '@/src/services/waybill.service';
+import { generateWaybillHTML, openPrintPreview } from '@/src/services/pdf.service';
+import { transmitAddress } from '@/src/services/transmission.service';
 
 export default function WaybillDetailPage() {
   const params = useParams();
@@ -22,6 +24,8 @@ export default function WaybillDetailPage() {
     apple?: WalletPass;
   }>({});
   const [generatingWallet, setGeneratingWallet] = useState<'google' | 'apple' | null>(null);
+  const [transmitting, setTransmitting] = useState(false);
+  const [transmissionStatus, setTransmissionStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   useEffect(() => {
     loadDeliveryDetails();
@@ -103,6 +107,93 @@ export default function WaybillDetailPage() {
       alert(`Failed to generate ${type} wallet pass`);
     } finally {
       setGeneratingWallet(null);
+    }
+  }
+
+  // Helper function to get mock addresses for demonstration
+  // TODO: Replace with actual address fetching in production
+  function getMockAddresses(): { sender: Address; recipient: Address } {
+    return {
+      sender: {
+        id: 'addr-sender',
+        userId: 'user-123',
+        type: 'home',
+        pid: '100-0001',
+        encryptedData: '東京都千代田区千代田1-1',
+        isPrimary: true,
+        isDefault: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      recipient: {
+        id: 'addr-recipient',
+        userId: 'user-456',
+        type: 'work',
+        pid: '530-0001',
+        encryptedData: '大阪府大阪市北区梅田1-1-1',
+        isPrimary: true,
+        isDefault: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    };
+  }
+
+  async function handlePrintWaybill() {
+    if (!waybill || !delivery) return;
+
+    // TODO: In production, fetch actual address data from the API
+    // const senderAddress = await fetchAddressById(waybill.senderId);
+    // const recipientAddress = await fetchAddressById(waybill.receiverId);
+    
+    const { sender, recipient } = getMockAddresses();
+
+    const html = generateWaybillHTML({
+      waybill,
+      delivery,
+      senderAddress: sender,
+      recipientAddress: recipient,
+    });
+
+    openPrintPreview(html);
+  }
+
+  async function handleTransmitAddress() {
+    if (!waybill || !delivery) return;
+
+    try {
+      setTransmitting(true);
+      setTransmissionStatus('idle');
+
+      // TODO: In production, fetch actual address data from the API
+      // const senderAddress = await fetchAddressById(waybill.senderId);
+      // const recipientAddress = await fetchAddressById(waybill.receiverId);
+      
+      const { sender, recipient } = getMockAddresses();
+
+      const result = await transmitAddress({
+        waybillId: waybill.id,
+        carrierId: delivery.carrierId,
+        addressData: {
+          sender,
+          recipient,
+        },
+        packageInfo: waybill.packageInfo,
+      });
+
+      if (result.status === 'confirmed' || result.status === 'sent') {
+        setTransmissionStatus('success');
+        alert(`配送業者へ住所を送信しました。\n追跡番号: ${result.trackingNumber}`);
+      } else {
+        setTransmissionStatus('error');
+        alert(`送信に失敗しました: ${result.errorMessage || '不明なエラー'}`);
+      }
+    } catch (error) {
+      setTransmissionStatus('error');
+      console.error('Failed to transmit address:', error);
+      alert('住所の送信に失敗しました。');
+    } finally {
+      setTransmitting(false);
     }
   }
 
@@ -208,6 +299,56 @@ export default function WaybillDetailPage() {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="card" style={{ marginBottom: '24px', padding: '20px' }}>
+        <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '16px' }}>
+          🎯 アクション / Actions
+        </h3>
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <button
+            onClick={handlePrintWaybill}
+            className="btn btn-primary"
+            style={{ flex: '1 1 200px' }}
+          >
+            🖨️ 伝票を印刷 / Print Waybill
+          </button>
+          <button
+            onClick={handleTransmitAddress}
+            className="btn btn-primary"
+            disabled={transmitting || transmissionStatus === 'success'}
+            style={{ flex: '1 1 200px' }}
+          >
+            {transmitting ? '送信中...' : transmissionStatus === 'success' ? '✅ 送信完了' : '📤 配送業者へ送信'}
+          </button>
+          <button
+            onClick={() => handleGenerateWalletPass('google')}
+            className="btn btn-secondary"
+            disabled={generatingWallet === 'google'}
+            style={{ flex: '1 1 200px' }}
+          >
+            {generatingWallet === 'google' ? 'Generating...' : '📱 Google Wallet'}
+          </button>
+          <button
+            onClick={() => handleGenerateWalletPass('apple')}
+            className="btn btn-secondary"
+            disabled={generatingWallet === 'apple'}
+            style={{ flex: '1 1 200px' }}
+          >
+            {generatingWallet === 'apple' ? 'Generating...' : '🍎 Apple Wallet'}
+          </button>
+        </div>
+        {transmissionStatus === 'success' && (
+          <div style={{ marginTop: '12px', padding: '12px', backgroundColor: '#dcfce7', borderRadius: '6px', color: '#166534' }}>
+            ✅ 配送業者への住所送信が完了しました / Address transmitted to carrier successfully
+          </div>
+        )}
+        {transmissionStatus === 'error' && (
+          <div style={{ marginTop: '12px', padding: '12px', backgroundColor: '#fee2e2', borderRadius: '6px', color: '#991b1b' }}>
+            ❌ 配送業者への送信に失敗しました / Failed to transmit address to carrier
+          </div>
+        )}
       </div>
 
       <div className="grid grid-cols-2" style={{ gap: '24px' }}>
