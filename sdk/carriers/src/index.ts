@@ -40,3 +40,6 @@ export * from './utils/handshake-token';
 
 // Standard formats
 export * from './formats';
+
+// Pricing module
+export * from './pricing';
