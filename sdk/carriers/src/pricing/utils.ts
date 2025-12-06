@@ -4,6 +4,7 @@
  */
 
 import { RouteType } from './types';
+import { TAX_RATES, DISTANCE_ESTIMATES, CONTINENTAL_GROUPS } from './constants';
 
 /**
  * Calculate distance between two coordinates using Haversine formula
@@ -144,21 +145,11 @@ export function estimateDistanceBetweenCountries(
 ): number {
   // Same country
   if (country1.toUpperCase() === country2.toUpperCase()) {
-    return 500; // Average domestic distance
+    return DISTANCE_ESTIMATES.DOMESTIC_AVERAGE;
   }
 
-  // Continental groupings for rough estimation
-  const continents: Record<string, string[]> = {
-    'ASIA': ['CN', 'JP', 'KR', 'TH', 'VN', 'SG', 'MY', 'ID', 'PH', 'IN'],
-    'EUROPE': ['GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'CH', 'AT', 'PL'],
-    'NORTH_AMERICA': ['US', 'CA', 'MX'],
-    'SOUTH_AMERICA': ['BR', 'AR', 'CL', 'CO', 'PE'],
-    'OCEANIA': ['AU', 'NZ'],
-    'AFRICA': ['ZA', 'NG', 'EG', 'KE', 'MA']
-  };
-
   const getContinent = (country: string): string | null => {
-    for (const [continent, countries] of Object.entries(continents)) {
+    for (const [continent, countries] of Object.entries(CONTINENTAL_GROUPS)) {
       if (countries.includes(country.toUpperCase())) {
         return continent;
       }
@@ -171,32 +162,19 @@ export function estimateDistanceBetweenCountries(
 
   // Same continent
   if (continent1 && continent2 && continent1 === continent2) {
-    return 2000; // Average intra-continental distance
+    return DISTANCE_ESTIMATES.INTRA_CONTINENTAL;
   }
 
   // Different continents
-  return 8000; // Average inter-continental distance
+  return DISTANCE_ESTIMATES.INTER_CONTINENTAL;
 }
 
 /**
  * Get tax rate for a country
- * This is a helper that can be expanded with more countries
+ * Uses centralized tax rate constants
  */
 export function getTaxRateForCountry(countryCode: string): number {
-  const taxRates: Record<string, number> = {
-    'JP': 0.10, // Japan 10%
-    'CN': 0.13, // China 13%
-    'US': 0.0,  // No federal tax
-    'GB': 0.20, // UK 20%
-    'DE': 0.19, // Germany 19%
-    'FR': 0.20, // France 20%
-    'IT': 0.22, // Italy 22%
-    'ES': 0.21, // Spain 21%
-    'AU': 0.10, // Australia 10%
-    'CA': 0.05, // Canada 5% (federal only)
-  };
-
-  return taxRates[countryCode.toUpperCase()] || 0;
+  return TAX_RATES[countryCode.toUpperCase()] || 0;
 }
 
 /**

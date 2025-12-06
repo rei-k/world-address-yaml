@@ -38,3 +38,10 @@ export {
   calculateBusinessDays,
   addBusinessDays
 } from './utils';
+export {
+  EXCHANGE_RATES,
+  TAX_RATES,
+  DEFAULT_PRICING,
+  DISTANCE_ESTIMATES,
+  CONTINENTAL_GROUPS
+} from './constants';

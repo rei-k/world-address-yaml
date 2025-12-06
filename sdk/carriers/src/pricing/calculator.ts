@@ -21,6 +21,7 @@ import {
   DistanceInfo
 } from './types';
 import { calculateDistance, getRouteType, getDimensionalWeight } from './utils';
+import { EXCHANGE_RATES, TAX_RATES, DEFAULT_PRICING } from './constants';
 
 /**
  * Main pricing calculator class
@@ -332,16 +333,7 @@ export class PricingCalculator {
       return amount;
     }
 
-    // Simplified conversion - in production, use real-time exchange rates
-    const exchangeRates: Record<string, Record<string, number>> = {
-      'USD': { 'CNY': 7.2, 'JPY': 150, 'EUR': 0.92, 'GBP': 0.79 },
-      'CNY': { 'USD': 0.14, 'JPY': 20.8, 'EUR': 0.13, 'GBP': 0.11 },
-      'JPY': { 'USD': 0.0067, 'CNY': 0.048, 'EUR': 0.0061, 'GBP': 0.0053 },
-      'EUR': { 'USD': 1.09, 'CNY': 7.82, 'JPY': 164, 'GBP': 0.86 },
-      'GBP': { 'USD': 1.27, 'CNY': 9.1, 'JPY': 190, 'EUR': 1.16 }
-    };
-
-    const rate = exchangeRates[fromCurrency]?.[toCurrency] || 1;
+    const rate = EXCHANGE_RATES[fromCurrency]?.[toCurrency] || 1;
     return amount * rate;
   }
 
@@ -383,30 +375,14 @@ export function createDefaultPricingCalculator(currency: string = 'USD'): Pricin
       { upTo: Infinity, price: currency === 'JPY' ? 8000 : (currency === 'CNY' ? 80 : 60) }
     ],
     pricePerExtraKm: currency === 'JPY' ? 2 : (currency === 'CNY' ? 0.02 : 0.015),
-    fuelSurchargeRate: 0.15, // 15% fuel surcharge
-    insuranceRate: 0.01, // 1% of declared value
-    dimensionalFactor: 5000, // Standard dimensional factor (cm³ to kg)
+    fuelSurchargeRate: DEFAULT_PRICING.FUEL_SURCHARGE_RATE,
+    insuranceRate: DEFAULT_PRICING.INSURANCE_RATE,
+    dimensionalFactor: DEFAULT_PRICING.DIMENSIONAL_FACTOR,
     dimensionalWeightRate: currency === 'JPY' ? 300 : (currency === 'CNY' ? 3 : 2.5),
-    serviceMultipliers: {
-      'ECONOMY': 0.8,
-      'STANDARD': 1.0,
-      'EXPRESS': 1.5
-    },
-    regionalAdjustments: {
-      // Remote or difficult areas
-      'AQ': 100, // Antarctica
-      'GL': 50,  // Greenland
-      'FK': 30,  // Falkland Islands
-    },
-    taxRates: {
-      'JP': 0.10, // Japan 10% consumption tax
-      'CN': 0.13, // China 13% VAT
-      'US': 0.0,  // No federal sales tax (varies by state)
-      'GB': 0.20, // UK 20% VAT
-      'DE': 0.19, // Germany 19% VAT
-      'FR': 0.20, // France 20% VAT
-    },
-    quoteValidityHours: 24
+    serviceMultipliers: DEFAULT_PRICING.SERVICE_MULTIPLIERS,
+    regionalAdjustments: DEFAULT_PRICING.REGIONAL_SURCHARGES,
+    taxRates: TAX_RATES,
+    quoteValidityHours: DEFAULT_PRICING.QUOTE_VALIDITY_HOURS
   };
 
   return new PricingCalculator(defaultConfig);
