@@ -506,9 +506,10 @@ export function openPrintPreview(html: string): void {
  * Format address for display
  */
 function formatAddress(address: Address): string {
-  // This is a simplified version - real implementation would decrypt and format address data
-  // In production, this would decrypt the encryptedData and format it properly
-  return address.encryptedData || 'Address data encrypted';
+  // Security: Do not display encrypted data directly in PDFs
+  // This is a placeholder until proper decryption is implemented
+  // In production, decrypt the encryptedData and format it according to country standards
+  return '[Address will be displayed after decryption implementation]';
 }
 
 /**

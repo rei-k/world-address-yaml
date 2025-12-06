@@ -118,6 +118,9 @@ export async function getCustomerList(
           aVal = a.createdAt.getTime();
           bVal = b.createdAt.getTime();
           break;
+        default:
+          // Ensure all cases are covered
+          throw new Error(`Unsupported sort field: ${filter.sortBy}`);
       }
 
       if (aVal === undefined || aVal === null) return 1;

@@ -110,6 +110,35 @@ export default function WaybillDetailPage() {
     }
   }
 
+  // Helper function to get mock addresses for demonstration
+  // TODO: Replace with actual address fetching in production
+  function getMockAddresses(): { sender: Address; recipient: Address } {
+    return {
+      sender: {
+        id: 'addr-sender',
+        userId: 'user-123',
+        type: 'home',
+        pid: '100-0001',
+        encryptedData: '東京都千代田区千代田1-1',
+        isPrimary: true,
+        isDefault: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      recipient: {
+        id: 'addr-recipient',
+        userId: 'user-456',
+        type: 'work',
+        pid: '530-0001',
+        encryptedData: '大阪府大阪市北区梅田1-1-1',
+        isPrimary: true,
+        isDefault: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    };
+  }
+
   async function handlePrintWaybill() {
     if (!waybill || !delivery) return;
 
@@ -117,36 +146,13 @@ export default function WaybillDetailPage() {
     // const senderAddress = await fetchAddressById(waybill.senderId);
     // const recipientAddress = await fetchAddressById(waybill.receiverId);
     
-    // Mock addresses for demonstration - replace with actual data in production
-    const mockSenderAddress: Address = {
-      id: 'addr-sender',
-      userId: 'user-123',
-      type: 'home',
-      pid: '100-0001',
-      encryptedData: '東京都千代田区千代田1-1',
-      isPrimary: true,
-      isDefault: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-
-    const mockRecipientAddress: Address = {
-      id: 'addr-recipient',
-      userId: 'user-456',
-      type: 'work',
-      pid: '530-0001',
-      encryptedData: '大阪府大阪市北区梅田1-1-1',
-      isPrimary: true,
-      isDefault: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
+    const { sender, recipient } = getMockAddresses();
 
     const html = generateWaybillHTML({
       waybill,
       delivery,
-      senderAddress: mockSenderAddress,
-      recipientAddress: mockRecipientAddress,
+      senderAddress: sender,
+      recipientAddress: recipient,
     });
 
     openPrintPreview(html);
@@ -163,37 +169,14 @@ export default function WaybillDetailPage() {
       // const senderAddress = await fetchAddressById(waybill.senderId);
       // const recipientAddress = await fetchAddressById(waybill.receiverId);
       
-      // Mock addresses for demonstration - replace with actual data in production
-      const mockSenderAddress: Address = {
-        id: 'addr-sender',
-        userId: 'user-123',
-        type: 'home',
-        pid: '100-0001',
-        encryptedData: '東京都千代田区千代田1-1',
-        isPrimary: true,
-        isDefault: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
-
-      const mockRecipientAddress: Address = {
-        id: 'addr-recipient',
-        userId: 'user-456',
-        type: 'work',
-        pid: '530-0001',
-        encryptedData: '大阪府大阪市北区梅田1-1-1',
-        isPrimary: true,
-        isDefault: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
+      const { sender, recipient } = getMockAddresses();
 
       const result = await transmitAddress({
         waybillId: waybill.id,
         carrierId: delivery.carrierId,
         addressData: {
-          sender: mockSenderAddress,
-          recipient: mockRecipientAddress,
+          sender,
+          recipient,
         },
         packageInfo: waybill.packageInfo,
       });

@@ -68,8 +68,8 @@ export async function batchTransmitAddresses(
   request: BatchTransmissionRequest
 ): Promise<BatchTransmissionResult> {
   const results: AddressTransmissionResult[] = [];
-  // eslint-disable-next-line prefer-const
-  let successful = 0; // Will be incremented when actual transmission is implemented
+  // Note: successful will be incremented when actual transmission logic is implemented
+  const successful = 0;
   let failed = 0;
 
   // Process each waybill sequentially
